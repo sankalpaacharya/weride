@@ -18,16 +18,6 @@ import { useRef } from "react"
 
 export default function Component() {
 
-    const nameRef = useRef();
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const confirmPasswordRef = useRef();
-    const roleRef = useRef();
-
-    const onSubmit = () => {
-
-    }
-
 
     return (
         <div className="w-full mt-5">
