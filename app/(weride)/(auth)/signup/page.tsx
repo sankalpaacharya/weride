@@ -4,6 +4,8 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useForm } from 'react-hook-form'
+import type { FieldValues } from 'react-hook-form'
 import {
     Select,
     SelectContent,
@@ -15,13 +17,16 @@ import {
 } from "@/components/ui/select"
 import toast from "react-hot-toast"
 
+export default function Page() {
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm();
 
-export default function Component() {
-
+    const submitForm = (data: FieldValues) => {
+        console.log(data)
+    }
 
     return (
         <div className="w-full mt-5">
-            <form action="">
+            <form onSubmit={handleSubmit((data) => submitForm(data))}>
                 <Card className="mx-auto max-w-sm">
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold">Sign up</CardTitle>
@@ -31,22 +36,26 @@ export default function Component() {
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input id="name" type="text" required />
+                                <Input {...register('name', { required: "Name is required", minLength: { value: 4, message: "name must be at least of 4 characters" }, maxLength: { value: 100, message: "name can't be more then 200 characters" } })} id="name" type="text" />
+                                {errors.name && <p className="text-red-500 text-sm">{`${errors.name.message}`}</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="s@sot.pdpu.ac.in (please use college email)" required />
+                                <Input {...register('email', { required: "Email is required" })} id="email" type="email" placeholder="s@sot.pdpu.ac.in (please use college email)" />
+                                {errors.email && <p className="text-red-500 text-sm">{`${errors.email.message}`}</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input id="password" type="password" required />
+                                <Input {...register('password', { required: "Password is required", minLength: { value: 8, message: "Password must be at least of 8 characters" }, maxLength: { value: 200, message: "Password can't be more then 200 characters" } })} id="password" type="password" />
+                                {errors.password && <p className="text-red-500 text-sm">{`${errors.password.message}`}.</p>}
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password">Confirm Password</Label>
-                                <Input id="password" type="password" required />
+                                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                                <Input {...register('confirmPassword', { required: "Password is required", minLength: { value: 8, message: "Password must be at least of 8 characters" }, maxLength: { value: 200, message: "Password can't be more then 200 characters" }, validate: (data) => data.value == getValues("password") || "Password must match" })} id="confirmPassword" type="password" />
+                                {errors.confirmPassword && <p className="text-red-500 text-sm">{`${errors.confirmPassword.message}`}</p>}
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password">Role</Label>
+                                <Label htmlFor="role">Role</Label>
                                 <Select defaultValue="renter">
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Select your role" />
@@ -62,8 +71,8 @@ export default function Component() {
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Link className="underline text-gray-600 text-sm" href={"/login"}>Already have account? login</Link>
-                                <Button type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
-                                    Singin
+                                <Button disabled={isSubmitting} type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
+                                    Signup
                                 </Button>
                             </div>
                         </div>

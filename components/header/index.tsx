@@ -3,16 +3,27 @@ import { FaRegUser } from "react-icons/fa";
 import { RiEBikeFill } from "react-icons/ri";
 // import { RiInboxArchiveFill } from "react-icons/ri";
 import { FaCartShopping } from "react-icons/fa6";
+import { FaHome } from "react-icons/fa";
 import { FaQuestion } from "react-icons/fa";
 import Link from 'next/link';
 
 export default function index() {
     return (
         <div className='w-full flex px-10 justify-between items-center bg-gray-200 text-gray-800 p-3'>
-            <div className='cursor-pointer'>
-                <RiEBikeFill className='text-gray-600' size={25} />
-            </div>
+            <Link href={"/"}>
+                <div className='cursor-pointer'>
+                    <RiEBikeFill className='text-gray-600' size={25} />
+                </div>
+            </Link>
             <div className='flex gap-5 items-center'>
+                <Link href={"/"}>
+                    <div className='flex shadow-md md:shadow-none items-center rounded-full gap-2 cursor-pointer p-2 bg-[#fffffff3] md:bg-gray-200 transition duration-200 ease-in-out hover:bg-gray-300'>
+                        <FaHome size={20} className='' />
+                        <p className='hidden md:flex text-center'>
+                            Home
+                        </p>
+                    </div>
+                </Link>
                 <Link href={"/login"}>
                     <div className='flex shadow-md md:shadow-none items-center rounded-full gap-2 cursor-pointer p-2 bg-[#fffffff3] md:bg-gray-200 transition duration-200 ease-in-out hover:bg-gray-300'>
                         <FaRegUser size={20} className='' />

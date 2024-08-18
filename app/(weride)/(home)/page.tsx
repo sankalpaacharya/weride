@@ -3,7 +3,7 @@ import Header from "@/components/header"
 import BikeCard from "@/components/bikecard"
 export default function Home() {
   return (
-    <main className="overflow-hidden relative w-full">
+    <main className="overflow-hidden relative w-full -z-10">
       <div className="flex justify-between">
         <div></div>
         <div className="grid md:grid-cols-3 grid-cols-2 md:gap-10 gap-2 px-2 mt-10">
