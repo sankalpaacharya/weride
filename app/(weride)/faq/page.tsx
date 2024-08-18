@@ -13,7 +13,7 @@ export default function page() {
                 <h2 className='md:text-3xl text-2xl font-bold text-gray-700'>Do you Have any Questions ?</h2>
                 <p className='text-gray-600 md:text-lg text-sm font-medium'>We have answers(well, most of the times!)</p>
                 <p className='text-gray-700 text-md'>Below you will find the most common questions asked on WeRide. Also, please feel free to
-                    react out to use if you have any further query
+                    reach out to us if you have any further query
                 </p>
             </div>
             <div className='md:w-[70%] w-[85%] mt-10'>
@@ -38,14 +38,14 @@ export default function page() {
                             prefer.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="item-3">
+                    <AccordionItem value="item-4">
                         <AccordionTrigger>How to register my account?</AccordionTrigger>
                         <AccordionContent>
                             Yes. It&apos;s animated by default, but you can disable it if you
                             prefer.
                         </AccordionContent>
                     </AccordionItem>
-                    <AccordionItem value="item-3">
+                    <AccordionItem value="item-5">
                         <AccordionTrigger>Do I need to have driving lisence to rent a vechiel</AccordionTrigger>
                         <AccordionContent>
                             Yes. It&apos;s animated by default, but you can disable it if you
