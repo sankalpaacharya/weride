@@ -20,7 +20,6 @@ import toast from "react-hot-toast"
 import { signupAction } from "@/app/actions"
 import { useState } from "react"
 
-
 export default function Page() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TsignInSchema>({ resolver: zodResolver(signInSchema) });
     const [selectValue, setSelectValue] = useState("renter");
@@ -30,7 +29,12 @@ export default function Page() {
             formData.role = selectValue;
         }
         const response = await signupAction(formData);
-        console.log("this is me")
+        if (response.error) {
+            toast.error(response.error)
+        }
+        if (response.success) {
+            toast.success(response.success)
+        }
     }
 
     return (
