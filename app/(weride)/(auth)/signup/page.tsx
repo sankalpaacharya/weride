@@ -17,17 +17,25 @@ import {
 } from "@/components/ui/select"
 import { signInSchema, TsignInSchema } from "@/app/schemas/signInSchema"
 import toast from "react-hot-toast"
+import { signupAction } from "@/app/actions"
+import { useState } from "react"
+
 
 export default function Page() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TsignInSchema>({ resolver: zodResolver(signInSchema) });
+    const [selectValue, setSelectValue] = useState("renter");
 
-    const submitForm = (data: TsignInSchema) => {
-        console.log(data)
+    const submitForm = async (formData: TsignInSchema) => {
+        if (selectValue === "owner" || selectValue === "renter") {
+            formData.role = selectValue;
+        }
+        const response = await signupAction(formData);
+        console.log("this is me")
     }
 
     return (
         <div className="w-full mt-5">
-            <form onSubmit={handleSubmit((data) => submitForm(data))}>
+            <form onSubmit={handleSubmit(submitForm)}>
                 <Card className="mx-auto max-w-sm">
                     <CardHeader className="space-y-1">
                         <CardTitle className="text-2xl font-bold">Sign up</CardTitle>
@@ -57,12 +65,12 @@ export default function Page() {
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="role">Role</Label>
-                                <Select defaultValue="renter">
+                                <Select onValueChange={(value) => setSelectValue(value)} defaultValue="renter">
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Select your role" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectGroup>
+                                        <SelectGroup >
                                             <SelectLabel>Role</SelectLabel>
                                             <SelectItem value="owner">Vehicle Owner</SelectItem>
                                             <SelectItem value="renter">Renter</SelectItem>

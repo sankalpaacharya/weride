@@ -7,7 +7,7 @@ export const signInSchema = z.object({
         .regex(/^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)?pdpu\.ac\.in$/, "Email must be a college email"),
     password: z.string().min(8, "Password must be at least 8 characters").max(200, "Password can't be more than 200 characters"),
     confirmPassword: z.string().min(8, "Password must be at least 8 characters").max(200, "Password can't be more than 200 characters"),
-    role: z.enum(['renter', 'owner'])
+    role: z.enum(['renter', 'owner']).default("renter")
 }).refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
     path: ["confirmPassword"]

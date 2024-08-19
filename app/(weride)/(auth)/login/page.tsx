@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
-import type { FieldValues } from 'react-hook-form'
 import { loginInSchema, TloginSchema } from "@/app/schemas/logInSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useState } from "react"
 
 export default function Component() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TloginSchema>({ resolver: zodResolver(loginInSchema) });
