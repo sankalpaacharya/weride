@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useForm } from 'react-hook-form'
-import type { FieldValues } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
     Select,
     SelectContent,
@@ -15,12 +15,13 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { signInSchema, TsignInSchema } from "@/app/schemas/signInSchema"
 import toast from "react-hot-toast"
 
 export default function Page() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm();
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TsignInSchema>({ resolver: zodResolver(signInSchema) });
 
-    const submitForm = (data: FieldValues) => {
+    const submitForm = (data: TsignInSchema) => {
         console.log(data)
     }
 

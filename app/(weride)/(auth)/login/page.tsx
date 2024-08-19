@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import type { FieldValues } from 'react-hook-form'
+import { loginInSchema, TloginSchema } from "@/app/schemas/logInSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export default function Component() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm();
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TloginSchema>({ resolver: zodResolver(loginInSchema) });
 
-    const submitForm = (data: FieldValues) => {
-        console.log('first')
+    const submitForm = (data: TloginSchema) => {
+        console.log(data)
     }
 
     return (
@@ -26,12 +28,12 @@ export default function Component() {
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input {...register("email", { required: "Email is required" })} id="email" type="email" placeholder="s@sot.pdpu.ac.in" />
+                                <Input {...register("email")} id="email" type="email" placeholder="s@sot.pdpu.ac.in" />
                                 {errors.email && <p className="text-red-500 text-sm">{`${errors.email.message}`}</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input {...register("password", { required: "Password is required" })} id="password" type="password" />
+                                <Input {...register("password")} id="password" type="password" />
                                 {errors.password && <p className="text-red-500 text-sm">{`${errors.password.message}`}.</p>}
                             </div>
                             <div className="flex flex-col gap-3">
