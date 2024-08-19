@@ -36,22 +36,22 @@ export default function Page() {
                         <div className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="name">Name</Label>
-                                <Input {...register('name', { required: "Name is required", minLength: { value: 4, message: "name must be at least of 4 characters" }, maxLength: { value: 100, message: "name can't be more then 200 characters" } })} id="name" type="text" />
+                                <Input {...register('name')} id="name" type="text" />
                                 {errors.name && <p className="text-red-500 text-sm">{`${errors.name.message}`}</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input {...register('email', { required: "Email is required" })} id="email" type="email" placeholder="s@sot.pdpu.ac.in (please use college email)" />
+                                <Input {...register('email')} id="email" type="email" placeholder="s@sot.pdpu.ac.in (please use college email)" />
                                 {errors.email && <p className="text-red-500 text-sm">{`${errors.email.message}`}</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="password">Password</Label>
-                                <Input {...register('password', { required: "Password is required", minLength: { value: 8, message: "Password must be at least of 8 characters" }, maxLength: { value: 200, message: "Password can't be more then 200 characters" } })} id="password" type="password" />
+                                <Input {...register('password')} id="password" type="password" />
                                 {errors.password && <p className="text-red-500 text-sm">{`${errors.password.message}`}.</p>}
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="confirmPassword">Confirm Password</Label>
-                                <Input {...register('confirmPassword', { required: "Password is required", minLength: { value: 8, message: "Password must be at least of 8 characters" }, maxLength: { value: 200, message: "Password can't be more then 200 characters" }, validate: (data) => data.value == getValues("password") || "Password must match" })} id="confirmPassword" type="password" />
+                                <Input {...register('confirmPassword')} id="confirmPassword" type="password" />
                                 {errors.confirmPassword && <p className="text-red-500 text-sm">{`${errors.confirmPassword.message}`}</p>}
                             </div>
                             <div className="space-y-2">
