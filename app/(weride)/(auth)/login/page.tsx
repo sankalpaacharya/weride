@@ -7,13 +7,20 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { loginInSchema, TloginSchema } from "@/app/schemas/logInSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { loginAction } from "@/app/actions"
+import toast from "react-hot-toast"
 
 export default function Component() {
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TloginSchema>({ resolver: zodResolver(loginInSchema) });
 
-    const submitForm = (data: TloginSchema) => {
-        console.log(data)
+    const submitForm = async (formData: TloginSchema) => {
+        const response = await loginAction(formData);
+        if (response.error) {
+            toast.error(response.error)
+        }
+        if (response.success) {
+            toast.success(response.success)
+        }
     }
 
     return (
