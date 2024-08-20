@@ -20,8 +20,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ href, icon: Icon, label }) => (
         </div>
     </Link>
 );
-
-const Index: React.FC = () => {
+interface IndexProps {
+    isAuthenticated: boolean;
+}
+const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
     return (
         <div className='w-full flex px-10 justify-between items-center bg-gray-200 text-gray-800 p-3'>
             <Link href={"/"}>
