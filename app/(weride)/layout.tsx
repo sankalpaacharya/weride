@@ -1,12 +1,21 @@
 import NavBar from "@/components/navbar";
 import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
+import { createClient } from "@/utils/supabase/server";
 
-export default function Layout({
+export default async function Layout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+
+    const supabase = await createClient();
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (user) {
+        console.log('user is logged in')
+    }
+
+
     return (
         <main className="flex flex-col min-h-screen overflow-hidden relative">
             <Toaster
