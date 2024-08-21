@@ -1,5 +1,3 @@
-import NavBar from "@/components/navbar";
-import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";

@@ -11,9 +11,6 @@ export default async function Layout({
 
     const supabase = await createClient();
     const { data: { user }, error } = await supabase.auth.getUser();
-    if (user) {
-        console.log('user is logged in')
-    }
 
 
     return (
@@ -23,7 +20,7 @@ export default async function Layout({
                 reverseOrder={false}
             />
             <NavBar />
-            <Header />
+            <Header isAuthenticated={user ? true : false} />
             <div className="flex grow w-full">
                 {children}
             </div>

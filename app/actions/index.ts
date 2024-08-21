@@ -2,6 +2,7 @@
 import { TsignInSchema, signInSchema } from '@/app/schemas/signInSchema'
 import { TloginSchema, loginInSchema } from '@/app/schemas/logInSchema'
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
 
 export async function signupAction(data: TsignInSchema) {
     const result = signInSchema.safeParse(data)
@@ -15,6 +16,7 @@ export async function signupAction(data: TsignInSchema) {
         email: data.email,
         password: data.password,
     })
+
     if (error) {
         return { error: "Oops, an error occured!" }
     }
@@ -41,14 +43,15 @@ export async function loginAction(data: TloginSchema) {
         email: data.email,
         password: data.password,
     })
+
     if (error) {
-        return { error: "Oops, an error occured!" }
+        return { error: error?.message }
     }
     if (userData.user == null) {
         return { "error": "Invalid login credentials" }
     }
     if (userData.user) {
-        return { "success": "Login Sucessfull" }
+        redirect("/")
     }
-    return { error: "Oops, an error occured!" }
+    return { error: "Oops, error occured" }
 }

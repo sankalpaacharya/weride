@@ -70,7 +70,7 @@ export default function Page() {
                     <CardContent>
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="name">Full Name</Label>
                                 <Input {...register("name")} id="name" type="text" />
                                 {errors.name && (
                                     <p className="text-red-500 text-sm">

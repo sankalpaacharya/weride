@@ -11,15 +11,12 @@ import { loginAction } from "@/app/actions"
 import toast from "react-hot-toast"
 
 export default function Component() {
-    const { register, handleSubmit, formState: { errors, isSubmitting }, reset, getValues } = useForm<TloginSchema>({ resolver: zodResolver(loginInSchema) });
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TloginSchema>({ resolver: zodResolver(loginInSchema) });
 
     const submitForm = async (formData: TloginSchema) => {
         const response = await loginAction(formData);
-        if (response.error) {
+        if (response && response.error) {
             toast.error(response.error)
-        }
-        if (response.success) {
-            toast.success(response.success)
         }
     }
 
@@ -45,7 +42,7 @@ export default function Component() {
                             </div>
                             <div className="flex flex-col gap-3">
                                 <Link className="underline text-gray-600 text-sm" href={"/signup"}>Need an Account? signup</Link>
-                                <Button type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
+                                <Button disabled={isSubmitting} type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
                                     Login
                                 </Button>
                             </div>

@@ -3,6 +3,8 @@ import { FaRegUser, FaHome, FaQuestion } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from 'next/link';
+import Profile from "@/components/profile"
+
 
 interface MenuItemProps {
     href: string;
@@ -25,7 +27,7 @@ interface IndexProps {
 }
 const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
     return (
-        <div className='w-full flex px-10 justify-between items-center bg-gray-200 text-gray-800 p-3'>
+        <div className='w-full flex md:px-10 px-3 justify-between items-center bg-gray-200 text-gray-800 p-3'>
             <Link href={"/"}>
                 <div className='cursor-pointer'>
                     <RiEBikeFill className='text-gray-600' size={25} />
@@ -33,11 +35,14 @@ const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
             </Link>
             <div className='flex gap-5 items-center'>
                 <MenuItem href="/" icon={FaHome} label="Home" />
-                <MenuItem href="/login" icon={FaRegUser} label="Account" />
                 <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
                 <MenuItem href="/faq" icon={FaQuestion} label="FAQ" />
+                {isAuthenticated ? (<Profile></Profile>) : (<MenuItem href="/login" icon={FaRegUser} label="Account" />)}
+
             </div>
         </div>
+
+
     );
 }
 
