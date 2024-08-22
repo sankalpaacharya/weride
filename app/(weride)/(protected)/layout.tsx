@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -15,7 +14,7 @@ export default async function Layout({
     }
 
     return (
-        <div>
+        <div className="w-full">
             {children}
         </div>
     );

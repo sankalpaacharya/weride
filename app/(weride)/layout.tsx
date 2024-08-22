@@ -12,7 +12,6 @@ export default async function Layout({
     const supabase = await createClient();
     const { data: { user }, error } = await supabase.auth.getUser();
 
-
     return (
         <main className="flex flex-col min-h-screen overflow-hidden relative">
             <Toaster

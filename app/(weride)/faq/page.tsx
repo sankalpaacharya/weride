@@ -21,26 +21,26 @@ export default function page() {
                     <AccordionItem value="item-1">
                         <AccordionTrigger>Is this platform from the PDEU?</AccordionTrigger>
                         <AccordionContent>
-                            No. This platform is for the students of PDEU.
+                            No, this platform is not officially from PDEU. It is a private initiative developed with the specific goal of benefiting PDEU students. Our mission is to provide a convenient and secure way for students to rent vehicles within the campus community, ensuring ease of transportation.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
                         <AccordionTrigger>What if my vehicle gets damaged by the renter?</AccordionTrigger>
                         <AccordionContent>
-                            The renter is responsible for any damage to the owner's vehicle. Please refer to the Terms and Conditions for more information. 
+                            In the event that the vehicle is damaged during the rental period, the rider is responsible for covering the cost of repairs or, if necessary, replacement. We understand that accidents can happen, and we encourage open communication to resolve any issues fairly. Our goal is to ensure a positive experience for both the rider and the vehicle owner.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
-                        <AccordionTrigger>How is price calculated ?</AccordionTrigger>
+                        <AccordionTrigger>How is the price calculated ?</AccordionTrigger>
                         <AccordionContent>
-                            The initial price is decided by the Owner. Regarding late fees or other queries please refer to the Terms & Conditions.
+                            You agree to pay the hourly rental fee as set by the vehicle owner. To ensure a smooth rental process, we kindly ask that the full rental fee be paid in advance, before the rental period begins.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-4">
                         <AccordionTrigger>How can I register myself?</AccordionTrigger>
                         <AccordionContent>
-                            After signing up and succesful creation of your weride account, you have two options, either put your vehicle on rent or rent vehicle for yourself. 
-                            
+                            After signing up and succesful creation of your weride account, you have two options, either put your vehicle on rent or rent vehicle for yourself.
+
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-5">
