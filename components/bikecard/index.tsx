@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import RentalModal from '@/components/rentalmodal'
 import { FaStar } from "react-icons/fa";
 
 export default function index({ imageName }: { imageName: String }) {
@@ -33,7 +34,9 @@ export default function index({ imageName }: { imageName: String }) {
                             <FaStar className='text-yellow-400' />
                         </div>
                     </div>
-                    <button className='bg-[#2874A6] text-md px-3 py-1 rounded-lg mt-2 w-full text-white'>Rent</button>
+                    <RentalModal>
+                        <button className='bg-[#2874A6] cursor-pointer text-md px-3 py-1 rounded-lg mt-2 w-full text-white'>Rent</button>
+                    </RentalModal>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ export default function index() {
         <div className='pr-3 '>
             <DropdownMenu >
                 <DropdownMenuTrigger>   <Avatar>
-                    <AvatarImage src="https://github.com/nishit369.png" />
+                    <AvatarImage src="https://github.com/randompost12.png" />
                     <AvatarFallback>WR</AvatarFallback>
                 </Avatar></DropdownMenuTrigger>
                 <DropdownMenuContent>

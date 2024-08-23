@@ -1,7 +1,7 @@
 import BikeCard from "@/components/bikecard"
 export default function Home() {
   return (
-    <main className=" overflow-hidden relative w-full -z-10">
+    <main className=" overflow-hidden relative w-full">
       <div className="flex justify-between ">
         <div className="">
         </div>

@@ -17,7 +17,7 @@ export default function Header() {
     ];
 
     return (
-        <header className="bg-[#146eb4] text-white py-3 md:px-14 px-5 z-0">
+        <header className="bg-[#146eb4] text-white py-3 md:px-14 px-5 z-10 relative">
             <div className="flex justify-between items-center">
                 <div className="text-xl font-bold cursor-pointer">
                     <Link href="/">
@@ -35,7 +35,13 @@ export default function Header() {
                     <IoMdMenu size={30} />
                 </button>
             </div>
-            <div className={`absolute text-black border h-screen z-40 bg-white top-0 right-0 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full md:w-[24rem]`}>
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black opacity-50 z-30"
+                    onClick={toggleMenu}
+                />
+            )}
+            <div className={`fixed text-black border h-full z-40 bg-white top-0 right-0 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'} w-full md:w-[24rem]`}>
                 <div className="px-10 mt-10 flex justify-between items-center">
                     <p className="text-2xl font-medium">Menu</p>
                     <RxCross1 onClick={toggleMenu} className="cursor-pointer" size={25} />
