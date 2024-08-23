@@ -63,6 +63,55 @@ body{
   }
 }
 
+.content{
+  display: none
+}
+
+.tabs-content{
+  position: relative;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.tab-content {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+
+#tab1:checked ~ .tab-content #content1,
+#tab2:checked ~ .tab-content #content2,
+#tab3:checked ~ .tab-content #content3 {
+    transform: translateX(0);
+    opacity: 1;
+}
+#tab1:checked ~ .tab-content #content1 {
+  left: 0;
+}
+#tab2:checked ~ .tab-content #content2 {
+  left: 0;
+}
+#tab3:checked ~ .tab-content #content3 {
+  left: 0;
+}
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content {
+  position: relative;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}
 @layer base {
   * {
     @apply border-border;
