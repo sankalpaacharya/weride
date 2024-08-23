@@ -2,9 +2,11 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Checkbox } from "@/components/ui/checkbox"
 
 import Link from "next/link"
 import { ReactNode, useState } from "react"
+import toast from "react-hot-toast"
 
 interface RentalModal {
     children: ReactNode
@@ -12,14 +14,24 @@ interface RentalModal {
 
 export default function RentalModal({ children }: RentalModal) {
     const [selectedTab, setSelectedTab] = useState("tab1");
-
+    const [isTosAccepted, setIsTosAccepted] = useState(false);
     const handleNextClick = () => {
+        if (isTosAccepted === false) {
+            toast.error("Accept the terms of service")
+            return
+        }
         if (selectedTab === "tab1") setSelectedTab("tab2");
         if (selectedTab === "tab2") setSelectedTab("tab3");
     }
 
+    const onModalChange = (isOpen: boolean) => {
+        setSelectedTab("tab1");
+        setIsTosAccepted(false);
+
+    }
+
     return (
-        <Dialog>
+        <Dialog onOpenChange={onModalChange}>
             <DialogTrigger asChild>
                 {children}
             </DialogTrigger>
@@ -50,24 +62,43 @@ export default function RentalModal({ children }: RentalModal) {
                                             While weride does not have direct control over the actions of users, any reports or evidence of reckless driving may result in immediate termination of the rental agreement, forfeiture of any deposits, and a permanent ban from our platform. Additionally, renters are fully responsible for any legal consequences, fines, penalties, or damages resulting from reckless driving
                                             <Link className="underline" href="/"> (read more).</Link>
                                         </p>
-
                                     </ul>
-
+                                    <div className="flex items-center my-5 space-x-2">
+                                        <Checkbox onClick={() => setIsTosAccepted(!isTosAccepted)} id="terms" />
+                                        <label
+                                            htmlFor="terms"
+                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                        >
+                                            I have read all the terms of service and I accept it.
+                                        </label>
+                                    </div>
                                 </ScrollArea>
                             </DialogDescription>
                             <div className="flex justify-end mt-5">
-                                <Button className="bg-[#2874A6] hover:bg-[#388bc1]" onClick={handleNextClick}>Next</Button>
+                                <Button disabled={!isTosAccepted} className="" onClick={handleNextClick}>Next</Button>
                             </div>
                         </div>
                         <div className={`tab ${selectedTab === "tab2" ? "active" : ""}`}>
                             <DialogTitle>Terms of Service 2</DialogTitle>
-                            <DialogDescription>Content for tab 2</DialogDescription>
-                            <Button onClick={handleNextClick}>Next</Button>
+                            <DialogDescription>
+                                <ScrollArea className="h-[500px] rounded-md  p-4">
+
+                                </ScrollArea>
+                            </DialogDescription>
+                            <div className="flex justify-end mt-5">
+                                <Button className="" onClick={handleNextClick}>Next</Button>
+                            </div>
                         </div>
                         <div className={`tab ${selectedTab === "tab3" ? "active" : ""}`}>
                             <DialogTitle>Terms of Service 3</DialogTitle>
-                            <DialogDescription>Content for tab 3</DialogDescription>
-                            <Button onClick={handleNextClick}>Finish</Button>
+                            <DialogDescription>
+                                <ScrollArea className="h-[500px] rounded-md  p-4">
+
+                                </ScrollArea>
+                            </DialogDescription>
+                            <div className="flex gap-2 justify-end mt-5">
+                                <Button className="" onClick={handleNextClick}>Next</Button>
+                            </div>
                         </div>
                     </div>
                 </div>
