@@ -120,3 +120,10 @@ input[type="radio"] {
     @apply bg-background text-foreground;
   }
 }
+blockquote {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #ccc; 
+  background-color: #f9f9f9;
+  font-style: italic; 
+}

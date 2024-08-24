@@ -9,6 +9,8 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>1. Information We Collect</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
+
                 </p>
                 <p className="mb-4">
                     <strong>1.1. Personal Information:</strong> We collect personal information such as your name, contact information, and payment details when you register or use our service.
@@ -21,6 +23,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>2. How We Use Your Information</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
                 </p>
                 <p className="mb-4">
                     <strong>2.1. Service Provision:</strong> We use your personal information to provide and improve our services, including facilitating vehicle rentals and processing payments.
@@ -36,6 +39,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>3. Data Security</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
                 </p>
                 <p className="mb-4">
                     We take reasonable steps to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
@@ -45,6 +49,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>4. Data Sharing</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
                 </p>
                 <p className="mb-4">
                     <strong>4.1. With Vehicle Owners/Riders:</strong> Your personal information may be shared with the vehicle owner or rider to facilitate the rental process.
@@ -57,12 +62,50 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>5. Your Rights</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
                 </p>
                 <p className="mb-4">
                     <strong>5.1. Access and Correction:</strong> You have the right to access and correct your personal information held by us.
                 </p>
                 <p className="mb-4">
                     <strong>5.2. Deletion:</strong> You may request the deletion of your personal information, subject to legal obligations.
+                </p>
+            </section>
+            <br></br>
+            <br></br>
+            <section className="text-gray-700 mb-8">
+                <p className="text-lg font-semibold mb-4">
+                    <strong>Other Important Policies</strong>
+                    <hr className="border-t border-gray-600 my-4"/>
+                </p>
+                <p className="text-lg font-semibold mb-4">
+                    <strong>1. Dispute Resolution</strong>
+                </p>
+                <p className="mb-4">
+                    <strong> Disputes Between Users:</strong> In case of a dispute between a rider and a owner, both parties agree to attempt to resolve the issue amicably. If a resolution cannot be reached, WeRide may assist in mediating the dispute, but we are not responsible for the final outcome.
+                </p>
+                <p className="text-lg font-semibold mb-4">
+                    <strong>2. User Conduct</strong>
+                </p>
+                <p className="mb-4">
+                    <strong> Prohibited Activities:</strong> Users may not engage in any illegal activities or misuse the vehicles rented through our service. This includes, but is not limited to, reckless driving, unauthorized alterations, or using the vehicle for purposes other than agreed upon.
+                </p>
+                <p className="mb-4">
+                    <strong> Reporting Violations:</strong> Users are encouraged to report any violations of these terms to WeRide at <a href="mailto:sankalpaacharya01@gmail.com." className="text-blue-600 hover:underline">
+                    sankalpaacharya01@gmail.com
+  </a>
+                </p>
+                <p className="text-lg font-semibold mb-4">
+                    <strong>3. Modifications to Terms</strong>
+                </p>
+                <p className="mb-4">
+                    We reserve the right to modify these terms at any time. Users will be notified of any changes via email or through our platform. Continued use of the service after changes are made constitutes acceptance of the new terms.
+                </p>
+                <p className="text-lg font-semibold mb-4">
+                    <strong>4. Termination</strong>
+                </p>
+                <p className="mb-4">
+                    We reserve the right to terminate or suspend your access to the service for any violation of these terms or for any other reason at our discretion.
                 </p>
             </section>
 

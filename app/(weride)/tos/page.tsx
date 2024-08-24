@@ -14,19 +14,19 @@ export default function TermsOfService() {
                     By accessing or using our service, you agree to these terms in full.
                 </p>
                 <p className="mb-4">
-                    You must be a registered user and at least 18 years old to use this service. By using this service, you represent that you meet these eligibility requirements.
+                    You must be a registered user and at least <strong>18 years old</strong> to use this service. By using this service, you represent that you meet these eligibility requirements.
                 </p>
                 <p className="mb-4">
                     You must possess a valid driving license for two-wheelers. By proceeding with the rental, you confirm that you hold a current and valid two-wheeler driving license and that you are legally permitted to operate the vehicle. Failure to present a valid license upon request or if found driving without one will result in immediate cancellation of the rental, potential legal action, and a permanent ban from our platform.
                 </p>
                 <p className="mb-4">
-                    Please ensure you have your driving license with you at all times during the rental period.
+                    Please ensure you have your <strong>driving license</strong> with you at all times during the rental period.
                 </p>
             </section>
 
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
-                    <strong>Vehicle Rental Agreement</strong>
+                    <blockquote><strong>Vehicle Rental Agreement</strong></blockquote>
                 </p>
                 <p className="mb-4">
                     <strong> Rental Duration:</strong> You as a rider agree to rent the vehicle for the duration agreed upon with the vehicle owner. Any extension of time will result in late fees charge levied on the rider (read late fees policy).
@@ -41,7 +41,7 @@ export default function TermsOfService() {
 
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
-                    <strong>Late Fee Policy</strong>
+                    <blockquote><strong>Late Fee Policy</strong></blockquote>
                 </p>
                 <p  className="mb-4 ">
                     <strong>Late Returns:</strong><br></br>
@@ -63,7 +63,7 @@ export default function TermsOfService() {
 
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
-                    <strong>Vehicle Condition</strong>
+                    <blockquote><strong>Vehicle Condition</strong></blockquote>
                 </p>
                 <p className="mb-4">
                     <strong> Inspection:</strong> Both the Rider and the Owner must inspect the vehicle before the rental period begins, noting any pre-existing damage.
@@ -78,7 +78,7 @@ export default function TermsOfService() {
 
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
-                    <strong>Reckless Driving Policy</strong>
+                    <blockquote><strong>Reckless Driving Policy</strong></blockquote>
                 </p>
                 <p className="mb-4">
                     Reckless driving is strictly prohibited while using any vehicle rented through our platform. Reckless driving includes, but is not limited to:
@@ -91,7 +91,7 @@ export default function TermsOfService() {
                     <li>Driving in a manner that endangers the safety of the driver, passengers, pedestrians, or other road users.</li>
                 </ul>
                 <p className="mb-4">
-                    <strong>Consequences:</strong> While WeRide does not have direct control over the actions of users, any reports or evidence of reckless driving may result in immediate termination of the rental agreement, forfeiture of any deposits, and a permanent ban from our platform. Additionally, renters are fully responsible for any legal consequences, fines, penalties, or damages resulting from reckless driving.
+                    <blockquote><strong>Consequences:</strong> While WeRide does not have direct control over the actions of users, any reports or evidence of reckless driving may result in immediate termination of the rental agreement, forfeiture of any deposits, and a permanent ban from our platform. Additionally, renters are fully responsible for any legal consequences, fines, penalties, or damages resulting from reckless driving.</blockquote>
                 </p>
                 <p className="mb-4">
                     By using our service, you agree to adhere to all traffic laws and drive responsibly at all times.
