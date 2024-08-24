@@ -12,12 +12,11 @@ export default async function Layout({
     if (user) {
         const response = (await supabase.from("users").select("*").eq("id", user.id)).data;
         if (response) {
-            if (!response[0].is_verified) {
-                redirect('/verify')
+            if (response[0].is_verified) {
+                redirect('/')
             }
         }
     }
-
     if (!user) {
         redirect('/login')
     }

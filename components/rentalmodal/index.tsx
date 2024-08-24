@@ -171,14 +171,6 @@ export default function RentalModal({ children }: RentalModal) {
                                                 <Label>Emergency Contact</Label>
                                                 <Input type="number"></Input>
                                             </div>
-                                            <div className="space-y-3">
-                                                <Label>Negotiate Price</Label>
-                                                <div className="flex gap-5 items-center flex-wrap">
-                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 10}</div>
-                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 20}</div>
-                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 30}</div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </ScrollArea>
