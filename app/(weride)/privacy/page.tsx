@@ -3,13 +3,13 @@ import Link from 'next/link';
 
 export default function PrivacyPolicy() {
     return (
-        <main className="max-w-4xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+        <main className="max-w-4xl mx-auto px-6 py-12 bg-white rounded-lg">
             <h1 className="text-4xl font-extrabold mb-8 text-center text-[#146eb4]">Privacy Policy</h1>
-            
+
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>1. Information We Collect</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
 
                 </p>
                 <p className="mb-4">
@@ -19,11 +19,11 @@ export default function PrivacyPolicy() {
                     <strong>1.2. Vehicle Data:</strong> We may collect data about the vehicles you rent or provide for rent, including but not limited to location, usage, and condition.
                 </p>
             </section>
-            
+
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>2. How We Use Your Information</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
                 </p>
                 <p className="mb-4">
                     <strong>2.1. Service Provision:</strong> We use your personal information to provide and improve our services, including facilitating vehicle rentals and processing payments.
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>3. Data Security</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
                 </p>
                 <p className="mb-4">
                     We take reasonable steps to protect your personal information from unauthorized access, disclosure, alteration, or destruction.
@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>4. Data Sharing</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
                 </p>
                 <p className="mb-4">
                     <strong>4.1. With Vehicle Owners/Riders:</strong> Your personal information may be shared with the vehicle owner or rider to facilitate the rental process.
@@ -62,7 +62,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>5. Your Rights</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
                 </p>
                 <p className="mb-4">
                     <strong>5.1. Access and Correction:</strong> You have the right to access and correct your personal information held by us.
@@ -76,7 +76,7 @@ export default function PrivacyPolicy() {
             <section className="text-gray-700 mb-8">
                 <p className="text-lg font-semibold mb-4">
                     <strong>Other Important Policies</strong>
-                    <hr className="border-t border-gray-600 my-4"/>
+                    <hr className="border-t border-gray-600 my-4" />
                 </p>
                 <p className="text-lg font-semibold mb-4">
                     <strong>1. Dispute Resolution</strong>
@@ -92,8 +92,8 @@ export default function PrivacyPolicy() {
                 </p>
                 <p className="mb-4">
                     <strong> Reporting Violations:</strong> Users are encouraged to report any violations of these terms to WeRide at <a href="mailto:sankalpaacharya01@gmail.com." className="text-blue-600 hover:underline">
-                    sankalpaacharya01@gmail.com
-  </a>
+                        sankalpaacharya01@gmail.com
+                    </a>
                 </p>
                 <p className="text-lg font-semibold mb-4">
                     <strong>3. Modifications to Terms</strong>
@@ -109,11 +109,6 @@ export default function PrivacyPolicy() {
                 </p>
             </section>
 
-            <div className="text-center mt-8">
-                <Link href="/" className="inline-block px-6 py-2 text-white bg-[#146eb4] rounded-lg shadow-md hover:bg-blue-700 transition-colors">
-                    Back to Home
-                </Link>
-            </div>
         </main>
     );
 }

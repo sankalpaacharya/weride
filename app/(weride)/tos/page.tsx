@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function TermsOfService() {
     return (
-        <main className="max-w-4xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+        <main className="max-w-4xl mx-auto px-6 py-12 bg-white  rounded-lg">
             <h1 className="text-4xl font-extrabold mb-8 text-center text-[#146eb4]">Terms of Service</h1>
 
             <section className="text-gray-700 mb-8">
@@ -43,18 +43,18 @@ export default function TermsOfService() {
                 <p className="text-lg font-semibold mb-4">
                     <blockquote><strong>Late Fee Policy</strong></blockquote>
                 </p>
-                <p  className="mb-4 ">
+                <p className="mb-4 ">
                     <strong>Late Returns:</strong><br></br>
                     If a vehicle is not returned by the agreed-upon time, a late fee will be charged.<br></br>
                     For the first late hour, <br></br>
                     <strong>Late Fee = (2 * Rental Fee). </strong><br></br>
-                    For each subsequent hour n, the late fee can be calculated as:<br></br> 
+                    For each subsequent hour n, the late fee can be calculated as:<br></br>
                     <strong>Late Fee (for hour n) = Previous Late Fee + 0.5 * Previous Late Fee.</strong>
                 </p>
                 <p className="mb-4 ">
                     For example, if you rented a vehicle for two hours for rental fees of Rs.100 and returned it after five hours, the total extra cost (other than the rental fees) would be:<br></br>
-                <strong>  (2 * 100)[for 1st hr] + ((200 * 0.5) + 200) [for 2nd hr] + ((300 * 0.5) + 300) [for 3rd hr] <br></br>
-                = 200 + 300 + 450 = Rs. 950</strong>
+                    <strong>  (2 * 100)[for 1st hr] + ((200 * 0.5) + 200) [for 2nd hr] + ((300 * 0.5) + 300) [for 3rd hr] <br></br>
+                        = 200 + 300 + 450 = Rs. 950</strong>
                 </p>
                 <p className="mb-4">
                     <strong>Grace Period:</strong> A 10-12 minute grace period may be provided before late fees are applied.
@@ -98,11 +98,7 @@ export default function TermsOfService() {
                 </p>
             </section>
 
-            <div className="text-center mt-8">
-                <Link href="/" className="inline-block px-6 py-2 text-white bg-[#146eb4] rounded-lg shadow-md hover:bg-#146eb4-700 transition-colors">
-                    Back to Home
-                </Link>
-            </div>
+
         </main>
     );
 }
