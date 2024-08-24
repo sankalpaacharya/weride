@@ -29,7 +29,6 @@ export default function RentalModal({ children }: RentalModal) {
         setIsTosAccepted(false);
 
     }
-
     return (
         <Dialog onOpenChange={onModalChange}>
             <DialogTrigger asChild>
@@ -79,10 +78,54 @@ export default function RentalModal({ children }: RentalModal) {
                             </div>
                         </div>
                         <div className={`tab ${selectedTab === "tab2" ? "active" : ""}`}>
-                            <DialogTitle>Terms of Service 2</DialogTitle>
+                            <DialogTitle>Vehicle Information 🛵</DialogTitle>
                             <DialogDescription>
                                 <ScrollArea className="h-[500px] rounded-md  p-4">
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Owner:</span>
+                                            <span className="text-gray-600">Vinit Thakkar</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Vehicle Model:</span>
+                                            <span className="text-gray-600">Honda Activa 6G</span>
+                                        </div>
 
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Fuel Type:</span>
+                                            <span className="text-gray-600">Petrol</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Fuel Efficiency:</span>
+                                            <span className="text-gray-600">45 km/l</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Top Speed:</span>
+                                            <span className="text-gray-600">85 km/h</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Seating Capacity:</span>
+                                            <span className="text-gray-600">2 persons</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Features:</span>
+                                            <span className="text-gray-600">Helmet included</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Insurance:</span>
+                                            <span className="text-gray-600">Covered</span>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <span className="font-semibold text-gray-700">Rental Terms:</span>
+                                            <span className="text-gray-600">Minimum 2 hours, No off-road</span>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2">
+                                            <p className="font-semibold bg-[#388bc1] rounded text-white  text-md border text-center ">Owner Message:</p>
+                                            <span className="text-gray-600">You need to be careful with your ride please don't damage the vehicle and enjoy your ride</span>
+                                        </div>
+
+                                    </div>
                                 </ScrollArea>
                             </DialogDescription>
                             <div className="flex justify-end mt-5">
@@ -97,7 +140,7 @@ export default function RentalModal({ children }: RentalModal) {
                                 </ScrollArea>
                             </DialogDescription>
                             <div className="flex gap-2 justify-end mt-5">
-                                <Button className="" onClick={handleNextClick}>Next</Button>
+                                <Button className="" onClick={handleNextClick}>Rent Now</Button>
                             </div>
                         </div>
                     </div>
