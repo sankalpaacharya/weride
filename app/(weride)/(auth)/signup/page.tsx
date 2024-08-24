@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ImSpinner3 } from "react-icons/im";
 import {
     Select,
     SelectContent,
@@ -166,8 +167,12 @@ export default function Page() {
                                 <Button
                                     disabled={isSubmitting}
                                     type="submit"
-                                    className="w-full bg-[#146eb4] hover:bg-[#1880cf]"
+                                    className="w-full bg-[#146eb4] flex gap-3 hover:bg-[#1880cf]"
                                 >
+                                    {
+                                        isSubmitting &&
+                                        <ImSpinner3 className="animate-spin" />
+                                    }
                                     Signup
                                 </Button>
                             </div>

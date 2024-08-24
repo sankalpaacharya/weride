@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegUser, FaHome, FaQuestion } from "react-icons/fa";
+import { FaRegUser, FaHome } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from 'next/link';
@@ -36,7 +36,6 @@ const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
             <div className='flex gap-5 items-center'>
                 <MenuItem href="/" icon={FaHome} label="Home" />
                 <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
-                <MenuItem href="/faq" icon={FaQuestion} label="FAQ" />
                 {isAuthenticated ? (<Profile></Profile>) : (<MenuItem href="/login" icon={FaRegUser} label="Account" />)}
 
             </div>

@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Checkbox } from "@/components/ui/checkbox"
-
+import { Slider } from "@/components/ui/slider"
 import Link from "next/link"
 import { ReactNode, useState } from "react"
 import toast from "react-hot-toast"
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 interface RentalModal {
     children: ReactNode
@@ -15,6 +18,7 @@ interface RentalModal {
 export default function RentalModal({ children }: RentalModal) {
     const [selectedTab, setSelectedTab] = useState("tab1");
     const [isTosAccepted, setIsTosAccepted] = useState(false);
+    const [hours, setHours] = useState<any>(1);
     const handleNextClick = () => {
         if (isTosAccepted === false) {
             toast.error("Accept the terms of service")
@@ -38,7 +42,7 @@ export default function RentalModal({ children }: RentalModal) {
                 <div className="tabs">
                     <div className="tab-content">
                         <div className={`tab  ${selectedTab === "tab1" ? "active" : ""}`}>
-                            <DialogTitle>Terms of Service</DialogTitle>
+                            <DialogTitle>Terms and Conditions</DialogTitle>
                             <DialogDescription>
                                 <ScrollArea className="h-[500px] rounded-md  p-4">
                                     <ul className="space-y-2 mt-5">
@@ -120,11 +124,20 @@ export default function RentalModal({ children }: RentalModal) {
                                             <span className="text-gray-600">Minimum 2 hours, No off-road</span>
                                         </div>
 
-                                        <div className="flex flex-col gap-2">
-                                            <p className="font-semibold bg-[#388bc1] rounded text-white  text-md border text-center ">Owner Message:</p>
-                                            <span className="text-gray-600">You need to be careful with your ride please don't damage the vehicle and enjoy your ride</span>
+                                        <div className="flex justify-center ">
+                                            <div className="gap-5 flex p-3 w-full rounded-lg bg-[#388bc1] text-white">
+                                                <div className="">
+                                                    <Avatar>
+                                                        <AvatarImage src="https://github.com/shadcn.png" />
+                                                        <AvatarFallback>CN</AvatarFallback>
+                                                    </Avatar>
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold">Owner Message</p>
+                                                    <p className="font-normal ">Please ride Carefully, don't damage the vehicle. Enjoy your ride. There is nothing to say so fuck off</p>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </ScrollArea>
                             </DialogDescription>
@@ -133,11 +146,46 @@ export default function RentalModal({ children }: RentalModal) {
                             </div>
                         </div>
                         <div className={`tab ${selectedTab === "tab3" ? "active" : ""}`}>
-                            <DialogTitle>Terms of Service 3</DialogTitle>
-                            <DialogDescription>
-                                <ScrollArea className="h-[500px] rounded-md  p-4">
+                            <DialogTitle>Ride Information</DialogTitle>
+                            <DialogDescription className="flex flex-col justify-between">
+                                <ScrollArea className="h-[500px] rounded-md p-4">
+                                    <div className="flex flex-col">
+                                        <div className="flex flex-col gap-5 px-1">
+                                            <div className="space-y-1">
+                                                <Label>Destination Location</Label>
+                                                <Input></Input>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label>Hours ({hours})</Label>
+                                                <Slider
+                                                    className=""
+                                                    minStepsBetweenThumbs={1}
+                                                    onValueChange={(hour) => setHours(Math.max(hour[0], 1))}
+                                                    defaultValue={[1]}
+                                                    max={5}
+                                                    step={1}
+                                                />
+                                            </div>
 
+                                            <div className="space-y-1">
+                                                <Label>Emergency Contact</Label>
+                                                <Input type="number"></Input>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <Label>Negotiate Price</Label>
+                                                <div className="flex gap-5 items-center flex-wrap">
+                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 10}</div>
+                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 20}</div>
+                                                    <div className="p-3 cursor-pointer font-bold rounded-lg text-white shadow-lg bg-main">{(100 * hours) - 30}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ScrollArea>
+                                <div className="px-4 flex gap-1">
+                                    <p className="text-md font-medium">Price:</p>
+                                    <p className="text-md">₹{100 * hours}</p>
+                                </div>
                             </DialogDescription>
                             <div className="flex gap-2 justify-end mt-5">
                                 <Button className="" onClick={handleNextClick}>Rent Now</Button>

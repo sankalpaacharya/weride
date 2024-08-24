@@ -14,6 +14,7 @@ export default function Header() {
         { href: '/', label: 'Terms of Use' },
         { href: '/', label: 'Privacy' },
         { href: '/', label: 'About Us' },
+        { href: '/faq', label: 'FAQ' },
     ];
 
     return (
