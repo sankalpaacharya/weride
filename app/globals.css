@@ -120,6 +120,11 @@ input[type="radio"] {
     @apply bg-background text-foreground;
   }
 }
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 blockquote {
   padding: 1rem;
   margin: 1rem 0;
