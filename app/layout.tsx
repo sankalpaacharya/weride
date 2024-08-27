@@ -5,8 +5,8 @@ import "./globals.css";
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '400', '500', '700'] });
 
 export const metadata: Metadata = {
-  title: "weRide- High Rise Rental",
-  description: "WeRide High Rise Rental",
+  title: "weride.live",
+  description: "weride-share the wheels, share the fun",
 };
 
 export default function RootLayout({
