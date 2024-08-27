@@ -1,10 +1,19 @@
+"use client"
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
+import { useForm } from 'react-hook-form'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { renterIdentitySchema, TrenterIdentitySchema } from '@/app/schemas/renterIdentitySchema'
 export default function RenterForm() {
+
+    const { register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        setValue, } = useForm({ resolver: zodResolver(renterIdentitySchema) });
+
     return (
         <form action="">
             <Card className="mx-auto max-w-md w-[100rem]">
@@ -16,28 +25,28 @@ export default function RenterForm() {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="password">College ID Card Photo (Both Side)</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Input {...register("collegeIDPhoto")} id="collegeIDPhoto" type="file" placeholder='319' />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Hostel ID Card Photo (Both Side)</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Input {...register("hostelIDPhoto")} id="hostelIDPhoto" type="file" placeholder='319' />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Driving Licence Photo (Both Side)</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Input {...register("drivingLicencePhoto")} id="drivingLicencePhoto" type="file" placeholder='319' />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Profile Photo</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Input {...register("profilePhoto")} id="profilePhoto" type="file" placeholder='319' />
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="email">Hostel Block</Label>
-                            <Input id="email" type="text" placeholder='A1' />
+                            <Input {...register("hostelBlock")} id="hostelBlock" type="text" placeholder='A1' />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Room no</Label>
-                            <Input id="password" type="text" placeholder='319' />
+                            <Input {...register("hostelRoom")} id="hostelRoom" type="text" placeholder='319' />
                         </div>
 
                         <div className="flex flex-col gap-3">

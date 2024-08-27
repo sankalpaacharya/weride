@@ -72,7 +72,7 @@ export default function RentalModal({ children }: RentalModal) {
                                             htmlFor="terms"
                                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                         >
-                                            I have read all the terms of service and I accept it.
+                                            I have read all the terms and conditions and I accept it.
                                         </label>
                                     </div>
                                 </ScrollArea>

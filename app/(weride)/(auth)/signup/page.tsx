@@ -32,8 +32,6 @@ export default function Page() {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-        reset,
-        getValues,
         setValue,
     } = useForm<TsignInSchema>({
         resolver: zodResolver(signInSchema),
