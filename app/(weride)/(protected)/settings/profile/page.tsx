@@ -22,28 +22,28 @@ export default function page() {
                             <Label htmlFor="email">Full Name</Label>
                             <Input defaultValue="Sankalpa Acharya" type="text" id="text" placeholder="Full Name" />
                         </div>
-                        <p className='text-sm text-gray-500'>This is your full name and it's can't be changed more then once</p>
+                        <p className='text-sm text-gray-500'>This is your full name, and it can't be changed more than once.</p>
                     </div>
                     <div className='space-y-2'>
                         <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
                             <Label htmlFor="email">Email</Label>
                             <Input disabled value="sankalp.ace22@sot.pdpu.ac.in" type="text" id="text" placeholder="Email" />
                         </div>
-                        <p className='text-sm text-gray-500'>Email can't be changed</p>
+                        <p className='text-sm text-gray-500'>Email can't be changed.</p>
                     </div>
                     <div className='space-y-2'>
                         <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
                             <Label htmlFor="email">Hostel Block</Label>
                             <Input defaultValue="B2" type="text" id="text" placeholder="Home Address" />
                         </div>
-                        <p className='text-sm text-gray-500'>Your hostel building block</p>
+                        <p className='text-sm text-gray-500'>Your hostel building block.</p>
                     </div>
                     <div className='space-y-2'>
                         <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
                             <Label htmlFor="email">Room no</Label>
                             <Input defaultValue="212" type="text" id="text" placeholder="Room No" />
                         </div>
-                        <p className='text-sm text-gray-500'>Your Room No</p>
+                        <p className='text-sm text-gray-500'>Your Room No.</p>
                     </div>
                     <Button>Update Profile</Button>
                 </div>

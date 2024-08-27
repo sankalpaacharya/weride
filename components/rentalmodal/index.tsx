@@ -134,7 +134,7 @@ export default function RentalModal({ children }: RentalModal) {
                                                 </div>
                                                 <div>
                                                     <p className="font-bold">Owner Message</p>
-                                                    <p className="font-normal ">Please ride Carefully, don't damage the vehicle. Enjoy your ride. There is nothing to say so fuck off</p>
+                                                    <p className="font-normal ">Please ride Carefully, don&apos;t damage the vehicle. Enjoy your ride. There is nothing to say so fuck off</p>
                                                 </div>
                                             </div>
                                         </div>
