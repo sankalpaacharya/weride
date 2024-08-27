@@ -14,9 +14,8 @@ export default function RenterForm() {
         formState: { errors, isSubmitting },
         setValue, } = useForm<TrenterIdentitySchema>({ resolver: zodResolver(renterIdentitySchema) });
 
-
     const submitForm = (data: TrenterIdentitySchema) => {
-        console.log("data", data)
+        console.log("data", data);
     }
 
     return (
@@ -76,14 +75,13 @@ export default function RenterForm() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="hostelRoom">Room no</Label>
-                            <Input {...register("hostelRoom")} id="hostelRoom" type="number" placeholder='319' />
+                            <Input {...register("hostelRoom")} id="hostelRoom" type="text" placeholder='319' />
                             {errors.hostelRoom && (
                                 <p className="text-red-500 text-sm">
                                     {`${errors.hostelRoom.message}`}
                                 </p>
                             )}
                         </div>
-
                         <div className="flex flex-col gap-3">
                             <Button disabled={isSubmitting} type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
                                 Verify

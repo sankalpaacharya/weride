@@ -12,7 +12,7 @@ const fileSchema = isClient
 
 export const renterIdentitySchema = z.object({
     hostelBlock: z.string({ required_error: "Hostel Block is required" }).max(2, "Block name can't be more than 2 characters").min(1, "Hostel Block is required"),
-    hostelRoom: z.number({ required_error: "Hostel Room is required" }).max(3, "Not a valid room number").min(1, "Room no is required"),
+    hostelRoom: z.string({ required_error: "Hostel Room is required" }).max(3, "Not a valid room number").min(1, "Room no is required"),
     collegeIDPhoto: fileSchema,
     hostelIDPhoto: fileSchema,
     profilePhoto: fileSchema,

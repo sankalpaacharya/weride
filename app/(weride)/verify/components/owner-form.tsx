@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 export default function OwnerForm() {
     return (
         <form action="">
-            <Card className="mx-auto max-w-md w-[100rem]">
+            <Card className="mx-auto max-w-sm md:max-w-md mb-10 w-[100rem]">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Owner Identity Verification</CardTitle>
                     <CardDescription>Please fill in the details below. If you have already filled in the details, please wait for account verification. This is a manual process and may take several hours or up to a day</CardDescription>
@@ -30,6 +30,10 @@ export default function OwnerForm() {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Vehicle Photo</Label>
+                            <Input id="password" type="file" placeholder='319' />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="password">QR Photo for payment</Label>
                             <Input id="password" type="file" placeholder='319' />
                         </div>
                         <div className="space-y-2">
