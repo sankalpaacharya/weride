@@ -18,5 +18,9 @@ export const ownerIdentitySchema = z.object({
     hostelIDPhoto: fileSchema,
     profilePhoto: fileSchema,
     QRPhoto: fileSchema,
-    messageToRenter: z.string({ required_error: "Message is required" }).max(500, "Block name can't be more than 2 characters").min(1, "Hostel Block is required")
+    messageToRenter: z.string({ required_error: "Message is required" }).max(500, "message name can't be more than 2 characters").min(1, "Hostel Block is required"),
+    vehicleName: z.string({ required_error: "Message is required" }).max(500, "name can't be more than 2 characters").min(1, "Vehicle name is required"),
+    fuelType: z.enum(["petrol", "diesel", "electric", "cycle"])
 })
+
+export type TownerIdentitySchema = z.infer<typeof ownerIdentitySchema>

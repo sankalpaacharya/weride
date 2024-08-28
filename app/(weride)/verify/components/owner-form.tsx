@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -5,8 +6,15 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ownerIdentitySchema, TownerIdentitySchema } from "@/app/schemas/ownerIdentitySchema"
 
 export default function OwnerForm() {
+
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(ownerIdentitySchema) });
+
+
     return (
         <form action="">
             <Card className="mx-auto max-w-sm md:max-w-md mb-10 w-[100rem]">
@@ -18,7 +26,7 @@ export default function OwnerForm() {
                     <div className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="password">College ID Card Photo (Both Side)</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Input {...register("")} id="password" type="file" placeholder='319' />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Hostel ID Card Photo (Both Side)</Label>
@@ -73,7 +81,7 @@ export default function OwnerForm() {
                             </Select>
                         </div>
                         <div className="flex flex-col gap-3">
-                            <Button type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
+                            <Button disabled={isSubmitting} type="submit" className="w-full bg-[#146eb4] hover:bg-[#1880cf]">
                                 Verify
                             </Button>
                         </div>
