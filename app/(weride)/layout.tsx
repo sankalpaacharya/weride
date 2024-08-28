@@ -2,6 +2,7 @@ import NavBar from "@/components/navbar";
 import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import { createClient } from "@/utils/supabase/server";
+import Providers from "@/components/progressbarprovider";
 
 export default async function Layout({
     children,
@@ -21,7 +22,7 @@ export default async function Layout({
             <NavBar />
             <Header isAuthenticated={user ? true : false} />
             <div className="flex grow w-full">
-                {children}
+                <Providers>{children}</Providers>
             </div>
         </main>
     );
