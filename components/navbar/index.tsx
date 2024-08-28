@@ -49,7 +49,7 @@ export default function Header() {
                 </div>
                 <nav className="px-10 mt-10 flex gap-5 flex-col">
                     {navLinks.map(link => (
-                        <Link key={link.label} href={link.href}>
+                        <Link onClick={() => setIsOpen(false)} key={link.label} href={link.href}>
                             {link.label}
                         </Link>
                     ))}
