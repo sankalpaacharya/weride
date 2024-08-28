@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -10,13 +10,19 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ownerIdentitySchema, TownerIdentitySchema } from "@/app/schemas/ownerIdentitySchema"
 
+
 export default function OwnerForm() {
 
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(ownerIdentitySchema) });
+    const [fuelType, setFuelType] = useState("petrol");
 
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TownerIdentitySchema>({ resolver: zodResolver(ownerIdentitySchema) });
+
+    const submitForm = (data: TownerIdentitySchema) => {
+
+    }
 
     return (
-        <form action="">
+        <form action="" onSubmit={handleSubmit(submitForm)}>
             <Card className="mx-auto max-w-sm md:max-w-md mb-10 w-[100rem]">
                 <CardHeader className="space-y-1">
                     <CardTitle className="text-2xl font-bold">Owner Identity Verification</CardTitle>
@@ -25,41 +31,86 @@ export default function OwnerForm() {
                 <CardContent>
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="password">College ID Card Photo (Both Side)</Label>
-                            <Input {...register("")} id="password" type="file" placeholder='319' />
+                            <Label htmlFor="collegeIDPhoto">College ID Card Photo (Both Side)</Label>
+                            <Input {...register("collegeIDPhoto")} id="collegeIDPhoto" type="file" placeholder='319' />
+                            {errors.collegeIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.collegeIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">Hostel ID Card Photo (Both Side)</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Label htmlFor="hostelIDPhoto">Hostel ID Card Photo (Both Side)</Label>
+                            <Input {...register("hostelIDPhoto")} id="hostelIDPhoto" type="file" placeholder='319' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">Profile Photo</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Label htmlFor="profilePhoto">Profile Photo</Label>
+                            <Input {...register("profilePhoto")} id="password" type="file" placeholder='319' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">Vehicle Photo</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Label htmlFor="vehiclePhoto">Vehicle Photo</Label>
+                            <Input {...register("vehiclePhoto")} id="password" type="file" placeholder='319' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">QR Photo for payment</Label>
-                            <Input id="password" type="file" placeholder='319' />
+                            <Label htmlFor="QRPhoto">QR Photo for payment</Label>
+                            <Input {...register("QRPhoto")} id="QRPhoto" type="file" placeholder='319' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="email">Hostel Block</Label>
-                            <Input id="email" type="text" placeholder='A1' />
+                            <Label htmlFor="hostelBlock">Hostel Block</Label>
+                            <Input {...register("hostelBlock")} id="email" type="text" placeholder='A1' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">Room no</Label>
-                            <Input id="password" type="text" placeholder='319' />
+                            <Label htmlFor="hostelRoom">Room no</Label>
+                            <Input {...register("hostelRoom")} id="password" type="text" placeholder='319' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="password">Vehicle Name</Label>
-                            <Input id="password" type="text" placeholder='Honda Activa 6G' />
+                            <Label htmlFor="vehicleName">Vehicle Name</Label>
+                            <Input {...register("vehicleName")} id="password" type="text" placeholder='Honda Activa 6G' />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="password">Message To Renters</Label>
-                            <Textarea placeholder="This message will be displayed to renter while booking vehicle." />
+                            <Label htmlFor="messageToRenter">Message To Renters</Label>
+                            <Textarea {...register("messageToRenter")} placeholder="This message will be displayed to renter while booking vehicle." />
+                            {errors.hostelIDPhoto && (
+                                <p className="text-red-500 text-sm">
+                                    {`${errors.hostelIDPhoto.message}`}
+                                </p>
+                            )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="role">Fuel Type</Label>
