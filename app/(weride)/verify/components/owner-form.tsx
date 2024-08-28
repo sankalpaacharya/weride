@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -18,6 +18,11 @@ export default function OwnerForm() {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<TownerIdentitySchema>({ resolver: zodResolver(ownerIdentitySchema) });
 
     const submitForm = (data: TownerIdentitySchema) => {
+        if (fuelType == "petrol" || fuelType == "cycle" || fuelType == "electric" || fuelType == "diesel") {
+            data.fuelType = fuelType
+        }
+
+
 
     }
 
@@ -51,45 +56,45 @@ export default function OwnerForm() {
                         <div className="space-y-2">
                             <Label htmlFor="profilePhoto">Profile Photo</Label>
                             <Input {...register("profilePhoto")} id="password" type="file" placeholder='319' />
-                            {errors.hostelIDPhoto && (
+                            {errors.profilePhoto && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.profilePhoto.message}`}
                                 </p>
                             )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="vehiclePhoto">Vehicle Photo</Label>
                             <Input {...register("vehiclePhoto")} id="password" type="file" placeholder='319' />
-                            {errors.hostelIDPhoto && (
+                            {errors.vehiclePhoto && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.vehiclePhoto.message}`}
                                 </p>
                             )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="QRPhoto">QR Photo for payment</Label>
                             <Input {...register("QRPhoto")} id="QRPhoto" type="file" placeholder='319' />
-                            {errors.hostelIDPhoto && (
+                            {errors.QRPhoto && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.QRPhoto.message}`}
                                 </p>
                             )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="hostelBlock">Hostel Block</Label>
                             <Input {...register("hostelBlock")} id="email" type="text" placeholder='A1' />
-                            {errors.hostelIDPhoto && (
+                            {errors.hostelBlock && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.hostelBlock.message}`}
                                 </p>
                             )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="hostelRoom">Room no</Label>
                             <Input {...register("hostelRoom")} id="password" type="text" placeholder='319' />
-                            {errors.hostelIDPhoto && (
+                            {errors.hostelRoom && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.hostelRoom.message}`}
                                 </p>
                             )}
                         </div>
@@ -97,18 +102,18 @@ export default function OwnerForm() {
                         <div className="space-y-2">
                             <Label htmlFor="vehicleName">Vehicle Name</Label>
                             <Input {...register("vehicleName")} id="password" type="text" placeholder='Honda Activa 6G' />
-                            {errors.hostelIDPhoto && (
+                            {errors.vehicleName && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.vehicleName.message}`}
                                 </p>
                             )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="messageToRenter">Message To Renters</Label>
                             <Textarea {...register("messageToRenter")} placeholder="This message will be displayed to renter while booking vehicle." />
-                            {errors.hostelIDPhoto && (
+                            {errors.messageToRenter && (
                                 <p className="text-red-500 text-sm">
-                                    {`${errors.hostelIDPhoto.message}`}
+                                    {`${errors.messageToRenter.message}`}
                                 </p>
                             )}
                         </div>
@@ -116,6 +121,7 @@ export default function OwnerForm() {
                             <Label htmlFor="role">Fuel Type</Label>
                             <Select
                                 defaultValue="petrol"
+                                onValueChange={value => setFuelType(value)}
                             >
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Select your role" />
