@@ -43,7 +43,7 @@ export default function RentalCard({
   };
 
   return (
-    <Card className="w-[35rem] max-w-sm mx-auto transition-all duration-300 hover:shadow-xl">
+    <Card className="md:w-[35rem] md:max-w-sm w-full mx-auto transition-all duration-300 hover:shadow-xl">
       <div className="relative w-full h-64">
         <Image
           className="rounded-t-lg object-cover brightness-50"
@@ -86,26 +86,30 @@ export default function RentalCard({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 text-gray-700">
-            <MdLocationOn className="text-primary text-lg" />
-            <span className="text-sm">High Rise</span>
+        <div className="flex gap-3 justify-between">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-gray-700">
+              <MdLocationOn className="text-primary text-lg" />
+              <span className="text-sm">High Rise</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-700">
+              <FaGasPump className="text-primary text-lg" />
+              <span className="text-sm">{bikeDetails.mileage}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2 text-gray-700">
-            <FaGasPump className="text-primary text-lg" />
-            <span className="text-sm">{bikeDetails.mileage}</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-700">
-            <MdSpeed className="text-primary text-lg" />
-            <span className="text-sm">{bikeDetails.maxSpeed}</span>
-          </div>
-          <div className="flex items-center gap-2 text-gray-700">
-            <BiTime className="text-primary text-lg" />
-            <span className="text-sm">24/7 Support</span>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-gray-700">
+              <MdSpeed className="text-primary text-lg" />
+              <span className="text-sm">{bikeDetails.maxSpeed}</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-700">
+              <BiTime className="text-primary text-lg" />
+              <span className="text-sm">24/7 Support</span>
+            </div>
           </div>
         </div>
 
-        <div className="border-t pt-4 space-y-2">
+        <div className="border-t pt-4 flex justify-between  space-y-2">
           <div className="flex items-center gap-2">
             <FaRegUserCircle className="text-primary" />
             <div>
@@ -124,9 +128,9 @@ export default function RentalCard({
           </div>
         </div>
 
-        <RentalModal>
+        {/* <RentalModal>
           <Button>Rent Now</Button>
-        </RentalModal>
+        </RentalModal> */}
       </CardContent>
     </Card>
   );

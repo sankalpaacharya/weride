@@ -18,14 +18,13 @@ export default function Home() {
   return (
     <main className=" overflow-hidden relative w-full">
       <FilterBar />
-      <div className="flex justify-between">
-        <div></div>
-        <div className="grid md:grid-cols-3 grid-cols-1 mt-10 gap-10">
+      <div className="flex  md:justify-center">
+        <div className="grid w-full md:w-fit  md:grid-cols-4 grid-cols-1 mt-10 gap-10 px-10 md:px-0">
+          <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
           <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
           <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
           <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
         </div>
-        <div></div>
       </div>
     </main>
   );
