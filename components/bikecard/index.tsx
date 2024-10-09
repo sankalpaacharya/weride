@@ -1,46 +1,133 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import RentalModal from "@/components/rentalmodal";
-import { FaStar } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { FaRegUserCircle } from "react-icons/fa";
-import { MdDirectionsBike } from "react-icons/md";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { FaRegUserCircle, FaGasPump, FaStar } from "react-icons/fa";
+import { MdDirectionsBike, MdSpeed, MdLocationOn } from "react-icons/md";
+import { BiTime } from "react-icons/bi";
 
-export default function index({ imageName }: { imageName: String }) {
+interface RentalCardProps {
+  imageName: string;
+  bikeDetails: {
+    name: string;
+    model: string;
+    owner: string;
+    lastRenter: string;
+    pricePerHour: number;
+    location: string;
+    mileage: string;
+    rating: number;
+    availability: "Available" | "Booked" | "Maintenance";
+    maxSpeed: string;
+  };
+}
+
+export default function RentalCard({
+  imageName,
+  bikeDetails,
+}: RentalCardProps) {
+  const getAvailabilityColor = (status: string) => {
+    switch (status) {
+      case "Available":
+        return "bg-green-100 text-green-800";
+      case "Booked":
+        return "bg-red-100 text-red-800";
+      case "Maintenance":
+        return "bg-yellow-100 text-yellow-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
   return (
-    <div className="md:mt-10 shadow-xl p-3 py-5 relative rounded-lg flex flex-col">
-      <Image
-        className="border rounded-xl w-[20rem] h-[17rem] object-cover"
-        alt="bike"
-        src={`/images/${imageName}`}
-        width={500}
-        height={500}
-      />
-      <div className="space-y-4">
-        <div className="mt-2">
-          <h2 className="text-lg font-semibold text-gray-800">
-            Honda Activa 125
-          </h2>
-          <div className="mt-3 space-y-1">
-            <div className="flex space-x-2 items-center">
-              <FaRegUserCircle color="#481885" />
-              <p className="text-sm text-gray-800">Vinit Thakkar</p>
+    <Card className="w-[35rem] max-w-sm mx-auto transition-all duration-300 hover:shadow-xl">
+      <div className="relative w-full h-64">
+        <Image
+          className="rounded-t-lg object-cover brightness-50"
+          alt={bikeDetails.name}
+          src={`/images/${imageName}`}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+        />
+        <div className="absolute top-4 right-4">
+          <Badge
+            className={`${getAvailabilityColor(
+              bikeDetails.availability
+            )} px-3 py-1`}
+          >
+            {bikeDetails.availability}
+          </Badge>
+        </div>
+        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+          <span className="font-bold text-lg text-primary">
+            ₹{bikeDetails.pricePerHour}
+          </span>
+          <span className="text-sm text-gray-600">/hr</span>
+        </div>
+      </div>
+
+      <CardContent className="p-6 space-y-4">
+        <div>
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
+                {bikeDetails.name}
+              </h2>
+              <p className="text-sm text-gray-600">{bikeDetails.model}</p>
             </div>
-            <div className="">
-              <p className="text-sm text-gray-800 flex space-x-2 items-center">
-                <MdDirectionsBike color="#481885" />
-                <p className="text-sm text-gray-800">Last Booked by Sankalpa</p>
-              </p>
+            <div className="flex items-center gap-1">
+              <FaStar className="text-yellow-400" />
+              <span className="font-semibold">{bikeDetails.rating}</span>
             </div>
           </div>
         </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex items-center gap-2 text-gray-700">
+            <MdLocationOn className="text-primary text-lg" />
+            <span className="text-sm">High Rise</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700">
+            <FaGasPump className="text-primary text-lg" />
+            <span className="text-sm">{bikeDetails.mileage}</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700">
+            <MdSpeed className="text-primary text-lg" />
+            <span className="text-sm">{bikeDetails.maxSpeed}</span>
+          </div>
+          <div className="flex items-center gap-2 text-gray-700">
+            <BiTime className="text-primary text-lg" />
+            <span className="text-sm">24/7 Support</span>
+          </div>
+        </div>
+
+        <div className="border-t pt-4 space-y-2">
+          <div className="flex items-center gap-2">
+            <FaRegUserCircle className="text-primary" />
+            <div>
+              <p className="text-sm font-medium text-gray-900">Owner</p>
+              <p className="text-sm text-gray-600">{bikeDetails.owner}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <MdDirectionsBike className="text-primary" />
+            <div>
+              <p className="text-sm font-medium text-gray-900">
+                Last Rented By
+              </p>
+              <p className="text-sm text-gray-600">{bikeDetails.lastRenter}</p>
+            </div>
+          </div>
+        </div>
+
         <RentalModal>
-          <Button className="cursor-pointer text-md px-3 py-1 rounded-lg mt-2 w-full text-white">
-            Rent
-          </Button>
+          <Button>Rent Now</Button>
         </RentalModal>
-      </div>
-      <div></div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
