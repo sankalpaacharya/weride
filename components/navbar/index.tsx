@@ -18,7 +18,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-[#146eb4] text-white py-3 md:px-14 px-5 z-10 relative">
+    <header className="bg-[#481885] text-white py-3 md:px-14 px-5 z-10 relative">
       <div className="flex justify-between items-center">
         <div className="text-xl font-bold cursor-pointer">
           <Link href="/">WeRide</Link>
