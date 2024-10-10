@@ -25,9 +25,9 @@ export default function Home() {
           </h2>
           <div className="grid w-full md:w-fit mt-5  md:grid-cols-4 grid-cols-1  gap-10 px-10 md:px-0">
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+            <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+            <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
           </div>
         </div>
       </div>
