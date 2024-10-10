@@ -4,7 +4,7 @@ import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["100", "400", "300", "500", "700"],
+  weight: ["100", "400", "200", "300", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className + "overflow-x-hidden"}>
+      <body className={`${poppins.className} overflow-x-hidden`}>
         {children}
       </body>
     </html>

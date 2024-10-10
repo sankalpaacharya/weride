@@ -18,12 +18,17 @@ export default function Home() {
   return (
     <main className=" overflow-hidden relative w-full">
       <FilterBar />
-      <div className="flex  md:justify-center">
-        <div className="grid w-full md:w-fit  md:grid-cols-4 grid-cols-1 mt-10 gap-10 px-10 md:px-0">
-          <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-          <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-          <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-          <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+      <div className="flex flex-col mt-10 md:items-center ">
+        <div>
+          <h2 className="font-semibold text-xl text-gray-800">
+            Frequently Booked
+          </h2>
+          <div className="grid w-full md:w-fit mt-5  md:grid-cols-4 grid-cols-1  gap-10 px-10 md:px-0">
+            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
+          </div>
         </div>
       </div>
     </main>
