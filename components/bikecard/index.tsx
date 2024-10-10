@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FaRegUserCircle, FaGasPump, FaStar } from "react-icons/fa";
 import { MdDirectionsBike, MdSpeed, MdLocationOn } from "react-icons/md";
 import { BiTime } from "react-icons/bi";
+import Link from "next/link";
 
 interface RentalCardProps {
   imageName: string;
@@ -43,95 +44,99 @@ export default function RentalCard({
   };
 
   return (
-    <Card className="md:w-[35rem] md:max-w-sm w-full mx-auto transition-all duration-300 hover:shadow-xl">
-      <div className="relative w-full h-64">
-        <Image
-          className="rounded-t-lg object-cover brightness-50"
-          alt={bikeDetails.name}
-          src={`/images/${imageName}`}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
-        />
-        <div className="absolute top-4 right-4">
-          <Badge
-            className={`${getAvailabilityColor(
-              bikeDetails.availability
-            )} px-3 py-1`}
-          >
-            {bikeDetails.availability}
-          </Badge>
-        </div>
-        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-          <span className="font-bold text-lg text-primary">
-            ₹{bikeDetails.pricePerHour}
-          </span>
-          <span className="text-sm text-gray-600">/hr</span>
-        </div>
-      </div>
-
-      <CardContent className="p-6 space-y-4">
-        <div>
-          <div className="flex justify-between items-start">
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
-                {bikeDetails.name}
-              </h2>
-              <p className="text-sm text-gray-600">{bikeDetails.model}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <FaStar className="text-yellow-400" />
-              <span className="font-semibold">{bikeDetails.rating}</span>
-            </div>
+    <Link href={""} className="transition-all duration-300 hover:shadow-xl">
+      <Card className="md:w-[35rem] md:max-w-sm w-full mx-auto ">
+        <div className="relative w-full h-64">
+          <Image
+            className="rounded-t-lg object-cover brightness-50"
+            alt={bikeDetails.name}
+            src={`/images/${imageName}`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+          />
+          <div className="absolute top-4 right-4">
+            <Badge
+              className={`${getAvailabilityColor(
+                bikeDetails.availability
+              )} px-3 py-1`}
+            >
+              {bikeDetails.availability}
+            </Badge>
+          </div>
+          <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+            <span className="font-bold text-lg text-primary">
+              ₹{bikeDetails.pricePerHour}
+            </span>
+            <span className="text-sm text-gray-600">/hr</span>
           </div>
         </div>
 
-        <div className="flex gap-3 justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-gray-700">
-              <MdLocationOn className="text-primary text-lg" />
-              <span className="text-sm">High Rise</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-700">
-              <FaGasPump className="text-primary text-lg" />
-              <span className="text-sm">{bikeDetails.mileage}</span>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-gray-700">
-              <MdSpeed className="text-primary text-lg" />
-              <span className="text-sm">{bikeDetails.maxSpeed}</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-700">
-              <BiTime className="text-primary text-lg" />
-              <span className="text-sm">24/7 Support</span>
+        <CardContent className="p-6 space-y-4">
+          <div>
+            <div className="flex justify-between items-start">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
+                  {bikeDetails.name}
+                </h2>
+                <p className="text-sm text-gray-600">{bikeDetails.model}</p>
+              </div>
+              <div className="flex items-center gap-1">
+                <FaStar className="text-yellow-400" />
+                <span className="font-semibold">{bikeDetails.rating}</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="border-t pt-4 flex justify-between  space-y-2">
-          <div className="flex items-center gap-2">
-            <FaRegUserCircle className="text-primary" />
-            <div>
-              <p className="text-sm font-medium text-gray-900">Owner</p>
-              <p className="text-sm text-gray-600">{bikeDetails.owner}</p>
+          <div className="flex gap-3 justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-gray-700">
+                <MdLocationOn className="text-primary text-lg" />
+                <span className="text-sm">High Rise</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-700">
+                <FaGasPump className="text-primary text-lg" />
+                <span className="text-sm">{bikeDetails.mileage}</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-gray-700">
+                <MdSpeed className="text-primary text-lg" />
+                <span className="text-sm">{bikeDetails.maxSpeed}</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-700">
+                <BiTime className="text-primary text-lg" />
+                <span className="text-sm">24/7 Support</span>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <MdDirectionsBike className="text-primary" />
-            <div>
-              <p className="text-sm font-medium text-gray-900">
-                Last Rented By
-              </p>
-              <p className="text-sm text-gray-600">{bikeDetails.lastRenter}</p>
-            </div>
-          </div>
-        </div>
 
-        {/* <RentalModal>
+          <div className="border-t pt-4 flex justify-between  space-y-2">
+            <div className="flex items-center gap-2">
+              <FaRegUserCircle className="text-primary" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">Owner</p>
+                <p className="text-sm text-gray-600">{bikeDetails.owner}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <MdDirectionsBike className="text-primary" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">
+                  Last Rented By
+                </p>
+                <p className="text-sm text-gray-600">
+                  {bikeDetails.lastRenter}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* <RentalModal>
           <Button>Rent Now</Button>
         </RentalModal> */}
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
