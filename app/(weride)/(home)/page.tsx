@@ -19,11 +19,11 @@ export default function Home() {
     <main className=" overflow-hidden relative w-full">
       <FilterBar />
       <div className="flex flex-col mt-10 md:items-center ">
-        <div>
-          <h2 className="font-semibold text-xl text-gray-800">
+        <div className="w-full md:w-fit px-10 md:px-0">
+          <h2 className="font-semibold text-xl  text-gray-800">
             Frequently Booked
           </h2>
-          <div className="grid w-full md:w-fit mt-5  md:grid-cols-4 grid-cols-1  gap-10 px-10 md:px-0">
+          <div className="grid mt-5 lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10 ">
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
             <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
