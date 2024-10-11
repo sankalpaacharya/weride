@@ -3,7 +3,8 @@ import { TsignInSchema, signInSchema } from '@/app/schemas/signInSchema'
 import { TloginSchema, loginInSchema } from '@/app/schemas/logInSchema'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-
+import { TrenterIdentitySchema } from '../schemas/renterIdentitySchema'
+import { ownerIdentitySchema } from '../schemas/ownerIdentitySchema'
 export async function signupAction(data: TsignInSchema) {
     const result = signInSchema.safeParse(data)
     if (!result.success) {
@@ -54,4 +55,15 @@ export async function loginAction(data: TloginSchema) {
         redirect("/")
     }
     return { error: "Oops, error occured" }
+}
+
+
+
+export async function renterFormAction(data:any){
+    const formData:TrenterIdentitySchema = data 
+    console.log(data)
+    if(data){
+        return {message:"Received the message"}
+    }
+    return {error:"Received the message"}
 }

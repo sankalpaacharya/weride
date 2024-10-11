@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +16,8 @@ import {
   renterIdentitySchema,
   TrenterIdentitySchema,
 } from "@/app/schemas/renterIdentitySchema";
+import { renterFormAction } from "@/app/actions";
+
 export default function RenterForm() {
   const {
     register,
@@ -26,8 +28,36 @@ export default function RenterForm() {
     resolver: zodResolver(renterIdentitySchema),
   });
 
-  const submitForm = (data: TrenterIdentitySchema) => {
-    console.log("data", data);
+  const submitForm = async (data: TrenterIdentitySchema) => {
+    try {
+      const formData = new FormData();
+
+      if (data.collegeIDPhoto?.[0]) {
+        formData.append("collegeIDPhoto", data.collegeIDPhoto[0]);
+      }
+      if (data.hostelIDPhoto?.[0]) {
+        formData.append("hostelIDPhoto", data.hostelIDPhoto[0]);
+      }
+      if (data.drivingLicencePhoto?.[0]) {
+        formData.append("drivingLicencePhoto", data.drivingLicencePhoto[0]);
+      }
+      if (data.profilePhoto?.[0]) {
+        formData.append("profilePhoto", data.profilePhoto[0]);
+      }
+
+      formData.append("hostelBlock", data.hostelBlock);
+      formData.append("hostelRoom", data.hostelRoom);
+
+      const response = await renterFormAction(formData);
+
+      if (response.error) {
+        console.error(response.error);
+      } else {
+        console.log(response.message);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -54,6 +84,7 @@ export default function RenterForm() {
                 id="collegeIDPhoto"
                 type="file"
                 placeholder="319"
+                accept="image/*"
               />
               {errors.collegeIDPhoto && (
                 <p className="text-red-500 text-sm">
@@ -70,6 +101,7 @@ export default function RenterForm() {
                 id="hostelIDPhoto"
                 type="file"
                 placeholder="319"
+                accept="image/*"
               />
               {errors.hostelIDPhoto && (
                 <p className="text-red-500 text-sm">
@@ -86,6 +118,7 @@ export default function RenterForm() {
                 id="drivingLicencePhoto"
                 type="file"
                 placeholder="319"
+                accept="image/*"
               />
               {errors.drivingLicencePhoto && (
                 <p className="text-red-500 text-sm">
@@ -100,6 +133,7 @@ export default function RenterForm() {
                 id="profilePhoto"
                 type="file"
                 placeholder="319"
+                accept="image/*"
               />
               {errors.profilePhoto && (
                 <p className="text-red-500 text-sm">

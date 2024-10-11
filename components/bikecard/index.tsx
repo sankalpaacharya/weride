@@ -133,8 +133,8 @@ export default function RentalCard({
           </div>
 
           {/* <RentalModal>
-          <Button>Rent Now</Button>
-        </RentalModal> */}
+            <Button>Rent Now</Button>
+          </RentalModal> */}
         </CardContent>
       </Card>
     </Link>
