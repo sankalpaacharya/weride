@@ -136,3 +136,7 @@ blockquote {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.mark{
+  border: 2px solid red;
+}
