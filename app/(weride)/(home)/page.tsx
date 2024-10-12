@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className=" overflow-hidden relative w-full">
       <FilterBar />
-      <div className="flex flex-col mt-10 md:items-center ">
+      <div className="flex flex-col mt-10 md:items-center">
         <div className="w-full md:w-fit px-5 md:px-10">
           <h2 className="font-semibold text-xl  text-gray-800">
             Frequently Booked
