@@ -45,10 +45,10 @@ export default function RentalCard({
 
   return (
     <Link
-      href={""}
+      href={"/product/1"}
       className="transition-all w-full md:w-fit duration-300 hover:shadow-xl"
     >
-      <Card className="md:w-[35rem] md:max-w-sm w-full mx-auto ">
+      <Card className="lg:w-[35rem] md:w-[30rem]  md:max-w-sm w-full mx-auto ">
         <div className="relative w-full h-64">
           <Image
             className="rounded-t-lg object-cover brightness-50"

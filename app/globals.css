@@ -140,3 +140,7 @@ blockquote {
 .mark{
   border: 2px solid red;
 }
+
+.card-shadow{
+  box-shadow: 0 0 20px #00000029;
+}
