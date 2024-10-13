@@ -62,7 +62,7 @@ export default function RenterForm() {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <Card className="mx-auto max-w-md w-[100rem]">
+      <Card className="mx-auto max-w-md md:w-[100rem]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
             Renter Identity Verification
