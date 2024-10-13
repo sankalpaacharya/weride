@@ -41,22 +41,22 @@ export default function Page({ params }: paramsProps) {
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="max-w-[100rem] w-full">
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-10">
           <BikeGallery />
           <CheckoutCard />
         </div>
         <div className="p-6">
           <BikeInfo />
           <div className="mt-10 flex gap-4">
-            <Avatar className="w-[5rem] h-[5rem]">
+            <Avatar className="md:w-[5rem] w-[3rem] md:h-[5rem] h-[3rem]">
               <AvatarImage width={200} src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <div>
-              <h3 className="text-xl font-medium">Vinit Thakkar</h3>
+              <h3 className="md:text-xl font-medium">Vinit Thakkar</h3>
               <p className="text-sm text-gray-600">Response time &lt;10mins</p>
-              <div className="mt-2 flex flex-col text-lg font-medium">
-                <div className="flex space-x-3">
+              <div className="mt-2 flex flex-col  md:text-lg font-medium">
+                <div className="flex md:flex-row flex-col md:space-x-3">
                   <p className="flex gap-2 items-center">
                     <FaStar className="text-main" />
                     4.8

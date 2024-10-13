@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/carousel";
 
 export default function BikeGallery() {
+  const [activeImage, setActiveImage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => {
-      setIsMobile(window.innerWidth <= 767);
+      setIsMobile(window.innerWidth < 768);
     };
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
@@ -22,51 +23,58 @@ export default function BikeGallery() {
 
   const images = [
     "/images/bike3.webp",
-    "/images/bike3.webp",
+    "/images/bike1.jpeg",
     "/images/bike3.webp",
   ];
 
-  const MobileCarousel = () => (
-    <Carousel className="w-full max-w-xs mx-auto">
-      <CarouselContent>
-        {images.map((src, index) => (
-          <CarouselItem key={index}>
-            <img
-              alt={`bike image ${index + 1}`}
-              className="w-full h-auto rounded-xl"
-              src={src}
-            />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
-  );
+  const handleThumbnailClick = (index: number) => {
+    setActiveImage(index);
+  };
 
-  const DesktopGallery = () => (
-    <div className="flex gap-3">
-      <div className="flex flex-col gap-2">
-        {images.slice(0, 2).map((src, index) => (
-          <img
-            key={index}
-            alt={`bike image ${index + 1}`}
-            width={100}
-            className="aspect-video w-[10rem] cursor-pointer rounded-xl"
-            height={100}
-            src={src}
-          />
-        ))}
-      </div>
-      <img
-        alt="main bike image"
-        width={100}
-        className="aspect-video w-[50rem] rounded-xl"
-        height={100}
-        src={images[0]}
-      />
+  return (
+    <div className="w-[80%] md:w-full max-w-5xl mx-auto px-4">
+      {isMobile ? (
+        <Carousel className="w-full">
+          <CarouselContent>
+            {images.map((src, index) => (
+              <CarouselItem key={index}>
+                <img
+                  src={src}
+                  alt={`Bike image ${index + 1}`}
+                  className="w-full h-auto aspect-video rounded-xl"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      ) : (
+        <div className="flex flex-row gap-4">
+          <div className="w-1/5 flex flex-col gap-2">
+            {images.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                alt={`Thumbnail ${index + 1}`}
+                className={`w-full h-auto aspect-video object-cover rounded-xl cursor-pointer transition-opacity ${
+                  index === activeImage
+                    ? "brightness-95"
+                    : "brightness-50 hover:brightness-95"
+                }`}
+                onClick={() => handleThumbnailClick(index)}
+              />
+            ))}
+          </div>
+          <div className="w-4/5">
+            <img
+              src={images[activeImage]}
+              alt={`Main bike image ${activeImage + 1}`}
+              className="w-full h-auto rounded-xl object-fill aspect-video"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
-
-  return <div>{isMobile ? <MobileCarousel /> : <DesktopGallery />}</div>;
 }
