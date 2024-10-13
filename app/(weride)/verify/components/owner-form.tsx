@@ -51,7 +51,7 @@ export default function OwnerForm() {
 
   return (
     <form action="" onSubmit={handleSubmit(submitForm)}>
-      <Card className="mx-auto max-w-sm md:max-w-md mb-10 w-[100rem]">
+      <Card className="mx-auto max-w-sm md:max-w-md mb-10 md:w-[100rem]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
             Owner Identity Verification
