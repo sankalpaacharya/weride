@@ -58,7 +58,7 @@ export default function RentalCard({
           <div className="absolute top-4 right-4">
             <Badge
               className={`${getAvailabilityColor(
-                bikeDetails.availability
+                bikeDetails.availability,
               )} px-3 py-1`}
             >
               {bikeDetails.availability}
