@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
   overflow: hidden;
   overflow-y: auto;
 }
@@ -63,11 +63,11 @@ body{
   }
 }
 
-.content{
-  display: none
+.content {
+  display: none;
 }
 
-.tabs-content{
+.tabs-content {
   position: relative;
 }
 
@@ -84,8 +84,8 @@ input[type="radio"] {
 #tab1:checked ~ .tab-content #content1,
 #tab2:checked ~ .tab-content #content2,
 #tab3:checked ~ .tab-content #content3 {
-    transform: translateX(0);
-    opacity: 1;
+  transform: translateX(0);
+  opacity: 1;
 }
 #tab1:checked ~ .tab-content #content1 {
   left: 0;
@@ -121,23 +121,21 @@ input[type="radio"] {
   }
 }
 
-
 blockquote {
   padding: 1rem;
   margin: 1rem 0;
-  border-left: 4px solid #ccc; 
+  border-left: 4px solid #ccc;
   background-color: #f9f9f9;
-  font-style: italic; 
+  font-style: italic;
 }
 
-
-.bg-pattern{
+.bg-pattern {
   background-image: url("../public/images/bgpattern.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.mark{
+.mark {
   border: 2px solid red;
 }
 /* 
