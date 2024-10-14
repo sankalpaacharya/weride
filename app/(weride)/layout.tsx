@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import { Toaster } from "react-hot-toast";
 import { createClient } from "@/utils/supabase/server";
 import Providers from "@/components/progressbarprovider";
+import Footer from "@/components/footer";
 
 export default async function Layout({
   children,
@@ -23,6 +24,7 @@ export default async function Layout({
       <div className="flex grow w-full">
         <Providers>{children}</Providers>
       </div>
+      {/* <Footer></Footer> */}
     </main>
   );
 }

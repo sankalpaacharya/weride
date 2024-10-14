@@ -1,5 +1,6 @@
 import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
+import Footer from "@/components/footer";
 
 const bikeDetails = {
   name: "Honda Activa 125",
@@ -31,6 +32,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

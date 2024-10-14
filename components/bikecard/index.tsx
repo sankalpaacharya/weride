@@ -46,7 +46,7 @@ export default function RentalCard({
       className="transition-all duration-300 hover:shadow-xl w-full"
     >
       <Card className="h-full">
-        <div className="relative w-full pt-[65.67%]">
+        <div className="relative w-full pt-[66.67%]">
           <Image
             className="rounded-t-lg object-cover brightness-50 absolute inset-0"
             alt={bikeDetails.name}
