@@ -1,8 +1,5 @@
-"use client";
 import Image from "next/image";
 import React from "react";
-import RentalModal from "@/components/rentalmodal";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaRegUserCircle, FaGasPump, FaStar } from "react-icons/fa";
@@ -46,12 +43,12 @@ export default function RentalCard({
   return (
     <Link
       href={"/product/1"}
-      className="transition-all w-full md:w-fit duration-300 hover:shadow-xl"
+      className="transition-all duration-300 hover:shadow-xl w-full"
     >
-      <Card className="lg:w-[35rem] md:w-[30rem]  md:max-w-sm w-full mx-auto ">
-        <div className="relative w-full h-64">
+      <Card className="h-full">
+        <div className="relative w-full pt-[65.67%]">
           <Image
-            className="rounded-t-lg object-cover brightness-50"
+            className="rounded-t-lg object-cover brightness-50 absolute inset-0"
             alt={bikeDetails.name}
             src={`/images/${imageName}`}
             fill
@@ -61,7 +58,7 @@ export default function RentalCard({
           <div className="absolute top-4 right-4">
             <Badge
               className={`${getAvailabilityColor(
-                bikeDetails.availability,
+                bikeDetails.availability
               )} px-3 py-1`}
             >
               {bikeDetails.availability}
@@ -75,7 +72,7 @@ export default function RentalCard({
           </div>
         </div>
 
-        <CardContent className="p-6 space-y-4">
+        <CardContent className="p-4 space-y-4">
           <div>
             <div className="flex justify-between items-start">
               <div>
@@ -114,7 +111,7 @@ export default function RentalCard({
             </div>
           </div>
 
-          <div className="border-t pt-4 flex justify-between  space-y-2">
+          <div className="border-t pt-4 flex justify-between space-y-2">
             <div className="flex items-center gap-2">
               <FaRegUserCircle className="text-primary" />
               <div>

@@ -16,14 +16,14 @@ const bikeDetails = {
 
 export default function Home() {
   return (
-    <main className=" overflow-hidden relative w-full">
+    <main className="overflow-hidden relative w-full">
       <FilterBar />
-      <div className="flex flex-col mt-10 md:items-center">
-        <div className="w-full md:w-fit px-5 md:px-10">
+      <div className="flex flex-col mt-10">
+        <div className="w-full px-5 md:px-20">
           <h2 className="font-semibold text-xl text-gray-800">
             Frequently Booked
           </h2>
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 grid-cols-1 mt-5 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
             <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
             <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
