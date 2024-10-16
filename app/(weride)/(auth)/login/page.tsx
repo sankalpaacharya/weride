@@ -67,13 +67,19 @@ export default function Component() {
               <div className="flex flex-col gap-3">
                 <Link
                   className="underline text-gray-600 text-sm"
-                  href={"/signup"}
+                  href={"/forgot-password"}
                 >
-                  Need an Account? signup
+                  Forgot Password ?
                 </Link>
                 <Button disabled={isSubmitting} type="submit">
                   Login
                 </Button>
+                <Link
+                  className="underline text-gray-600 text-sm"
+                  href={"/signup"}
+                >
+                  Need an Account? signup
+                </Link>
               </div>
             </div>
           </CardContent>

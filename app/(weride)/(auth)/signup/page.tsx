@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Card,
   CardHeader,
@@ -125,7 +124,6 @@ export default function Page() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
-                {/* Use PasswordInput for confirm password field */}
                 <PasswordInput
                   {...register("confirmPassword")}
                   id="confirmPassword"
