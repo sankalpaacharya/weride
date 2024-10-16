@@ -15,6 +15,7 @@ import { loginInSchema, TloginSchema } from "@/app/schemas/logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginAction } from "@/app/actions";
 import toast from "react-hot-toast";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export default function Component() {
   const {
@@ -56,14 +57,10 @@ export default function Component() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  {...register("password")}
-                  id="password"
-                  type="password"
-                />
+                <PasswordInput {...register("password")} id="password" />
                 {errors.password && (
                   <p className="text-red-500 text-sm">
-                    {`${errors.password.message}`}.
+                    {`${errors.password.message}`}
                   </p>
                 )}
               </div>

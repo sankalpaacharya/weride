@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Card,
   CardHeader,
@@ -26,6 +27,7 @@ import { signInSchema, TsignInSchema } from "@/app/schemas/signInSchema";
 import toast from "react-hot-toast";
 import { signupAction } from "@/app/actions";
 import { useState } from "react";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export default function Page() {
   const {
@@ -113,11 +115,8 @@ export default function Page() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input
-                  {...register("password")}
-                  id="password"
-                  type="password"
-                />
+                {/* Use PasswordInput for password field */}
+                <PasswordInput {...register("password")} id="password" />
                 {errors.password && (
                   <p className="text-red-500 text-sm">
                     {`${errors.password.message}`}
@@ -126,10 +125,10 @@ export default function Page() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
+                {/* Use PasswordInput for confirm password field */}
+                <PasswordInput
                   {...register("confirmPassword")}
                   id="confirmPassword"
-                  type="password"
                 />
                 {errors.confirmPassword && (
                   <p className="text-red-500 text-sm">
