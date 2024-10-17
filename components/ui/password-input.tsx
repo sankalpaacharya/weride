@@ -20,7 +20,6 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
 
-        {/* Toggle Button */}
         <Button
           type="button"
           variant="ghost"
@@ -38,7 +37,6 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
           </span>
         </Button>
 
-        {/* Hide browser's password reveal button */}
         <style>{`
           input::-ms-reveal,
           input::-ms-clear {
@@ -47,7 +45,7 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
         `}</style>
       </div>
     );
-  },
+  }
 );
 
 PasswordInput.displayName = "PasswordInput";
