@@ -13,6 +13,10 @@ const sidebarNavItems = [
     title: "Appearance",
     href: "/settings/appearance",
   },
+  {
+    title: "Update Password",
+    href: "/settings/update-password",
+  },
 ];
 export default async function Layout({
   children,
