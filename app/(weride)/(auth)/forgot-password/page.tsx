@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 type Props = {};
 
-export default function layout({}: Props) {
+export default function ForgotPassword({}: Props) {
   const [email, setEmail] = useState<string>("");
 
   return (
