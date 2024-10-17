@@ -34,10 +34,10 @@ const BikeInfo: React.FC = () => (
       </div>
     </div>
     <p className="md:w-3/5">
-      Beautiful, lightweight carbon racing bike with disc brakes (I don't know
-      the exact weight, but about 7 kg)`&apos; frame size 51 (suitable for
-      riders between 1.65m and 1.80m tall). The Ultegra 11-speed is
-      versatile`&apos; so it's suitable even for steep hills.
+      Beautiful, lightweight carbon racing bike with disc brakes (I don&apos;t
+      know the exact weight, but about 7 kg)&apos; frame size 51 (suitable for
+      riders between 1.65m and 1.80m tall). The Ultegra 11-speed is versatile,
+      so it&apos;s suitable even for steep hills.
     </p>
   </div>
 );
