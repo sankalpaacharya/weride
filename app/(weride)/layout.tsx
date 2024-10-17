@@ -24,7 +24,7 @@ export default async function Layout({
       <div className="flex grow w-full">
         <Providers>{children}</Providers>
       </div>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </main>
   );
 }

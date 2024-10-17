@@ -13,7 +13,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 
-export default function Page() {
+export default function updatePasswordForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,7 +42,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex mt-20 items-center justify-center">
       <form onSubmit={handleSubmit}>
         <Card className="mx-auto max-w-sm">
           <CardHeader className="space-y-1">

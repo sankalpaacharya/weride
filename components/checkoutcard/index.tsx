@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 export default function CheckoutCard() {
   return (
@@ -47,8 +48,19 @@ export default function CheckoutCard() {
         </div>
       </div>
       <div className="mt-10">
+        <p className="text-xs text-gray-600">
+          By clicking “Rent now“ you agree to the WeRide{" "}
+          <Link target="_blank" href={"/tos"} className="underline">
+            Terms
+          </Link>{" "}
+          and{" "}
+          <Link target="_blank" href={"/tos"} className="underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
         <RentalModal>
-          <Button className="w-full">Rent Now</Button>
+          <Button className="w-full mt-2">Rent Now</Button>
         </RentalModal>
       </div>
     </div>

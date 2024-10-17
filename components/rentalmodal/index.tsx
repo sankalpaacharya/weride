@@ -21,7 +21,7 @@ interface RentalModal {
 export default function RentalModal({ children }: RentalModal) {
   const [selectedTab, setSelectedTab] = useState("terms");
   const [isTosAccepted, setIsTosAccepted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNextClick = () => {
     if (!isTosAccepted) {
