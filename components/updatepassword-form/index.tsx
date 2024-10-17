@@ -13,7 +13,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 
-export default function updatePasswordForm() {
+export default function UpdatePasswordForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
