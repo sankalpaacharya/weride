@@ -1,12 +1,5 @@
-"use client";
 import React, { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PasswordInput } from "@/components/ui/password-input";
@@ -16,7 +9,7 @@ import toast from "react-hot-toast";
 export default function UpdatePasswordForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,51 +22,58 @@ export default function UpdatePasswordForm() {
       if (error) {
         console.log(error);
         toast.error(error.message);
-        return;
-      }
-      if (data) {
-        setIsLoading(false);
+      } else if (data) {
         toast.success("Password Changed");
         console.log(data);
-        return;
       }
+    } else {
+      toast.error("Passwords do not match");
     }
-    toast.error("Password not matched");
+    setIsLoading(false);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Card className="mx-auto max-w-sm">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Update Password</CardTitle>
-          <CardDescription>
-            You will receive a password reset link if you are a registered user.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className="space-y-6 w-full">
+      <div>
+        <h3 className="text-lg font-medium">Change Password</h3>
+        <p className="text-sm text-muted-foreground">
+          Change your account password here.
+        </p>
+      </div>
+      <Separator />
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-8">
           <div className="space-y-2">
             <Label htmlFor="password">New Password</Label>
             <PasswordInput
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="new password"
+              placeholder="Enter new password"
+              className="w-full"
             />
+            <p className="text-sm text-muted-foreground">
+              Enter your new password here.
+            </p>
           </div>
-          <div className="space-y-2 mt-10">
-            <Label htmlFor="newPassword">Confirm Password</Label>
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword">Confirm New Password</Label>
             <PasswordInput
-              id="newPassword"
+              id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="confirm password"
+              placeholder="Confirm new password"
+              className="w-full"
             />
+            <p className="text-sm text-muted-foreground">
+              Re-enter your new password to confirm.
+            </p>
           </div>
-          <Button disabled={isLoading} type="submit" className="mt-4 w-full">
-            Submit
+          <Button type="submit" disabled={isLoading} className="w-full">
+            Update Password
           </Button>
-        </CardContent>
-      </Card>
-    </form>
+        </div>
+      </form>
+    </div>
   );
 }
