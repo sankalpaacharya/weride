@@ -22,7 +22,9 @@ export default function ForgotPassword({}: Props) {
     setIsLoading(true);
 
     const supabase = await createClient();
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "/",
+    });
     if (error) {
       toast.error("Email not sent");
     }

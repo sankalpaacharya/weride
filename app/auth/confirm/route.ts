@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
     if (!error) {
       redirect(next);
     }
+    console.log(error)
   }
   redirect("/error");
 }
