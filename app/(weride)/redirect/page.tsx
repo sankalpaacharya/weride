@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function Page({}: Props) {
   const params = useSearchParams();
   const url = params.get("r");
   useEffect(() => {
