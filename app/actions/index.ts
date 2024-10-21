@@ -4,7 +4,6 @@ import { TloginSchema, loginInSchema } from "@/app/schemas/logInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { TrenterIdentitySchema } from "../schemas/renterIdentitySchema";
-import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
 export async function signupAction(data: TsignInSchema) {
   const result = signInSchema.safeParse(data);
   if (!result.success) {
