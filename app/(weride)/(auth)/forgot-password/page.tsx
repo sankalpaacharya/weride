@@ -162,7 +162,7 @@ const OTPSubmitForm = ({ email }: { email: string }) => {
 };
 
 export default function ForgotPassword() {
-  const [isOTPInput, setIsOTPInput] = useState(true);
+  const [isOTPInput, setIsOTPInput] = useState(false);
   const [email, setEmail] = useState("");
 
   return (
