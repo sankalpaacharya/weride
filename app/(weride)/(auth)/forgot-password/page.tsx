@@ -58,14 +58,14 @@ const ForgotPasswordInputForm = ({
 
   return (
     <form onSubmit={sendForgotEmail}>
-      <Card className="mx-auto max-w-sm">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Forgot Password</CardTitle>
-          <CardDescription>
+      <Card className="w-full max-w-md mx-auto shadow-lg">
+        <CardHeader className="space-y-2 text-center">
+          <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
+          <CardDescription className="text-sm">
             Enter your email to receive a verification code
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -75,9 +75,10 @@ const ForgotPasswordInputForm = ({
               onChange={(e) => setLocalEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              className="w-full"
             />
           </div>
-          <Button disabled={isLoading} className="mt-4 w-full">
+          <Button disabled={isLoading} className="w-full">
             {isLoading ? "Sending..." : "Send Code"}
           </Button>
         </CardContent>
@@ -86,7 +87,13 @@ const ForgotPasswordInputForm = ({
   );
 };
 
-const OTPSubmitForm = ({ email }: { email: string }) => {
+const OTPSubmitForm = ({
+  email,
+  setIsOTPInput,
+}: {
+  email: string;
+  setIsOTPInput: (value: boolean) => void;
+}) => {
   const [OTPValue, setOTPValue] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
 
@@ -121,40 +128,59 @@ const OTPSubmitForm = ({ email }: { email: string }) => {
         verifyOTP();
       }}
     >
-      <Card className="mx-auto max-w-sm">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Enter OTP Code</CardTitle>
-          <CardDescription>
-            Enter the 6-digit code sent to {email}
+      <Card className="w-full max-w-md mx-auto shadow-lg">
+        <CardHeader className="space-y-2 text-center">
+          <CardTitle className="text-2xl font-bold">
+            Verify Your Email
+          </CardTitle>
+          <CardDescription className="text-sm">
+            Enter the 6-digit code sent to{" "}
+            <span className="font-medium">{email}</span>
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <InputOTP
-            maxLength={6}
-            value={OTPValue}
-            onChange={setOTPValue}
-            disabled={isVerifying}
-          >
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
-            </InputOTPGroup>
-          </InputOTP>
+        <CardContent className="space-y-6">
+          <div className="flex justify-center">
+            <InputOTP
+              maxLength={6}
+              value={OTPValue}
+              onChange={setOTPValue}
+              disabled={isVerifying}
+              className="gap-2"
+            >
+              <InputOTPGroup className="gap-2">
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup className="gap-2">
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
 
-          <Button
-            type="submit"
-            disabled={OTPValue.length !== 6 || isVerifying}
-            className="w-full"
-          >
-            {isVerifying ? "Verifying..." : "Verify Code"}
-          </Button>
+          <div className="space-y-4">
+            <Button
+              type="submit"
+              disabled={OTPValue.length !== 6 || isVerifying}
+              className="w-full"
+            >
+              {isVerifying ? "Verifying..." : "Verify Code"}
+            </Button>
+
+            <div className="text-center text-sm text-muted-foreground">
+              Didn't receive the code?{" "}
+              <button
+                type="button"
+                onClick={() => setIsOTPInput(false)}
+                className="text-primary hover:underline font-medium"
+              >
+                Send again
+              </button>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </form>
@@ -162,13 +188,13 @@ const OTPSubmitForm = ({ email }: { email: string }) => {
 };
 
 export default function ForgotPassword() {
-  const [isOTPInput, setIsOTPInput] = useState(false);
+  const [isOTPInput, setIsOTPInput] = useState(true);
   const [email, setEmail] = useState("");
 
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full min-h-[80vh] flex items-center justify-center p-4">
       {isOTPInput ? (
-        <OTPSubmitForm email={email} />
+        <OTPSubmitForm email={email} setIsOTPInput={setIsOTPInput} />
       ) : (
         <ForgotPasswordInputForm
           setIsOTPInput={setIsOTPInput}
