@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import {
   InputOTP,
   InputOTPGroup,
@@ -19,50 +19,66 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-type Props = {};
-const ForgotPasswordInputForm = ({ setIsOTPInput }: { setIsOTPInput: any }) => {
-  const [email, setEmail] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const ForgotPasswordInputForm = ({
+  setIsOTPInput,
+  setEmail,
+}: {
+  setIsOTPInput: (value: boolean) => void;
+  setEmail: (value: string) => void;
+}) => {
+  const [localEmail, setLocalEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const sendForgotEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const supabase = await createClient();
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: email,
-      options: {
-        emailRedirectTo: "https://weride.live/",
-      },
-    });
-    if (error) {
-      toast.error("Email not sent");
-    }
-    if (data) {
-      setIsLoading(false);
-      toast.success("Email sent, also check your spam folder");
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithOtp({
+        email: localEmail,
+        options: {
+          emailRedirectTo: "https://weride.live/",
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      setEmail(localEmail);
       setIsOTPInput(true);
+      toast.success("Email sent! Please check your inbox and spam folder");
+    } catch (error) {
+      toast.error("Failed to send email. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
-    <form action="#" onSubmit={sendForgotEmail}>
+    <form onSubmit={sendForgotEmail}>
       <Card className="mx-auto max-w-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">Forgot Password</CardTitle>
           <CardDescription>
-            You will receive password reset link if you are a registered user
+            Enter your email to receive a verification code
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
-              onChange={(e) => setEmail(e.target.value)}
+              id="email"
               type="email"
-              placeholder="s@sot.pdpu.ac.in"
+              value={localEmail}
+              onChange={(e) => setLocalEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
             />
           </div>
           <Button disabled={isLoading} className="mt-4 w-full">
-            Submit
+            {isLoading ? "Sending..." : "Send Code"}
           </Button>
         </CardContent>
       </Card>
@@ -70,33 +86,54 @@ const ForgotPasswordInputForm = ({ setIsOTPInput }: { setIsOTPInput: any }) => {
   );
 };
 
-const OTPSubmitForm = () => {
-  const [OTPValue, setOTValue] = useState("");
+const OTPSubmitForm = ({ email }: { email: string }) => {
+  const [OTPValue, setOTPValue] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
-  useEffect(() => {
-    const submitOTP = async (OTP: string) => {
-      const supabase = await createClient();
-    };
+  const verifyOTP = async () => {
+    if (OTPValue.length !== 6) return;
+    setIsVerifying(true);
 
-    if (OTPValue.length >= 6) {
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.verifyOtp({
+        email,
+        token: OTPValue,
+        type: "email",
+      });
+
+      if (error) throw error;
+
+      toast.success("Verification successful!");
+      window.location.href = "/settings/update-password";
+    } catch (error) {
+      toast.error("Invalid code. Please try again.");
+      setOTPValue("");
+    } finally {
+      setIsVerifying(false);
     }
-  }, [OTPValue]);
+  };
 
   return (
-    <form action="#">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        verifyOTP();
+      }}
+    >
       <Card className="mx-auto max-w-sm">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">
-            Enter 6 digit Pin
-          </CardTitle>
-          <CardDescription>Check your mail for the 6 digit pin</CardDescription>
+          <CardTitle className="text-2xl font-bold">Enter OTP Code</CardTitle>
+          <CardDescription>
+            Enter the 6-digit code sent to {email}
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <InputOTP
-            disabled={true}
-            onChange={(value) => setOTValue(value)}
-            value={OTPValue}
             maxLength={6}
+            value={OTPValue}
+            onChange={setOTPValue}
+            disabled={isVerifying}
           >
             <InputOTPGroup>
               <InputOTPSlot index={0} />
@@ -110,20 +147,33 @@ const OTPSubmitForm = () => {
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
+
+          <Button
+            type="submit"
+            disabled={OTPValue.length !== 6 || isVerifying}
+            className="w-full"
+          >
+            {isVerifying ? "Verifying..." : "Verify Code"}
+          </Button>
         </CardContent>
       </Card>
     </form>
   );
 };
 
-export default function ForgotPassword({}: Props) {
+export default function ForgotPassword() {
   const [isOTPInput, setIsOTPInput] = useState(true);
+  const [email, setEmail] = useState("");
+
   return (
     <div className="w-full flex items-center justify-center">
       {isOTPInput ? (
-        <OTPSubmitForm />
+        <OTPSubmitForm email={email} />
       ) : (
-        <ForgotPasswordInputForm setIsOTPInput={setIsOTPInput} />
+        <ForgotPasswordInputForm
+          setIsOTPInput={setIsOTPInput}
+          setEmail={setEmail}
+        />
       )}
     </div>
   );
