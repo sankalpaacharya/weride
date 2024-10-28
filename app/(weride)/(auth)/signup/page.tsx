@@ -251,7 +251,7 @@ const OTPVerificationForm = ({
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              Didn't receive the code?{" "}
+              Didnapos;t receive the code?{" "}
               <button
                 type="button"
                 onClick={onResendCode}

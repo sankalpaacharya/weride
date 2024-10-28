@@ -171,7 +171,7 @@ const OTPSubmitForm = ({
             </Button>
 
             <div className="text-center text-sm text-muted-foreground">
-              Didn't receive the code?{" "}
+              Didn&#39;t receive the code?{" "}
               <button
                 type="button"
                 onClick={() => setIsOTPInput(false)}
