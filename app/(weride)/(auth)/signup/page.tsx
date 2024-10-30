@@ -7,6 +7,7 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import { Dispatch, SetStateAction } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -36,11 +37,11 @@ import {
 } from "@/components/ui/input-otp";
 
 const SignupForm = ({
-  onSubmitSignup,
-  isSubmitting,
+  setIsVerifying,
+  setEmail,
 }: {
-  onSubmitSignup: (data: TsignInSchema) => Promise<void>;
-  isSubmitting: boolean;
+  setIsVerifying: Dispatch<SetStateAction<boolean>>;
+  setEmail: Dispatch<SetStateAction<string>>;
 }) => {
   const {
     register,
@@ -51,6 +52,7 @@ const SignupForm = ({
     resolver: zodResolver(signInSchema),
   });
   const [selectValue, setSelectValue] = useState("renter");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handlePhoneInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const numericValue = event.target.value.replace(/\D/g, "");
@@ -58,10 +60,25 @@ const SignupForm = ({
   };
 
   const onSubmit = async (data: TsignInSchema) => {
+    setIsSubmitting(true);
     if (selectValue === "owner" || selectValue === "renter") {
       data.role = selectValue;
     }
-    await onSubmitSignup(data);
+    try {
+      const response = await signupAction(data);
+      if (response.error) {
+        toast.error(response.error);
+        setIsSubmitting(false);
+      }
+      if (response.success) {
+        setEmail(data.email);
+        setIsVerifying(true);
+        setIsSubmitting(false);
+        toast.success(response.success);
+      }
+    } catch (error) {
+      toast.error("Failed to complete signup. Please try again.");
+    }
   };
 
   return (
@@ -172,11 +189,9 @@ const SignupForm = ({
 
 const OTPVerificationForm = ({
   email,
-  onVerificationComplete,
   onResendCode,
 }: {
   email: string;
-  onVerificationComplete: () => void;
   onResendCode: () => void;
 }) => {
   const [OTPValue, setOTPValue] = useState("");
@@ -197,7 +212,7 @@ const OTPVerificationForm = ({
 
       if (error) throw error;
       toast.success("Email verified successfully!");
-      onVerificationComplete();
+      window.location.href = "/";
     } catch (error) {
       toast.error("Invalid code. Please try again.");
       setOTPValue("");
@@ -269,70 +284,20 @@ const OTPVerificationForm = ({
 
 export default function SignupPage() {
   const [isVerifying, setIsVerifying] = useState(false);
-  const [formData, setFormData] = useState<TsignInSchema | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSignupSubmit = async (data: TsignInSchema) => {
-    setIsSubmitting(true);
-    try {
-      const supabase = createClient();
-      const { error } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-        options: {
-          emailRedirectTo: "https://weride.live/",
-          data: {
-            name: data.name,
-            phone: data.phone,
-            role: data.role,
-          },
-        },
-      });
-
-      if (error) throw error;
-
-      setFormData(data);
-      setIsVerifying(true);
-      toast.success("Verification email sent! Please check your inbox");
-    } catch (error) {
-      toast.error("Signup failed. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleVerificationComplete = async () => {
-    if (!formData) return;
-
-    try {
-      const response = await signupAction(formData);
-      if (response.error) {
-        toast.error(response.error);
-      }
-      if (response.success) {
-        toast.success(response.success);
-        window.location.href = "/login";
-      }
-    } catch (error) {
-      toast.error("Failed to complete signup. Please try again.");
-    }
-  };
+  const [email, setEmail] = useState("");
 
   const handleResendCode = async () => {
-    if (!formData?.email) return;
-
+    if (!email) return;
     try {
       const supabase = createClient();
       const { error } = await supabase.auth.resend({
         type: "signup",
-        email: formData.email,
+        email: email,
         options: {
           emailRedirectTo: "https://weride.live/",
         },
       });
-
       if (error) throw error;
-
       toast.success("Verification email resent!");
     } catch (error) {
       toast.error("Failed to resend verification email. Please try again.");
@@ -341,17 +306,10 @@ export default function SignupPage() {
 
   return (
     <div className="w-full min-h-[80vh] flex items-center justify-center">
-      {isVerifying && formData ? (
-        <OTPVerificationForm
-          email={formData.email}
-          onVerificationComplete={handleVerificationComplete}
-          onResendCode={handleResendCode}
-        />
+      {isVerifying ? (
+        <OTPVerificationForm email={email} onResendCode={handleResendCode} />
       ) : (
-        <SignupForm
-          onSubmitSignup={handleSignupSubmit}
-          isSubmitting={isSubmitting}
-        />
+        <SignupForm setEmail={setEmail} setIsVerifying={setIsVerifying} />
       )}
     </div>
   );

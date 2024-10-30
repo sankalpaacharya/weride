@@ -16,8 +16,10 @@ export async function signupAction(data: TsignInSchema) {
     email: data.email,
     password: data.password,
   });
-
+  console.log('form hitz')
+  console.log(userData,error)
   if (error) {
+    console.log(error)
     return { error: "Oops, an error occured!" };
   }
   const response = await supabase
@@ -32,7 +34,7 @@ export async function signupAction(data: TsignInSchema) {
   if (userData.user) {
     return { success: "Confirm your email" };
   }
-  return { error: "Oops, an error occured!" };
+  return { message: "Welcome!!" };
 }
 
 export async function loginAction(data: TloginSchema) {
