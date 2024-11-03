@@ -7,13 +7,14 @@ import { FaRegSmileBeam } from "react-icons/fa";
 import { PiMedalLight } from "react-icons/pi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type ParamsProps = {
   params: { id: string };
 };
 
 const BikeInfo: React.FC = () => (
-  <div className="space-y-2">
+  <div className="space-y-2 mt-10">
     <h2 className="text-2xl font-medium">
       Honda Activa 125 |{" "}
       <span className="text-lg text-gray-800">
@@ -87,9 +88,58 @@ const BikePage: React.FC<ParamsProps> = ({ params }) => {
           <OwnerInfo />
         </div>
 
-        <div className="px-6 mt-20">
+        <div className="px-6 md:mt-20 mt-20">
           <h2 className="text-2xl font-semibold">Full address of booking</h2>
           <p className="text-sm">Pdeu High Rise Hostel</p>
+          <Image
+            src={"/images/map.png"}
+            height={100}
+            width={2000}
+            alt="map image"
+            className="rounded-lg mt-5 w-full h-[10rem] md:h-fit object-cover border shadow"
+          />
+        </div>
+
+        <div className="px-6 mt-20 space-y-5">
+          <h2 className="text-2xl font-semibold">Good to Know</h2>
+          <div className="grid md:text-base text-sm md:grid-cols-2 md:gap-10 gap-5  grid-rows-3">
+            <div>
+              <h3 className="font-semibold">How long can I rent a bike? </h3>
+              <p>
+                You can rent a bike for as long as you want. For either a few
+                days, or up to several weeks. It all depends on you and the
+                availability of the bike.{" "}
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">
+                How does the payment for the bike rental work?{" "}
+              </h3>
+              <p>
+                You can rent a bike for as long as you want. For either a few
+                days, or up to several weeks. It all depends on you and the
+                availability of the bike.{" "}
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">How do I contact the Owner? </h3>
+              <p>
+                You can rent a bike for as long as you want. For either a few
+                days, or up to several weeks. It all depends on you and the
+                availability of the bike.{" "}
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold">
+                How can I make sure that the bike is protected against theft?{" "}
+              </h3>
+              <p>
+                You can rent a bike for as long as you want. For either a few
+                days, or up to several weeks. It all depends on you and the
+                availability of the bike.{" "}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
