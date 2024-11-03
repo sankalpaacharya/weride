@@ -16,10 +16,10 @@ export async function signupAction(data: TsignInSchema) {
     email: data.email,
     password: data.password,
   });
-  console.log('form hitz')
-  console.log(userData,error)
+  console.log("form hitz");
+  console.log(userData, error);
   if (error) {
-    console.log(error)
+    console.log(error);
     return { error: "Oops, an error occured!" };
   }
   const response = await supabase

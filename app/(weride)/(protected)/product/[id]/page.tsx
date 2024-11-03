@@ -13,7 +13,7 @@ type ParamsProps = {
 };
 
 const BikeInfo: React.FC = () => (
-  <div className="mt-10 space-y-5">
+  <div className="space-y-2">
     <h2 className="text-2xl font-medium">
       Honda Activa 125 |{" "}
       <span className="text-lg text-gray-800">
@@ -82,9 +82,14 @@ const BikePage: React.FC<ParamsProps> = ({ params }) => {
           <BikeGallery />
           <CheckoutCard />
         </div>
-        <div className="p-6">
+        <div className="px-6">
           <BikeInfo />
           <OwnerInfo />
+        </div>
+
+        <div className="px-6 mt-20">
+          <h2 className="text-2xl font-semibold">Full address of booking</h2>
+          <p className="text-sm">Pdeu High Rise Hostel</p>
         </div>
       </div>
     </div>

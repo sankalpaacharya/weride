@@ -4,7 +4,7 @@ import "./globals.css";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["100", "400", "200", "300", "500", "700"],
+  weight: ["100", "400", "200", "300", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
