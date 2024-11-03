@@ -16,7 +16,7 @@ export default async function Layout({
       await supabase.from("users").select("*").eq("id", user.id)
     ).data;
     if (response) {
-      if (response[0].is_verified) {
+      if (response[0].status === "verified") {
         redirect("/");
       }
     }

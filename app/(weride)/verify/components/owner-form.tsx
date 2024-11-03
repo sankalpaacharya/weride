@@ -27,7 +27,7 @@ import {
   TownerIdentitySchema,
 } from "@/app/schemas/ownerIdentitySchema";
 
-export default function OwnerForm() {
+export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
 
   const {
@@ -54,7 +54,9 @@ export default function OwnerForm() {
       <Card className="mx-auto max-w-sm md:max-w-md mb-10 md:w-[100rem]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
-            Owner Identity Verification
+            {isPending
+              ? "Verification Pending ..."
+              : "Owner Identity Verification"}
           </CardTitle>
           <CardDescription>
             Please fill in the details below. If you have already filled in the
@@ -69,6 +71,7 @@ export default function OwnerForm() {
                 College ID Card Photo (Both Side)
               </Label>
               <Input
+                disabled={isPending}
                 {...register("collegeIDPhoto")}
                 id="collegeIDPhoto"
                 type="file"
@@ -85,6 +88,7 @@ export default function OwnerForm() {
                 Hostel ID Card Photo (Both Side)
               </Label>
               <Input
+                disabled={isPending}
                 {...register("hostelIDPhoto")}
                 id="hostelIDPhoto"
                 type="file"
@@ -99,6 +103,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="profilePhoto">Profile Photo</Label>
               <Input
+                disabled={isPending}
                 {...register("profilePhoto")}
                 id="password"
                 type="file"
@@ -113,6 +118,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="vehiclePhoto">Vehicle Photo</Label>
               <Input
+                disabled={isPending}
                 {...register("vehiclePhoto")}
                 id="password"
                 type="file"
@@ -127,6 +133,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="QRPhoto">QR Photo for payment</Label>
               <Input
+                disabled={isPending}
                 {...register("QRPhoto")}
                 id="QRPhoto"
                 type="file"
@@ -141,6 +148,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="hostelBlock">Hostel Block</Label>
               <Input
+                disabled={isPending}
                 {...register("hostelBlock")}
                 id="email"
                 type="text"
@@ -155,6 +163,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="hostelRoom">Room no</Label>
               <Input
+                disabled={isPending}
                 {...register("hostelRoom")}
                 id="password"
                 type="text"
@@ -170,6 +179,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="vehicleName">Vehicle Name</Label>
               <Input
+                disabled={isPending}
                 {...register("vehicleName")}
                 id="password"
                 type="text"
@@ -184,6 +194,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="messageToRenter">Message To Renters</Label>
               <Textarea
+                disabled={isPending}
                 {...register("messageToRenter")}
                 placeholder="This message will be displayed to renter while booking vehicle."
               />
@@ -196,6 +207,7 @@ export default function OwnerForm() {
             <div className="space-y-2">
               <Label htmlFor="role">Fuel Type</Label>
               <Select
+                disabled={isPending}
                 defaultValue="petrol"
                 onValueChange={(value) => setFuelType(value)}
               >
@@ -215,11 +227,11 @@ export default function OwnerForm() {
             </div>
             <div className="flex flex-col gap-3">
               <Button
-                disabled={isSubmitting}
+                disabled={isSubmitting || isPending}
                 type="submit"
                 className="w-full bg-main hover:bg-mainhover"
               >
-                Verify
+                {isPending ? "Waiting for Verification" : "Verify"}
               </Button>
             </div>
           </div>

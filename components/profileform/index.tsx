@@ -4,7 +4,6 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 type Props = {
   userData: {
     name: string;
@@ -12,7 +11,7 @@ type Props = {
     phone: string;
     email: string;
     role: string;
-    is_verfied: boolean;
+    status: string;
     hostel_block: string;
     hostel_room: string;
     rollno: string;

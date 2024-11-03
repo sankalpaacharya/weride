@@ -18,7 +18,7 @@ import {
 } from "@/app/schemas/renterIdentitySchema";
 import { renterFormAction } from "@/app/actions";
 
-export default function RenterForm() {
+export default function RenterForm({ isPending }: { isPending: boolean }) {
   const {
     register,
     handleSubmit,
@@ -65,7 +65,9 @@ export default function RenterForm() {
       <Card className="mx-auto max-w-md md:w-[100rem]">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
-            Renter Identity Verification
+            {isPending
+              ? "Verification Pending"
+              : "Renter Identity Verification"}
           </CardTitle>
           <CardDescription>
             Please fill in the details below. If you have already filled in the
@@ -80,6 +82,7 @@ export default function RenterForm() {
                 College ID Card Photo (Both Side)
               </Label>
               <Input
+                disabled={isPending}
                 {...register("collegeIDPhoto")}
                 id="collegeIDPhoto"
                 type="file"
@@ -97,6 +100,7 @@ export default function RenterForm() {
                 Hostel ID Card Photo (Both Side)
               </Label>
               <Input
+                disabled={isPending}
                 {...register("hostelIDPhoto")}
                 id="hostelIDPhoto"
                 type="file"
@@ -114,6 +118,7 @@ export default function RenterForm() {
                 Driving Licence Photo (Both Side)
               </Label>
               <Input
+                disabled={isPending}
                 {...register("drivingLicencePhoto")}
                 id="drivingLicencePhoto"
                 type="file"
@@ -129,6 +134,7 @@ export default function RenterForm() {
             <div className="space-y-2">
               <Label htmlFor="password">Profile Photo</Label>
               <Input
+                disabled={isPending}
                 {...register("profilePhoto")}
                 id="profilePhoto"
                 type="file"
@@ -145,6 +151,7 @@ export default function RenterForm() {
             <div className="space-y-2">
               <Label htmlFor="hostelBlock">Hostel Block</Label>
               <Input
+                disabled={isPending}
                 {...register("hostelBlock")}
                 id="hostelBlock"
                 type="text"
@@ -159,6 +166,7 @@ export default function RenterForm() {
             <div className="space-y-2">
               <Label htmlFor="hostelRoom">Room no</Label>
               <Input
+                disabled={isPending}
                 {...register("hostelRoom")}
                 id="hostelRoom"
                 type="text"
@@ -172,11 +180,11 @@ export default function RenterForm() {
             </div>
             <div className="flex flex-col gap-3">
               <Button
-                disabled={isSubmitting}
+                disabled={isSubmitting || isPending}
                 type="submit"
                 className="w-full bg-main hover:bg-mainhover"
               >
-                Verify
+                {isPending ? "Waiting for verification" : "Verify"}
               </Button>
             </div>
           </div>
