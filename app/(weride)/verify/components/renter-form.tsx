@@ -66,7 +66,7 @@ export default function RenterForm({ isPending }: { isPending: boolean }) {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
             {isPending
-              ? "Verification Pending"
+              ? "⏳Wait!, Your Account is Being Reviewed"
               : "Renter Identity Verification"}
           </CardTitle>
           <CardDescription>
