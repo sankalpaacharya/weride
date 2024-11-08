@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,16 +18,19 @@ import {
 } from "@/app/schemas/renterIdentitySchema";
 import { renterFormAction } from "@/app/actions";
 
-export default function RenterForm({ isPending }: { isPending: boolean }) {
+export default function RenterForm({
+  isPending: formState = false,
+}: {
+  isPending: boolean;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setValue,
   } = useForm<TrenterIdentitySchema>({
     resolver: zodResolver(renterIdentitySchema),
   });
-
+  const [isPending, setIsPending] = useState(formState);
   const submitForm = async (data: TrenterIdentitySchema) => {
     try {
       const formData = new FormData();
@@ -47,13 +50,17 @@ export default function RenterForm({ isPending }: { isPending: boolean }) {
 
       formData.append("hostelBlock", data.hostelBlock);
       formData.append("hostelRoom", data.hostelRoom);
+      formData.append("rollno", data.rollno);
 
       const response = await renterFormAction(formData);
 
       if (response.error) {
         console.error(response.error);
-      } else {
-        console.log(response.message);
+        return;
+      }
+      if (response.sucess) {
+        setIsPending(true);
+        return;
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -178,9 +185,23 @@ export default function RenterForm({ isPending }: { isPending: boolean }) {
                 </p>
               )}
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="rollno">Roll no</Label>
+              <Input
+                disabled={isPending}
+                {...register("rollno")}
+                id="rollno"
+                type="text"
+                placeholder="22BCP890"
+              />
+              {errors.rollno && (
+                <p className="text-red-500 text-sm">
+                  {`${errors.rollno?.message}`}
+                </p>
+              )}
+            </div>
             <div className="flex flex-col gap-3">
               <Button
-                disabled={isSubmitting || isPending}
                 type="submit"
                 className="w-full bg-main hover:bg-mainhover"
               >
