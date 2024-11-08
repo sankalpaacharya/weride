@@ -19,7 +19,6 @@ const fileSchema = isClient
       )
   : z.any();
 
-
 export const renterIdentitySchema = z.object({
   hostelBlock: z
     .string({ required_error: "Hostel Block is required" })
@@ -29,7 +28,7 @@ export const renterIdentitySchema = z.object({
     .string({ required_error: "Hostel Room is required" })
     .max(3, "Not a valid room number")
     .min(1, "Room no is required"),
-  rollno:z.string({ required_error: "Rollno is required" }),
+  rollno: z.string({ required_error: "Rollno is required" }),
   collegeIDPhoto: fileSchema,
   hostelIDPhoto: fileSchema,
   profilePhoto: fileSchema,
