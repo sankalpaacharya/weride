@@ -62,7 +62,6 @@ export async function loginAction(data: TloginSchema) {
 
 export async function renterFormAction(data: any) {
   const formData: TrenterIdentitySchema = data;
-  console.log(data);
   if (data) {
     return { message: "Received the message" };
   }
