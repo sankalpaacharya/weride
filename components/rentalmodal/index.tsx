@@ -21,7 +21,7 @@ interface RentalModal {
 export default function RentalModal({ children }: RentalModal) {
   const [selectedTab, setSelectedTab] = useState("terms");
   const [isTosAccepted, setIsTosAccepted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleNextClick = () => {
     if (!isTosAccepted) {
@@ -43,14 +43,14 @@ export default function RentalModal({ children }: RentalModal) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="px-3">
         {selectedTab === "terms" ? (
-          <>
+          <div>
             <DialogTitle>Terms and Conditions</DialogTitle>
             <DialogDescription>
               <ScrollArea className="h-[500px] rounded-md p-4">
                 <ul className="space-y-2 mt-5">
-                  <p className="text-md font-bold text-gray-800">
+                  <span className="text-md font-bold text-gray-800">
                     Vehicle Rental Agreement
-                  </p>
+                  </span>
                   <li className="">
                     {" "}
                     <span className="font-bold">3.1. Rental Duration:</span> You
@@ -79,9 +79,9 @@ export default function RentalModal({ children }: RentalModal) {
                   </li>
                 </ul>
                 <ul className="space-y-2 mt-5">
-                  <p className="text-md font-bold text-gray-800">
+                  <span className="text-md font-bold text-gray-800">
                     Vehicle Condition
-                  </p>
+                  </span>
                   <li className="">
                     {" "}
                     <span className="font-bold">5.1. Inspection:</span> Both the
@@ -105,10 +105,10 @@ export default function RentalModal({ children }: RentalModal) {
                   </li>
                 </ul>
                 <ul className="space-y-2 mt-5 list-disc">
-                  <p className="text-md font-bold text-gray-800">
+                  <span className="text-md font-bold text-gray-800">
                     Reckless Driving Policy
-                  </p>
-                  <p>
+                  </span>
+                  <span>
                     Reckless driving is strictly prohibited while using any
                     vehicle rented through our platform. While weride does not
                     have direct control over the actions of users, any reports
@@ -122,7 +122,7 @@ export default function RentalModal({ children }: RentalModal) {
                       {" "}
                       (read more).
                     </Link>
-                  </p>
+                  </span>
                 </ul>
                 <div className="flex items-center my-5 space-x-2">
                   <Checkbox
@@ -146,9 +146,9 @@ export default function RentalModal({ children }: RentalModal) {
                 Next
               </Button>
             </div>
-          </>
+          </div>
         ) : isLoading ? (
-          <>
+          <div>
             <DialogTitle>Hold Tight, Your Ride is Almost Ready...</DialogTitle>
             <DialogDescription>
               <div className="h-[400px] flex flex-col items-center justify-center">
@@ -160,9 +160,9 @@ export default function RentalModal({ children }: RentalModal) {
                 Warming Up the Wheels for You..
               </div>
             </DialogDescription>
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             <DialogTitle>Rental Confirmation</DialogTitle>
             <DialogDescription>
               <div className="flex flex-col items-center justify-center h-[400px]">
@@ -178,7 +178,7 @@ export default function RentalModal({ children }: RentalModal) {
             <div className="flex justify-end mt-5">
               <Button onClick={() => onModalChange(false)}>Close</Button>
             </div>
-          </>
+          </div>
         )}
       </DialogContent>
     </Dialog>

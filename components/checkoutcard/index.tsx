@@ -4,6 +4,9 @@ import RentalModal from "../rentalmodal";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { useForm } from "react-hook-form";
+import { checkOutSchema, TcheckOutSchema } from "@/app/schemas/checkOutSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Select,
   SelectContent,
@@ -13,78 +16,122 @@ import {
 } from "@/components/ui/select";
 import Link from "next/link";
 
+const PRICE_PER_KM = 7;
+const HOURLY_RATES = [
+  { value: "10", hours: 1 },
+  { value: "15", hours: 2 },
+  { value: "25", hours: 3 },
+  { value: "30", hours: 4 },
+  { value: "40", hours: 5 },
+];
+
+const KILOMETER_OPTIONS = [10, 15, 25, 30, 40];
+
 export default function CheckoutCard() {
   const [kiloMeters, setKiloMeters] = useState(10);
-  const pricePerKilometer = 7;
+  const [hours, setHours] = useState(1);
+  const totalPrice = PRICE_PER_KM * kiloMeters;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TcheckOutSchema>({ resolver: zodResolver(checkOutSchema) });
+
+  const submitForm = (data: TcheckOutSchema) => {
+    console.log(data);
+  };
+
   return (
     <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 px-5 rounded-xl">
-      <div className="space-y-1">
-        <h2 className="text-main text-2xl font-medium">
-          {pricePerKilometer}₹ / KM(s)
-        </h2>
-        <p className="text-sm text-gray-600">360₹ / 4hrs</p>
-      </div>
-      <span className="text-main flex gap-2 mt-5">
-        <MdIosShare size={20} />
-        Share
-      </span>
-      <div className="mt-5">
-        <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="hours">kilometers</Label>
-          <Select onValueChange={(value) => setKiloMeters(parseInt(value))}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Hours" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="10">10</SelectItem>
-              <SelectItem value="15">15</SelectItem>
-              <SelectItem value="25">25</SelectItem>
-              <SelectItem value="30">30</SelectItem>
-              <SelectItem value="40">40</SelectItem>
-            </SelectContent>
-          </Select>
+      <form onSubmit={handleSubmit((data) => submitForm(data))}>
+        <div className="space-y-1">
+          <h2 className="text-main text-2xl font-medium">
+            {PRICE_PER_KM}₹ / KM(s)
+          </h2>
+          <p className="text-sm text-gray-600">360₹ / 4hrs</p>
         </div>
-      </div>
-      <div className="mt-5">
-        <div className="grid w-full items-center gap-1.5">
-          <Label htmlFor="location">Location</Label>
-          <Input type="text" id="location" placeholder="Enter location" />
+
+        <span className="text-main flex gap-2 mt-5">
+          <MdIosShare size={20} />
+          Share
+        </span>
+
+        <div className="mt-5">
+          <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="hours">Hour</Label>
+            <Select onValueChange={(hours) => setHours(parseInt(hours))}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Hours" />
+              </SelectTrigger>
+              <SelectContent>
+                {HOURLY_RATES.map((rate) => (
+                  <SelectItem key={rate.value} value={rate.value}>
+                    {rate.hours}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="mt-5">
+            <div className="grid w-full items-center gap-1.5">
+              <Label htmlFor="kilometers">Kilometers</Label>
+              <Select onValueChange={(value) => setKiloMeters(parseInt(value))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Kilometers" />
+                </SelectTrigger>
+                <SelectContent>
+                  {KILOMETER_OPTIONS.map((km) => (
+                    <SelectItem key={km} value={km.toString()}>
+                      {km}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="mt-5 grid grid-cols-2 gap-1 text-gray-700 text-sm ">
-        <p className="text-left">
-          {pricePerKilometer}₹ x {kiloMeters} KM(s)
-        </p>
-        <p className="text-right font-bold">
-          {pricePerKilometer * kiloMeters}₹
-        </p>
-        <p className="text-left">Service fee</p>
-        <p className="text-right font-bold">0.0₹</p>
-        <p className="text-left">Late fee</p>
-        <p className="text-right">To be calculated</p>
-        <hr />
-        <hr />
-        <p className="font-md mt-2 font-semibold">Total</p>
-        <p className="font-md mt-2 font-semibold text-right">
-          ₹{kiloMeters * pricePerKilometer}
-        </p>
-      </div>
-      <div className="mt-10">
-        <p className="text-xs text-gray-600">
-          By clicking “Rent now“ you agree to the WeRide{" "}
-          <Link target="_blank" href={"/tos"} className="underline">
-            Terms
-          </Link>{" "}
-          and{" "}
-          <Link target="_blank" href={"/tos"} className="underline">
-            Privacy Policy
-          </Link>
-          .
-        </p>
-        <RentalModal>
-          <Button className="w-full mt-2">Rent Now</Button>
-        </RentalModal>
-      </div>
+
+        <div className="mt-5">
+          <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="location">Location</Label>
+            <Input type="text" id="location" placeholder="Enter location" />
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-1 text-gray-700 text-sm ">
+          <p className="text-left">
+            {PRICE_PER_KM}₹ x {kiloMeters} KM(s)
+          </p>
+          <p className="text-right font-bold">{totalPrice}₹</p>
+          <p className="text-left">Service fee</p>
+          <p className="text-right font-bold">0.0₹</p>
+          <p className="text-left">Late fee</p>
+          <p className="text-right">To be calculated</p>
+          <hr />
+          <hr />
+          <p className="font-md mt-2 font-semibold">Total</p>
+          <p className="font-md mt-2 font-semibold text-right">₹{totalPrice}</p>
+        </div>
+
+        <div className="mt-10">
+          <p className="text-xs text-gray-600">
+            By clicking "Rent now" you agree to the WeRide{" "}
+            <Link target="_blank" href={"/tos"} className="underline">
+              Terms
+            </Link>{" "}
+            and{" "}
+            <Link target="_blank" href={"/tos"} className="underline">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+          <RentalModal>
+            <Button className="w-full mt-2">Rent Now</Button>
+          </RentalModal>
+        </div>
+      </form>
     </div>
   );
 }

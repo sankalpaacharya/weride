@@ -103,6 +103,7 @@ const BikePage: React.FC<ParamsProps> = ({ params }) => {
         <div className="px-6 mt-20 space-y-5">
           <h2 className="text-2xl font-semibold">Good to Know</h2>
           <div className="grid md:text-base text-sm md:grid-cols-2 md:gap-10 gap-5  grid-rows-3">
+            {/*  make a array of this section and use map to display data instead of manually making tags */}
             <div>
               <h3 className="font-semibold">How long can I rent a bike? </h3>
               <p>
