@@ -24,9 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { signInSchema, TsignInSchema } from "@/app/schemas/signInSchema";
+import { signInSchema, TsignInSchema } from "@/lib/schemas/signInSchema";
 import toast from "react-hot-toast";
-import { signupAction } from "@/app/actions";
+import { signupAction } from "@/lib/actions/auth";
 import { PasswordInput } from "@/components/ui/password-input";
 import { createClient } from "@/utils/supabase/client";
 import {

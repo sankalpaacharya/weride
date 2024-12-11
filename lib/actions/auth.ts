@@ -1,12 +1,16 @@
 "use server";
-import { TsignInSchema, signInSchema } from "@/app/schemas/signInSchema";
-import { TloginSchema, loginInSchema } from "@/app/schemas/logInSchema";
+import { TsignInSchema, signInSchema } from "@/lib/schemas/signInSchema";
+import { TloginSchema, loginInSchema } from "@/lib/schemas/logInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import {
   TrenterIdentitySchema,
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
+
+
+
+
 export async function signupAction(data: TsignInSchema) {
   const result = signInSchema.safeParse(data);
   if (!result.success) {
@@ -19,7 +23,6 @@ export async function signupAction(data: TsignInSchema) {
     email: data.email,
     password: data.password,
   });
-  console.log("form hitz");
   console.log(userData, error);
   if (error) {
     console.log(error);
@@ -112,4 +115,10 @@ export async function renterFormAction(data: any) {
     return { sucess: "Your information has been added!" };
   }
   return { error: "Received the message" };
+}
+
+
+export async function ownerIdentityAction(data:any) {
+
+  console.log(data)
 }

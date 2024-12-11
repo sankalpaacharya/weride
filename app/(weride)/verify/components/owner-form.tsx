@@ -25,8 +25,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ownerIdentitySchema,
   TownerIdentitySchema,
-} from "@/app/schemas/ownerIdentitySchema";
-
+} from "@/lib/schemas/ownerIdentitySchema";
+import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
 export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
 
@@ -38,7 +38,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     resolver: zodResolver(ownerIdentitySchema),
   });
 
-  const submitForm = (data: TownerIdentitySchema) => {
+  const submitForm = async (data: TownerIdentitySchema) => {
     if (
       fuelType == "petrol" ||
       fuelType == "cycle" ||

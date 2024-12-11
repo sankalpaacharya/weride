@@ -11,9 +11,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { loginInSchema, TloginSchema } from "@/app/schemas/logInSchema";
+import { loginInSchema, TloginSchema } from "@/lib/schemas/logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginAction } from "@/app/actions";
+import { loginAction } from "@/lib/actions/auth";
 import toast from "react-hot-toast";
 import { PasswordInput } from "@/components/ui/password-input";
 

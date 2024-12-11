@@ -21,7 +21,7 @@ interface RentalModal {
 export default function RentalModal({ children }: RentalModal) {
   const [selectedTab, setSelectedTab] = useState("terms");
   const [isTosAccepted, setIsTosAccepted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNextClick = () => {
     if (!isTosAccepted) {
@@ -147,7 +147,7 @@ export default function RentalModal({ children }: RentalModal) {
         ) : isLoading ? (
           <div>
             <DialogTitle>Hold Tight, Your Ride is Almost Ready...</DialogTitle>
-            <DialogDescription>
+            <DialogDescription asChild>
               <div className="h-[400px] flex flex-col items-center justify-center">
                 <img
                   src="/images/animation.gif"

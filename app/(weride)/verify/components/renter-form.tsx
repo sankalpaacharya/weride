@@ -15,8 +15,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   renterIdentitySchema,
   TrenterIdentitySchema,
-} from "@/app/schemas/renterIdentitySchema";
-import { renterFormAction } from "@/app/actions";
+} from "@/lib/schemas/renterIdentitySchema";
+import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 
 export default function RenterForm({
   isPending: formState = false,

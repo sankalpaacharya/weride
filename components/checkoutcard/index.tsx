@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
-import { checkOutSchema, TcheckOutSchema } from "@/app/schemas/checkOutSchema";
+import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Select,
@@ -41,7 +41,6 @@ export default function CheckoutCard() {
   const submitForm = (data: TcheckOutSchema) => {
     console.log(data);
   };
-
   return (
     <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 px-5 rounded-xl">
       <form onSubmit={handleSubmit((data) => submitForm(data))}>
