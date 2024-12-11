@@ -49,6 +49,15 @@ export async function renterFormAction(data: any) {
       status: "pending",
     })
     .eq("id", user?.id);
+    
+  const {data:collegeIDImageData, error:collegeIDError} = await supabase.storage.from("CollegeID").upload(`${user?.id}.png`,formData.collegeIDPhoto,{
+    cacheControl: '3600',
+    upsert: false
+  })
+
+  if(error){
+    return {error:"Sorry there is error while uploading image"}
+  }
 
   if (data) {
     return { sucess: "Your information has been added!" };

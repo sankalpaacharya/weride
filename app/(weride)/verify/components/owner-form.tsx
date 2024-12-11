@@ -69,6 +69,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             <div className="space-y-2">
               <Label htmlFor="collegeIDPhoto">
                 College ID Card Photo (Both Side)
+                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -86,6 +87,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             <div className="space-y-2">
               <Label htmlFor="hostelIDPhoto">
                 Hostel ID Card Photo (Both Side)
+                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -102,6 +104,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="profilePhoto">Profile Photo</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("profilePhoto")}
@@ -117,6 +120,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="vehiclePhoto">Vehicle Photo</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("vehiclePhoto")}
@@ -132,6 +136,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="QRPhoto">QR Photo for payment</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("QRPhoto")}

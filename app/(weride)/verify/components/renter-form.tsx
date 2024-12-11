@@ -86,7 +86,8 @@ export default function RenterForm({
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="collegeIDPhoto">
-                College ID Card Photo (Both Side)
+                College ID Card Photo (Both Side){" "}
+                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -105,6 +106,7 @@ export default function RenterForm({
             <div className="space-y-2">
               <Label htmlFor="hostelIDPhoto">
                 Hostel ID Card Photo (Both Side)
+                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -123,6 +125,7 @@ export default function RenterForm({
             <div className="space-y-2">
               <Label htmlFor="drivingLicencePhoto">
                 Driving Licence Photo (Both Side)
+                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -140,6 +143,7 @@ export default function RenterForm({
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Profile Photo</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("profilePhoto")}
