@@ -96,7 +96,12 @@ export default function CheckoutCard() {
         <div className="mt-5">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="location">Location</Label>
-            <Input type="text" id="location" placeholder="Enter location" />
+            <Input
+              type="text"
+              id="location"
+              placeholder="Enter location"
+              {...register("location")}
+            />
           </div>
         </div>
 

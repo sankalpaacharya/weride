@@ -135,7 +135,11 @@ export default function RentalModal({ children }: RentalModal) {
               </div>
             </DialogDescription>
             <div className="flex justify-end mt-5">
-              <Button disabled={!isTosAccepted} onClick={handleNextClick}>
+              <Button
+                type="submit"
+                disabled={!isTosAccepted}
+                onClick={handleNextClick}
+              >
                 Next
               </Button>
             </div>
