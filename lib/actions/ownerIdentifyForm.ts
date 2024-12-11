@@ -1,9 +1,10 @@
-import { ownerIdentitySchema , TownerIdentitySchema} from "../schemas/ownerIdentitySchema"
+import {
+  ownerIdentitySchema,
+  TownerIdentitySchema,
+} from "../schemas/ownerIdentitySchema";
 
+export async function ownerIdentityAction(data: any) {
+  console.log(data);
 
-export async function ownerIdentityAction(data:any) {
-
-  console.log(data)
-  
-  return {message:"testing the for"}
+  return { message: "testing the for" };
 }

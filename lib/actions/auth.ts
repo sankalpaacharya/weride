@@ -8,9 +8,6 @@ import {
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
 
-
-
-
 export async function signupAction(data: TsignInSchema) {
   const result = signInSchema.safeParse(data);
   if (!result.success) {
@@ -117,8 +114,6 @@ export async function renterFormAction(data: any) {
   return { error: "Received the message" };
 }
 
-
-export async function ownerIdentityAction(data:any) {
-
-  console.log(data)
+export async function ownerIdentityAction(data: any) {
+  console.log(data);
 }

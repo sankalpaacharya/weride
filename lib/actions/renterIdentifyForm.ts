@@ -1,11 +1,9 @@
-"use server"
+"use server";
 import { createClient } from "@/utils/supabase/server";
 import {
   TrenterIdentitySchema,
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
-
-
 
 export async function renterFormAction(data: any) {
   const supabase = await createClient();
