@@ -9,7 +9,7 @@ export default function Page({}: Props) {
   const url = params.get("r");
   useEffect(() => {
     window.location.href = url || "/";
-  }, []);
+  }, [url]);
 
   return (
     <div className="w-full flex justify-center items-center">

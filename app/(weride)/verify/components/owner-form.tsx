@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -47,6 +47,8 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     ) {
       data.fuelType = fuelType;
     }
+    const response = await ownerIdentityAction(data);
+    console.log(response);
   };
 
   return (

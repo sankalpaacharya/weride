@@ -121,7 +121,7 @@ export default function CheckoutCard() {
 
         <div className="mt-10">
           <p className="text-xs text-gray-600">
-            By clicking "Rent now" you agree to the WeRide{" "}
+            By clicking &quot;Rent now&quot; you agree to the WeRide{" "}
             <Link target="_blank" href={"/tos"} className="underline">
               Terms
             </Link>{" "}
