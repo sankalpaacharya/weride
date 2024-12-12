@@ -1,5 +1,6 @@
 "use client";
 import React, { ReactNode, useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -57,7 +58,7 @@ export default function RentalModal({ children }: RentalModal) {
                       You as a rider agree to rent the vehicle for the duration
                       agreed upon with the vehicle owner. Any extension of time
                       will result in late fees charge levied on the rider{" "}
-                      <Link className="underline" href={"/"}>
+                      <Link className="underline" href="/">
                         (read late fees policy)
                       </Link>
                     </div>
@@ -110,13 +111,9 @@ export default function RentalModal({ children }: RentalModal) {
                       have direct control over the actions of users, any reports
                       or evidence of reckless driving may result in immediate
                       termination of the rental agreement, forfeiture of any
-                      deposits, and a permanent ban from our platform.&nbsp;
+                      deposits, and a permanent ban from our platform.{" "}
                       <Link className="underline" href="/">
-                        read more
-                      </Link>
-                      .
-                      <Link className="underline" href="/">
-                        (read more).
+                        (read more)
                       </Link>
                     </div>
                   </div>
@@ -153,10 +150,13 @@ export default function RentalModal({ children }: RentalModal) {
             <DialogTitle>Hold Tight, Your Ride is Almost Ready...</DialogTitle>
             <DialogDescription asChild>
               <div className="h-[400px] flex flex-col items-center justify-center">
-                <img
+                <Image
                   src="/images/animation.gif"
                   className="mt-10 h-[20rem]"
-                  alt=""
+                  alt="Loading animation"
+                  width={320}
+                  height={320}
+                  priority
                 />
                 Warming Up the Wheels for You..
               </div>
