@@ -4,7 +4,7 @@ import {
   TrenterIdentitySchema,
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
-async function uploadImage(userID:string, file:File,fileName:string) {
+async function uploadImage(userID: string, file: File, fileName: string) {
   const supabase = await createClient();
   const { error } = await supabase.storage
     .from(fileName)
@@ -19,8 +19,7 @@ async function uploadImage(userID:string, file:File,fileName:string) {
   return { success: "Upload successful" };
 }
 
-export async function renterFormAction(data:any) {
-  
+export async function renterFormAction(data: any) {
   const supabase = await createClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();
   if (authError) {
