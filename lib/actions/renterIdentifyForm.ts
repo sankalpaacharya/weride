@@ -4,28 +4,43 @@ import {
   TrenterIdentitySchema,
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
-
-export async function renterFormAction(data: any) {
+async function uploadImage(userID:string, file:File,fileName:string) {
   const supabase = await createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  const { error } = await supabase.storage
+    .from(fileName)
+    .upload(`${userID}.png`, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
   if (error) {
+    return { error: error.message };
+  }
+  return { success: "Upload successful" };
+}
+
+export async function renterFormAction(data:any) {
+  
+  const supabase = await createClient();
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError) {
     return { error: "User is not logged in" };
   }
+
   const { data: userData, error: userError } = await supabase
     .from("users")
     .select("*")
-    .eq("id", user?.id);
+    .eq("id", authData?.user?.id);
+
   if (userError) {
     return { error: "No user found" };
   }
-  if (userData[0].status == "pending" || userData[0].status == "verified") {
+
+  if (userData[0].status === "pending" || userData[0].status === "verified") {
     return { error: "Your account is in review state" };
   }
 
-  const formData: TrenterIdentitySchema = {
+  const formData = {
     hostelBlock: data.get("hostelBlock"),
     hostelRoom: data.get("hostelRoom"),
     rollno: data.get("rollno"),
@@ -48,19 +63,22 @@ export async function renterFormAction(data: any) {
       rollno: formData.rollno,
       status: "pending",
     })
-    .eq("id", user?.id);
-    
-  const {data:collegeIDImageData, error:collegeIDError} = await supabase.storage.from("CollegeID").upload(`${user?.id}.png`,formData.collegeIDPhoto,{
-    cacheControl: '3600',
-    upsert: false
-  })
+    .eq("id", authData?.user?.id);
 
-  if(error){
-    return {error:"Sorry there is error while uploading image"}
+  if (authData?.user?.id) {
+    const uploadPromises = [
+      uploadImage(authData.user.id, formData.collegeIDPhoto, "CollegeID"),
+      uploadImage(authData.user.id, formData.hostelIDPhoto, "HostelID"),
+      uploadImage(authData.user.id, formData.profilePhoto, "Profile"),
+    ];
+
+    const uploadResults = await Promise.all(uploadPromises);
+
+    const uploadErrors = uploadResults.filter((res) => res.error);
+    if (uploadErrors.length > 0) {
+      return { error: uploadErrors.map((err) => err.error).join(", ") };
+    }
   }
 
-  if (data) {
-    return { sucess: "Your information has been added!" };
-  }
-  return { error: "Received the message" };
+  return { success: "Your information has been added!" };
 }

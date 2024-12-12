@@ -17,6 +17,7 @@ import {
   TrenterIdentitySchema,
 } from "@/lib/schemas/renterIdentitySchema";
 import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
+import toast from "react-hot-toast";
 
 export default function RenterForm({
   isPending: formState = false,
@@ -56,11 +57,12 @@ export default function RenterForm({
 
       if (response.error) {
         console.error(response.error);
+        toast.error(response.error);
         return;
       }
-      if (response.sucess) {
+      if (response.success) {
         setIsPending(true);
-        return;
+        toast.success(response.success);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
