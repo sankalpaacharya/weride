@@ -38,7 +38,6 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
   } = useForm<TownerIdentitySchema>({
     resolver: zodResolver(ownerIdentitySchema),
   });
-  console.log(errors);
 
   const submitForm = async (data: TownerIdentitySchema) => {
     if (
@@ -61,10 +60,12 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     ownerFormData.append("messageToRenter", data.messageToRenter);
     ownerFormData.append("collegeID", data.messageToRenter);
     ownerFormData.append("rollno", data.rollno);
-    console.log(ownerFormData);
+    ownerFormData.append("fuelType", fuelType);
+    ownerFormData.append("vehicleDescription", data.vehicleDescription);
     const response = await ownerIdentityAction(ownerFormData);
     if (response.error) {
       toast.error(response.error);
+      console.log("this is coming from the server action", response.error);
     }
   };
 
@@ -74,7 +75,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold">
             {isPending
-              ? "Verification Pending ..."
+              ? "⏳Wait!, Your Account is Being Reviewed"
               : "Owner Identity Verification"}
           </CardTitle>
           <CardDescription>
@@ -186,6 +187,21 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="hostelRoom">Room no</Label>
+              <Input
+                disabled={isPending}
+                {...register("hostelRoom")}
+                id="password"
+                type="text"
+                placeholder="319"
+              />
+              {errors.hostelRoom && (
+                <p className="text-red-500 text-sm">
+                  {`${errors.hostelRoom.message}`}
+                </p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="hostelRoom">Roll no</Label>
               <Input
                 disabled={isPending}
                 {...register("rollno")}

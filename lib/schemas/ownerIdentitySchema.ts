@@ -35,7 +35,7 @@ export const ownerIdentitySchema = z.object({
   QRPhoto: fileSchema,
   messageToRenter: z
     .string({ required_error: "Message is required" })
-    .max(500, "message name can't be more than 2 characters")
+    .max(500, "message name can't be more than 500 characters")
     .min(100, "Message to renter must be atleast a 100 characters"),
   rollno: z.string({ required_error: "Rollno is required" }),
   vehicleDescription: z
