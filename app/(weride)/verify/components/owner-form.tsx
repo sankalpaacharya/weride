@@ -27,6 +27,7 @@ import {
   TownerIdentitySchema,
 } from "@/lib/schemas/ownerIdentitySchema";
 import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
+import toast from "react-hot-toast";
 export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
 
@@ -37,6 +38,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
   } = useForm<TownerIdentitySchema>({
     resolver: zodResolver(ownerIdentitySchema),
   });
+  console.log(errors);
 
   const submitForm = async (data: TownerIdentitySchema) => {
     if (
@@ -47,8 +49,23 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     ) {
       data.fuelType = fuelType;
     }
-    const response = await ownerIdentityAction(data);
-    console.log(response);
+    const ownerFormData = new FormData();
+    ownerFormData.append("collegeIDPhoto", data.collegeIDPhoto[0]);
+    ownerFormData.append("hostelIDPhoto", data.hostelIDPhoto[0]);
+    ownerFormData.append("QRPhoto", data.QRPhoto[0]);
+    ownerFormData.append("vehiclePhoto", data.vehiclePhoto[0]);
+    ownerFormData.append("profilePhoto", data.profilePhoto[0]);
+    ownerFormData.append("hostelBlock", data.hostelBlock);
+    ownerFormData.append("hostelRoom", data.hostelRoom);
+    ownerFormData.append("vehicleName", data.vehicleName);
+    ownerFormData.append("messageToRenter", data.messageToRenter);
+    ownerFormData.append("collegeID", data.messageToRenter);
+    ownerFormData.append("rollno", data.rollno);
+    console.log(ownerFormData);
+    const response = await ownerIdentityAction(ownerFormData);
+    if (response.error) {
+      toast.error(response.error);
+    }
   };
 
   return (
@@ -171,7 +188,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Label htmlFor="hostelRoom">Room no</Label>
               <Input
                 disabled={isPending}
-                {...register("hostelRoom")}
+                {...register("rollno")}
                 id="password"
                 type="text"
                 placeholder="319"
@@ -197,6 +214,19 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                   {`${errors.vehicleName.message}`}
                 </p>
               )}
+              <div className="space-y-2">
+                <Label htmlFor="messageToRenter">Vehicle Description</Label>
+                <Textarea
+                  disabled={isPending}
+                  {...register("vehicleDescription")}
+                  placeholder="write the vehicle description, min 100 characters"
+                />
+                {errors.vehicleDescription && (
+                  <p className="text-red-500 text-sm">
+                    {`${errors.vehicleDescription.message}`}
+                  </p>
+                )}
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="messageToRenter">Message To Renters</Label>
