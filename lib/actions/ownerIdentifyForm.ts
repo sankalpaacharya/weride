@@ -3,7 +3,6 @@ import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
 
 async function uploadImage(userID: string, file: File, fileName: string) {
-
   const supabase = await createClient();
   const { error } = await supabase.storage
     .from(fileName)
@@ -35,6 +34,7 @@ export async function ownerIdentityAction(formData: any) {
   if (userData[0].status === "pending" || userData[0].status === "verified") {
     return { error: "Your account is in review state" };
   }
+  // Object.fromentries(formData) can be done instead of creating this data object, will reduce the noloc
   const data = {
     collegeIDPhoto: formData.get("collegeIDPhoto"),
     hostelIDPhoto: formData.get("hostelIDPhoto"),
@@ -73,7 +73,7 @@ export async function ownerIdentityAction(formData: any) {
       owner: authData.user.id,
     })
     .eq("id", authData.user.id);
-if (authData?.user?.id) {
+  if (authData?.user?.id) {
     const uploadPromises = [
       uploadImage(authData.user.id, data.collegeIDPhoto, "CollegeID"),
       uploadImage(authData.user.id, data.hostelIDPhoto, "HostelID"),
