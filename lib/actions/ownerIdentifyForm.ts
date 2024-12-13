@@ -2,6 +2,9 @@
 import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
 
+// make use of facade design pattern 
+//  for different db query, make a file which has a function for getting user updating upserting etc
+
 async function uploadImage(userID: string, file: File, fileName: string) {
   const supabase = await createClient();
   const { error } = await supabase.storage
