@@ -13,6 +13,34 @@ type ParamsProps = {
   params: { id: string };
 };
 
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+const faqData: FAQItem[] = [
+  {
+    question: "How long can I rent a bike?",
+    answer:
+      "You can rent a bike starting from 1 to a maximum of 5 hours",
+  },
+  {
+    question: "How does the payment for the bike rental work?",
+    answer:
+      "",
+  },
+  {
+    question: "How do I contact the Owner?",
+    answer:
+      "You can rent a bike for as long as you want. For either a few days, or up to several weeks. It all depends on you and the availability of the bike.",
+  },
+  {
+    question: "How can I make sure that the bike is protected against theft?",
+    answer:
+      "Make sure you are parking the bike in a secure, well lit area or near a busy road for enhanced security. Also, do check that the area is legal to park at.",
+  },
+];
+
 const BikeInfo: React.FC = () => (
   <div className="space-y-2 mt-10">
     <h2 className="text-2xl font-medium">
@@ -103,43 +131,13 @@ const BikePage: React.FC<ParamsProps> = ({ params }) => {
         <div className="px-6 mt-20 space-y-5">
           <h2 className="text-2xl font-semibold">Good to Know</h2>
           <div className="grid md:text-base text-sm md:grid-cols-2 md:gap-10 gap-5  grid-rows-3">
-            {/*  make a array of this section and use map to display data instead of manually making tags */}
-            <div>
-              <h3 className="font-semibold">How long can I rent a bike? </h3>
-              <p>
-                You can rent a bike for as long as you want. For either a few
-                days, or up to several weeks. It all depends on you and the
-                availability of the bike.{" "}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">
-                How does the payment for the bike rental work?{" "}
-              </h3>
-              <p>
-                You can rent a bike for as long as you want. For either a few
-                days, or up to several weeks. It all depends on you and the
-                availability of the bike.{" "}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">How do I contact the Owner? </h3>
-              <p>
-                You can rent a bike for as long as you want. For either a few
-                days, or up to several weeks. It all depends on you and the
-                availability of the bike.{" "}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold">
-                How can I make sure that the bike is protected against theft?{" "}
-              </h3>
-              <p>
-                You can rent a bike for as long as you want. For either a few
-                days, or up to several weeks. It all depends on you and the
-                availability of the bike.{" "}
-              </p>
-            </div>
+            {
+            faqData.map((faq, index) => (
+              <div key={index}>
+                <h3 className="font-semibold">{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+))}
           </div>
         </div>
       </div>
