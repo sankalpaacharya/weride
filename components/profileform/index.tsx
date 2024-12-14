@@ -74,15 +74,15 @@ export default function ProfileForm({ userData }: Props) {
           </div>
           <div className="space-y-2">
             <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Room no</Label>
+              <Label htmlFor="email">Roll no</Label>
               <Input
-                defaultValue={userData.hostel_room}
+                defaultValue={userData.rollno}
                 type="text"
                 id="text"
-                placeholder="Room No"
+                placeholder="Roll No"
               />
             </div>
-            <p className="text-sm text-gray-500">Your Room No.</p>
+            <p className="text-sm text-gray-500">Your Roll No.</p>
           </div>
           <div className="space-y-2">
             <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
