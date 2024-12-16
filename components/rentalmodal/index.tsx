@@ -163,23 +163,21 @@ export default function RentalModal({ children }: RentalModal) {
             </DialogDescription>
           </div>
         ) : (
-          <div>
+          <>
             <DialogTitle>Rental Confirmation</DialogTitle>
-            <DialogDescription>
-              <div className="flex flex-col items-center justify-center h-[400px]">
-                <CheckCircle size={64} className="text-green-500 mb-4" />
-                <p className="text-xl font-semibold text-center">
-                  Your rental is confirmed!
-                </p>
-                <p className="text-center mt-2">
-                  Thank you for renting with us. Enjoy your ride!
-                </p>
-              </div>
+            <DialogDescription className="flex flex-col items-center justify-center h-[400px]">
+              <CheckCircle size={64} className="text-green-500 mb-4" />
+              <span className="text-xl font-semibold text-center">
+                Your rental is confirmed!
+              </span>
+              <span className="text-center mt-2">
+                Thank you for renting with us. Enjoy your ride!
+              </span>
             </DialogDescription>
             <div className="flex justify-end mt-5">
               <Button onClick={() => onModalChange(false)}>Close</Button>
             </div>
-          </div>
+          </>
         )}
       </DialogContent>
     </Dialog>

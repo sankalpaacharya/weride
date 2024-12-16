@@ -21,11 +21,13 @@ type FAQItem = {
 const faqData: FAQItem[] = [
   {
     question: "How long can I rent a bike?",
-    answer: "You can rent a bike starting from 1 to a maximum of 5 hours after which a late fees charge will be applied on your total amount.",
+    answer:
+      "You can rent a bike starting from 1 to a maximum of 5 hours after which a late fees charge will be applied on your total amount.",
   },
   {
     question: "How does the payment for the bike rental work?",
-    answer: "You can pay the total amount for the bike rental to the owner directly through cash or online UPI after the completion of your rental period.",
+    answer:
+      "You can pay the total amount for the bike rental to the owner directly through cash or online UPI after the completion of your rental period.",
   },
   {
     question: "How do I contact the Owner?",
