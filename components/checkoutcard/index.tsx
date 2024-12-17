@@ -35,8 +35,11 @@ export default function CheckoutCard() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<TcheckOutSchema>({ resolver: zodResolver(checkOutSchema) });
+    formState: { errors, isValid },
+  } = useForm<TcheckOutSchema>({
+    resolver: zodResolver(checkOutSchema),
+    mode: "onChange",
+  });
   console.log(errors);
 
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
@@ -140,11 +143,7 @@ export default function CheckoutCard() {
             .
           </p>
           <RentalModal formData={formData}>
-            <Button
-              disabled={errors ? true : false}
-              className="w-full mt-2"
-              type="submit"
-            >
+            <Button disabled={!isValid} className="w-full mt-2" type="submit">
               Rent Now
             </Button>
           </RentalModal>
