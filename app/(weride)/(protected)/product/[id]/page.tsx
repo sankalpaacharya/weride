@@ -103,7 +103,7 @@ const OwnerInfo: React.FC = () => (
 
 const BikePage: React.FC<ParamsProps> = ({ params }) => {
   const { id: bikeId } = params;
-
+  console.log(bikeId);
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="max-w-[100rem] w-full">

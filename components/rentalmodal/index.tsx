@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,15 +14,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { CheckCircle } from "lucide-react";
+import { TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 
 interface RentalModal {
   children: ReactNode;
+  formData: TcheckOutSchema | {};
 }
 
-export default function RentalModal({ children }: RentalModal) {
+export default function RentalModal({ children, formData }: RentalModal) {
   const [selectedTab, setSelectedTab] = useState("terms");
   const [isTosAccepted, setIsTosAccepted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleNextClick = () => {
     if (!isTosAccepted) {
@@ -31,6 +33,13 @@ export default function RentalModal({ children }: RentalModal) {
     }
     setSelectedTab("checkout");
   };
+
+  useEffect(() => {
+    if (selectedTab === "checkout") {
+      // make a form submit her also validate the data if it's wrong the error
+      console.log(formData);
+    }
+  }, [selectedTab]);
 
   const onModalChange = (isOpen: boolean) => {
     if (!isOpen) {

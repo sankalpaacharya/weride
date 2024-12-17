@@ -28,21 +28,28 @@ const HOURLY_RATES = [
 const KILOMETER_OPTIONS = [10, 15, 25, 30, 40];
 
 export default function CheckoutCard() {
-  const [kiloMeters, setKiloMeters] = useState(10);
-  const [hours, setHours] = useState(1);
-  const totalPrice = PRICE_PER_KM * kiloMeters;
+  const [kiloMeters, setKiloMeters] = useState("10");
+  const [hours, setHours] = useState("1");
+  const totalPrice = PRICE_PER_KM * parseInt(kiloMeters);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<TcheckOutSchema>({ resolver: zodResolver(checkOutSchema) });
+  console.log(errors);
+
+  const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
-    console.log(data);
+    console.log("this is the form data", data);
+    data.kilometer = kiloMeters;
+    data.hour = hours;
+    setFormData(data);
   };
+
   return (
-    <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 px-5 rounded-xl">
+    <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 px-5 rounded-xl sticky top-0 h-fit">
       <form onSubmit={handleSubmit((data) => submitForm(data))}>
         <div className="space-y-1">
           <h2 className="text-main text-2xl font-medium">
@@ -50,16 +57,14 @@ export default function CheckoutCard() {
           </h2>
           <p className="text-sm text-gray-600">360₹ / 4hrs</p>
         </div>
-
         <span className="text-main flex gap-2 mt-5">
           <MdIosShare size={20} />
           Share
         </span>
-
         <div className="mt-5">
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="hours">Hour</Label>
-            <Select onValueChange={(hours) => setHours(parseInt(hours))}>
+            <Select onValueChange={(hours) => setHours(hours)}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Hours" />
               </SelectTrigger>
@@ -76,7 +81,7 @@ export default function CheckoutCard() {
           <div className="mt-5">
             <div className="grid w-full items-center gap-1.5">
               <Label htmlFor="kilometers">Kilometers</Label>
-              <Select onValueChange={(value) => setKiloMeters(parseInt(value))}>
+              <Select onValueChange={(value) => setKiloMeters(value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Kilometers" />
                 </SelectTrigger>
@@ -101,6 +106,9 @@ export default function CheckoutCard() {
               placeholder="Enter location"
               {...register("location")}
             />
+            {errors.location && (
+              <p className="text-red-500 text-sm">{`${errors.location.message}`}</p>
+            )}
           </div>
         </div>
 
@@ -131,8 +139,14 @@ export default function CheckoutCard() {
             </Link>
             .
           </p>
-          <RentalModal>
-            <Button className="w-full mt-2">Rent Now</Button>
+          <RentalModal formData={formData}>
+            <Button
+              disabled={errors ? true : false}
+              className="w-full mt-2"
+              type="submit"
+            >
+              Rent Now
+            </Button>
           </RentalModal>
         </div>
       </form>
