@@ -45,7 +45,7 @@ export async function ownerIdentityAction(formData: any) {
     vehiclePhoto: formData.get("vehiclePhoto"),
     QRPhoto: formData.get("QRPhoto"),
     hostelBlock: formData.get("hostelBlock"),
-   hostelRoom: formData.get("hostelRoom"),
+    hostelRoom: formData.get("hostelRoom"),
     vehicleName: formData.get("vehicleName"),
     vehicleDescription: formData.get("vehicleDescription"),
     messageToRenter: formData.get("messageToRenter"),

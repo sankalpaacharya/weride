@@ -31,7 +31,9 @@ export const ownerIdentitySchema = z.object({
   collegeIDPhoto: fileSchema,
   hostelIDPhoto: fileSchema,
   profilePhoto: fileSchema,
-  vehiclePhoto: fileSchema,
+  vehiclePhotoFront: fileSchema,
+  vehiclePhotoSide: fileSchema,
+  vehiclePhotoBack: fileSchema,
   QRPhoto: fileSchema,
   messageToRenter: z
     .string({ required_error: "Message is required" })

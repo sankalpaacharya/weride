@@ -52,8 +52,10 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     ownerFormData.append("collegeIDPhoto", data.collegeIDPhoto[0]);
     ownerFormData.append("hostelIDPhoto", data.hostelIDPhoto[0]);
     ownerFormData.append("QRPhoto", data.QRPhoto[0]);
-    ownerFormData.append("vehiclePhoto", data.vehiclePhoto[0]);
     ownerFormData.append("profilePhoto", data.profilePhoto[0]);
+    ownerFormData.append("vehiclePhotoFront", data.vehiclePhotoFront[0]);
+    ownerFormData.append("vehiclePhotoBack", data.vehiclePhotoBack[0]);
+    ownerFormData.append("vehiclePhotoSide", data.vehiclePhotoSide[0]);
     ownerFormData.append("hostelBlock", data.hostelBlock);
     ownerFormData.append("hostelRoom", data.hostelRoom);
     ownerFormData.append("vehicleName", data.vehicleName);
@@ -139,21 +141,54 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="vehiclePhoto">Vehicle Photo</Label>
+              <Label htmlFor="vehiclePhoto">Vehicle Photo- Front View</Label>
               <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
-                {...register("vehiclePhoto")}
+                {...register("vehiclePhotoFront")}
                 id="password"
                 type="file"
                 placeholder="319"
               />
-              {errors.vehiclePhoto && (
+              {errors.vehiclePhotoFront && (
                 <p className="text-red-500 text-sm">
-                  {`${errors.vehiclePhoto.message}`}
+                  {`${errors.vehiclePhotoFront.message}`}
                 </p>
               )}
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="vehiclePhoto">Vehicle Photo- Side View</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
+              <Input
+                disabled={isPending}
+                {...register("vehiclePhotoSide")}
+                id="password"
+                type="file"
+                placeholder="319"
+              />
+              {errors.vehiclePhotoSide && (
+                <p className="text-red-500 text-sm">
+                  {`${errors.vehiclePhotoSide.message}`}
+                </p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="vehiclePhoto">Vehicle Photo- Back View</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
+              <Input
+                disabled={isPending}
+                {...register("vehiclePhotoBack")}
+                id="password"
+                type="file"
+                placeholder="319"
+              />
+              {errors.vehiclePhotoBack && (
+                <p className="text-red-500 text-sm">
+                  {`${errors.vehiclePhotoBack.message}`}
+                </p>
+              )}
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="QRPhoto">QR Photo for payment</Label>
               <span className="text-xs mx-1 text-red-500">200KB</span>
