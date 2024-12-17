@@ -18,11 +18,11 @@ import Link from "next/link";
 
 const PRICE_PER_KM = 7;
 const HOURLY_RATES = [
-  { value: "10", hours: 1 },
-  { value: "15", hours: 2 },
-  { value: "25", hours: 3 },
-  { value: "30", hours: 4 },
-  { value: "40", hours: 5 },
+  { value: "1" },
+  { value: "2" },
+  { value: "3" },
+  { value: "4" },
+  { value: "5" },
 ];
 
 const KILOMETER_OPTIONS = [10, 15, 25, 30, 40];
@@ -74,7 +74,7 @@ export default function CheckoutCard() {
               <SelectContent>
                 {HOURLY_RATES.map((rate) => (
                   <SelectItem key={rate.value} value={rate.value}>
-                    {rate.hours}
+                    {rate.value}
                   </SelectItem>
                 ))}
               </SelectContent>

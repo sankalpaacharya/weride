@@ -14,7 +14,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { CheckCircle } from "lucide-react";
-import { TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
+import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
+import { rentCheckoutAction } from "@/lib/actions/rentCheckout";
 
 interface RentalModal {
   children: ReactNode;
@@ -34,10 +35,23 @@ export default function RentalModal({ children, formData }: RentalModal) {
     setSelectedTab("checkout");
   };
 
+  const submitForm = async (data: TcheckOutSchema | {}) => {
+    const result = checkOutSchema.safeParse(data);
+    if (!result.success) {
+      toast.error(result.error.issues[0].message);
+      return;
+    }
+    result.data.location = "";
+    const response = await rentCheckoutAction(result.data);
+    if (response?.error) {
+      toast.error(response.error);
+      setSelectedTab("terms");
+      return;
+    }
+  };
   useEffect(() => {
     if (selectedTab === "checkout") {
-      // make a form submit her also validate the data if it's wrong the error
-      console.log(formData);
+      submitForm(formData);
     }
   }, [selectedTab]);
 
