@@ -24,6 +24,8 @@ type Vehicle = {
   fuel_type: string;
   message: string;
   owner_name: string;
+  price: number;
+  availability: string;
 };
 
 export default async function Home() {

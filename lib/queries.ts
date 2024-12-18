@@ -7,7 +7,9 @@ export async function getVehicles(limit: number = 10) {
     .select("*,users(status)")
     .limit(limit);
 
-  const vechilesData = data?.filter((vehicle)=>vehicle.users.status!="pending" ) 
+  const vechilesData = data?.filter(
+    (vehicle) => vehicle.users.status != "pending",
+  );
   if (error) {
     return [{ error: "there is some error getting the data" }];
   }

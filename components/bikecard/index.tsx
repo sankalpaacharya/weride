@@ -6,6 +6,7 @@ import { FaRegUserCircle, FaGasPump, FaStar } from "react-icons/fa";
 import { MdDirectionsBike, MdSpeed, MdLocationOn } from "react-icons/md";
 import { BiTime } from "react-icons/bi";
 import Link from "next/link";
+import { date } from "zod";
 
 interface RentalCardProps {
   imageName: string;
@@ -19,6 +20,8 @@ interface RentalCardProps {
     fuel_type: string;
     message: string;
     owner_name: string;
+    price: number;
+    availability: string;
   };
 }
 
@@ -32,7 +35,7 @@ export default function RentalCard({
         return "bg-green-100 text-green-800";
       case "Booked":
         return "bg-red-100 text-red-800";
-      case "Maintenance":
+      case "Maintainence":
         return "bg-yellow-100 text-yellow-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -55,12 +58,16 @@ export default function RentalCard({
             priority
           />
           <div className="absolute top-4 right-4">
-            <Badge className={`${getAvailabilityColor("Available")} px-3 py-1`}>
-              Available
+            <Badge
+              className={`${getAvailabilityColor(bikeDetails.availability)} px-3 py-1`}
+            >
+              {bikeDetails.availability}
             </Badge>
           </div>
           <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-            <span className="font-bold text-lg text-primary">₹100</span>
+            <span className="font-bold text-lg text-primary">
+              ₹{bikeDetails.price}
+            </span>
             <span className="text-sm text-gray-600">/hr</span>
           </div>
         </div>
