@@ -27,7 +27,6 @@ type Vehicle = {
 };
 
 export default async function Home() {
-  const sankalpa = "this is me sankalpa";
   const vehiclesData = await getVehicles();
   return (
     <main className="overflow-hidden relative w-full">

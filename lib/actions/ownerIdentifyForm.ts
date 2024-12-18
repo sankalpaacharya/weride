@@ -80,7 +80,7 @@ export async function ownerIdentityAction(formData: any) {
       fuel_type: data.fuelType,
       message: data.messageToRenter,
       owner: authData.user.id,
-      owner_name: userData[0].name
+      owner_name: userData[0].name,
     })
     .select();
   if (error) {
@@ -116,5 +116,7 @@ export async function ownerIdentityAction(formData: any) {
       return { error: uploadErrors.map((err) => err.error).join(", ") };
     }
   }
-  return { success: "Your data has been submitted please wait for the verification" };
+  return {
+    success: "Your data has been submitted please wait for the verification",
+  };
 }
