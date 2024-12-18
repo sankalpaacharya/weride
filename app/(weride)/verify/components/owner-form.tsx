@@ -67,7 +67,11 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     const response = await ownerIdentityAction(ownerFormData);
     if (response.error) {
       toast.error(response.error);
-      console.log("this is coming from the server action", response.error);
+      return;
+    }
+    if (response.success) {
+      toast.error(response.success);
+      return;
     }
   };
 

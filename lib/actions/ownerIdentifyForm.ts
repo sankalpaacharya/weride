@@ -19,7 +19,7 @@ async function uploadImage(userID: string, file: File, fileName: string) {
   }
   return { success: "Upload successful" };
 }
-//  if there is error at any state or any point whole things should throw error, 
+//  if there is error at any state or any point whole things should throw error,
 //  this is bringing the inconsistency in the database
 export async function ownerIdentityAction(formData: any) {
   const supabase = await createClient();
@@ -70,7 +70,7 @@ export async function ownerIdentityAction(formData: any) {
       status: "pending",
     })
     .eq("id", authData?.user?.id);
- const {data:vehicleData,error}= await supabase
+  const { data: vehicleData, error } = await supabase
     .from("vehicle")
     .insert({
       name: data.vehicleName,
@@ -78,18 +78,31 @@ export async function ownerIdentityAction(formData: any) {
       fuel_type: data.fuelType,
       message: data.messageToRenter,
       owner: authData.user.id,
-    }).select()
-  if(error){
-    return {error:"error in uploading the vehicle information"}
+    })
+    .select();
+  if (error) {
+    return { error: "error in uploading the vehicle information" };
   }
   if (authData?.user?.id && vehicleData) {
     const uploadPromises = [
       uploadImage(authData.user.id, data.collegeIDPhoto, "CollegeID"),
       uploadImage(authData.user.id, data.hostelIDPhoto, "HostelID"),
       uploadImage(authData.user.id, data.profilePhoto, "Profile"),
-      uploadImage(vehicleData[0].id+"_front", data.vehiclePhotoFront, "Vehicle"),
-      uploadImage(vehicleData[0].id+"_side", data.vehiclePhotoSide, "Vehicle"),
-      uploadImage(vehicleData[0].id+"_back", data.vehiclePhotoBack, "Vehicle"),
+      uploadImage(
+        vehicleData[0].id + "_front",
+        data.vehiclePhotoFront,
+        "Vehicle",
+      ),
+      uploadImage(
+        vehicleData[0].id + "_side",
+        data.vehiclePhotoSide,
+        "Vehicle",
+      ),
+      uploadImage(
+        vehicleData[0].id + "_back",
+        data.vehiclePhotoBack,
+        "Vehicle",
+      ),
     ];
 
     const uploadResults = await Promise.all(uploadPromises);
@@ -99,5 +112,5 @@ export async function ownerIdentityAction(formData: any) {
       return { error: uploadErrors.map((err) => err.error).join(", ") };
     }
   }
-  return { message: "testing the for" };
+  return { success: "Your data has been uploaded" };
 }
