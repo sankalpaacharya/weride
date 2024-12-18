@@ -1,6 +1,6 @@
 import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
-import Footer from "@/components/footer";
+import { getVehicles } from "@/lib/queries";
 
 const bikeDetails = {
   name: "Honda Activa 125",
@@ -14,8 +14,21 @@ const bikeDetails = {
   availability: "Available" as const,
   maxSpeed: "90 kmph",
 };
+type Vehicle = {
+  id: string;
+  created_at: string;
+  owner: string;
+  name: string;
+  vehicle_code: string;
+  description: string;
+  fuel_type: string;
+  message: string;
+  owner_name: string;
+};
 
-export default function Home() {
+export default async function Home() {
+  const sankalpa = "this is me sankalpa";
+  const vehiclesData = await getVehicles();
   return (
     <main className="overflow-hidden relative w-full">
       <FilterBar />
@@ -25,10 +38,13 @@ export default function Home() {
             Frequently Booked
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-            <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
-            <RentalCard imageName="bike1.jpeg" bikeDetails={bikeDetails} />
-            <RentalCard imageName="bike2.jpeg" bikeDetails={bikeDetails} />
+            {vehiclesData.map((vehicle: Vehicle) => (
+              <RentalCard
+                key={vehicle.id}
+                imageName="bike1.jpeg"
+                bikeDetails={vehicle}
+              />
+            ))}
           </div>
         </div>
       </div>

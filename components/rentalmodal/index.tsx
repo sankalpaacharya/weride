@@ -41,11 +41,14 @@ export default function RentalModal({ children, formData }: RentalModal) {
       toast.error(result.error.issues[0].message);
       return;
     }
-    result.data.location = "";
     const response = await rentCheckoutAction(result.data);
     if (response?.error) {
       toast.error(response.error);
       setSelectedTab("terms");
+      return;
+    }
+    if (response.success) {
+      setIsLoading(false);
       return;
     }
   };

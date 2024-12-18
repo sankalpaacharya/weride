@@ -6,4 +6,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
   if (!result.success) {
     return { error: result.error.issues[0].message };
   }
+ 
+  return {success:"your ride is confirmed"}
+
 }

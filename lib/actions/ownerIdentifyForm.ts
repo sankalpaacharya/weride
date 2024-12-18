@@ -4,6 +4,7 @@ import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
 
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
+// make a available status  column in vehicle field, check bikecard component
 
 async function uploadImage(userID: string, file: File, fileName: string) {
   const supabase = await createClient();
@@ -21,6 +22,7 @@ async function uploadImage(userID: string, file: File, fileName: string) {
 }
 //  if there is error at any state or any point whole things should throw error,
 //  this is bringing the inconsistency in the database
+// make an rpc for the transaction, which is not needed at the development time we will figure this later on
 export async function ownerIdentityAction(formData: any) {
   const supabase = await createClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();
@@ -78,6 +80,7 @@ export async function ownerIdentityAction(formData: any) {
       fuel_type: data.fuelType,
       message: data.messageToRenter,
       owner: authData.user.id,
+      owner_name: userData[0].name
     })
     .select();
   if (error) {
@@ -103,6 +106,7 @@ export async function ownerIdentityAction(formData: any) {
         data.vehiclePhotoBack,
         "Vehicle",
       ),
+      uploadImage(vehicleData[0].id, data.QRPhoto, "QRCode"),
     ];
 
     const uploadResults = await Promise.all(uploadPromises);
@@ -112,5 +116,5 @@ export async function ownerIdentityAction(formData: any) {
       return { error: uploadErrors.map((err) => err.error).join(", ") };
     }
   }
-  return { success: "Your data has been uploaded" };
+  return { success: "Your data has been submitted please wait for the verification" };
 }

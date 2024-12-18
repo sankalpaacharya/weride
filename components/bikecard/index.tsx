@@ -10,16 +10,15 @@ import Link from "next/link";
 interface RentalCardProps {
   imageName: string;
   bikeDetails: {
-    name: string;
-    model: string;
+    id: string;
+    created_at: string;
     owner: string;
-    lastRenter: string;
-    pricePerHour: number;
-    location: string;
-    mileage: string;
-    rating: number;
-    availability: "Available" | "Booked" | "Maintenance";
-    maxSpeed: string;
+    name: string;
+    vehicle_code: string;
+    description: string;
+    fuel_type: string;
+    message: string;
+    owner_name: string;
   };
 }
 
@@ -56,18 +55,12 @@ export default function RentalCard({
             priority
           />
           <div className="absolute top-4 right-4">
-            <Badge
-              className={`${getAvailabilityColor(
-                bikeDetails.availability,
-              )} px-3 py-1`}
-            >
-              {bikeDetails.availability}
+            <Badge className={`${getAvailabilityColor("Available")} px-3 py-1`}>
+              Available
             </Badge>
           </div>
           <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-            <span className="font-bold text-lg text-primary">
-              ₹{bikeDetails.pricePerHour}
-            </span>
+            <span className="font-bold text-lg text-primary">₹100</span>
             <span className="text-sm text-gray-600">/hr</span>
           </div>
         </div>
@@ -79,11 +72,11 @@ export default function RentalCard({
                 <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
                   {bikeDetails.name}
                 </h2>
-                <p className="text-sm text-gray-600">{bikeDetails.model}</p>
+                <p className="text-sm text-gray-600">{bikeDetails.name}</p>
               </div>
               <div className="flex items-center gap-1">
                 <FaStar className="text-yellow-400" />
-                <span className="font-semibold">{bikeDetails.rating}</span>
+                <span className="font-semibold">4.3</span>
               </div>
             </div>
           </div>
@@ -96,13 +89,13 @@ export default function RentalCard({
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <FaGasPump className="text-primary text-lg" />
-                <span className="text-sm">{bikeDetails.mileage}</span>
+                <span className="text-sm">60kmpl</span>
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-gray-700">
                 <MdSpeed className="text-primary text-lg" />
-                <span className="text-sm">{bikeDetails.maxSpeed}</span>
+                <span className="text-sm">90kmph</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <BiTime className="text-primary text-lg" />
@@ -116,7 +109,9 @@ export default function RentalCard({
               <FaRegUserCircle className="text-primary" />
               <div>
                 <p className="text-sm font-medium text-gray-900">Owner</p>
-                <p className="text-sm text-gray-600">{bikeDetails.owner}</p>
+                <p className="text-sm text-gray-600">
+                  {bikeDetails.owner_name}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -125,9 +120,7 @@ export default function RentalCard({
                 <p className="text-sm font-medium text-gray-900">
                   Last Rented By
                 </p>
-                <p className="text-sm text-gray-600">
-                  {bikeDetails.lastRenter}
-                </p>
+                <p className="text-sm text-gray-600">Sankalpa</p>
               </div>
             </div>
           </div>

@@ -35,6 +35,7 @@ export const ownerIdentitySchema = z.object({
   vehiclePhotoSide: fileSchema,
   vehiclePhotoBack: fileSchema,
   QRPhoto: fileSchema,
+  drivingLiscencePhoto: fileSchema,
   messageToRenter: z
     .string({ required_error: "Message is required" })
     .max(500, "message name can't be more than 500 characters")

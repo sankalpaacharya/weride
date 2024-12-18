@@ -56,6 +56,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     ownerFormData.append("vehiclePhotoFront", data.vehiclePhotoFront[0]);
     ownerFormData.append("vehiclePhotoBack", data.vehiclePhotoBack[0]);
     ownerFormData.append("vehiclePhotoSide", data.vehiclePhotoSide[0]);
+    ownerFormData.append("drivingLiscencePhoto", data.drivingLiscencePhoto[0]);
     ownerFormData.append("hostelBlock", data.hostelBlock);
     ownerFormData.append("hostelRoom", data.hostelRoom);
     ownerFormData.append("vehicleName", data.vehicleName);
@@ -209,6 +210,23 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                 </p>
               )}
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="Driving Liscence">Driving Liscence</Label>
+              <span className="text-xs mx-1 text-red-500">200KB</span>
+              <Input
+                disabled={isPending}
+                {...register("drivingLiscencePhoto")}
+                id="drivingLiscence"
+                type="file"
+                placeholder="319"
+              />
+              {errors.drivingLiscencePhoto && (
+                <p className="text-red-500 text-sm">
+                  {`${errors.drivingLiscencePhoto.message}`}
+                </p>
+              )}
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="hostelBlock">Hostel Block</Label>
               <Input
