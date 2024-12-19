@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { MdIosShare } from "react-icons/md";
-import RentalModal from "../rentalmodal";
-import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import RentalModal from "./rentalmodal";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
