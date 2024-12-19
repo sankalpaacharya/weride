@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getVehicleData } from "@/lib/queries";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 
 type ParamsProps = {
   params: { id: string };
@@ -110,7 +112,11 @@ const OwnerInfo: React.FC<OwnerProps> = ({ name }) => (
 
 const BikePage: React.FC<ParamsProps> = async ({ params }) => {
   const { id: bikeId } = params;
-  const vehicleDetails = await getVehicleData(bikeId);
+  const vehicleResponse = await getVehicleData(bikeId);
+  if (vehicleResponse.error || !vehicleResponse.data) {
+    redirect("/");
+  }
+  const vehicleDetails = vehicleResponse.data;
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="max-w-[100rem] w-full">
