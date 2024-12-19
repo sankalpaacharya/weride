@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { MdIosShare } from "react-icons/md";
 import RentalModal from "../rentalmodal";

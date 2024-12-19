@@ -6,7 +6,6 @@ import { FaRegUserCircle, FaGasPump, FaStar } from "react-icons/fa";
 import { MdDirectionsBike, MdSpeed, MdLocationOn } from "react-icons/md";
 import { BiTime } from "react-icons/bi";
 import Link from "next/link";
-import { date } from "zod";
 
 interface RentalCardProps {
   imageName: string;
@@ -44,7 +43,7 @@ export default function RentalCard({
 
   return (
     <Link
-      href={"/product/1"}
+      href={`product/${bikeDetails.id}`}
       className="transition-all duration-300 hover:shadow-xl w-full"
     >
       <Card className="h-full">

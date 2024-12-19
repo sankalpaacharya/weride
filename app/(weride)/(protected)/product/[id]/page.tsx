@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import BikeGallery from "@/components/bikegallery";
 import CheckoutCard from "@/components/checkoutcard";
@@ -8,6 +7,7 @@ import { PiMedalLight } from "react-icons/pi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { getVehicleData } from "@/lib/queries";
 
 type ParamsProps = {
   params: { id: string };
@@ -18,6 +18,13 @@ type FAQItem = {
   answer: string;
 };
 
+type BikeProps = {
+  title: string;
+  description: string;
+};
+type OwnerProps = {
+  name: string;
+};
 const faqData: FAQItem[] = [
   {
     question: "How long can I rent a bike?",
@@ -41,10 +48,10 @@ const faqData: FAQItem[] = [
   },
 ];
 
-const BikeInfo: React.FC = () => (
+const BikeInfo: React.FC<BikeProps> = ({ title, description }) => (
   <div className="space-y-2 mt-10">
     <h2 className="text-2xl font-medium">
-      Honda Activa 125 |{" "}
+      {title}|{" "}
       <span className="text-lg text-gray-800">
         Endurace AL 2XS Ultegra Schaltung • Road Bike
       </span>
@@ -59,7 +66,7 @@ const BikeInfo: React.FC = () => (
           <FaStar className="text-yellow-400" />
           4.8
         </p>
-        <p className="underline">12 Reviews</p>
+        <p className="underline">0 Reviews</p>
       </div>
     </div>
     <p className="md:w-3/5">
@@ -71,14 +78,14 @@ const BikeInfo: React.FC = () => (
   </div>
 );
 
-const OwnerInfo: React.FC = () => (
+const OwnerInfo: React.FC<OwnerProps> = ({ name }) => (
   <div className="md:mt-20 mt-10 flex gap-4">
     <Avatar className="md:w-[5rem] w-[3rem] md:h-[5rem] h-[3rem]">
       <AvatarImage width={200} src="https://github.com/shadcn.png" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
     <div>
-      <h3 className="md:text-xl font-medium">Vinit Thakkar</h3>
+      <h3 className="md:text-xl font-medium">{name}</h3>
       <p className="text-sm text-gray-600">Response time &lt;10mins</p>
       <div className="mt-2 flex flex-col md:text-lg font-medium">
         <div className="flex md:flex-row flex-col md:space-x-3">
@@ -101,19 +108,22 @@ const OwnerInfo: React.FC = () => (
   </div>
 );
 
-const BikePage: React.FC<ParamsProps> = ({ params }) => {
+const BikePage: React.FC<ParamsProps> = async ({ params }) => {
   const { id: bikeId } = params;
-  console.log(bikeId);
+  const vehicleDetails = await getVehicleData(bikeId);
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="max-w-[100rem] w-full">
         <div className="flex flex-col lg:flex-row gap-10">
-          <BikeGallery />
+          <BikeGallery bikeId={bikeId} />
           <CheckoutCard />
         </div>
         <div className="px-6">
-          <BikeInfo />
-          <OwnerInfo />
+          <BikeInfo
+            title={vehicleDetails.name}
+            description={vehicleDetails.description}
+          />
+          <OwnerInfo name={vehicleDetails.owner_name} />
         </div>
 
         <div className="px-6 md:mt-20 mt-20">

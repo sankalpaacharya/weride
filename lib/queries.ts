@@ -15,3 +15,13 @@ export async function getVehicles(limit: number = 10) {
   }
   return vechilesData || [];
 }
+
+export async function getVehicleData(bikeId:string) {
+  const supabase = await createClient()
+  const {data,error} = await supabase.from("vehicle").select("*").eq("id",bikeId)
+  if(error){
+    return {error:error.message}
+  }
+  return data[0]
+  
+}

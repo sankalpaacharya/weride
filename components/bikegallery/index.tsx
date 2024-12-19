@@ -8,7 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export default function BikeGallery() {
+export default function BikeGallery({ bikeId }: { bikeId: string }) {
   const [activeImage, setActiveImage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,11 +20,13 @@ export default function BikeGallery() {
     window.addEventListener("resize", checkIsMobile);
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
-
+  const baseUrl =
+    "https://cxlnoycrdkdkdezryaph.supabase.co/storage/v1/object/public/Vehicle/" +
+    bikeId;
   const images = [
-    "/images/bike3.webp",
-    "/images/bike1.jpeg",
-    "/images/bike3.webp",
+    baseUrl + "_front.png",
+    baseUrl + "_side.png",
+    baseUrl + "_back.png",
   ];
 
   const handleThumbnailClick = (index: number) => {

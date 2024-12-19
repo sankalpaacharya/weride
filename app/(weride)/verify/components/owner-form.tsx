@@ -71,7 +71,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
       return;
     }
     if (response.success) {
-      toast.error(response.success);
+      toast.success(response.success);
       return;
     }
   };
