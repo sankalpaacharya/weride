@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "pnpm dlx husky install"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

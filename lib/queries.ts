@@ -13,41 +13,41 @@ type Vehicle = {
   availability: string;
 };
 
-type VehiclesResponse ={
-  data: Vehicle[]  | [];
+type VehiclesResponse = {
+  data: Vehicle[] | [];
   error: string | null;
-}
-type VehicleResponse ={
-  data:  Vehicle | null;
+};
+type VehicleResponse = {
+  data: Vehicle | null;
   error: string | null;
-}
+};
 
-
-
-export async function getVehicles(limit: number = 10):Promise<VehiclesResponse> {
+export async function getVehicles(
+  limit: number = 10,
+): Promise<VehiclesResponse> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("vehicle")
     .select("*,users(status)")
     .limit(limit);
 
-  const vechilesData = data?.filter(
-    (vehicle) => vehicle.users.status != "pending",
-  ) || []
- if(error) {
-  return {data:[],error:error.message}
- }
-  return {data:vechilesData, error:null} 
+  const vechilesData =
+    data?.filter((vehicle) => vehicle.users.status != "pending") || [];
+  if (error) {
+    return { data: [], error: error.message };
+  }
+  return { data: vechilesData, error: null };
 }
 
-export async function getVehicleData(bikeId: string):Promise<VehicleResponse> {
+export async function getVehicleData(bikeId: string): Promise<VehicleResponse> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("vehicle")
     .select("*")
-    .eq("id", bikeId).single();
+    .eq("id", bikeId)
+    .single();
   if (error) {
-    return { data:null, error: error.message };
+    return { data: null, error: error.message };
   }
-  return {data,error:null} 
+  return { data, error: null };
 }

@@ -6,7 +6,7 @@ WeRide lets college students share rides and wheels, making getting around campu
 
 - Clone the Repo
 - add `.env.local` file
-- Run `npm install`
-- Run `npm run dev`
+- Run `pnpm install`
+- Run `pnpm dev`
 
 ### Made with ❤️
