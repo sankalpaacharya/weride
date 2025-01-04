@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 type Vehicle = {
   id: string;
   created_at: string;
-  owner: string;
+  owner_id: string;
   name: string;
   vehicle_code: string;
   description: string;

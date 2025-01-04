@@ -27,8 +27,11 @@ const HOURLY_RATES = [
 ];
 
 const KILOMETER_OPTIONS = [10, 15, 25, 30, 40];
-
-export default function CheckoutCard() {
+type CheckoutCardProps = {
+  bikeId: string;
+  ownerId: string;
+};
+export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
   const [kiloMeters, setKiloMeters] = useState("10");
   const [hours, setHours] = useState("1");
   const totalPrice = PRICE_PER_KM * parseInt(kiloMeters);
@@ -46,9 +49,10 @@ export default function CheckoutCard() {
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
-    console.log("this is the form data", data);
     data.kilometer = kiloMeters;
     data.hour = hours;
+    data.bikeId = bikeId;
+    data.ownerId = ownerId;
     setFormData(data);
   };
 

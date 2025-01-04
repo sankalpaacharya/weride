@@ -7,6 +7,9 @@ export const checkOutSchema = z.object({
     .string()
     .min(10, "minimum length should be of 10 characters")
     .max(100, "location can't be more than 100 characters"),
+  ownerId:z.string(),
+  bikeId:z.string()
+  
 });
 
 export type TcheckOutSchema = z.infer<typeof checkOutSchema>;

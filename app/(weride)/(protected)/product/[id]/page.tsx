@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getVehicleData } from "@/lib/queries";
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
 
 type ParamsProps = {
   params: { id: string };
@@ -122,7 +121,7 @@ const BikePage: React.FC<ParamsProps> = async ({ params }) => {
       <div className="max-w-[100rem] w-full">
         <div className="flex flex-col lg:flex-row gap-10">
           <BikeGallery bikeId={bikeId} />
-          <CheckoutCard />
+          <CheckoutCard bikeId={bikeId} ownerId={vehicleDetails.owner_id} />
         </div>
         <div className="px-6">
           <BikeInfo

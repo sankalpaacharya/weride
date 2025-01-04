@@ -36,6 +36,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
   };
 
   const submitForm = async (data: TcheckOutSchema | {}) => {
+    // here im checking the data of the submission
     const result = checkOutSchema.safeParse(data);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
