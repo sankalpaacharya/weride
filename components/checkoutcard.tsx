@@ -44,15 +44,12 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
     resolver: zodResolver(checkOutSchema),
     mode: "onChange",
   });
-  console.log(errors);
-
+  console.log("these are the errros", errors);
+  console.log(isValid);
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
-    data.kilometer = kiloMeters;
-    data.hour = hours;
-    data.bikeId = bikeId;
-    data.ownerId = ownerId;
+    console.log("form data is about to be submit");
     setFormData(data);
   };
 
