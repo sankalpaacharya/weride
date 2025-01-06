@@ -4,7 +4,6 @@ import { TloginSchema, loginInSchema } from "@/lib/schemas/logInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import {
-  TrenterIdentitySchema,
   renterIdentitySchema,
 } from "../schemas/renterIdentitySchema";
 
@@ -13,7 +12,6 @@ export async function signupAction(data: TsignInSchema) {
   if (!result.success) {
     return { error: result.error.issues[0].message };
   }
-
   const supabase = await createClient();
   const { confirmPassword, password, ...formData } = data;
   const { data: userData, error } = await supabase.auth.signUp({
@@ -83,15 +81,7 @@ export async function renterFormAction(data: any) {
     return { error: "Your account is in review state" };
   }
 
-  const formData: TrenterIdentitySchema = {
-    hostelBlock: data.get("hostelBlock"),
-    hostelRoom: data.get("hostelRoom"),
-    rollno: data.get("rollno"),
-    collegeIDPhoto: data.get("collegeIDPhoto"),
-    hostelIDPhoto: data.get("hostelIDPhoto"),
-    drivingLicencePhoto: data.get("drivingLicencePhoto"),
-    profilePhoto: data.get("profilePhoto"),
-  };
+  const formData = Object.fromEntries(data);
 
   const result = renterIdentitySchema.safeParse(formData);
   if (!result.success) {
@@ -114,6 +104,3 @@ export async function renterFormAction(data: any) {
   return { error: "Received the message" };
 }
 
-export async function ownerIdentityAction(data: any) {
-  console.log(data);
-}
