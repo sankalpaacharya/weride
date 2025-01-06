@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+
 type Vehicle = {
   id: string;
   created_at: string;
@@ -21,6 +22,8 @@ type VehicleResponse = {
   data: Vehicle | null;
   error: string | null;
 };
+
+
 
 export async function getVehicles(
   limit: number = 10,
@@ -51,3 +54,33 @@ export async function getVehicleData(bikeId: string): Promise<VehicleResponse> {
   }
   return { data, error: null };
 }
+
+export async function uploadImage(userID: string, file: File, bucketName: string) {
+  const supabase = await createClient();
+  const { error } = await supabase.storage
+    .from(bucketName)
+    .upload(`${userID}.png`, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  if (error) {
+    return { error: error.message };
+  }
+  return { success: "Upload successful" };
+}
+
+// -------------------user related queries ---------------- 
+
+
+export async function getUserById(id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", id)
+    .single();
+ 
+  if (error) throw error;
+  return data;
+ }

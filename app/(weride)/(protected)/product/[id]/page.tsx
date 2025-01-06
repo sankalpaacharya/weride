@@ -7,7 +7,7 @@ import { PiMedalLight } from "react-icons/pi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { getVehicleData } from "@/lib/queries";
+import { getVehicleData } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 
 type ParamsProps = {

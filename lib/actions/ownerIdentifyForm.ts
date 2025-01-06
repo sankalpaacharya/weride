@@ -1,25 +1,11 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
-
+import { uploadImage } from "../supabase/queries";
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
 // make a available status  column in vehicle field, check bikecard component
 
-async function uploadImage(userID: string, file: File, fileName: string) {
-  const supabase = await createClient();
-  const { error } = await supabase.storage
-    .from(fileName)
-    .upload(`${userID}.png`, file, {
-      cacheControl: "3600",
-      upsert: true,
-    });
-
-  if (error) {
-    return { error: error.message };
-  }
-  return { success: "Upload successful" };
-}
 //  if there is error at any state or any point whole things should throw error,
 //  this is bringing the inconsistency in the database
 // make an rpc for the transaction, which is not needed at the development time we will figure this later on

@@ -144,7 +144,7 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
             </Link>
             .
           </p>
-          <RentalModal formData={formData}>
+          <RentalModal formData={{ ...formData, bikeId, ownerId }}>
             <Button disabled={!isValid} className="w-full mt-2" type="submit">
               Rent Now
             </Button>

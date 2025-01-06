@@ -1,6 +1,6 @@
 import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
-import { getVehicles } from "@/lib/queries";
+import { getVehicles } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 const bikeDetails = {
   name: "Honda Activa 125",
