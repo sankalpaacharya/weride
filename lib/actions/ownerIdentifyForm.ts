@@ -1,7 +1,8 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
-import { uploadImage } from "../supabase/queries";
+import { insertVehicle, uploadImage } from "../supabase/queries";
+import { PostgrestError } from "@supabase/supabase-js";
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
 // make a available status  column in vehicle field, check bikecard component
@@ -10,6 +11,8 @@ import { uploadImage } from "../supabase/queries";
 //  this is bringing the inconsistency in the database
 // make an rpc for the transaction, which is not needed at the development time we will figure this later on
 export async function ownerIdentityAction(formData: any) {
+try {
+  
   const supabase = await createClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();
   if (authError) {
@@ -27,23 +30,7 @@ export async function ownerIdentityAction(formData: any) {
   if (userData[0].status === "pending" || userData[0].status === "verified") {
     return { error: "Your account is in review state" };
   }
-  // Object.fromentries(formData) can be done instead of creating this data object, will reduce the noloc
-  const data = {
-    collegeIDPhoto: formData.get("collegeIDPhoto"),
-    hostelIDPhoto: formData.get("hostelIDPhoto"),
-    profilePhoto: formData.get("profilePhoto"),
-    vehiclePhotoFront: formData.get("vehiclePhotoFront"),
-    vehiclePhotoSide: formData.get("vehiclePhotoSide"),
-    vehiclePhotoBack: formData.get("vehiclePhotoBack"),
-    QRPhoto: formData.get("QRPhoto"),
-    hostelBlock: formData.get("hostelBlock"),
-    hostelRoom: formData.get("hostelRoom"),
-    vehicleName: formData.get("vehicleName"),
-    vehicleDescription: formData.get("vehicleDescription"),
-    messageToRenter: formData.get("messageToRenter"),
-    fuelType: formData.get("fuelType"),
-    rollno: formData.get("rollno"),
-  };
+  const data = Object.fromEntries(formData);
 
   const result = ownerIdentitySchema.safeParse(data);
   if (!result.success) {
@@ -58,9 +45,8 @@ export async function ownerIdentityAction(formData: any) {
       status: "pending",
     })
     .eq("id", authData?.user?.id);
-  const { data: vehicleData, error } = await supabase
-    .from("vehicle")
-    .insert({
+
+  const vehicleData = await insertVehicle({
       name: data.vehicleName,
       description: data.vehicleDescription,
       fuel_type: data.fuelType,
@@ -68,10 +54,6 @@ export async function ownerIdentityAction(formData: any) {
       owner: authData.user.id,
       owner_name: userData[0].name,
     })
-    .select();
-  if (error) {
-    return { error: "error in uploading the vehicle information" };
-  }
   if (authData?.user?.id && vehicleData) {
     const uploadPromises = [
       uploadImage(authData.user.id, data.collegeIDPhoto, "CollegeID"),
@@ -105,4 +87,8 @@ export async function ownerIdentityAction(formData: any) {
   return {
     success: "Your data has been submitted please wait for the verification",
   };
+} catch (error) {
+  console.log(error)
+  return {error:"couldn't add the data,:(("}
+}
 }

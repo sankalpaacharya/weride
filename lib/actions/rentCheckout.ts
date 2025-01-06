@@ -8,7 +8,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log("id of owner and bike",data.ownerId,data.bikeId)
+  console.log("id of owner and bike", data.ownerId, data.bikeId);
   const insertData = {
     renter_id: user?.id,
     owner_id: data.ownerId,
@@ -17,17 +17,19 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     rent_hour: data.hour,
     estimated_km: data.kilometer,
   };
-  const { error } = await supabase
-    .from("order")
-    .insert(insertData)
-    .select();
-  
-  if(error){
-    return {error:"can't data add to the orders table"}
+  const { error } = await supabase.from("order").insert(insertData).select();
+
+  if (error) {
+    return { error: "can't data add to the orders table" };
   }
-  const {error:updateError} = await supabase.from("vehicle").update({availability:"Booked"}).eq("id",data.bikeId)
-  if(updateError){
-    return {error:"There is some error while updating the vehicle availability"}
+  const { error: updateError } = await supabase
+    .from("vehicle")
+    .update({ availability: "Booked" })
+    .eq("id", data.bikeId);
+  if (updateError) {
+    return {
+      error: "There is some error while updating the vehicle availability",
+    };
   }
   // before even putting code to database i have to check if the vechile is available or not but for now im just adding
   //  data

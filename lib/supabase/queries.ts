@@ -23,6 +23,24 @@ type VehicleResponse = {
   error: string | null;
 };
 
+type VehicleInsert = {
+    name:string
+    description:string
+    fuel_type:string 
+    message:string 
+    owner:string 
+    owner_name:string
+}
+
+export async function insertVehicle(vehicleData:VehicleInsert){
+  const supabase = await createClient()
+  const {data,error} =  await supabase
+    .from("vehicle")
+    .insert(vehicleData)
+    .select();
+    if(error) throw error
+    return data
+}
 
 
 export async function getVehicles(
@@ -55,7 +73,13 @@ export async function getVehicleData(bikeId: string): Promise<VehicleResponse> {
   return { data, error: null };
 }
 
-export async function uploadImage(userID: string, file: File, bucketName: string) {
+
+// ------------- upload images --------- 
+export async function uploadImage(
+  userID: string,
+  file: File,
+  bucketName: string,
+) {
   const supabase = await createClient();
   const { error } = await supabase.storage
     .from(bucketName)
@@ -70,8 +94,7 @@ export async function uploadImage(userID: string, file: File, bucketName: string
   return { success: "Upload successful" };
 }
 
-// -------------------user related queries ---------------- 
-
+// -------------------user related queries ----------------
 
 export async function getUserById(id: string) {
   const supabase = await createClient();
@@ -80,7 +103,15 @@ export async function getUserById(id: string) {
     .select("*")
     .eq("id", id)
     .single();
- 
   if (error) throw error;
   return data;
- }
+}
+
+export async function isLoggedIn():Promise<boolean>{
+  const supabase = await createClient()
+  const {error} = await supabase.auth.getUser()
+  if(error){
+    return false
+  }
+  return true
+}
