@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { isLoggedIn } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 
 export default async function Layout({
@@ -6,12 +6,8 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
-  if (user) {
+  const loginStatus = await isLoggedIn();
+  if (loginStatus) {
     redirect("/");
   }
   return <>{children}</>;

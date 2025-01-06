@@ -24,24 +24,23 @@ type VehicleResponse = {
 };
 
 type VehicleInsert = {
-    name:string
-    description:string
-    fuel_type:string 
-    message:string 
-    owner:string 
-    owner_name:string
-}
+  name: string;
+  description: string;
+  fuel_type: string;
+  message: string;
+  owner: string;
+  owner_name: string;
+};
 
-export async function insertVehicle(vehicleData:VehicleInsert){
-  const supabase = await createClient()
-  const {data,error} =  await supabase
+export async function insertVehicle(vehicleData: VehicleInsert) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
     .from("vehicle")
     .insert(vehicleData)
     .select();
-    if(error) throw error
-    return data
+  if (error) throw error;
+  return data;
 }
-
 
 export async function getVehicles(
   limit: number = 10,
@@ -73,8 +72,7 @@ export async function getVehicleData(bikeId: string): Promise<VehicleResponse> {
   return { data, error: null };
 }
 
-
-// ------------- upload images --------- 
+// ------------- upload images ---------
 export async function uploadImage(
   userID: string,
   file: File,
@@ -107,11 +105,11 @@ export async function getUserById(id: string) {
   return data;
 }
 
-export async function isLoggedIn():Promise<boolean>{
-  const supabase = await createClient()
-  const {error} = await supabase.auth.getUser()
-  if(error){
-    return false
+export async function isLoggedIn(): Promise<boolean> {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.getUser();
+  if (error) {
+    return false;
   }
-  return true
+  return true;
 }
