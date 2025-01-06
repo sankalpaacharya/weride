@@ -53,6 +53,6 @@ export async function renterFormAction(data: any) {
     return { success: "Your information has been added!" };
   } catch (error) {
     console.log("error");
-    return {error:"some error has occured adding the data"}
+    return { error: "some error has occured adding the data" };
   }
 }

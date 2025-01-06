@@ -3,9 +3,7 @@ import { TsignInSchema, signInSchema } from "@/lib/schemas/signInSchema";
 import { TloginSchema, loginInSchema } from "@/lib/schemas/logInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import {
-  renterIdentitySchema,
-} from "../schemas/renterIdentitySchema";
+import { renterIdentitySchema } from "../schemas/renterIdentitySchema";
 
 export async function signupAction(data: TsignInSchema) {
   const result = signInSchema.safeParse(data);
@@ -103,4 +101,3 @@ export async function renterFormAction(data: any) {
   }
   return { error: "Received the message" };
 }
-
