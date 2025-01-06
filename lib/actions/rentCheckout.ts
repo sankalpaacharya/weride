@@ -1,14 +1,22 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { TcheckOutSchema, checkOutSchema } from "../schemas/checkOutSchema";
+import { getVehicleStatus, updateVehicleStatus } from "../supabase/queries";
+import { sendDiscordMessage } from "../utils";
 
 export async function rentCheckoutAction(data: TcheckOutSchema) {
-  const result = checkOutSchema.safeParse(data);
+try {
+  const vechileStatus  = await getVehicleStatus(data.bikeId);
+
+  if(vechileStatus==="Booked"){
+    return {error:"This vechile is already booked"}
+  }
+    const result = checkOutSchema.safeParse(data);
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log("id of owner and bike", data.ownerId, data.bikeId);
+
   const insertData = {
     renter_id: user?.id,
     owner_id: data.ownerId,
@@ -22,20 +30,16 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
   if (error) {
     return { error: "can't data add to the orders table" };
   }
-  const { error: updateError } = await supabase
-    .from("vehicle")
-    .update({ availability: "Booked" })
-    .eq("id", data.bikeId);
-  if (updateError) {
-    return {
-      error: "There is some error while updating the vehicle availability",
-    };
-  }
-  // before even putting code to database i have to check if the vechile is available or not but for now im just adding
-  //  data
-  // also get the owner_id here then to ask from the client side which can be of full risk
+  await updateVehicleStatus(data.bikeId,"Booked")
+  await sendDiscordMessage(user?.id || "","your rent has been confirmed") 
   if (!result.success) {
     return { error: result.error.issues[0].message };
   }
   return { success: "your ride is confirmed" };
+
+} catch (error) {
+
+  console.log(error)  
+  return {error:"wouldn't rent a vehicle rn"}  
+}
 }

@@ -72,6 +72,24 @@ export async function getVehicleData(bikeId: string): Promise<VehicleResponse> {
   return { data, error: null };
 }
 
+export async function updateVehicleStatus(bikeId:string,status:string){
+  const supabase = await createClient()
+  const {data,error} = await supabase
+    .from("vehicle")
+    .update({ availability: "Booked" })
+    .eq("id", bikeId);
+
+    if(error) throw error
+    return data
+}
+
+export async function getVehicleStatus(vehicleId:string){
+  const supabase = await createClient()
+  const {data,error} = await supabase.from("vehicle").select("availability").eq("id",vehicleId).single()
+  if(error) throw error
+  return data?.availability
+}
+
 // ------------- upload images ---------
 export async function uploadImage(
   userID: string,
