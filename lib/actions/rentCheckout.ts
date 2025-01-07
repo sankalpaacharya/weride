@@ -30,10 +30,10 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     if (error) {
       return { error: "can't data add to the orders table" };
     }
-    await updateVehicleStatus(data.bikeId, "Booked");
+    const vechileData = await updateVehicleStatus(data.bikeId, "Booked")
     await sendDiscordMessage(
       user?.id || "",
-      discordMessageMaker("Sankalpa", data.location),
+      discordMessageMaker("Sankalpa", data.location,vechileData?.name),
     );
     if (!result.success) {
       return { error: result.error.issues[0].message };

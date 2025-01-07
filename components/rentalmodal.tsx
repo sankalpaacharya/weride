@@ -204,7 +204,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
               </span>
             </DialogDescription>
             <DialogClose className="flex justify-end mt-5">
-              <Button onClick={() => onModalChange(false)}>Close</Button>
+              <Button>Close</Button>
             </DialogClose>
           </>
         )}

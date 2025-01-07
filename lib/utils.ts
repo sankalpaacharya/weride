@@ -20,21 +20,25 @@ export async function sendDiscordMessage(userId: string, message: string) {
     });
   }
 }
+export function getFormatedDate(){
+  const date = new Date()
+  return `${date.toISOString().split('T')[0]}, ${date.toLocaleTimeString()}`
+}
 
-export function discordMessageMaker(ownerName: string, location: string) {
+export function discordMessageMaker(ownerName: string, location: string,vehicle_name:string) {
   return `
   🎉 Ride Confirmed! 🚗💨
 
 📌 Details of the Ride:
 
-    Vehicle Title: 🚙 {vehicle_title}
-    Vehicle Name: 🔖 {vehicle_name}
+    Vehicle Name: 🚙 ${vehicle_name}
     Owner Name: 🧑‍🔧 ${ownerName}
-    Pickup Location: 📍 {pickup_location}
+    Pickup Location: 📍 PDEU
     Drop-off Location: 🎯 ${location}
-    Date & Time: 📅 ${Date.now()}
+    Date & Time: 📅 ${getFormatedDate()}
 
 🤝 Thank you for choosing us!
 Sit back, relax, and enjoy your ride! 🚘✨
   `;
 }
+
