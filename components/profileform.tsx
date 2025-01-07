@@ -4,6 +4,7 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { FaDiscord } from "react-icons/fa";
 type Props = {
   userData: {
     name: string;
@@ -96,7 +97,16 @@ export default function ProfileForm({ userData }: Props) {
             </div>
             <p className="text-sm text-gray-500">Your Room No.</p>
           </div>
-          <Button>Update Profile</Button>
+
+          <div className="space-y-2">
+            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+              <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
+                <FaDiscord size={20} />
+                Connect to Discord
+              </Button>
+            </div>
+          </div>
+          <Button className="">Update Profile</Button>
         </div>
       </div>
     </div>

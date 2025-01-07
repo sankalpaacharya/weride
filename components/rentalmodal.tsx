@@ -49,6 +49,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
       return;
     }
     if (response.success) {
+      toast.success(response.success);
       setIsLoading(false);
       return;
     }
