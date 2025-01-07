@@ -46,14 +46,12 @@ Sit back, relax, and enjoy your ride! 🚘✨
   `;
 }
 
-
 type NotificationTextProps = {
   renterName: string;
   location: string;
   hours: string;
   kilometers: string;
 };
-
 
 export const discordOwnerRentRequest = ({
   renterName,
@@ -72,4 +70,4 @@ ${renterName} has requested to rent your vehicle
 Please review and respond to this rental request within 30 minutes. The request will expire after this time.
 
 Thank you for using our service!`;
-}
+};
