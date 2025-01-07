@@ -31,7 +31,10 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
       return { error: "can't data add to the orders table" };
     }
     await updateVehicleStatus(data.bikeId, "Booked");
-    await sendDiscordMessage(user?.id || "",discordMessageMaker("Sankalpa",data.location));
+    await sendDiscordMessage(
+      user?.id || "",
+      discordMessageMaker("Sankalpa", data.location),
+    );
     if (!result.success) {
       return { error: result.error.issues[0].message };
     }

@@ -8,6 +8,7 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -202,9 +203,9 @@ export default function RentalModal({ children, formData }: RentalModal) {
                 Thank you for renting with us. Enjoy your ride!
               </span>
             </DialogDescription>
-            <div className="flex justify-end mt-5">
+            <DialogClose className="flex justify-end mt-5">
               <Button onClick={() => onModalChange(false)}>Close</Button>
-            </div>
+            </DialogClose>
           </>
         )}
       </DialogContent>

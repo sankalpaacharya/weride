@@ -21,7 +21,7 @@ export async function sendDiscordMessage(userId: string, message: string) {
   }
 }
 
-export function discordMessageMaker(ownerName:string,location:string){
+export function discordMessageMaker(ownerName: string, location: string) {
   return `
   🎉 Ride Confirmed! 🚗💨
 
@@ -36,5 +36,5 @@ export function discordMessageMaker(ownerName:string,location:string){
 
 🤝 Thank you for choosing us!
 Sit back, relax, and enjoy your ride! 🚘✨
-  `
+  `;
 }
