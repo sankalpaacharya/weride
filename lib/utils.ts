@@ -20,12 +20,16 @@ export async function sendDiscordMessage(userId: string, message: string) {
     });
   }
 }
-export function getFormatedDate(){
-  const date = new Date()
-  return `${date.toISOString().split('T')[0]}, ${date.toLocaleTimeString()}`
+export function getFormatedDate() {
+  const date = new Date();
+  return `${date.toISOString().split("T")[0]}, ${date.toLocaleTimeString()}`;
 }
 
-export function discordMessageMaker(ownerName: string, location: string,vehicle_name:string) {
+export function discordMessageMaker(
+  ownerName: string,
+  location: string,
+  vehicle_name: string,
+) {
   return `
   🎉 Ride Confirmed! 🚗💨
 
@@ -41,4 +45,3 @@ export function discordMessageMaker(ownerName: string, location: string,vehicle_
 Sit back, relax, and enjoy your ride! 🚘✨
   `;
 }
-

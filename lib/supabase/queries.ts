@@ -77,7 +77,9 @@ export async function updateVehicleStatus(bikeId: string, status: string) {
   const { data, error } = await supabase
     .from("vehicle")
     .update({ availability: "Booked" })
-    .eq("id", bikeId).select().single();
+    .eq("id", bikeId)
+    .select()
+    .single();
 
   if (error) throw error;
   return data;
