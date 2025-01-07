@@ -1,8 +1,8 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { TcheckOutSchema, checkOutSchema } from "../schemas/checkOutSchema";
-import { getVehicleStatus, updateVehicleStatus } from "../supabase/queries";
-import { discordMessageMaker, sendDiscordMessage } from "../utils";
+import { getUserById, getVehicleStatus, updateVehicleStatus } from "../supabase/queries";
+import { discordOwnerRentRequest,discordRenterMessageMaker, sendDiscordMessage } from "../utils";
 
 export async function rentCheckoutAction(data: TcheckOutSchema) {
   try {
@@ -16,7 +16,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-
+    const rentUser = await getUserById(user?.id||"")
     const insertData = {
       renter_id: user?.id,
       owner_id: data.ownerId,
@@ -33,7 +33,11 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     const vechileData = await updateVehicleStatus(data.bikeId, "Booked");
     await sendDiscordMessage(
       user?.id || "",
-      discordMessageMaker("Sankalpa", data.location, vechileData?.name),
+      discordRenterMessageMaker(vechileData.owner_name, data.location, vechileData?.name),
+    );
+    await sendDiscordMessage(
+      vechileData.owner_id || "",
+      discordOwnerRentRequest({renterName:rentUser.name,location:data.location,hours:data.hour,kilometers:data.kilometer}),
     );
     if (!result.success) {
       return { error: result.error.issues[0].message };

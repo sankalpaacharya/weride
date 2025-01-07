@@ -25,7 +25,7 @@ export function getFormatedDate() {
   return `${date.toISOString().split("T")[0]}, ${date.toLocaleTimeString()}`;
 }
 
-export function discordMessageMaker(
+export function discordRenterMessageMaker(
   ownerName: string,
   location: string,
   vehicle_name: string,
@@ -44,4 +44,32 @@ export function discordMessageMaker(
 🤝 Thank you for choosing us!
 Sit back, relax, and enjoy your ride! 🚘✨
   `;
+}
+
+
+type NotificationTextProps = {
+  renterName: string;
+  location: string;
+  hours: string;
+  kilometers: string;
+};
+
+
+export const discordOwnerRentRequest = ({
+  renterName,
+  location,
+  hours,
+  kilometers,
+}: NotificationTextProps) => {
+  return `New Rental Request!
+
+${renterName} has requested to rent your vehicle
+
+📍 Pickup Location: ${location}
+⏰ Duration: ${hours} hour(s)
+🛣️ Distance: ${kilometers} KM
+
+Please review and respond to this rental request within 30 minutes. The request will expire after this time.
+
+Thank you for using our service!`;
 }
