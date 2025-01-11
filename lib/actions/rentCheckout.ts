@@ -14,10 +14,10 @@ import {
 
 export async function rentCheckoutAction(data: TcheckOutSchema) {
   try {
-    const vechileStatus = await getVehicleStatus(data.bikeId);
+    const vehicleStatus = await getVehicleStatus(data.bikeId);
 
-    if (vechileStatus === "Booked") {
-      return { error: "This vechile is already booked" };
+    if (vehicleStatus === "Booked") {
+      return { error: "This vehicle is already booked" };
     }
     const result = checkOutSchema.safeParse(data);
     const supabase = await createClient();
@@ -38,17 +38,17 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     if (error) {
       return { error: "can't data add to the orders table" };
     }
-    const vechileData = await updateVehicleStatus(data.bikeId, "Booked");
+    const vehicleData = await updateVehicleStatus(data.bikeId, "Booked");
     await sendDiscordMessage(
       user?.id || "",
       discordRenterMessageMaker(
-        vechileData.owner_name,
+        vehicleData.owner_name,
         data.location,
-        vechileData?.name,
+        vehicleData?.name,
       ),
     );
     await sendDiscordMessage(
-      vechileData.owner_id || "",
+      vehicleData.owner_id || "",
       discordOwnerRentRequest({
         renterName: rentUser.name,
         location: data.location,

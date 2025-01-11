@@ -195,10 +195,12 @@ export default function RentalModal({ children, formData }: RentalModal) {
           <>
             <DialogTitle>Rental Confirmation</DialogTitle>
             <DialogDescription className="flex flex-col items-center justify-center h-[400px]">
-              <CheckCircle size={64} className="text-green-500 mb-4" />
+              {/* <CheckCircle size={64} className="text-green-500 mb-4" /> */}
+              <Image src="/images/tick_animation.gif" alt="tick" width={100} height={100}/>
               <span className="text-xl font-semibold text-center">
                 Your rental is confirmed!
               </span>
+
               <span className="text-center mt-2">
                 Thank you for renting with us. Enjoy your ride!
               </span>
