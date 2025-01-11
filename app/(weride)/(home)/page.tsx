@@ -47,6 +47,13 @@ export default async function Home() {
                 bikeDetails={vehicle}
               />
             ))}
+            {vehiclesData.data.map((vehicle: Vehicle) => (
+              <RentalCard
+                key={vehicle.id}
+                imageName="bike3.webp"
+                bikeDetails={vehicle}
+              />
+            ))}
           </div>
         </div>
       </div>

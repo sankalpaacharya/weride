@@ -24,7 +24,7 @@ export default function index() {
     window.location.reload();
   };
   return (
-    <div className="pr-3 ">
+    <div className="">
       <DropdownMenu>
         <DropdownMenuTrigger>
           {" "}

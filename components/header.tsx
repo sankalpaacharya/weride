@@ -24,7 +24,7 @@ interface IndexProps {
 }
 const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
   return (
-    <div className="w-full flex md:px-10 px-3 justify-between items-center bg-gray-200 text-gray-800 p-3">
+    <div className="w-full flex md:px-20 px-3 justify-between items-center bg-gray-200 text-gray-800 p-3">
       <Link href={"/"}>
         <div className="cursor-pointer">
           <RiEBikeFill className="text-gray-600" size={25} />

@@ -93,7 +93,7 @@ export async function getVehicleStatus(vehicleId: string) {
     .eq("id", vehicleId)
     .single();
   if (error) throw error;
-  return data?.availability;
+  return data.availability;
 }
 
 // ------------- upload images ---------
@@ -136,4 +136,20 @@ export async function isLoggedIn(): Promise<boolean> {
     return false;
   }
   return true;
+}
+
+export async function getAuthUserId():Promise<string>{
+  const supabase = await createClient()
+  const {data,error} = await supabase.auth.getUser()
+  if(error) throw error
+  return data.user.id
+}
+
+export async function getUserStatus(){
+  const supabase = await createClient()
+  const {data,error} = await supabase.auth.getUser() 
+  if(error) throw error
+  const {data:userData, error:userError} = await supabase.from("users").select("status").eq("id",data.user.id).single()
+  if (userError) throw error
+  return userData.status
 }

@@ -20,6 +20,7 @@ export async function sendDiscordMessage(userId: string, message: string) {
     });
   }
 }
+
 export function getFormatedDate() {
   const date = new Date();
   return `${date.toISOString().split("T")[0]}, ${date.toLocaleTimeString()}`;
