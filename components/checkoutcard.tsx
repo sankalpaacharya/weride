@@ -8,6 +8,9 @@ import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FaRoad } from "react-icons/fa";
+import { IoTime } from "react-icons/io5";
+import { FaLocationDot } from "react-icons/fa6";
 import {
   Select,
   SelectContent,
@@ -68,7 +71,10 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
         </span>
         <div className="mt-5">
           <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="hours">Hour</Label>
+            <Label htmlFor="kilometers" className="flex items-center gap-1">
+              <IoTime size={13} />
+              Hours
+            </Label>
             <Select onValueChange={(hours) => setHours(hours)}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Hours" />
@@ -85,7 +91,10 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
 
           <div className="mt-5">
             <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="kilometers">Kilometers</Label>
+              <Label htmlFor="kilometers" className="flex items-center gap-1">
+                <FaRoad size={13} />
+                Kilometers
+              </Label>
               <Select onValueChange={(value) => setKiloMeters(value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Kilometers" />
@@ -104,7 +113,10 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
 
         <div className="mt-5">
           <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="location">Location</Label>
+            <Label htmlFor="kilometers" className="flex items-center gap-1">
+              <FaLocationDot size={12} />
+              Location
+            </Label>
             <Input
               type="text"
               id="location"
