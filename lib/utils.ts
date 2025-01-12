@@ -32,6 +32,7 @@ export function discordRenterMessageMaker(
   vehicle_name: string,
 ) {
   return `
+ \`\`\` 
   🎉 Ride Confirmed! 🚗💨
 
 📌 Details of the Ride:
@@ -44,6 +45,7 @@ export function discordRenterMessageMaker(
 
 🤝 Thank you for choosing us!
 Sit back, relax, and enjoy your ride! 🚘✨
+ \`\`\` 
   `;
 }
 
@@ -60,7 +62,9 @@ export const discordOwnerRentRequest = ({
   hours,
   kilometers,
 }: NotificationTextProps) => {
-  return `New Rental Request!
+  return `
+ \`\`\` 
+  New Rental Request!
 
 ${renterName} has requested to rent your vehicle
 
@@ -70,5 +74,7 @@ ${renterName} has requested to rent your vehicle
 
 Please review and respond to this rental request within 30 minutes. The request will expire after this time.
 
-Thank you for using our service!`;
+Thank you for using our service!
+ \`\`\` 
+`;
 };
