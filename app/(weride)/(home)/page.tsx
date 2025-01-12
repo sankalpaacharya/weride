@@ -39,11 +39,7 @@ export default async function Home() {
             Frequently Booked
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-            {[
-              ...vehiclesData.data,
-              ...vehiclesData.data,
-              ...vehiclesData.data,
-            ].map((vehicle: Vehicle) => (
+            {[...vehiclesData.data].map((vehicle: Vehicle) => (
               <RentalCard
                 key={vehicle.id}
                 imageName="bike3.webp"

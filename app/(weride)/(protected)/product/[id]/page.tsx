@@ -10,8 +10,10 @@ import Image from "next/image";
 import { getVehicleData } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 
-type ParamsProps = {
-  params: { id: string };
+type PageProps = {
+  params: Promise<{
+    id: string;
+  }>;
 };
 
 type FAQItem = {
@@ -23,9 +25,11 @@ type BikeProps = {
   title: string;
   description: string;
 };
+
 type OwnerProps = {
   name: string;
 };
+
 const faqData: FAQItem[] = [
   {
     question: "How long can I rent a bike?",
@@ -109,13 +113,14 @@ const OwnerInfo: React.FC<OwnerProps> = ({ name }) => (
   </div>
 );
 
-const BikePage: React.FC<ParamsProps> = async ({ params }) => {
-  const { id: bikeId } = params;
+async function BikePage({ params }: PageProps) {
+  const { id: bikeId } = await params;
   const vehicleResponse = await getVehicleData(bikeId);
   if (vehicleResponse.error || !vehicleResponse.data) {
     redirect("/");
   }
   const vehicleDetails = vehicleResponse.data;
+
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="max-w-[100rem] w-full">
@@ -157,6 +162,6 @@ const BikePage: React.FC<ParamsProps> = async ({ params }) => {
       </div>
     </div>
   );
-};
+}
 
 export default BikePage;
