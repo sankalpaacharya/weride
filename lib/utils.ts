@@ -1,7 +1,7 @@
 import { DISCORD_URL } from "@/utils/constants";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { format, toDate } from 'date-fns-tz';
+import { format, toDate } from "date-fns-tz";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,10 +23,10 @@ export async function sendDiscordMessage(userId: string, message: string) {
 }
 
 export function getFormatedDate() {
-  const indiaTimezone = 'Asia/Kolkata';
+  const indiaTimezone = "Asia/Kolkata";
   const now = new Date();
   const zonedDate = toDate(now, { timeZone: indiaTimezone });
-  return `${format(zonedDate, 'yyyy-MM-dd')}, ${format(zonedDate, 'hh:mm:ss a', { timeZone: indiaTimezone })}`;
+  return `${format(zonedDate, "yyyy-MM-dd")}, ${format(zonedDate, "hh:mm:ss a", { timeZone: indiaTimezone })}`;
 }
 
 export function discordRenterMessageMaker(

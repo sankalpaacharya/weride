@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function page({ params: { id } }: { params: { id: string } }) {
-  return <div>{id}</div>;
+export default function page() {
+  return <div>hello</div>;
 }
