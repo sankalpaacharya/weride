@@ -55,7 +55,7 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
   };
 
   return (
-    <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 px-5 rounded-xl sticky top-0 h-fit">
+    <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 rounded-xl sticky top-0 h-fit">
       <form onSubmit={handleSubmit((data) => submitForm(data))}>
         <div className="space-y-1">
           <h2 className="text-main text-2xl font-medium">

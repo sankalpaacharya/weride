@@ -128,7 +128,7 @@ async function BikePage({ params }: PageProps) {
           <BikeGallery bikeId={bikeId} />
           <CheckoutCard bikeId={bikeId} ownerId={vehicleDetails.owner_id} />
         </div>
-        <div className="px-6">
+        <div className="">
           <BikeInfo
             title={vehicleDetails.name}
             description={vehicleDetails.description}
@@ -136,7 +136,7 @@ async function BikePage({ params }: PageProps) {
           <OwnerInfo name={vehicleDetails.owner_name} />
         </div>
 
-        <div className="px-6 md:mt-20 mt-20">
+        <div className="md:mt-20 mt-20">
           <h2 className="text-2xl font-semibold">Full address of booking</h2>
           <p className="text-sm">Pdeu High Rise Hostel</p>
           <Image
@@ -147,8 +147,7 @@ async function BikePage({ params }: PageProps) {
             className="rounded-lg mt-5 w-full h-[10rem] md:h-fit object-cover border shadow"
           />
         </div>
-
-        <div className="px-6 mt-20 space-y-5">
+        <div className="mt-20 space-y-5">
           <h2 className="text-2xl font-semibold">Good to Know</h2>
           <div className="grid md:text-base text-sm md:grid-cols-2 md:gap-10 gap-5  grid-rows-3">
             {faqData.map((faq, index) => (
