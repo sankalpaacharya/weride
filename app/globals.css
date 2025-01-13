@@ -135,6 +135,6 @@ blockquote {
   border: 2px solid red;
 }
 
-.container{
+.container {
   @apply max-w-[1600px] mx-auto;
 }

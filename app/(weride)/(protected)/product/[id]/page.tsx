@@ -123,7 +123,7 @@ async function BikePage({ params }: PageProps) {
 
   return (
     <div className="flex justify-center min-h-screen mt-5">
-      <div className="max-w-[100rem] w-full">
+      <div className="container">
         <div className="flex flex-col lg:flex-row gap-10">
           <BikeGallery bikeId={bikeId} />
           <CheckoutCard bikeId={bikeId} ownerId={vehicleDetails.owner_id} />

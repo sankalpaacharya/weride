@@ -34,7 +34,7 @@ export default function BikeGallery({ bikeId }: { bikeId: string }) {
   };
 
   return (
-    <div className="w-[80%] md:w-full max-w-5xl mx-auto px-4">
+    <div className="w-[80%] md:w-full max-w-5xl mx-auto">
       {isMobile ? (
         <Carousel className="w-full">
           <CarouselContent>

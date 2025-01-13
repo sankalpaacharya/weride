@@ -6,7 +6,7 @@ type PageProps = {
   }>;
 };
 
-async function page({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
   const { id } = await params;
-  return <div>hello</div>;
+  return <div>{id}</div>;
 }
