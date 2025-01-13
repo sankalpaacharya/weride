@@ -32,6 +32,10 @@ type VehicleInsert = {
   owner_name: string;
 };
 
+// in function in this file im passing arguments like an class object
+// function(this,this,this)
+// change it to function({this,this,this}) will be easy to work with
+
 export async function insertVehicle(vehicleData: VehicleInsert) {
   const supabase = await createClient();
   const { data, error } = await supabase

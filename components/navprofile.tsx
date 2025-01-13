@@ -10,52 +10,62 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FaRegUser } from "react-icons/fa";
-import { RiEBikeFill } from "react-icons/ri";
+import { RiBikeFill } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
-
 import { MdLogout } from "react-icons/md";
+import { ChevronRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 
-export default function index() {
+export default function NavProfile() {
   const logOutUser = async () => {
     const supabase = await createClient();
     await supabase.auth.signOut();
     window.location.reload();
   };
+
+  const NavLinks = [
+    {
+      name: "Profile",
+      icon: FaRegUser,
+      href: "/settings/profile",
+    },
+    {
+      name: "Vehicle",
+      icon: RiBikeFill,
+      href: "/vechile",
+    },
+    {
+      name: "History",
+      icon: FaHistory,
+      href: "/rental/requests",
+    },
+  ];
+
   return (
-    <div className="">
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          {" "}
-          <Avatar>
-            <AvatarImage src="https://github.com/randompost12.png" />
-            <AvatarFallback>WR</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <Link href={"/settings/profile"}>
-            <DropdownMenuItem className="flex gap-2 items-center">
-              <FaRegUser className="mr-2 h-4 w-4" />{" "}
-              <span className="">Profile</span>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar>
+          <AvatarImage src="https://github.com/randompost12.png" />
+          <AvatarFallback>WR</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" alignOffset={12}>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {NavLinks.map((link) => (
+          <Link key={link.href} href={link.href}>
+            <DropdownMenuItem className="flex gap-2 items-center py-3">
+              <link.icon /> <span className="">{link.name}</span>
+              <ChevronRight className="ml-auto" size={16} />
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem className="flex gap-2 items-center">
-            <RiEBikeFill className="mr-2 h-4 w-4" />{" "}
-            <span className="">Vehicle</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className="flex gap-2 items-center">
-            <FaHistory className="mr-2 h-4 w-4" />{" "}
-            <span className="">History</span>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={logOutUser} className="flex gap-2">
-            <MdLogout /> Logout
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+        ))}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={logOutUser} className="flex gap-2 py-3">
+          <MdLogout /> Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

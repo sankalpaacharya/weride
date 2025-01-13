@@ -47,8 +47,6 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
     resolver: zodResolver(checkOutSchema),
     mode: "onChange",
   });
-  console.log("these are the errros", errors);
-  console.log(isValid);
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
