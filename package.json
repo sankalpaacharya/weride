@@ -2,6 +2,11 @@
   "name": "weride",
   "version": "0.1.0",
   "private": true,
+  "pnpm": {
+    "overrides": {
+      "ajv":"8.17.1"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",

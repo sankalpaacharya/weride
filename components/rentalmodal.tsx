@@ -14,7 +14,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { CheckCircle } from "lucide-react";
 import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 import { rentCheckoutAction } from "@/lib/actions/rentCheckout";
 
@@ -22,7 +21,6 @@ interface RentalModal {
   children: ReactNode;
   formData: TcheckOutSchema | {};
 }
-
 export default function RentalModal({ children, formData }: RentalModal) {
   const [selectedTab, setSelectedTab] = useState("terms");
   const [isTosAccepted, setIsTosAccepted] = useState(false);
@@ -181,6 +179,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
               <div className="h-[400px] flex flex-col items-center justify-center">
                 <Image
                   src="/images/animation.gif"
+                  unoptimized
                   className="mt-10 h-[20rem]"
                   alt="Loading animation"
                   width={320}
