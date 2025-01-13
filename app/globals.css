@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -135,7 +134,7 @@ blockquote {
 .mark {
   border: 2px solid red;
 }
-/* 
-.cardshadow{
-  box-shadow: 0 0 20px #00000029;
-} */
+
+.container{
+  @apply max-w-[1600px] mx-auto;
+}

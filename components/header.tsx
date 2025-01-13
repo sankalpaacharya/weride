@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from "next/link";
 import Profile from "@/components/navprofile";
+import { getUserStatus } from "@/lib/supabase/queries";
 
 interface MenuItemProps {
   href: string;
@@ -22,22 +23,25 @@ const MenuItem: React.FC<MenuItemProps> = ({ href, icon: Icon, label }) => (
 interface IndexProps {
   isAuthenticated: boolean;
 }
-const Index: React.FC<IndexProps> = ({ isAuthenticated }) => {
+const Index: React.FC<IndexProps> = async ({ isAuthenticated }) => {
+  const userStatus = await getUserStatus();
   return (
-    <div className="w-full flex md:px-20 px-3 justify-between items-center bg-gray-200 text-gray-800 p-3">
-      <Link href={"/"}>
-        <div className="cursor-pointer">
-          <RiEBikeFill className="text-gray-600" size={25} />
+    <div className="w-full bg-gray-200 text-gray-800 py-3 md:px-3 px-0">
+      <div className="container flex justify-between items-center">
+        <Link href={"/"}>
+          <div className="cursor-pointer">
+            <RiEBikeFill className="text-gray-600" size={25} />
+          </div>
+        </Link>
+        <div className="flex gap-5 items-center">
+          <MenuItem href="/" icon={FaHome} label="Home" />
+          <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
+          {isAuthenticated ? (
+            <Profile></Profile>
+          ) : (
+            <MenuItem href="/login" icon={FaRegUser} label="Account" />
+          )}
         </div>
-      </Link>
-      <div className="flex gap-5 items-center">
-        <MenuItem href="/" icon={FaHome} label="Home" />
-        <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
-        {isAuthenticated ? (
-          <Profile></Profile>
-        ) : (
-          <MenuItem href="/login" icon={FaRegUser} label="Account" />
-        )}
       </div>
     </div>
   );

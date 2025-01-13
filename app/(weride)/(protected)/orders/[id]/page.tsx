@@ -1,5 +1,12 @@
 import React from "react";
 
-export default function page() {
+type PageProps = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
+async function page({ params }: PageProps) {
+  const { id } = await params;
   return <div>hello</div>;
 }

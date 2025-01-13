@@ -31,17 +31,21 @@ export default async function Home() {
   const vehiclesData = await getVehicles();
 
   return (
-    <main className="overflow-hidden relative w-full">
+    <div className="overflow-hidden relative w-full">
       <FilterBar />
-      <div className="flex flex-col mt-10">
-        <div className="w-full px-5 md:px-20">
+      <div className="flex flex-col mt-10 container">
+        <div className="w-full">
           <h2 className="font-semibold text-xl text-gray-800">
             Frequently Booked
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-            {[...vehiclesData.data].map((vehicle: Vehicle) => (
+            {[
+              ...vehiclesData.data,
+              ...vehiclesData.data,
+              ...vehiclesData.data,
+            ].map((vehicle: Vehicle, index) => (
               <RentalCard
-                key={vehicle.id}
+                key={index}
                 imageName="bike3.webp"
                 bikeDetails={vehicle}
               />
@@ -49,6 +53,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
