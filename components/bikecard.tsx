@@ -43,7 +43,7 @@ export default function RentalCard({
 
   return (
     <Link
-      href={`product/${bikeDetails.id}`}
+      href={`vehicle/${bikeDetails.id}`}
       className="transition-all duration-300 hover:shadow-xl w-full"
     >
       <Card className="h-full">

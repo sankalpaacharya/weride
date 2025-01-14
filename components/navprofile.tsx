@@ -13,10 +13,10 @@ import { FaRegUser } from "react-icons/fa";
 import { RiBikeFill } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Hand } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
-
+import { FaHandshake } from "react-icons/fa6";
 export default function NavProfile() {
   const logOutUser = async () => {
     const supabase = await createClient();
@@ -39,6 +39,11 @@ export default function NavProfile() {
       name: "History",
       icon: FaHistory,
       href: "/rental/requests",
+    },
+    {
+      name: "Request",
+      icon: FaHandshake,
+      href: "/rental/request",
     },
   ];
 

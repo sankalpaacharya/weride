@@ -1,5 +1,4 @@
 import { getUserStatus, isLoggedIn } from "@/lib/supabase/queries";
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
 export default async function Layout({
