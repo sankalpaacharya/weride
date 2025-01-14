@@ -24,7 +24,6 @@ interface IndexProps {
   isAuthenticated: boolean;
 }
 const Index: React.FC<IndexProps> = async ({ isAuthenticated }) => {
-  const userStatus = await getUserStatus();
   return (
     <div className="w-full bg-gray-200 text-gray-800 py-3 md:px-3 px-0">
       <div className="container flex justify-between items-center">
