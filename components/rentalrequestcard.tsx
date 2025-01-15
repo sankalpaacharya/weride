@@ -2,18 +2,31 @@
 import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { MapPin, Navigation, AlertTriangle, Timer } from "lucide-react";
 import Image from "next/image";
 import scooter from "@/public/images/scooter.png";
 import { useEffect } from "react";
 
-export default function RentalRequestCard() {
-  const dummyProgress = 20;
-  const dummyStartTime = 20;
-  const [startTime, setStartTime] = useState(30 * 60);
+const ProgressBar = ({ timeleft }: { timeleft: number }) => {
+  return (
+    <div className="w-full bg-gray-200 rounded-full h-1.5">
+      <div
+        className="bg-purple-600 h-1.5 rounded-full transition-all duration-1000"
+        style={{ width: `${(timeleft / (30 * 60)) * 100}%` }}
+      />
+    </div>
+  );
+};
 
-  useEffect(() => {}, []);
+export default function RentalRequestCard() {
+  const [timeLeft, setTimeLeft] = useState(30 * 60);
+
+  useEffect(() => {
+    const requestTimer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+    return () => clearTimeout(requestTimer);
+  }, [timeLeft]);
 
   return (
     <Card className="max-w-md mx-auto bg-white shadow-lg">
@@ -23,17 +36,23 @@ export default function RentalRequestCard() {
             <div className="flex items-center gap-2">
               <p className="font-mono font-bold text-lg text-gray-700 flex space-x-2 items-center">
                 <Timer size={20} />
-                <span>29:30</span>
+                <span>
+                  {Math.floor(timeLeft / 60)}:
+                  {String(timeLeft % 60).length < 2 ? "0" : ""}
+                  {timeLeft % 60}
+                </span>
               </p>
             </div>
-            <div className="flex items-center gap-2 text-red-600">
-              <AlertTriangle className="w-4 h-4" />
-              <span className="text-sm font-medium">
-                Response required soon
-              </span>
-            </div>
+            {timeLeft < 600 ? (
+              <div className="flex items-center gap-2 text-red-600">
+                <AlertTriangle className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  Response required soon
+                </span>
+              </div>
+            ) : null}
           </div>
-          <Progress value={30} max={30} />
+          <ProgressBar timeleft={timeLeft} />
         </div>
 
         {/* Header with avatar and name */}
