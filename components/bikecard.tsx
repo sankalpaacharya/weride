@@ -64,7 +64,7 @@ export default function RentalCard({
             </Badge>
           </div>
           <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-            <span className="font-bold text-lg text-primary">
+            <span className="font-bold text-lg text-primary  dark:text-purple-800">
               ₹{bikeDetails.price}
             </span>
             <span className="text-sm text-gray-600">/hr</span>
@@ -75,10 +75,10 @@ export default function RentalCard({
           <div>
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
+                <h2 className="text-xl font-bold text-gray-900  dark:text-white whitespace-nowrap">
                   {bikeDetails.name}
                 </h2>
-                <p className="text-sm text-gray-600">{bikeDetails.name}</p>
+                <p className="text-sm text-gray-600  dark:text-white">{bikeDetails.name}</p>
               </div>
               <div className="flex items-center gap-1">
                 <FaStar className="text-yellow-400" />
@@ -91,21 +91,21 @@ export default function RentalCard({
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-gray-700">
                 <MdLocationOn className="text-primary text-lg" />
-                <span className="text-sm">High Rise</span>
+                <span className="text-sm dark:text-white">High Rise</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <FaGasPump className="text-primary text-lg" />
-                <span className="text-sm">60kmpl</span>
+                <span className="text-sm  dark:text-white">60kmpl</span>
               </div>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-gray-700">
                 <MdSpeed className="text-primary text-lg" />
-                <span className="text-sm">90kmph</span>
+                <span className="text-sm  dark:text-white">90kmph</span>
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <BiTime className="text-primary text-lg" />
-                <span className="text-sm">24/7 Support</span>
+                <span className="text-sm  dark:text-white">24/7 Support</span>
               </div>
             </div>
           </div>
@@ -114,8 +114,8 @@ export default function RentalCard({
             <div className="flex items-center gap-2">
               <FaRegUserCircle className="text-primary" />
               <div>
-                <p className="text-sm font-medium text-gray-900">Owner</p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm font-medium text-gray-900  dark:text-white">Owner</p>
+                <p className="text-sm text-gray-600  dark:text-white">
                   {bikeDetails.owner_name}
                 </p>
               </div>
@@ -123,10 +123,10 @@ export default function RentalCard({
             <div className="flex items-center gap-2">
               <MdDirectionsBike className="text-primary" />
               <div>
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-gray-900  dark:text-white">
                   Last Rented By
                 </p>
-                <p className="text-sm text-gray-600">Sankalpa</p>
+                <p className="text-sm text-gray-600  dark:text-white">Sankalpa</p>
               </div>
             </div>
           </div>

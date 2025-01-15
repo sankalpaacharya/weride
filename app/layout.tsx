@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ui/ThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,8 +27,14 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.className} overflow-x-hidden`}>
-        {children}
-      </body>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>      </body>
     </html>
   );
 }

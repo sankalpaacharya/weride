@@ -4,6 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from "next/link";
 import Profile from "@/components/navprofile";
+import { ModeToggle } from "@/components/ui/modetoggle"; 
 
 interface MenuItemProps {
   href: string;
@@ -32,6 +33,7 @@ const Index: React.FC<IndexProps> = async ({ isAuthenticated }) => {
           </div>
         </Link>
         <div className="flex gap-5 items-center">
+          <ModeToggle/>
           <MenuItem href="/" icon={FaHome} label="Home" />
           <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
           {isAuthenticated ? (

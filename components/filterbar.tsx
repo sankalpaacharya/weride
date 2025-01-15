@@ -28,7 +28,7 @@ export default function SearchHero() {
             </button>
             <input
               placeholder="Where do you want to go?"
-              className="outline-none h-12 md:h-16 w-full border-2 shadow-lg rounded-full px-12 pr-16"
+              className="outline-none h-12 md:h-16 w-full border-2 shadow-lg rounded-full px-12 pr-16 "
               type="text"
             />
           </div>
