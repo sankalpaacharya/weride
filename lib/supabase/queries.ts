@@ -47,7 +47,7 @@ export async function insertVehicle(vehicleData: VehicleInsert) {
 }
 
 export async function getVehicles(
-  limit: number = 10,
+  limit: number = 10
 ): Promise<VehiclesResponse> {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -104,7 +104,7 @@ export async function getVehicleStatus(vehicleId: string) {
 export async function uploadImage(
   userID: string,
   file: File,
-  bucketName: string,
+  bucketName: string
 ) {
   const supabase = await createClient();
   const { error } = await supabase.storage
@@ -160,4 +160,62 @@ export async function getUserStatus() {
     .single();
   if (userError) throw error;
   return userData.status;
+}
+
+export async function getOrderByStatus(
+  status: "active" | "pending" | "completed" | "canceled"
+) {
+  const supabase = await createClient();
+
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError) throw userError;
+
+  const { data: orderData, error: orderError } = await supabase
+    .from("order")
+    .select(
+      `
+    created_at,
+    location,
+    rent_hour,
+    estimated_km,
+    user:users!renter_id(name,id),
+    vehicle(name, price)
+  `
+    ) //user table mein 2 foreign key refrences so syntax -> user:users!renter_id(name,id)
+    .eq("owner_id", userData.user.id)
+    .eq("status", status);
+  if (orderError) {
+    console.error("Order query error:", orderError.message);
+    throw orderError;
+  }
+  if (!orderData) return []; // Return an empty array if no data is found
+
+  const formattedOrders = orderData.map((order) => {
+    const createdAt = new Date(order.created_at);
+    const estimatedHours = order.rent_hour;
+    const endTime = new Date(createdAt);
+    endTime.setHours(endTime.getHours() + estimatedHours);
+    const timeleft = Math.max(
+      0,
+      Math.floor((endTime.getTime() - new Date().getTime()) / (1000 * 60)) //abhi ke liye minutes me rakha hain
+    );
+
+    return {
+      user: {
+        name: (order.user as unknown as { name: string }).name, // bc typescript ki BT hai, object hai fir bhi usko lag raha hai array hai
+        profileUrl: `https://cxlnoycrdkdkdezryaph.supabase.co/storage/v1/object/public/Profile/${(order.user as unknown as { id: string }).id}.png`,
+      },
+      rideDetails: {
+        location: order.location,
+        duration: order.rent_hour,
+        estimated_km: order.estimated_km ,
+        startTimeDate: `${createdAt.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}, ${createdAt.toLocaleDateString()}`,
+        endTimeDate: `${endTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}, ${endTime.toLocaleDateString()}`,
+        timeleft,
+        vehicle_name: (order.vehicle as unknown as { name: string }).name,
+        price: (order.vehicle as unknown as { price: string }).price,
+      },
+    };
+  });
+  return formattedOrders;
 }
