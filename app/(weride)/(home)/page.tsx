@@ -53,6 +53,29 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <div className="bg-primary mt-20 text-white py-10">
+        <div className="container mx-auto text-center px-4">
+          <h3 className="text-3xl font-bold mb-4">
+            Ready to Ride? Rent or List Your Bike Now!
+          </h3>
+          <p className="text-lg mb-6">
+            Join a community of students making commuting easier and earning
+            smarter.
+          </p>
+          <div className="flex justify-center gap-4 mb-4 flex-col md:flex-row items-center">
+            <button className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg shadow-lg transition">
+              <i className="lucide lucide-bike"></i> Rent a Bike
+            </button>
+            <button className="flex items-center gap-2 bg-white hover:bg-gray-200 text-orange-500 font-medium py-2 px-6 rounded-lg shadow-lg border-2 border-orange-500 transition">
+              <i className="lucide lucide-dollar-sign"></i> List Your Bike
+            </button>
+          </div>
+          <p className="text-sm text-gray-300">
+            Be the hero of your own commute! Hassle-free. Affordable. Fun.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

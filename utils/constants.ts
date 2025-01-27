@@ -1,1 +1,1 @@
-export const DISCORD_URL = "https://weride-discord-backend.onrender.com";
+export const DISCORD_URL = "https://weride-discord-backend-production.up.railway.app";

@@ -4,16 +4,25 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from "next/link";
 import Profile from "@/components/navprofile";
-
+import { Radio } from "lucide-react";
+import { cn } from "@/lib/utils";
 interface MenuItemProps {
   href: string;
   icon: React.ElementType;
   label: string;
+  className?: string;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ href, icon: Icon, label }) => (
+const MenuItem: React.FC<MenuItemProps> = ({
+  href,
+  icon: Icon,
+  label,
+  className = "",
+}) => (
   <Link href={href}>
-    <div className="flex shadow-md md:shadow-none items-center rounded-full gap-2 cursor-pointer p-2 bg-[#fffffff3] md:bg-gray-200 transition duration-200 ease-in-out hover:bg-gray-300">
+    <div
+      className={`flex shadow-md md:shadow-none items-center rounded-full gap-2 cursor-pointer p-2 bg-[#fffffff3] md:bg-gray-200 transition duration-200 ease-in-out hover:bg-gray-300 ${cn(className)}`}
+    >
       <Icon size={20} />
       <p className="hidden md:flex text-center">{label}</p>
     </div>
@@ -33,6 +42,7 @@ const Index: React.FC<IndexProps> = async ({ isAuthenticated }) => {
         </Link>
         <div className="flex gap-5 items-center">
           <MenuItem href="/" icon={FaHome} label="Home" />
+          <MenuItem href="/" icon={Radio} label="Active" />
           <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
           {isAuthenticated ? (
             <Profile></Profile>

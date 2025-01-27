@@ -12,8 +12,8 @@ import {
 import { FaRegUser } from "react-icons/fa";
 import { RiBikeFill } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
-import { MdLogout } from "react-icons/md";
-import { ChevronRight, Hand } from "lucide-react";
+import { MdLogout, MdOnlinePrediction } from "react-icons/md";
+import { ChevronRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { FaHandshake } from "react-icons/fa6";
@@ -40,10 +40,15 @@ export default function NavProfile() {
       icon: FaHistory,
       href: "/rental/requests",
     },
+    // {
+    //   name: "Request",
+    //   icon: FaHandshake,
+    //   href: "/rental/request",
+    // },
     {
-      name: "Request",
-      icon: FaHandshake,
-      href: "/rental/request",
+      name: "Active Ride",
+      icon: MdOnlinePrediction,
+      href: "/ride",
     },
   ];
 

@@ -7,7 +7,7 @@ type Props = {};
 
 export default function footer({}: Props) {
   return (
-    <div className="mt-20">
+    <div className="">
       <Separator />
       <div className="px-20">
         <div className="mt-5 flex justify-center gap-3">

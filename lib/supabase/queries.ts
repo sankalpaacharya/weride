@@ -244,3 +244,8 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
     throw error;
   }
 }
+
+
+export async function getActiveRide(){
+   
+}
