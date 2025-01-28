@@ -126,7 +126,7 @@ export default function RentalCard({
                 <p className="text-sm font-medium text-gray-900">
                   Last Rented By
                 </p>
-                <p className="text-sm text-gray-600">Sankalpa</p>
+                <p className="text-sm text-gray-600">Someone</p>
               </div>
             </div>
           </div>

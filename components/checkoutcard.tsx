@@ -1,43 +1,34 @@
 "use client";
 import React, { useState } from "react";
-import { MdIosShare } from "react-icons/md";
-import RentalModal from "./rentalmodal";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm } from "react-hook-form";
 import { checkOutSchema, TcheckOutSchema } from "@/lib/schemas/checkOutSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FaRoad } from "react-icons/fa";
-import { IoTime } from "react-icons/io5";
+import { IoTimeOutline } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Input } from "./ui/input";
 import Link from "next/link";
+import RentalModal from "./rentalmodal";
 
-const PRICE_PER_KM = 7;
-const HOURLY_RATES = [
-  { value: "1" },
-  { value: "2" },
-  { value: "3" },
-  { value: "4" },
-  { value: "5" },
+const PRICE_PER_MINUTE = 40 / 60; // ₹40 per hour = ₹0.67 per minute
+const DURATION_OPTIONS = [
+  { value: "30", label: "30 mins", displayDuration: "30 minutes" },
+  { value: "60", label: "1 hour", displayDuration: "1 hour" },
+  { value: "120", label: "2 hours", displayDuration: "2 hours" },
+  { value: "180", label: "3 hours", displayDuration: "3 hours" },
+  { value: "1440", label: "Full day", displayDuration: "24 hours" },
 ];
 
-const KILOMETER_OPTIONS = [10, 15, 25, 30, 40];
 type CheckoutCardProps = {
   bikeId: string;
   ownerId: string;
 };
+
 export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
-  const [kiloMeters, setKiloMeters] = useState("10");
-  const [hours, setHours] = useState("1");
-  const totalPrice = PRICE_PER_KM * parseInt(kiloMeters);
+  const [minutes, setMinutes] = useState("60");
+  const totalPrice = Math.round(PRICE_PER_MINUTE * parseInt(minutes));
 
   const {
     register,
@@ -47,120 +38,128 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
     resolver: zodResolver(checkOutSchema),
     mode: "onChange",
   });
+
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
-    console.log("form data is about to be submit");
     setFormData(data);
   };
 
-  return (
-    <div className="md:shadow-cardshadow shadow-none flex-grow md:p-10 rounded-xl sticky top-0 h-fit">
-      <form onSubmit={handleSubmit((data) => submitForm(data))}>
-        <div className="space-y-1">
-          <h2 className="text-main text-2xl font-medium">
-            {PRICE_PER_KM}₹ / KM(s)
-          </h2>
-          <p className="text-sm text-gray-600">360₹ / 4hrs</p>
-        </div>
-        <span className="text-main flex gap-2 mt-5">
-          <MdIosShare size={20} />
-          Share
-        </span>
-        <div className="mt-5">
-          <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="kilometers" className="flex items-center gap-1">
-              <IoTime size={13} />
-              Hours
-            </Label>
-            <Select onValueChange={(hours) => setHours(hours)}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Hours" />
-              </SelectTrigger>
-              <SelectContent>
-                {HOURLY_RATES.map((rate) => (
-                  <SelectItem key={rate.value} value={rate.value}>
-                    {rate.value}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+  const getDisplayDuration = (mins: string) => {
+    const option = DURATION_OPTIONS.find((opt) => opt.value === mins);
+    return option?.displayDuration || `${mins} minutes`;
+  };
 
-          <div className="mt-5">
-            <div className="grid w-full items-center gap-1.5">
-              <Label htmlFor="kilometers" className="flex items-center gap-1">
-                <FaRoad size={13} />
-                Kilometers
-              </Label>
-              <Select onValueChange={(value) => setKiloMeters(value)}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Kilometers" />
-                </SelectTrigger>
-                <SelectContent>
-                  {KILOMETER_OPTIONS.map((km) => (
-                    <SelectItem key={km} value={km.toString()}>
-                      {km}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle className="flex items-center justify-between">
+          <div>
+            <span className="text-3xl font-bold text-primary">₹40</span>
+            <span className="text-sm text-gray-500 ml-2">per hour</span>
+          </div>
+          <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+            Available Now
+          </div>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit(submitForm)} className="space-y-6">
+          {/* Duration Selection */}
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2 text-base">
+              <IoTimeOutline className="text-primary" size={18} />
+              Rental Duration
+            </Label>
+            <div className="grid grid-cols-3 gap-2">
+              {DURATION_OPTIONS.map((option) => (
+                <Button
+                  key={option.value}
+                  type="button"
+                  variant={minutes === option.value ? "default" : "outline"}
+                  className={`h-12 w-full ${
+                    option.value === "1440" ? "col-span-2" : ""
+                  }`}
+                  onClick={() => setMinutes(option.value)}
+                >
+                  {option.label}
+                </Button>
+              ))}
             </div>
           </div>
-        </div>
 
-        <div className="mt-5">
-          <div className="grid w-full items-center gap-1.5">
-            <Label htmlFor="kilometers" className="flex items-center gap-1">
-              <FaLocationDot size={12} />
-              Location
+          {/* Pickup Location */}
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2 text-base">
+              <FaLocationDot className="text-primary" size={18} />
+              Pickup Location
             </Label>
             <Input
               type="text"
-              id="location"
-              placeholder="Enter location"
+              className="h-12"
+              placeholder="Enter your pickup location"
               {...register("location")}
             />
             {errors.location && (
-              <p className="text-red-500 text-sm">{`${errors.location.message}`}</p>
+              <p className="text-destructive text-sm">
+                {errors.location.message}
+              </p>
             )}
           </div>
-        </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-1 text-gray-700 text-sm ">
-          <p className="text-left">
-            {PRICE_PER_KM}₹ x {kiloMeters} KM(s)
-          </p>
-          <p className="text-right font-bold">{totalPrice}₹</p>
-          <p className="text-left">Service fee</p>
-          <p className="text-right font-bold">0.0₹</p>
-          <p className="text-left">Late fee</p>
-          <p className="text-right">To be calculated</p>
-          <hr />
-          <hr />
-          <p className="font-md mt-2 font-semibold">Total</p>
-          <p className="font-md mt-2 font-semibold text-right">₹{totalPrice}</p>
-        </div>
+          {/* Price Breakdown */}
+          <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+            <div className="flex justify-between text-sm">
+              <span>Base rate ({getDisplayDuration(minutes)})</span>
+              <span className="font-medium">₹{totalPrice}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Insurance & Protection</span>
+              <span className="font-medium text-green-600">Included</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Service fee</span>
+              <span className="font-medium">₹0</span>
+            </div>
+            <div className="h-px bg-gray-200 my-2" />
+            <div className="flex justify-between text-base font-semibold">
+              <span>Total</span>
+              <span>₹{totalPrice}</span>
+            </div>
+          </div>
 
-        <div className="mt-10">
-          <p className="text-xs text-gray-600">
-            By clicking &quot;Rent now&quot; you agree to the WeRide{" "}
-            <Link target="_blank" href={"/tos"} className="underline">
-              Terms
-            </Link>{" "}
-            and{" "}
-            <Link target="_blank" href={"/tos"} className="underline">
-              Privacy Policy
-            </Link>
-            .
-          </p>
-          <RentalModal formData={{ ...formData, bikeId, ownerId }}>
-            <Button disabled={!isValid} className="w-full mt-2" type="submit">
-              Rent Now
-            </Button>
-          </RentalModal>
-        </div>
-      </form>
-    </div>
+          {/* Terms and Rent Button */}
+          <div className="space-y-4">
+            <p className="text-xs text-gray-600">
+              By clicking "Rent now" you agree to the WeRide{" "}
+              <Link href="/tos" className="text-primary hover:underline">
+                Terms
+              </Link>{" "}
+              and{" "}
+              <Link href="/privacy" className="text-primary hover:underline">
+                Privacy Policy
+              </Link>
+            </p>
+
+            <RentalModal
+              formData={{
+                ...formData,
+                bikeId,
+                ownerId,
+                durationInMinutes: parseInt(minutes),
+              }}
+            >
+              <Button
+                disabled={!isValid}
+                className="w-full h-12 text-base font-medium"
+                type="submit"
+              >
+                Rent Now
+              </Button>
+            </RentalModal>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

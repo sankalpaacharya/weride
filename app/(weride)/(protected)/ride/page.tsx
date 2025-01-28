@@ -1,21 +1,21 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { X, MapPin, Calendar, Share2, Bike, Phone, Mail } from "lucide-react";
+import { X, MapPin, Calendar, Bike, Phone, Mail, Gauge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import QrCode from "@/public/images/QRimage.jpeg";
 
 const ActiveRideStatus = () => {
   const [timeLeft, setTimeLeft] = useState({
-    hours: 0,
-    minutes: 0,
+    hours: 1,
+    minutes: 30,
     seconds: 0,
   });
+
   const [rideData] = useState({
     startMeter: 36000,
-    ratePerKm: 7,
-    basePrice: 105,
-    currentMeter: 36015,
+    ratePerMin: 40,
+    startTime: new Date(),
     owner: {
       name: "Sankalpa Acharya",
       phone: "+91 98765 43210",
@@ -25,20 +25,38 @@ const ActiveRideStatus = () => {
     },
   });
 
-  // Calculate time left
   useEffect(() => {
-    const endTime = new Date("2024/1/17 13:00:00").getTime();
-
     const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = endTime - now;
+      setTimeLeft((prev) => {
+        if (prev.hours === 0 && prev.minutes === 0 && prev.seconds === 0) {
+          clearInterval(timer);
+          return prev;
+        }
 
-      setTimeLeft({
-        hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        ),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000),
+        let newHours = prev.hours;
+        let newMinutes = prev.minutes;
+        let newSeconds = prev.seconds;
+
+        if (newSeconds === 0) {
+          if (newMinutes === 0) {
+            if (newHours === 0) {
+              return prev;
+            }
+            newHours--;
+            newMinutes = 59;
+          } else {
+            newMinutes--;
+          }
+          newSeconds = 59;
+        } else {
+          newSeconds--;
+        }
+
+        return {
+          hours: newHours,
+          minutes: newMinutes,
+          seconds: newSeconds,
+        };
       });
     }, 1000);
 
@@ -48,11 +66,75 @@ const ActiveRideStatus = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-3xl mx-auto space-y-6">
-        {/* Header */}
+        {/* Header with Vehicle Info */}
         <div className="text-center">
           <h1 className="text-3xl font-bold text-purple-900">Active Ride</h1>
           <p className="text-gray-600">Honda Activa 125</p>
         </div>
+
+        {/* Time Remaining Card */}
+        <Card className="bg-gradient-to-br from-purple-900 to-purple-800 text-white overflow-hidden">
+          <CardContent className="pt-8 pb-8">
+            <div className="text-center space-y-6">
+              <h2 className="text-xl font-medium">Time Remaining</h2>
+              <div className="flex justify-center items-center gap-4">
+                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
+                  <div className="text-5xl font-bold">
+                    {String(timeLeft.hours).padStart(2, "0")}
+                  </div>
+                  <div className="text-sm mt-1 opacity-80">Hours</div>
+                </div>
+                <div className="text-4xl font-bold">:</div>
+                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
+                  <div className="text-5xl font-bold">
+                    {String(timeLeft.minutes).padStart(2, "0")}
+                  </div>
+                  <div className="text-sm mt-1 opacity-80">Minutes</div>
+                </div>
+                <div className="text-4xl font-bold">:</div>
+                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
+                  <div className="text-5xl font-bold">
+                    {String(timeLeft.seconds).padStart(2, "0")}
+                  </div>
+                  <div className="text-sm mt-1 opacity-80">Seconds</div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Rest of the component remains unchanged */}
+        {/* Meter Reading Card */}
+        <Card className="border-2 border-purple-100">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Gauge className="text-purple-900" />
+              Meter Reading
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <div className="text-sm text-gray-500">Initial Reading</div>
+                <div className="text-2xl font-bold text-purple-900">
+                  {rideData.startMeter.toLocaleString()} km
+                </div>
+                <div className="text-xs text-gray-400">Verified by Owner</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-sm text-gray-500">Rate</div>
+                <div className="text-2xl font-bold text-purple-900">
+                  ₹{rideData.ratePerMin}/hr
+                </div>
+                <div className="text-xs text-gray-400">
+                  Final reading at return
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Owner Info Card */}
         <Card>
           <CardHeader>
             <CardTitle>Vehicle Owner</CardTitle>
@@ -106,28 +188,6 @@ const ActiveRideStatus = () => {
             </div>
           </CardContent>
         </Card>
-        {/* Time Remaining Card */}
-        <Card className="bg-purple-900 text-white">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <h2 className="text-xl font-semibold">Time Remaining</h2>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="text-4xl font-bold">{timeLeft.hours}</div>
-                  <div className="text-sm opacity-80">Hours</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold">{timeLeft.minutes}</div>
-                  <div className="text-sm opacity-80">Minutes</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold">{timeLeft.seconds}</div>
-                  <div className="text-sm opacity-80">Seconds</div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Ride Details Card */}
         <Card>
@@ -147,14 +207,7 @@ const ActiveRideStatus = () => {
                 <Calendar className="text-purple-900" />
                 <div>
                   <div className="font-medium">Rental Period</div>
-                  <div className="text-gray-600">10:00 AM - 1:00 PM</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Bike className="text-purple-900" />
-                <div>
-                  <div className="font-medium">Rate</div>
-                  <div className="text-gray-600">₹7/km</div>
+                  <div className="text-gray-600">30 minutes</div>
                 </div>
               </div>
             </div>
@@ -174,13 +227,15 @@ const ActiveRideStatus = () => {
                   width={400}
                   alt="Owner QR code"
                   src={QrCode}
-                ></Image>
+                />
               </div>
               <div>
-                <div className="text-2xl font-bold text-purple-900">₹120</div>
-                <div className="text-gray-600">Scan to pay</div>
-                <p className="text-sm text-gray-400">
-                  Only pay once the ride is completed
+                <div className="text-2xl font-bold text-purple-900">₹20</div>
+                <div className="text-gray-600">
+                  Scan to pay after ride completion
+                </div>
+                <p className="text-sm text-gray-400 mt-1">
+                  Final amount will be calculated based on duration
                 </p>
               </div>
             </div>
@@ -188,12 +243,12 @@ const ActiveRideStatus = () => {
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex gap-4">
-          <button className="flex-1 bg-purple-900 text-white py-3 rounded-lg flex items-center justify-center gap-2">
+        <div className="flex gap-4 sticky bottom-6">
+          <button className="flex-1 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium">
             <X size={20} />
             End Ride
           </button>
-          <button className="flex-1 border-2 border-purple-900 text-purple-900 py-3 rounded-lg">
+          <button className="flex-1 border-2 border-purple-900 text-purple-900 py-4 rounded-lg font-medium">
             Contact Support
           </button>
         </div>

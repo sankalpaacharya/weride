@@ -65,7 +65,7 @@ export async function insertVehicle(vehicleData: VehicleInsert) {
 }
 
 export async function getVehicles(
-  limit: number = 10
+  limit: number = 10,
 ): Promise<VehiclesResponse> {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -122,7 +122,7 @@ export async function getVehicleStatus(vehicleId: string) {
 export async function uploadImage(
   userID: string,
   file: File,
-  bucketName: string
+  bucketName: string,
 ) {
   const supabase = await createClient();
   const { error } = await supabase.storage
@@ -200,7 +200,7 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
         estimated_km,
         user:users!owner_id(name,id),
         vehicle(name, price)
-      `
+      `,
       ) //user table mein 2 foreign key refrences so syntax -> user:users!owner_id(name,id)
       .order("created_at", { ascending: false }) // sort according to recent order first
       .or(`renter_id.eq.${userData.user.id},owner_id.eq.${userData.user.id}`);
@@ -217,7 +217,7 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
       endTime.setHours(endTime.getHours() + estimatedHours);
       const timeleft = Math.max(
         0,
-        Math.floor((endTime.getTime() - new Date().getTime()) / (1000 * 60)) //abhi ke liye *60 karke  minutes me rakha hain
+        Math.floor((endTime.getTime() - new Date().getTime()) / (1000 * 60)), //abhi ke liye *60 karke  minutes me rakha hain
       );
 
       return {
@@ -245,7 +245,4 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
   }
 }
 
-
-export async function getActiveRide(){
-   
-}
+export async function getActiveRide() {}
