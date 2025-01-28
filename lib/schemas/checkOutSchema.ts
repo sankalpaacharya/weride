@@ -2,7 +2,6 @@ import { z } from "zod";
 
 export const checkOutSchema = z.object({
   hour: z.string().default("1"),
-  kilometer: z.string().default("10"),
   location: z
     .string()
     .trim()

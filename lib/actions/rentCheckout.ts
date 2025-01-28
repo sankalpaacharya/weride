@@ -31,7 +31,6 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
       bike_id: data.bikeId,
       location: data.location,
       rent_hour: data.hour,
-      estimated_km: data.kilometer,
     };
     const { error } = await supabase.from("order").insert(insertData).select();
 
@@ -53,7 +52,6 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
         renterName: rentUser.name,
         location: data.location,
         hours: data.hour,
-        kilometers: data.kilometer,
       }),
     );
     if (!result.success) {

@@ -12,23 +12,31 @@ import { Input } from "./ui/input";
 import Link from "next/link";
 import RentalModal from "./rentalmodal";
 
-const PRICE_PER_MINUTE = 40 / 60; // ₹40 per hour = ₹0.67 per minute
+const PRICE_PER_HOUR = 40; // ₹40 per hour
+
 const DURATION_OPTIONS = [
-  { value: "30", label: "30 mins", displayDuration: "30 minutes" },
-  { value: "60", label: "1 hour", displayDuration: "1 hour" },
-  { value: "120", label: "2 hours", displayDuration: "2 hours" },
-  { value: "180", label: "3 hours", displayDuration: "3 hours" },
-  { value: "1440", label: "Full day", displayDuration: "24 hours" },
+  { value: "1", label: "1 hour", displayDuration: "1 hour" },
+  { value: "2", label: "2 hours", displayDuration: "2 hours" },
+  { value: "3", label: "3 hours", displayDuration: "3 hours" },
+  { value: "4", label: "4 hours", displayDuration: "4 hours" },
+  { value: "5", label: "5 hours", displayDuration: "5 hours" },
+  { value: "6", label: "6 hours", displayDuration: "6 hours" },
+  { value: "24", label: "Full day", displayDuration: "24 hours" },
 ];
 
 type CheckoutCardProps = {
   bikeId: string;
   ownerId: string;
+  availability: string;
 };
 
-export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
-  const [minutes, setMinutes] = useState("60");
-  const totalPrice = Math.round(PRICE_PER_MINUTE * parseInt(minutes));
+export default function CheckoutCard({
+  bikeId,
+  ownerId,
+  availability,
+}: CheckoutCardProps) {
+  const [hours, setHours] = useState("1"); // Default to 1 hour
+  const totalPrice = PRICE_PER_HOUR * parseInt(hours);
 
   const {
     register,
@@ -45,9 +53,9 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
     setFormData(data);
   };
 
-  const getDisplayDuration = (mins: string) => {
-    const option = DURATION_OPTIONS.find((opt) => opt.value === mins);
-    return option?.displayDuration || `${mins} minutes`;
+  const getDisplayDuration = (hrs: string) => {
+    const option = DURATION_OPTIONS.find((opt) => opt.value === hrs);
+    return option?.displayDuration || `${hrs} hours`;
   };
 
   return (
@@ -59,7 +67,7 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
             <span className="text-sm text-gray-500 ml-2">per hour</span>
           </div>
           <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
-            Available Now
+            {availability}
           </div>
         </CardTitle>
       </CardHeader>
@@ -76,18 +84,17 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
                 <Button
                   key={option.value}
                   type="button"
-                  variant={minutes === option.value ? "default" : "outline"}
+                  variant={hours === option.value ? "default" : "outline"}
                   className={`h-12 w-full ${
-                    option.value === "1440" ? "col-span-2" : ""
+                    option.value === "24" ? "col-span-2" : ""
                   }`}
-                  onClick={() => setMinutes(option.value)}
+                  onClick={() => setHours(option.value)}
                 >
                   {option.label}
                 </Button>
               ))}
             </div>
           </div>
-
           {/* Pickup Location */}
           <div className="space-y-2">
             <Label className="flex items-center gap-2 text-base">
@@ -106,11 +113,10 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
               </p>
             )}
           </div>
-
           {/* Price Breakdown */}
           <div className="bg-gray-50 p-4 rounded-lg space-y-3">
             <div className="flex justify-between text-sm">
-              <span>Base rate ({getDisplayDuration(minutes)})</span>
+              <span>Base rate ({getDisplayDuration(hours)})</span>
               <span className="font-medium">₹{totalPrice}</span>
             </div>
             <div className="flex justify-between text-sm">
@@ -127,7 +133,6 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
               <span>₹{totalPrice}</span>
             </div>
           </div>
-
           {/* Terms and Rent Button */}
           <div className="space-y-4">
             <p className="text-xs text-gray-600">
@@ -140,13 +145,12 @@ export default function CheckoutCard({ bikeId, ownerId }: CheckoutCardProps) {
                 Privacy Policy
               </Link>
             </p>
-
             <RentalModal
               formData={{
                 ...formData,
                 bikeId,
                 ownerId,
-                durationInMinutes: parseInt(minutes),
+                durationInMinutes: parseInt(hours) * 60, // Convert hours to minutes for backend
               }}
             >
               <Button

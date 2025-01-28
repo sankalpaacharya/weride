@@ -126,7 +126,11 @@ async function BikePage({ params }: PageProps) {
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-10">
           <BikeGallery bikeId={bikeId} />
-          <CheckoutCard bikeId={bikeId} ownerId={vehicleDetails.owner_id} />
+          <CheckoutCard
+            bikeId={bikeId}
+            ownerId={vehicleDetails.owner_id}
+            availability={vehicleDetails.availability}
+          />
         </div>
         <div className="">
           <BikeInfo

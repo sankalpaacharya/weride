@@ -56,14 +56,12 @@ type NotificationTextProps = {
   renterName: string;
   location: string;
   hours: string;
-  kilometers: string;
 };
 
 export const discordOwnerRentRequest = ({
   renterName,
   location,
   hours,
-  kilometers,
 }: NotificationTextProps) => {
   return `
  \`\`\` 
@@ -73,7 +71,6 @@ ${renterName} has requested to rent your vehicle
 
 📍 Pickup Location: ${location}
 ⏰ Duration: ${hours} hour(s)
-🛣️ Distance: ${kilometers} KM
 
 Please review and respond to this rental request within 30 minutes. The request will expire after this time.
 
