@@ -46,7 +46,7 @@ export default async function Home() {
             ].map((vehicle: Vehicle, index) => (
               <RentalCard
                 key={index}
-                imageName="bike3.webp"
+                imageName="bike2.jpeg"
                 bikeDetails={vehicle}
               />
             ))}
