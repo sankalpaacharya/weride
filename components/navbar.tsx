@@ -22,11 +22,14 @@ export default function Header() {
     <header className="bg-[#481885] text-white py-3 md:px-14 px-5 z-10 relative">
       <div className="flex justify-between items-center">
         <div className="text-xl font-bold cursor-pointer">
-          <Link href="/">WeRide</Link>
+          <Link prefetch={false} href="/">
+            WeRide
+          </Link>
         </div>
         <nav className="md:flex gap-10 hidden">
           {navLinks.map((link) => (
             <Link
+              prefetch={false}
               key={link.label}
               className="hover:bg-[#ffffff22] px-2 py-1 text-center rounded-lg transition-all"
               href={link.href}
