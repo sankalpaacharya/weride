@@ -83,8 +83,8 @@ export default function RenterForm({
             details, please wait for account verification. This is a manual
             process and may take several hours or up to a day
             <br />
-            We Know it's annoying to fill forms but it's just for your and the
-            bike owner's safety 💂
+            😩 We Know it's annoying to fill forms but it's just for your and
+            the bike owner's safety 💂
           </CardDescription>
         </CardHeader>
         <CardContent>

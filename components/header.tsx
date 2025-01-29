@@ -6,6 +6,8 @@ import Link from "next/link";
 import Profile from "@/components/navprofile";
 import { Radio } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isLoggedIn } from "@/lib/supabase/queries";
+
 interface MenuItemProps {
   href: string;
   icon: React.ElementType;
@@ -28,10 +30,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
     </div>
   </Link>
 );
-interface IndexProps {
-  isAuthenticated: boolean;
-}
-const Index: React.FC<IndexProps> = async ({ isAuthenticated }) => {
+const Index: React.FC = async () => {
+  const isAuthenticated = await isLoggedIn();
   return (
     <div className="w-full bg-gray-200 text-gray-800 py-3 md:px-3 px-0">
       <div className="container flex justify-between items-center">

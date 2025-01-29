@@ -3,7 +3,7 @@ import OwnerForm from "./components/owner-form";
 import RenterForm from "./components/renter-form";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function page() {
+export default async function Page() {
   const supabase = await createClient();
   let {
     data: { user },

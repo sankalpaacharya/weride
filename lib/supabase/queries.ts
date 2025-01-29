@@ -246,3 +246,4 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
 }
 
 export async function getActiveRide() {}
+// 
