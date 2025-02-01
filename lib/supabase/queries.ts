@@ -247,3 +247,6 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
 
 export async function getActiveRide() {}
 //
+export async function updateProfile(){
+  const supabase = await createClient()
+}

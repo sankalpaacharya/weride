@@ -20,7 +20,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="space-y-6 p-10 pb-16">
+    <div className="space-y-6 py-10 pb-16 container">
       <div className="space-y-0.5">
         <h2 className="text-2xl font-bold tracking-tight">Settings</h2>
         <p className="text-muted-foreground">
