@@ -1,18 +1,17 @@
 import React from "react";
-import Link from "next/link";
 
 export default function PrivacyPolicy() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-12 bg-white rounded-lg">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-[#146eb4]">
+      <h1 className="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800">
         Privacy Policy
       </h1>
 
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>1. Information We Collect</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="mb-4">
           <strong>1.1. Personal Information:</strong> We collect personal
           information such as your name, contact information, and payment
@@ -28,8 +27,8 @@ export default function PrivacyPolicy() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>2. How We Use Your Information</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="mb-4">
           <strong>2.1. Service Provision:</strong> We use your personal
           information to provide and improve our services, including
@@ -48,8 +47,8 @@ export default function PrivacyPolicy() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>3. Data Security</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="mb-4">
           We take reasonable steps to protect your personal information from
           unauthorized access, disclosure, alteration, or destruction.
@@ -59,8 +58,8 @@ export default function PrivacyPolicy() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>4. Data Sharing</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="mb-4">
           <strong>4.1. With Vehicle Owners/Riders:</strong> Your personal
           information may be shared with the vehicle owner or rider to
@@ -76,8 +75,8 @@ export default function PrivacyPolicy() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>5. Your Rights</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="mb-4">
           <strong>5.1. Access and Correction:</strong> You have the right to
           access and correct your personal information held by us.
@@ -92,8 +91,8 @@ export default function PrivacyPolicy() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>Other Important Policies</strong>
-          <hr className="border-t border-gray-600 my-4" />
         </p>
+        <hr className="border-t border-gray-600 my-4" />
         <p className="text-lg font-semibold mb-4">
           <strong>1. Dispute Resolution</strong>
         </p>

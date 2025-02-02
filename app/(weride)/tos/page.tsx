@@ -1,9 +1,10 @@
+
 import React from "react";
 
 export default function TermsOfService() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-12 bg-white  rounded-lg">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-[#146eb4]">
+      <h1 className="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800">
         Terms of Service
       </h1>
 
@@ -38,11 +39,10 @@ export default function TermsOfService() {
       </section>
 
       <section className="text-gray-700 mb-8">
-        <p className="text-lg font-semibold mb-4">
-          <blockquote>
-            <strong>Vehicle Rental Agreement</strong>
-          </blockquote>
-        </p>
+        <blockquote>
+          <strong>Vehicle Rental Agreement</strong>
+        </blockquote>
+
         <p className="mb-4">
           <strong> Rental Duration:</strong> You as a rider agree to rent the
           vehicle for the duration agreed upon with the vehicle owner. Any
@@ -63,11 +63,9 @@ export default function TermsOfService() {
       </section>
 
       <section className="text-gray-700 mb-8">
-        <p className="text-lg font-semibold mb-4">
-          <blockquote>
-            <strong>Late Fee Policy</strong>
-          </blockquote>
-        </p>
+        <blockquote>
+          <strong>Late Fee Policy</strong>
+        </blockquote>
         <p className="mb-4 ">
           <strong>Late Returns:</strong>
           <br></br>
@@ -99,11 +97,9 @@ export default function TermsOfService() {
       </section>
 
       <section className="text-gray-700 mb-8">
-        <p className="text-lg font-semibold mb-4">
-          <blockquote>
-            <strong>Vehicle Condition</strong>
-          </blockquote>
-        </p>
+        <blockquote>
+          <strong>Vehicle Condition</strong>
+        </blockquote>
         <p className="mb-4">
           <strong> Inspection:</strong> Both the Rider and the Owner must
           inspect the vehicle before the rental period begins, noting any
@@ -123,11 +119,9 @@ export default function TermsOfService() {
       </section>
 
       <section className="text-gray-700 mb-8">
-        <p className="text-lg font-semibold mb-4">
-          <blockquote>
-            <strong>Reckless Driving Policy</strong>
-          </blockquote>
-        </p>
+        <blockquote>
+          <strong>Reckless Driving Policy</strong>
+        </blockquote>
         <p className="mb-4">
           Reckless driving is strictly prohibited while using any vehicle rented
           through our platform. Reckless driving includes, but is not limited
@@ -149,17 +143,15 @@ export default function TermsOfService() {
             passengers, pedestrians, or other road users.
           </li>
         </ul>
-        <p className="mb-4">
-          <blockquote>
-            <strong>Consequences:</strong> While WeRide does not have direct
-            control over the actions of users, any reports or evidence of
-            reckless driving may result in immediate termination of the rental
-            agreement, forfeiture of any deposits, and a permanent ban from our
-            platform. Additionally, renters are fully responsible for any legal
-            consequences, fines, penalties, or damages resulting from reckless
-            driving.
-          </blockquote>
-        </p>
+        <blockquote>
+          <strong>Consequences:</strong> While WeRide does not have direct
+          control over the actions of users, any reports or evidence of reckless
+          driving may result in immediate termination of the rental agreement,
+          forfeiture of any deposits, and a permanent ban from our platform.
+          Additionally, renters are fully responsible for any legal
+          consequences, fines, penalties, or damages resulting from reckless
+          driving.
+        </blockquote>
         <p className="mb-4">
           By using our service, you agree to adhere to all traffic laws and
           drive responsibly at all times.

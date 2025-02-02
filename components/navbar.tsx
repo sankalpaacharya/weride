@@ -13,7 +13,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/tos", label: "Terms of Use" },
     { href: "/privacy", label: "Privacy" },
-    { href: "/", label: "About Us" },
+    { href: "/aboutus", label: "About Us" },
     { href: "/faq", label: "FAQ" },
     { href: "/faq", label: "Discord" },
   ];
