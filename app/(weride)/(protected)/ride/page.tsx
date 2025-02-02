@@ -1,18 +1,18 @@
-"use client";
-import React, { useState, useEffect } from "react";
 import { X, MapPin, Calendar, Bike, Phone, Mail, Gauge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import RideTimer from "@/components/ridetimer";
 import Image from "next/image";
 import QrCode from "@/public/images/QRimage.jpeg";
+import { getActiveRide } from "@/lib/supabase/queries";
+import {
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds,
+  addHours,
+} from "date-fns";
 
-const ActiveRideStatus = () => {
-  const [timeLeft, setTimeLeft] = useState({
-    hours: 1,
-    minutes: 30,
-    seconds: 0,
-  });
-
-  const [rideData] = useState({
+async function getRideData() {
+  return {
     startMeter: 36000,
     ratePerMin: 40,
     startTime: new Date(),
@@ -23,45 +23,39 @@ const ActiveRideStatus = () => {
       rating: 4.8,
       totalRides: 6,
     },
-  });
+  };
+}
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.hours === 0 && prev.minutes === 0 && prev.seconds === 0) {
-          clearInterval(timer);
-          return prev;
-        }
+const calculateRemainingTime = (acceptedAt: string, rentHour: number) => {
+  const startTime = new Date(acceptedAt);
+  const endTime = addHours(startTime, rentHour);
+  const now = new Date();
+  const timeDifference = differenceInSeconds(endTime, now);
+  const hours = Math.floor(timeDifference / 3600);
+  const minutes = Math.floor((timeDifference % 3600) / 60);
+  const seconds = timeDifference % 60;
+  if (timeDifference <= 0) {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
+  return {
+    hours,
+    minutes,
+    seconds,
+  };
+};
 
-        let newHours = prev.hours;
-        let newMinutes = prev.minutes;
-        let newSeconds = prev.seconds;
-
-        if (newSeconds === 0) {
-          if (newMinutes === 0) {
-            if (newHours === 0) {
-              return prev;
-            }
-            newHours--;
-            newMinutes = 59;
-          } else {
-            newMinutes--;
-          }
-          newSeconds = 59;
-        } else {
-          newSeconds--;
-        }
-
-        return {
-          hours: newHours,
-          minutes: newMinutes,
-          seconds: newSeconds,
-        };
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+const ActiveRideStatus = async () => {
+  const rideData = await getRideData();
+  const activeRideData = await getActiveRide();
+  console.log(activeRideData);
+  const timeLeft = calculateRemainingTime(
+    activeRideData.accepted_at,
+    activeRideData.rent_hour
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -73,37 +67,9 @@ const ActiveRideStatus = () => {
         </div>
 
         {/* Time Remaining Card */}
-        <Card className="bg-gradient-to-br from-purple-900 to-purple-800 text-white overflow-hidden">
-          <CardContent className="pt-8 pb-8">
-            <div className="text-center space-y-6">
-              <h2 className="text-xl font-medium">Time Remaining</h2>
-              <div className="flex justify-center items-center gap-4">
-                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-                  <div className="text-5xl font-bold">
-                    {String(timeLeft.hours).padStart(2, "0")}
-                  </div>
-                  <div className="text-sm mt-1 opacity-80">Hours</div>
-                </div>
-                <div className="text-4xl font-bold">:</div>
-                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-                  <div className="text-5xl font-bold">
-                    {String(timeLeft.minutes).padStart(2, "0")}
-                  </div>
-                  <div className="text-sm mt-1 opacity-80">Minutes</div>
-                </div>
-                <div className="text-4xl font-bold">:</div>
-                <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-                  <div className="text-5xl font-bold">
-                    {String(timeLeft.seconds).padStart(2, "0")}
-                  </div>
-                  <div className="text-sm mt-1 opacity-80">Seconds</div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Rest of the component remains unchanged */}
+        <RideTimer initialTime={timeLeft} />
+
         {/* Meter Reading Card */}
         <Card className="border-2 border-purple-100">
           <CardHeader>
@@ -113,22 +79,30 @@ const ActiveRideStatus = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-3 gap-6">
               <div className="space-y-2">
                 <div className="text-sm text-gray-500">Initial Reading</div>
                 <div className="text-2xl font-bold text-purple-900">
-                  {rideData.startMeter.toLocaleString()} km
+                  {activeRideData.initial_meter_reading}
+                  {activeRideData.final_meter_reading === "TBD" ? "" : "km"}
                 </div>
                 <div className="text-xs text-gray-400">Verified by Owner</div>
               </div>
               <div className="space-y-2">
                 <div className="text-sm text-gray-500">Rate</div>
-                <div className="text-2xl font-bold text-purple-900">
-                  ₹{rideData.ratePerMin}/hr
-                </div>
+                <div className="text-2xl font-bold text-purple-900">₹40/hr</div>
                 <div className="text-xs text-gray-400">
                   Final reading at return
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-sm text-gray-500">Final Reading</div>
+                <div className="text-2xl font-bold text-purple-900">
+                  {activeRideData.final_meter_reading}{" "}
+                  {activeRideData.final_meter_reading === "TBD" ? "" : "km"}
+                </div>
+                <div className="text-xs text-gray-400">Verified by Owner</div>
               </div>
             </div>
           </CardContent>
@@ -154,7 +128,7 @@ const ActiveRideStatus = () => {
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-semibold text-lg">
-                      {rideData.owner.name}
+                      {activeRideData.owner_id.name}
                     </h3>
                     <div className="flex items-center gap-1 text-yellow-500">
                       ★ {rideData.owner.rating}
@@ -168,10 +142,10 @@ const ActiveRideStatus = () => {
                   <div className="flex items-center gap-2 text-gray-600">
                     <Phone size={16} className="text-purple-900" />
                     <a
-                      href={`tel:${rideData.owner.phone}`}
+                      href={`tel:+91 ${activeRideData.owner_id.phone}`}
                       className="hover:text-purple-900"
                     >
-                      {rideData.owner.phone}
+                      +91 {activeRideData.owner_id.phone}
                     </a>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600">
@@ -180,7 +154,7 @@ const ActiveRideStatus = () => {
                       href={`mailto:${rideData.owner.email}`}
                       className="hover:text-purple-900"
                     >
-                      {rideData.owner.email}
+                      {activeRideData.owner_id.email}
                     </a>
                   </div>
                 </div>
@@ -200,14 +174,16 @@ const ActiveRideStatus = () => {
                 <MapPin className="text-purple-900" />
                 <div>
                   <div className="font-medium">Pickup Location</div>
-                  <div className="text-gray-600">Bhajipura</div>
+                  <div className="text-gray-600">{activeRideData.location}</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="text-purple-900" />
                 <div>
                   <div className="font-medium">Rental Period</div>
-                  <div className="text-gray-600">30 minutes</div>
+                  <div className="text-gray-600">
+                    {activeRideData.rent_hour} hour(s)
+                  </div>
                 </div>
               </div>
             </div>
@@ -230,7 +206,9 @@ const ActiveRideStatus = () => {
                 />
               </div>
               <div>
-                <div className="text-2xl font-bold text-purple-900">₹20</div>
+                <div className="text-2xl font-bold text-purple-900">
+                  ₹{activeRideData.rent_hour * 40}
+                </div>
                 <div className="text-gray-600">
                   Scan to pay after ride completion
                 </div>
@@ -243,15 +221,18 @@ const ActiveRideStatus = () => {
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 sticky bottom-6">
-          <button className="flex-1 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium">
-            <X size={20} />
-            End Ride
-          </button>
-          <button className="flex-1 border-2 border-purple-900 text-purple-900 py-4 rounded-lg font-medium">
-            Contact Support
-          </button>
-        </div>
+        {(activeRideData.status === "active" ||
+          activeRideData.status === "pending") && (
+          <div className="flex gap-4 sticky bottom-6">
+            <button className="flex-1 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium">
+              <X size={20} />
+              End Ride
+            </button>
+            <button className="flex-1 border-2 border-purple-900 text-purple-900 py-4 rounded-lg font-medium">
+              Contact Support
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

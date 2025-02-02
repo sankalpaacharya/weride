@@ -50,6 +50,13 @@ type rentalRequests = {
   };
 };
 
+
+class SupabasClient{
+
+  
+
+}
+
 // in function in this file im passing arguments like an class object
 // function(this,this,this)
 // change it to function({this,this,this}) will be easy to work with
@@ -180,6 +187,21 @@ export async function getUserStatus() {
   return userData.status;
 }
 
+export async function getActiveRide() {
+  const supabase = await createClient();
+  const {data:userData} = await supabase.auth.getUser()
+  const {data,error} = await supabase.from("order").select("*, owner_id(email,phone,name,id)").eq("renter_id",userData.user?.id).in("status",["active","pending"]).single()
+  if(error) throw error
+  return data
+
+}
+
+
+export async function updateProfile() {
+
+}
+
+
 export async function getRentalRequests(): Promise<rentalRequests[]> {
   const supabase = await createClient();
   try {
@@ -243,10 +265,4 @@ export async function getRentalRequests(): Promise<rentalRequests[]> {
     console.error("Error in getOrderByStatus:", error);
     throw error;
   }
-}
-
-export async function getActiveRide() {}
-//
-export async function updateProfile(){
-  const supabase = await createClient()
 }
