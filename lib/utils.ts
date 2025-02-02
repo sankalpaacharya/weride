@@ -2,6 +2,7 @@ import { DISCORD_URL } from "@/utils/constants";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format, toDate } from "date-fns-tz";
+import { differenceInSeconds, addHours } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -77,4 +78,39 @@ Please review and respond to this rental request within 30 minutes. The request 
 Thank you for using our service!
  \`\`\` 
 `;
+};
+
+
+
+export const calculateRemainingTime = (
+  acceptedAt: string,
+  rentHour: number,
+  status: string
+) => {
+  if (status === "pending") {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
+  const startTime = new Date(acceptedAt);
+  const endTime = addHours(startTime, rentHour);
+  const now = new Date();
+  const timeDifference = differenceInSeconds(endTime, now);
+  const hours = Math.floor(timeDifference / 3600);
+  const minutes = Math.floor((timeDifference % 3600) / 60);
+  const seconds = timeDifference % 60;
+  if (timeDifference <= 0) {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
+  return {
+    hours,
+    minutes,
+    seconds,
+  };
 };

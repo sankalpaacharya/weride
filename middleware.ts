@@ -15,15 +15,24 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // is user logged in ?
   if (isProtectedRoute && !user) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  //checking if user is actually verified or not (collegeID, HostelID etc)
   if (isVerifiedRoute && isProtectedRoute) {
     const userStatus = await getUserStatus();
     await updateSession(request);
     if (userStatus !== "verified") {
       return NextResponse.redirect(new URL("/verify", request.url));
+    }
+  }
+  // if user is logged in then don't show these page
+  if(path==="/login" || path=="/singup"){
+    if(user){
+      await updateSession(request)
+      return NextResponse.redirect(new URL("/", request.url))
     }
   }
 

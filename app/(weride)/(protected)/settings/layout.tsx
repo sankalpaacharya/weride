@@ -6,10 +6,6 @@ const sidebarNavItems = [
     href: "/settings/profile",
   },
   {
-    title: "Vehicle",
-    href: "/settings/vehicle",
-  },
-  {
     title: "Update Password",
     href: "/settings/update-password",
   },

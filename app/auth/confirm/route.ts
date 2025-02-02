@@ -21,7 +21,6 @@ export async function GET(request: NextRequest) {
       token_hash,
     });
     if (!error) {
-      console.log("token used");
       redirect(next);
     }
     console.log(error);

@@ -50,12 +50,7 @@ type rentalRequests = {
   };
 };
 
-
-class SupabasClient{
-
-  
-
-}
+class SupabasClient {}
 
 // in function in this file im passing arguments like an class object
 // function(this,this,this)
@@ -189,18 +184,21 @@ export async function getUserStatus() {
 
 export async function getActiveRide() {
   const supabase = await createClient();
-  const {data:userData} = await supabase.auth.getUser()
-  const {data,error} = await supabase.from("order").select("*, owner_id(email,phone,name,id)").eq("renter_id",userData.user?.id).in("status",["active","pending"]).single()
-  if(error) throw error
-  return data
-
+  const { data: userData } = await supabase.auth.getUser();
+  const { data, error } = await supabase
+    .from("order")
+    .select("*, owner_id(email,phone,name,id)")
+    .eq("renter_id", userData.user?.id)
+    .in("status", ["active", "pending"])
+    
+  if (error) throw error;
+  if(data.length>0){
+    return data[0]
+  }
+  return null;
 }
 
-
-export async function updateProfile() {
-
-}
-
+export async function updateProfile() {}
 
 export async function getRentalRequests(): Promise<rentalRequests[]> {
   const supabase = await createClient();
