@@ -37,7 +37,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
     if (error) {
       return { error: "can't data add to the orders table" };
     }
-    const vehicleData = await updateVehicleStatus(data.bikeId, "Booked");
+    const vehicleData = await updateVehicleStatus(data.bikeId, "Pending");
     await sendDiscordMessage(
       user?.id || "",
       discordRenterMessageMaker(

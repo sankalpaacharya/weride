@@ -1,17 +1,37 @@
-import { X, MapPin, Calendar, Bike, Phone, Mail, Gauge } from "lucide-react";
+import {
+  X,
+  MapPin,
+  Calendar,
+  Bike,
+  Phone,
+  Mail,
+  Gauge,
+  CloudLightning,
+} from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import RideTimer from "@/components/ridetimer";
 import Image from "next/image";
 import QrCode from "@/public/images/QRimage.jpeg";
-import { getActiveRide } from "@/lib/supabase/queries";
+import { getActiveRide, updateRideStatus } from "@/lib/supabase/queries";
 import { calculateRemainingTime } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
+import { updateVehicleStatus } from "@/lib/supabase/queries";
 
-const ActiveRideStatus = async () => {
+const Page = async () => {
   const activeRideData = await getActiveRide();
   if (!activeRideData) {
     return redirect("/");
+  }
+  console.log(activeRideData);
+
+  async function cancelRide() {
+    "use server";
+    if (activeRideData.status !== "active") {
+      await updateRideStatus(activeRideData.id, "Canceled");
+      await updateVehicleStatus(activeRideData.bike_id, "Available");
+      return redirect("/");
+    }
   }
   const timeLeft = calculateRemainingTime(
     activeRideData.accepted_at,
@@ -41,7 +61,7 @@ const ActiveRideStatus = async () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-3 grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <div className="text-sm text-gray-500">Initial Reading</div>
                   <div className="text-2xl font-bold text-purple-900">
@@ -186,13 +206,19 @@ const ActiveRideStatus = async () => {
           {(activeRideData.status === "active" ||
             activeRideData.status === "pending") && (
             <div className="flex gap-4 sticky bottom-6">
-              <Button
-                disabled={activeRideData.status === "active"}
-                className="flex-1 h-15 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium"
+              <form
+                action={cancelRide}
+                className={`flex-1 h-15 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "active" ? "opacity-70" : null}`}
               >
-                <X size={20} />
-                End Ride
-              </Button>
+                <button
+                  type="submit"
+                  disabled={activeRideData.status === "active"}
+                  className="flex items-center gap-2"
+                >
+                  <X size={20} />
+                  End Ride
+                </button>
+              </form>
               <Button
                 className="flex-1 h-15 border-2  py-4 border-primary"
                 variant={"outline"}
@@ -207,4 +233,4 @@ const ActiveRideStatus = async () => {
   );
 };
 
-export default ActiveRideStatus;
+export default Page;

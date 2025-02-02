@@ -150,7 +150,7 @@ export default function CheckoutCard({
                 ...formData,
                 bikeId,
                 ownerId,
-                durationInMinutes: parseInt(hours) * 60, // Convert hours to minutes for backend
+                hour: hours,
               }}
             >
               <Button

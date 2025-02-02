@@ -3,7 +3,7 @@ import { updateSession } from "@/utils/supabase/middleware";
 import { createClient } from "./utils/supabase/server";
 import { getUserStatus } from "./lib/supabase/queries";
 
-const publicRoutes = ["/", "/login", "/signup"];
+const publicRoutes = ["/", "/login", "/signup","/forgot-password"];
 const notVerifiedAcountRoutes = ["/verify", "/"];
 
 export async function middleware(request: NextRequest) {
@@ -29,10 +29,10 @@ export async function middleware(request: NextRequest) {
     }
   }
   // if user is logged in then don't show these page
-  if(path==="/login" || path=="/singup"){
-    if(user){
-      await updateSession(request)
-      return NextResponse.redirect(new URL("/", request.url))
+  if (path === "/login" || path == "/singup") {
+    if (user) {
+      await updateSession(request);
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

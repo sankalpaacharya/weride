@@ -42,7 +42,6 @@ const Index: React.FC = async () => {
         </Link>
         <div className="flex gap-5 items-center">
           <MenuItem href="/" icon={FaHome} label="Home" />
-          <MenuItem href="/ride" icon={Radio} label="Active" />
           <MenuItem href="/orders" icon={FaCartShopping} label="Orders" />
           {isAuthenticated ? (
             <Profile></Profile>

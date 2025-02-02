@@ -100,7 +100,7 @@ export async function updateVehicleStatus(bikeId: string, status: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("vehicle")
-    .update({ availability: "Booked" })
+    .update({ availability: status })
     .eq("id", bikeId)
     .select()
     .single();
@@ -189,13 +189,17 @@ export async function getActiveRide() {
     .from("order")
     .select("*, owner_id(email,phone,name,id)")
     .eq("renter_id", userData.user?.id)
-    .in("status", ["active", "pending"])
-    
+    .in("status", ["active", "pending"]).order("created_at",{ascending:false});
   if (error) throw error;
-  if(data.length>0){
-    return data[0]
+  if (data.length > 0) {
+    return data[0];
   }
   return null;
+}
+
+export async function updateRideStatus(rideId:string,status:string){
+  const supabase = await createClient();
+  await supabase.from("order").update({status}).eq("id",rideId)
 }
 
 export async function updateProfile() {}

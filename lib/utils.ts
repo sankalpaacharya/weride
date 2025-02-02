@@ -80,12 +80,10 @@ Thank you for using our service!
 `;
 };
 
-
-
 export const calculateRemainingTime = (
   acceptedAt: string,
   rentHour: number,
-  status: string
+  status: string,
 ) => {
   if (status === "pending") {
     return {

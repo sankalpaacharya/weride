@@ -52,22 +52,22 @@ const RideTimer = ({ initialTime }: { initialTime: any }) => {
         <div className="text-center space-y-6">
           <h2 className="text-xl font-medium">Time Remaining</h2>
           <div className="flex justify-center items-center gap-4">
-            <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-              <div className="text-5xl font-bold">
+            <div className="text-center bg-white/10 md:px-6 px-3 py-4 rounded-lg backdrop-blur-sm">
+              <div className="md:text-5xl text-3xl font-bold">
                 {String(timeLeft.hours).padStart(2, "0")}
               </div>
               <div className="text-sm mt-1 opacity-80">Hours</div>
             </div>
             <div className="text-4xl font-bold">:</div>
-            <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-              <div className="text-5xl font-bold">
+            <div className="text-center bg-white/10 md:px-6 px-3 py-4 rounded-lg backdrop-blur-sm">
+              <div className="md:text-5xl text-3xl font-bold">
                 {String(timeLeft.minutes).padStart(2, "0")}
               </div>
               <div className="text-sm mt-1 opacity-80">Minutes</div>
             </div>
             <div className="text-4xl font-bold">:</div>
-            <div className="text-center bg-white/10 px-6 py-4 rounded-lg backdrop-blur-sm">
-              <div className="text-5xl font-bold">
+            <div className="text-center bg-white/10 px-3 md:px-6 py-4 rounded-lg backdrop-blur-sm">
+              <div className="md:text-5xl text-3xl font-bold">
                 {String(timeLeft.seconds).padStart(2, "0")}
               </div>
               <div className="text-sm mt-1 opacity-80">Seconds</div>
