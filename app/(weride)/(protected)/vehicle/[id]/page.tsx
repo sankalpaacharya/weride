@@ -90,7 +90,7 @@ const OwnerInfo: React.FC<OwnerProps> = ({ name }) => (
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
     <div>
-      <h3 className="md:text-xl font-medium">{name}</h3>
+      <h3 className="md:text-xl font-medium">Owner H125</h3>
       <p className="text-sm text-gray-600">Response time &lt;10mins</p>
       <div className="mt-2 flex flex-col md:text-lg font-medium">
         <div className="flex md:flex-row flex-col md:space-x-3">

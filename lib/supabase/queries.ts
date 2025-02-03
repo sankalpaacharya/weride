@@ -127,23 +127,21 @@ export async function uploadImage(
   bucketName: string,
 ) {
   try {
-    
-  const supabase = await createClient();
-  const { error } = await supabase.storage
-    .from(bucketName)
-    .upload(`${userID}.png`, file, {
-      cacheControl: "3600",
-      upsert: true,
-    });
+    const supabase = await createClient();
+    const { error } = await supabase.storage
+      .from(bucketName)
+      .upload(`${userID}.png`, file, {
+        cacheControl: "3600",
+        upsert: true,
+      });
 
-  if (error!==null) {
-    return { error: error.message };
-
-  }
-  return { success: "Upload successful" };
+    if (error !== null) {
+      return { error: error.message };
+    }
+    return { success: "Upload successful" };
   } catch (error) {
-    console.log("im inside catch block")
-    
+    console.log("im inside catch block");
+
     return { error: error };
   }
 }

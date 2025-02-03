@@ -96,7 +96,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="collegeIDPhoto">
-                College ID Card Photo (Both Side)
+                College ID Card Photo (Front)
                 <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
@@ -114,7 +114,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="hostelIDPhoto">
-                Hostel ID Card Photo (Both Side)
+                Hostel ID Card Photo (Front)
                 <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input

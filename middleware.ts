@@ -28,6 +28,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/verify", request.url));
     }
   }
+
+  if(path=="/verify"){
+    const userStatus = await getUserStatus();
+    await updateSession(request);
+    if (userStatus === "verified") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
+  
   // if user is logged in then don't show these page
   if (path === "/login" || path == "/singup") {
     if (user) {

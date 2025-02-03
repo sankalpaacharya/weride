@@ -1,6 +1,7 @@
 import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
 import { getVehicles } from "@/lib/supabase/queries";
+
 const bikeDetails = {
   name: "Honda Activa 125",
   model: "2023 BS6",
