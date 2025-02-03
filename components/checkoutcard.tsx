@@ -12,7 +12,7 @@ import { Input } from "./ui/input";
 import Link from "next/link";
 import RentalModal from "./rentalmodal";
 
-const PRICE_PER_HOUR = 40; // ₹40 per hour
+const PRICE_PER_HOUR = 40;
 
 const DURATION_OPTIONS = [
   { value: "1", label: "1 hour", displayDuration: "1 hour" },
@@ -158,7 +158,7 @@ export default function CheckoutCard({
                 className="w-full h-12 text-base font-medium"
                 type="submit"
               >
-                Rent Now
+                Request to Book
               </Button>
             </RentalModal>
           </div>

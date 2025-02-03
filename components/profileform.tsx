@@ -5,6 +5,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 type Props = {
   userData: {
     name: string;
@@ -22,92 +29,111 @@ type Props = {
 export default function ProfileForm({ userData }: Props) {
   return (
     <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-medium">Profile</h3>
-        <p className="text-sm text-muted-foreground">
-          This is how others will see you on the site.
-        </p>
-      </div>
-      <Separator />
-      <div>
-        <div className="space-y-8">
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Full Name</Label>
-              <Input
-                defaultValue={userData.name}
-                type="text"
-                id="text"
-                placeholder="Full Name"
-              />
+      <Card className="mb-6">
+        <CardHeader>
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle className="text-2xl">Profile Settings</CardTitle>
+              <CardDescription>
+                Manage how you appear to potential renters
+              </CardDescription>
             </div>
-            <p className="text-sm text-gray-500">
-              This is your full name, and it can&apos;t be changed more than
-              once.
-            </p>
+            <Button className="bg-purple-600 hover:bg-purple-700">
+              Save Changes
+            </Button>
           </div>
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                disabled
-                value={userData.email}
-                type="text"
-                id="text"
-                placeholder="Email"
-              />
-            </div>
-            <p className="text-sm text-gray-500">
-              Email can&apos;t be changed.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Hostel Block</Label>
-              <Input
-                defaultValue={userData.hostel_block}
-                type="text"
-                id="text"
-                placeholder="Home Address"
-              />
-            </div>
-            <p className="text-sm text-gray-500">Your hostel building block.</p>
-          </div>
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Roll no</Label>
-              <Input
-                defaultValue={userData.rollno}
-                type="text"
-                id="text"
-                placeholder="Roll No"
-              />
-            </div>
-            <p className="text-sm text-gray-500">Your Roll No.</p>
-          </div>
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Label htmlFor="email">Room no</Label>
-              <Input
-                defaultValue={userData.hostel_room}
-                type="text"
-                id="text"
-                placeholder="Room No"
-              />
-            </div>
-            <p className="text-sm text-gray-500">Your Room No.</p>
-          </div>
+        </CardHeader>
+      </Card>
 
-          <div className="space-y-2">
-            <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-              <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
-                <FaDiscord size={20} />
-                Connect to Discord
-              </Button>
+      <div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Edit Your Information</CardTitle>
+            <CardDescription>
+              Make sure you have provided the correct details
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Label htmlFor="email">Full Name</Label>
+                  <Input
+                    defaultValue={userData.name}
+                    type="text"
+                    id="text"
+                    placeholder="Full Name"
+                  />
+                </div>
+                <p className="text-sm text-gray-500">
+                  This is your full name, and it can&apos;t be changed more than
+                  once.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    disabled
+                    value={userData.email}
+                    type="text"
+                    id="text"
+                    placeholder="Email"
+                  />
+                </div>
+                <p className="text-sm text-gray-500">
+                  Email can&apos;t be changed.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Label htmlFor="email">Hostel Block</Label>
+                  <Input
+                    defaultValue={userData.hostel_block}
+                    type="text"
+                    id="text"
+                    placeholder="Home Address"
+                  />
+                </div>
+                <p className="text-sm text-gray-500">
+                  Your hostel building block.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Label htmlFor="email">Roll no</Label>
+                  <Input
+                    defaultValue={userData.rollno}
+                    type="text"
+                    id="text"
+                    placeholder="Roll No"
+                  />
+                </div>
+                <p className="text-sm text-gray-500">Your Roll No.</p>
+              </div>
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Label htmlFor="email">Room no</Label>
+                  <Input
+                    defaultValue={userData.hostel_room}
+                    type="text"
+                    id="text"
+                    placeholder="Room No"
+                  />
+                </div>
+                <p className="text-sm text-gray-500">Your Room No.</p>
+              </div>
+              <div className="space-y-2">
+                <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
+                  <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
+                    <FaDiscord size={20} />
+                    Connect to Discord
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
-          <Button className="">Update Profile</Button>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
