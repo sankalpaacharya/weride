@@ -40,7 +40,7 @@ export async function ownerIdentityAction(formData: any) {
         hostel_room: data.hostelRoom,
         hostel_block: data.hostelBlock,
         rollno: data.rollno,
-        status: "Available",
+        status: "pending",
       })
       .eq("id", authData?.user?.id);
 

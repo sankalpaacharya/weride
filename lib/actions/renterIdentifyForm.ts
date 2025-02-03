@@ -13,8 +13,9 @@ export async function renterFormAction(data: any) {
     }
 
     const userData = await getUserById(authData.user.id);
+    console.log(userData)
 
-    if (userData[0].status === "pending" || userData[0].status === "verified") {
+    if (userData.status === "pending" || userData.status === "verified") {
       return { error: "Your account is in review state" };
     }
 
@@ -52,7 +53,7 @@ export async function renterFormAction(data: any) {
 
     return { success: "Your information has been added!" };
   } catch (error) {
-    console.log("error");
+    console.log(error);
     return { error: "some error has occured adding the data" };
   }
 }

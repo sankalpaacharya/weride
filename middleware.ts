@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if(path=="/verify"){
+  if (path == "/verify") {
     const userStatus = await getUserStatus();
     await updateSession(request);
     if (userStatus === "verified") {
@@ -37,7 +37,6 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  
   // if user is logged in then don't show these page
   if (path === "/login" || path == "/singup") {
     if (user) {
