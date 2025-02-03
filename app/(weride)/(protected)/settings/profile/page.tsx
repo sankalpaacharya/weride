@@ -16,7 +16,7 @@ export default async function page() {
   if (error) {
     redirect("/");
   }
-  const { id, ...userData } = data[0];
+  const { ...userData } = data[0];
 
   return <ProfileForm userData={userData} />;
 }

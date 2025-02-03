@@ -39,16 +39,16 @@ export const ownerIdentitySchema = z.object({
   messageToRenter: z
     .string({ required_error: "Message is required" })
     .max(500, "message name can't be more than 500 characters")
-    .min(100, "Message to renter must be atleast a 100 characters"),
+    .min(50, "Message to renter must be atleast a 50 characters"),
   rollno: z.string({ required_error: "Rollno is required" }),
   vehicleDescription: z
     .string({ required_error: "Message is required" })
     .max(500, "description can't be more than 5000 characters")
-    .min(200, "description for the vehicle should be atleast 200 characters"),
+    .min(100, "description for the vehicle should be atleast 100 characters"),
   vehicleName: z
     .string({ required_error: "Message is required" })
-    .max(40, "name can't be more than 2 characters")
-    .min(20, "vehicle name must be atleast 20 characters"),
+    .max(20, "name can't be more than 20 characters")
+    .min(10, "vehicle name must be atleast 10 characters"),
   fuelType: z.enum(["petrol", "diesel", "electric", "cycle"]).default("petrol"),
 });
 

@@ -2,7 +2,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
 import { insertVehicle, uploadImage } from "../supabase/queries";
-import { PostgrestError } from "@supabase/supabase-js";
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
 // make a available status  column in vehicle field, check bikecard component
@@ -41,7 +40,7 @@ export async function ownerIdentityAction(formData: any) {
         hostel_room: data.hostelRoom,
         hostel_block: data.hostelBlock,
         rollno: data.rollno,
-        status: "pending",
+        status: "Available",
       })
       .eq("id", authData?.user?.id);
 
@@ -50,7 +49,7 @@ export async function ownerIdentityAction(formData: any) {
       description: data.vehicleDescription,
       fuel_type: data.fuelType,
       message: data.messageToRenter,
-      owner: authData.user.id,
+      owner_id: authData.user.id,
       owner_name: userData[0].name,
     });
     if (authData?.user?.id && vehicleData) {

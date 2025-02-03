@@ -1,5 +1,4 @@
 "use client";
-import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -12,8 +11,10 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import Link from "next/link";
 type Props = {
   userData: {
+    id: string;
     name: string;
     created_at: string;
     phone: string;
@@ -125,10 +126,15 @@ export default function ProfileForm({ userData }: Props) {
               </div>
               <div className="space-y-2">
                 <div className="grid w-full max-w-sm items-center space-y-1 gap-1.5">
-                  <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
-                    <FaDiscord size={20} />
-                    Connect to Discord
-                  </Button>
+                  <Link
+                    href={`https://weride-discord-backend-production.up.railway.app/auth/discord?userId=${userData.id}`}
+                    target="_blank"
+                  >
+                    <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
+                      <FaDiscord size={20} />
+                      Connect to Discord
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

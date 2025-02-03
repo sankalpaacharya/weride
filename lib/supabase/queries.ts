@@ -28,7 +28,7 @@ type VehicleInsert = {
   description: string;
   fuel_type: string;
   message: string;
-  owner: string;
+  owner_id: string;
   owner_name: string;
 };
 
@@ -126,18 +126,26 @@ export async function uploadImage(
   file: File,
   bucketName: string,
 ) {
+  try {
+    
   const supabase = await createClient();
   const { error } = await supabase.storage
     .from(bucketName)
     .upload(`${userID}.png`, file, {
       cacheControl: "3600",
-      upsert: false,
+      upsert: true,
     });
 
-  if (error) {
+  if (error!==null) {
     return { error: error.message };
+
   }
   return { success: "Upload successful" };
+  } catch (error) {
+    console.log("im inside catch block")
+    
+    return { error: error };
+  }
 }
 
 // -------------------user related queries ----------------

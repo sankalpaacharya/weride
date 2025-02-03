@@ -265,7 +265,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                 {...register("rollno")}
                 id="password"
                 type="text"
-                placeholder="319"
+                placeholder="22BCP700"
               />
               {errors.hostelRoom && (
                 <p className="text-red-500 text-sm">
