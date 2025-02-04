@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getVehicleData } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
+import UnavailableTimeSlot from "@/components/timeslot";
 
 type PageProps = {
   params: Promise<{
@@ -123,7 +124,7 @@ async function BikePage({ params }: PageProps) {
 
   return (
     <div className="flex justify-center min-h-screen mt-5">
-      <div className="container">
+      <div className="container space-y-10">
         <div className="flex flex-col lg:flex-row gap-10">
           <BikeGallery bikeId={bikeId} />
           <CheckoutCard
@@ -139,6 +140,8 @@ async function BikePage({ params }: PageProps) {
           />
           <OwnerInfo name={vehicleDetails.owner_name} />
         </div>
+
+        <UnavailableTimeSlot></UnavailableTimeSlot>
 
         <div className="md:mt-20 mt-20">
           <h2 className="text-2xl font-semibold">Full address of booking</h2>

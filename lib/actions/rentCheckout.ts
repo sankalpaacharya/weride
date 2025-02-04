@@ -13,74 +13,124 @@ import {
 } from "../utils";
 import { sendMail } from '../../resend/mail';
 
-export async function rentCheckoutAction(data: TcheckOutSchema) {
-  try {
-    const vehicleStatus = await getVehicleStatus(data.bikeId);
+interface RentCheckoutResult {
+  success?: string;
+  error?: string;
+}
 
+interface VehicleInfo {
+  name: string;
+}
+
+interface OwnerInfo {
+  email: string;
+  name: string;
+}
+
+export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentCheckoutResult> {
+  const supabase = await createClient();
+
+  try {
+    // Validate input data
+    const result = checkOutSchema.safeParse(data);
+    if (!result.success) {
+      return { error: result.error.issues[0].message };
+    }
+
+    // Check vehicle availability
+    const vehicleStatus = await getVehicleStatus(data.bikeId);
     if (vehicleStatus === "Booked") {
       return { error: "This vehicle is already booked" };
     }
-    const result = checkOutSchema.safeParse(data);
-    const supabase = await createClient();
+
+    // Get current user
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const rentUser = await getUserById(user?.id || "");
+    if (!user) {
+      return { error: "User not authenticated" };
+    }
+
+    // Fetch additional data
+    const [rentUser, vehicleInfo, ownerInfo] = await Promise.all([
+      getUserById(user.id),
+      fetchVehicleName(supabase, data.bikeId),
+      fetchOwnerInfo(supabase, data.ownerId)
+    ]);
+
+    // Prepare order data
     const insertData = {
-      renter_id: user?.id,
+      renter_id: user.id,
       owner_id: data.ownerId,
       bike_id: data.bikeId,
       location: data.location,
       rent_hour: data.hour,
     };
-    const { data: vehicleName, error: vehicleError} = await supabase.from('vehicle').select('name').eq('id',data.bikeId).single()
-    if (vehicleError){
-      console.error("Could not fetch vehicle",vehicleError);
-      return { error : "Could not fetch vehicle" }
-    }
-    const { data: ownerData, error:ownerError } = await supabase.from('users').select('email,name').eq('id',data.ownerId).single()
-    if (ownerError) {
-      console.error("Error fetching owner's email:", ownerError);
-      return { error: "Couldn't fetch owner's email" };
-    }
-    const ownerEmail = ownerData?.email;
-    const ownerName = ownerData?.name;    
 
-    const { error } = await supabase.from("order").insert(insertData).select();
-
-    if (error) {
-      return { error: "can't add data to the orders table" };
+    // Insert order
+    const { error: orderError } = await supabase.from("order").insert(insertData).select();
+    if (orderError) {
+      return { error: "Cannot add data to the orders table" };
     }
+
+    // Update vehicle status
     const vehicleData = await updateVehicleStatus(data.bikeId, "Pending");
 
-    // send email to owner from weride 
-    await sendMail(ownerEmail, ownerName, rentUser.name, data.hour, data.location, rentUser.phone, vehicleName?.name );
-    // send the discord message if user has discord id in db else skip this part
-    await sendDiscordMessage(
-      user?.id || "",
-      discordRenterMessageMaker(
-        vehicleData.owner_name,
-        data.location,
-        vehicleData?.name,
-      ),
+    // Send email to owner
+    await sendMail(
+      ownerInfo.email, 
+      ownerInfo.name, 
+      rentUser.name, 
+      data.hour, 
+      data.location, 
+      rentUser.phone, 
+      vehicleInfo.name
     );
+
+    // Send Discord message
     await sendDiscordMessage(
       vehicleData.owner_id || "",
       discordOwnerRentRequest({
         renterName: rentUser.name,
         location: data.location,
         hours: data.hour,
-      }),
+      })
     );
 
-
-
-    if (!result.success) {
-      return { error: result.error.issues[0].message };
-    }
-    return { success: "your ride is confirmed" };
+    return { success: "Your ride is confirmed" };
   } catch (error) {
-    console.log(error);
-    return { error: "wouldn't rent a vehicle rn" };
+    console.error("Rent checkout error:", error);
+    return { error: "Could not complete vehicle rental" };
   }
+}
+
+async function fetchVehicleName(supabase: any, bikeId: string): Promise<VehicleInfo> {
+  const { data, error } = await supabase
+    .from('vehicle')
+    .select('name')
+    .eq('id', bikeId)
+    .single();
+
+  if (error) {
+    console.error("Could not fetch vehicle", error);
+    throw new Error("Could not fetch vehicle");
+  }
+
+  return data;
+}
+
+// Helper function to fetch owner information
+async function fetchOwnerInfo(supabase: any, ownerId: string): Promise<OwnerInfo> {
+  const { data, error } = await supabase
+    .from('users')
+    .select('email,name')
+    .eq('id', ownerId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching owner's email:", error);
+    throw new Error("Couldn't fetch owner's email");
+  }
+
+  return data;
 }

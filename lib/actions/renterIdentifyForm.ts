@@ -13,7 +13,7 @@ export async function renterFormAction(data: any) {
     }
 
     const userData = await getUserById(authData.user.id);
-    console.log(userData)
+    console.log(userData);
 
     if (userData.status === "pending" || userData.status === "verified") {
       return { error: "Your account is in review state" };

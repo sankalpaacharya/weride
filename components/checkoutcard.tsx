@@ -21,7 +21,6 @@ const DURATION_OPTIONS = [
   { value: "4", label: "4 hours", displayDuration: "4 hours" },
   { value: "5", label: "5 hours", displayDuration: "5 hours" },
   { value: "6", label: "6 hours", displayDuration: "6 hours" },
-  { value: "24", label: "Full day", displayDuration: "24 hours" },
 ];
 
 type CheckoutCardProps = {

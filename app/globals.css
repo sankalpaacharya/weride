@@ -135,6 +135,12 @@ blockquote {
   border: 2px solid red;
 }
 
+.red-shadow{
+  -webkit-box-shadow: 2px -3px 27px -7px rgba(230,32,42,1);
+  -moz-box-shadow: 2px -3px 27px -7px rgba(230,32,42,1);
+  box-shadow: 2px -3px 27px -7px rgba(230,32,42,1);
+}
+
 .container {
   @apply max-w-[1600px] mx-auto;
 }
