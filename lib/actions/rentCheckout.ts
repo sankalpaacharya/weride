@@ -11,6 +11,7 @@ import {
   discordRenterMessageMaker,
   sendDiscordMessage,
 } from "../utils";
+import { sendMail } from '../../resend/mail';
 
 export async function rentCheckoutAction(data: TcheckOutSchema) {
   try {
@@ -32,12 +33,28 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
       location: data.location,
       rent_hour: data.hour,
     };
+    const { data: vehicleName, error: vehicleError} = await supabase.from('vehicle').select('name').eq('id',data.bikeId).single()
+    if (vehicleError){
+      console.error("Could not fetch vehicle",vehicleError);
+      return { error : "Could not fetch vehicle" }
+    }
+    const { data: ownerData, error:ownerError } = await supabase.from('users').select('email,name').eq('id',data.ownerId).single()
+    if (ownerError) {
+      console.error("Error fetching owner's email:", ownerError);
+      return { error: "Couldn't fetch owner's email" };
+    }
+    const ownerEmail = ownerData?.email;
+    const ownerName = ownerData?.name;    
+
     const { error } = await supabase.from("order").insert(insertData).select();
 
     if (error) {
-      return { error: "can't data add to the orders table" };
+      return { error: "can't add data to the orders table" };
     }
     const vehicleData = await updateVehicleStatus(data.bikeId, "Pending");
+
+    // send email to owner from weride 
+    await sendMail(ownerEmail, ownerName, rentUser.name, data.hour, data.location, rentUser.phone, vehicleName?.name );
     // send the discord message if user has discord id in db else skip this part
     await sendDiscordMessage(
       user?.id || "",
@@ -55,6 +72,9 @@ export async function rentCheckoutAction(data: TcheckOutSchema) {
         hours: data.hour,
       }),
     );
+
+
+
     if (!result.success) {
       return { error: result.error.issues[0].message };
     }
