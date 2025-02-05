@@ -4,7 +4,6 @@ import { FaCartShopping } from "react-icons/fa6";
 import { RiEBikeFill } from "react-icons/ri";
 import Link from "next/link";
 import Profile from "@/components/navprofile";
-import { Radio } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { isLoggedIn } from "@/lib/supabase/queries";
 

@@ -1,13 +1,4 @@
-import {
-  X,
-  MapPin,
-  Calendar,
-  Bike,
-  Phone,
-  Mail,
-  Gauge,
-  CloudLightning,
-} from "lucide-react";
+import { X, MapPin, Calendar, Phone, Mail, Gauge } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import RideTimer from "@/components/ridetimer";
 import Image from "next/image";
@@ -17,7 +8,7 @@ import { calculateRemainingTime } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { updateVehicleStatus } from "@/lib/supabase/queries";
-
+import PendingLoading from "@/components/pendingloading";
 const Page = async () => {
   const activeRideData = await getActiveRide();
   if (!activeRideData) {
@@ -36,7 +27,7 @@ const Page = async () => {
   const timeLeft = calculateRemainingTime(
     activeRideData.accepted_at,
     activeRideData.rent_hour,
-    activeRideData.status,
+    activeRideData.status
   );
 
   return (
@@ -51,7 +42,11 @@ const Page = async () => {
             <p className="text-gray-600">Honda Activa 125</p>
           </div>
           {/* Time Remaining Card */}
-          <RideTimer initialTime={timeLeft} />
+          {activeRideData.status === "active" ? (
+            <RideTimer initialTime={timeLeft} />
+          ) : (
+            <PendingLoading />
+          )}
           {/* Meter Reading Card */}
           <Card className={`border-2 border-purple-100`}>
             <CardHeader>

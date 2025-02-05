@@ -15,7 +15,7 @@ export default function Header() {
     { href: "/privacy", label: "Privacy" },
     { href: "/aboutus", label: "About Us" },
     { href: "/faq", label: "FAQ" },
-    { href: "/faq", label: "Discord" },
+    { href: "https://discord.gg/R2TGFknA", label: "Discord" },
   ];
 
   return (

@@ -7,7 +7,7 @@ import Image from "next/image";
 import scooter from "@/public/images/scooter.png";
 import { useEffect } from "react";
 
-const ProgressBar = ({ timeleft }: { timeleft: number }) => {
+export const TimeProgressBar = ({ timeleft }: { timeleft: number }) => {
   return (
     <div className="w-full bg-gray-200 rounded-full h-1.5">
       <div
@@ -52,7 +52,7 @@ export default function RentalRequestCard() {
               </div>
             ) : null}
           </div>
-          <ProgressBar timeleft={timeLeft} />
+          <TimeProgressBar timeleft={timeLeft} />
         </div>
 
         {/* Header with avatar and name */}

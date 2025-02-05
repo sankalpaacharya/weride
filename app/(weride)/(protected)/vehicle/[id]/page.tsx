@@ -131,6 +131,7 @@ async function BikePage({ params }: PageProps) {
             bikeId={bikeId}
             ownerId={vehicleDetails.owner_id}
             availability={vehicleDetails.availability}
+            price={vehicleDetails.price}
           />
         </div>
         <div className="">

@@ -2,13 +2,14 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendMail = async (  ownerEmail: string,  
-  ownerName: string,  
-  renterName: string,  
-  hours: string,       
+export const sendMail = async (
+  ownerEmail: string,
+  ownerName: string,
+  renterName: string,
+  hours: string,
   location: string,
-  phone : string,
-  bikeName : string
+  phone: string,
+  bikeName: string,
 ) => {
   const { data, error } = await resend.emails.send({
     from: "Weride <team@weride.live>",
@@ -36,7 +37,7 @@ export const sendMail = async (  ownerEmail: string,
   });
   if (error) {
     console.error("Email Sending Failed: ");
-    return {error};
+    return { error };
   }
-  return {success : "Email sent successfully",data};
+  return { success: "Email sent successfully", data };
 };

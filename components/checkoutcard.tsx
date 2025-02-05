@@ -12,8 +12,6 @@ import { Input } from "./ui/input";
 import Link from "next/link";
 import RentalModal from "./rentalmodal";
 
-const PRICE_PER_HOUR = 40;
-
 const DURATION_OPTIONS = [
   { value: "1", label: "1 hour", displayDuration: "1 hour" },
   { value: "2", label: "2 hours", displayDuration: "2 hours" },
@@ -27,14 +25,17 @@ type CheckoutCardProps = {
   bikeId: string;
   ownerId: string;
   availability: string;
+  price: number;
 };
 
 export default function CheckoutCard({
   bikeId,
   ownerId,
   availability,
+  price,
 }: CheckoutCardProps) {
-  const [hours, setHours] = useState("1"); // Default to 1 hour
+  const PRICE_PER_HOUR = price;
+  const [hours, setHours] = useState("1");
   const totalPrice = PRICE_PER_HOUR * parseInt(hours);
 
   const {
@@ -62,7 +63,7 @@ export default function CheckoutCard({
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <div>
-            <span className="text-3xl font-bold text-primary">₹40</span>
+            <span className="text-3xl font-bold text-primary">₹{price}</span>
             <span className="text-sm text-gray-500 ml-2">per hour</span>
           </div>
           <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
@@ -98,7 +99,7 @@ export default function CheckoutCard({
           <div className="space-y-2">
             <Label className="flex items-center gap-2 text-base">
               <FaLocationDot className="text-primary" size={18} />
-              Pickup Location
+              Destination Location
             </Label>
             <Input
               type="text"

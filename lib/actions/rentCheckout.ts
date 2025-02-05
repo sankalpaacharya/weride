@@ -11,7 +11,7 @@ import {
   discordRenterMessageMaker,
   sendDiscordMessage,
 } from "../utils";
-import { sendMail } from '../../resend/mail';
+import { sendMail } from "../../resend/mail";
 
 interface RentCheckoutResult {
   success?: string;
@@ -27,7 +27,9 @@ interface OwnerInfo {
   name: string;
 }
 
-export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentCheckoutResult> {
+export async function rentCheckoutAction(
+  data: TcheckOutSchema,
+): Promise<RentCheckoutResult> {
   const supabase = await createClient();
 
   try {
@@ -55,7 +57,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentChe
     const [rentUser, vehicleInfo, ownerInfo] = await Promise.all([
       getUserById(user.id),
       fetchVehicleName(supabase, data.bikeId),
-      fetchOwnerInfo(supabase, data.ownerId)
+      fetchOwnerInfo(supabase, data.ownerId),
     ]);
 
     // Prepare order data
@@ -68,7 +70,10 @@ export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentChe
     };
 
     // Insert order
-    const { error: orderError } = await supabase.from("order").insert(insertData).select();
+    const { error: orderError } = await supabase
+      .from("order")
+      .insert(insertData)
+      .select();
     if (orderError) {
       return { error: "Cannot add data to the orders table" };
     }
@@ -78,13 +83,13 @@ export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentChe
 
     // Send email to owner
     await sendMail(
-      ownerInfo.email, 
-      ownerInfo.name, 
-      rentUser.name, 
-      data.hour, 
-      data.location, 
-      rentUser.phone, 
-      vehicleInfo.name
+      ownerInfo.email,
+      ownerInfo.name,
+      rentUser.name,
+      data.hour,
+      data.location,
+      rentUser.phone,
+      vehicleInfo.name,
     );
 
     // Send Discord message
@@ -94,7 +99,7 @@ export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentChe
         renterName: rentUser.name,
         location: data.location,
         hours: data.hour,
-      })
+      }),
     );
 
     return { success: "Your ride is confirmed" };
@@ -104,11 +109,14 @@ export async function rentCheckoutAction(data: TcheckOutSchema): Promise<RentChe
   }
 }
 
-async function fetchVehicleName(supabase: any, bikeId: string): Promise<VehicleInfo> {
+async function fetchVehicleName(
+  supabase: any,
+  bikeId: string,
+): Promise<VehicleInfo> {
   const { data, error } = await supabase
-    .from('vehicle')
-    .select('name')
-    .eq('id', bikeId)
+    .from("vehicle")
+    .select("name")
+    .eq("id", bikeId)
     .single();
 
   if (error) {
@@ -120,11 +128,14 @@ async function fetchVehicleName(supabase: any, bikeId: string): Promise<VehicleI
 }
 
 // Helper function to fetch owner information
-async function fetchOwnerInfo(supabase: any, ownerId: string): Promise<OwnerInfo> {
+async function fetchOwnerInfo(
+  supabase: any,
+  ownerId: string,
+): Promise<OwnerInfo> {
   const { data, error } = await supabase
-    .from('users')
-    .select('email,name')
-    .eq('id', ownerId)
+    .from("users")
+    .select("email,name")
+    .eq("id", ownerId)
     .single();
 
   if (error) {
