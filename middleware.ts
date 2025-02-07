@@ -4,16 +4,16 @@ import { createClient } from "./utils/supabase/server";
 import { getUserStatus } from "./lib/supabase/queries";
 
 
-  // const navLinks = [
-  //   { href: "/", label: "Home" },
-  //   { href: "/tos", label: "Terms of Use" },
-  //   { href: "/privacy", label: "Privacy" },
-  //   { href: "/aboutus", label: "About Us" },
-  //   { href: "/faq", label: "FAQ" },
-  //   { href: "https://discord.gg/R2TGFknA", label: "Discord" },
-  // ];
-
-const publicRoutes = ["/", "/login", "/signup", "/forgot-password","/faq","/tos","/aboutus","/privacy"];
+const publicRoutes = [
+  "/",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/faq",
+  "/tos",
+  "/aboutus",
+  "/privacy",
+];
 const notVerifiedAcountRoutes = ["/verify", "/"];
 
 export async function middleware(request: NextRequest) {

@@ -112,3 +112,13 @@ export const calculateRemainingTime = (
     seconds,
   };
 };
+
+
+export const calculatePendingTimeRemaining =  (createdAt:string):number=>{
+  const now = new Date()
+  const difference = differenceInSeconds(now,new Date(createdAt))
+  if(difference<=0){
+    return 0
+  }
+  return difference
+}

@@ -8,7 +8,6 @@ import {
 } from "../supabase/queries";
 import {
   discordOwnerRentRequest,
-  discordRenterMessageMaker,
   sendDiscordMessage,
 } from "../utils";
 import { sendMail } from "../../resend/mail";

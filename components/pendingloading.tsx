@@ -3,8 +3,9 @@ import bikeloading from "@/public/images/loadingbike.json";
 import Lottie from "lottie-react";
 import { TimeProgressBar } from "./rentalrequestcard";
 import { useEffect, useState } from "react";
-const PendingLoading = () => {
-  const [timeLeft, setTimeLeft] = useState(30 * 60);
+
+const PendingLoading = ({ timeRemaining }: { timeRemaining: number }) => {
+  const [timeLeft, setTimeLeft] = useState(1800 - timeRemaining);
 
   useEffect(() => {
     const requestTimer = setInterval(() => {

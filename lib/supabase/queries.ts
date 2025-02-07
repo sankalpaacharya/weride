@@ -76,7 +76,7 @@ export async function getVehicles(
     .limit(limit);
 
   const vechilesData =
-    data?.filter((vehicle) => vehicle.users.status != "pending") || [];
+    data?.filter((vehicle) => vehicle.users.status != "Pending") || [];
   if (error) {
     return { data: [], error: error.message };
   }
@@ -195,7 +195,7 @@ export async function getActiveRide() {
     .from("order")
     .select("*, owner_id(email,phone,name,id)")
     .eq("renter_id", userData.user?.id)
-    .in("status", ["active", "pending"])
+    .in("status", ["Active", "Pending"])
     .order("created_at", { ascending: false });
   if (error) throw error;
   if (data.length > 0) {

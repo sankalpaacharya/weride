@@ -10,7 +10,15 @@ import { IoTimeOutline } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { Input } from "./ui/input";
 import Link from "next/link";
+import { MapPinHouse } from "lucide-react";
 import RentalModal from "./rentalmodal";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const DURATION_OPTIONS = [
   { value: "1", label: "1 hour", displayDuration: "1 hour" },
@@ -37,7 +45,7 @@ export default function CheckoutCard({
   const PRICE_PER_HOUR = price;
   const [hours, setHours] = useState("1");
   const totalPrice = PRICE_PER_HOUR * parseInt(hours);
-
+  const [pickupLocation, setPickUpLocation] = useState();
   const {
     register,
     handleSubmit,
@@ -95,10 +103,10 @@ export default function CheckoutCard({
               ))}
             </div>
           </div>
-          {/* Pickup Location */}
+          {/* Destination Location */}
           <div className="space-y-2">
             <Label className="flex items-center gap-2 text-base">
-              <FaLocationDot className="text-primary" size={18} />
+              <MapPinHouse className="text-primary" size={18} />
               Destination Location
             </Label>
             <Input
@@ -113,6 +121,30 @@ export default function CheckoutCard({
               </p>
             )}
           </div>
+
+          {/*  Pick Up Location */}
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2 text-base">
+              <FaLocationDot className="text-primary" size={18} />
+              Pickup Location
+            </Label>
+            <Select>
+              <SelectTrigger className="w-full h-12">
+                <SelectValue placeholder="Pickup Location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="cafeteria_gate">Cafeteria Gate</SelectItem>
+                <SelectItem value="high_rise_gate">High Rise Gate</SelectItem>
+                <SelectItem value="ug_gate">UG Gate</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.location && (
+              <p className="text-destructive text-sm">
+                {errors.location.message}
+              </p>
+            )}
+          </div>
+
           {/* Price Breakdown */}
           <div className="bg-gray-50 p-4 rounded-lg space-y-3">
             <div className="flex justify-between text-sm">
@@ -145,6 +177,7 @@ export default function CheckoutCard({
                 Privacy Policy
               </Link>
             </p>
+
             <RentalModal
               formData={{
                 ...formData,

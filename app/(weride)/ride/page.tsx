@@ -9,16 +9,17 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { updateVehicleStatus } from "@/lib/supabase/queries";
 import PendingLoading from "@/components/pendingloading";
+import { calculatePendingTimeRemaining } from "@/lib/utils";
+
 const Page = async () => {
   const activeRideData = await getActiveRide();
   if (!activeRideData) {
     return redirect("/");
   }
-  console.log(activeRideData);
 
   async function cancelRide() {
     "use server";
-    if (activeRideData.status !== "active") {
+    if (activeRideData.status !== "Active") {
       await updateRideStatus(activeRideData.id, "Canceled");
       await updateVehicleStatus(activeRideData.bike_id, "Available");
       return redirect("/");
@@ -42,10 +43,14 @@ const Page = async () => {
             <p className="text-gray-600">Honda Activa 125</p>
           </div>
           {/* Time Remaining Card */}
-          {activeRideData.status === "active" ? (
+          {activeRideData.status === "Active" ? (
             <RideTimer initialTime={timeLeft} />
           ) : (
-            <PendingLoading />
+            <PendingLoading
+              timeRemaining={calculatePendingTimeRemaining(
+                activeRideData.created_at
+              )}
+            />
           )}
           {/* Meter Reading Card */}
           <Card className={`border-2 border-purple-100`}>
@@ -198,19 +203,20 @@ const Page = async () => {
             </CardContent>
           </Card>
           {/* Action Buttons */}
-          {(activeRideData.status === "active" ||
-            activeRideData.status === "pending") && (
+          {(activeRideData.status === "Active" ||
+            activeRideData.status === "Pending") && (
             <div className="flex gap-4 sticky bottom-6">
               <form
                 action={cancelRide}
-                className={`flex-1 h-15 bg-purple-900 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "active" ? "opacity-70" : null}`}
+                className={`flex-1 h-15 bg-purple-900 cursor-pointer transition-all hover:bg-purple-800 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "active" ? "opacity-70" : null}`}
               >
                 <button
                   type="submit"
-                  disabled={activeRideData.status === "active"}
+                  disabled={activeRideData.status === "Active"}
                   className="flex items-center gap-2"
                 >
                   <X size={20} />
+                  {/* {cancelLoading ? <X size={20} /> : <LoaderCircle />} */}
                   End Ride
                 </button>
               </form>

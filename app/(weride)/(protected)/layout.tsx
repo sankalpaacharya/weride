@@ -16,7 +16,7 @@ export default async function Layout({
       .from("order")
       .select("*")
       .eq("renter_id", user?.id)
-      .in("status", ["active", "pending"])
+      .in("status", ["Active", "Pending"])
       .single();
     if (rideData) {
       redirect("/ride");
