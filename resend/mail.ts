@@ -6,7 +6,7 @@ export const sendMail = async (
   ownerEmail: string,
   ownerName: string,
   renterName: string,
-  hours: string,
+  hours: number,
   location: string,
   phone: string,
   bikeName: string,

@@ -45,7 +45,8 @@ export default function CheckoutCard({
   const PRICE_PER_HOUR = price;
   const [hours, setHours] = useState("1");
   const totalPrice = PRICE_PER_HOUR * parseInt(hours);
-  const [pickupLocation, setPickUpLocation] = useState();
+  const [pickUpLocation, setPickUpLocation] =
+    useState<TcheckOutSchema["pickUpLocation"]>("High Rise Gate");
   const {
     register,
     handleSubmit,
@@ -54,11 +55,11 @@ export default function CheckoutCard({
     resolver: zodResolver(checkOutSchema),
     mode: "onChange",
   });
-
+  console.log(errors, isValid);
   const [formData, setFormData] = useState<TcheckOutSchema | {}>({});
 
   const submitForm = (data: TcheckOutSchema) => {
-    setFormData(data);
+    setFormData({ ...data, pickUpLocation });
   };
 
   const getDisplayDuration = (hrs: string) => {
@@ -106,7 +107,7 @@ export default function CheckoutCard({
           {/* Destination Location */}
           <div className="space-y-2">
             <Label className="flex items-center gap-2 text-base">
-              <MapPinHouse className="text-primary" size={18} />
+              <FaLocationDot className="text-primary" size={18} />
               Destination Location
             </Label>
             <Input
@@ -125,24 +126,24 @@ export default function CheckoutCard({
           {/*  Pick Up Location */}
           <div className="space-y-2">
             <Label className="flex items-center gap-2 text-base">
-              <FaLocationDot className="text-primary" size={18} />
+              <MapPinHouse className="text-primary" size={18} />
               Pickup Location
             </Label>
-            <Select>
+            <Select
+              defaultValue="High Rise Gate"
+              onValueChange={(value: TcheckOutSchema["pickUpLocation"]) =>
+                setPickUpLocation(value)
+              }
+            >
               <SelectTrigger className="w-full h-12">
                 <SelectValue placeholder="Pickup Location" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="cafeteria_gate">Cafeteria Gate</SelectItem>
-                <SelectItem value="high_rise_gate">High Rise Gate</SelectItem>
-                <SelectItem value="ug_gate">UG Gate</SelectItem>
+                <SelectItem value="High Rise Gate">High Rise Gate</SelectItem>
+                <SelectItem value="Cafeteria Gate">Cafeteria Gate</SelectItem>
+                <SelectItem value="Boys UG Gate">Boys UG Gate</SelectItem>
               </SelectContent>
             </Select>
-            {errors.location && (
-              <p className="text-destructive text-sm">
-                {errors.location.message}
-              </p>
-            )}
           </div>
 
           {/* Price Breakdown */}
@@ -183,7 +184,8 @@ export default function CheckoutCard({
                 ...formData,
                 bikeId,
                 ownerId,
-                hour: hours,
+                hour: parseInt(hours),
+                pickUpLocation,
               }}
             >
               <Button

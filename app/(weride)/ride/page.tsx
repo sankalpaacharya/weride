@@ -1,4 +1,12 @@
-import { X, MapPin, Calendar, Phone, Mail, Gauge } from "lucide-react";
+import {
+  X,
+  MapPin,
+  Calendar,
+  Phone,
+  Mail,
+  Gauge,
+  MapPinHouse,
+} from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import RideTimer from "@/components/ridetimer";
 import Image from "next/image";
@@ -164,6 +172,15 @@ const Page = async () => {
                     <div className="font-medium">Rental Period</div>
                     <div className="text-gray-600">
                       {activeRideData.rent_hour} hour(s)
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPinHouse className="text-purple-900" />
+                  <div>
+                    <div className="font-medium">Pickup Location</div>
+                    <div className="text-gray-600">
+                      {activeRideData.pickup_location}
                     </div>
                   </div>
                 </div>

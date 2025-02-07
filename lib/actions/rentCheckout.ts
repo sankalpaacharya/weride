@@ -6,10 +6,7 @@ import {
   getVehicleStatus,
   updateVehicleStatus,
 } from "../supabase/queries";
-import {
-  discordOwnerRentRequest,
-  sendDiscordMessage,
-} from "../utils";
+import { discordOwnerRentRequest, sendDiscordMessage } from "../utils";
 import { sendMail } from "../../resend/mail";
 
 interface RentCheckoutResult {
@@ -66,6 +63,7 @@ export async function rentCheckoutAction(
       bike_id: data.bikeId,
       location: data.location,
       rent_hour: data.hour,
+      pickup_location:data.pickUpLocation
     };
 
     // Insert order

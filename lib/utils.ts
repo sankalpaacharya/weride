@@ -56,7 +56,7 @@ Sit back, relax, and enjoy your ride! 🚘✨
 type NotificationTextProps = {
   renterName: string;
   location: string;
-  hours: string;
+  hours: number;
 };
 
 export const discordOwnerRentRequest = ({
@@ -113,12 +113,11 @@ export const calculateRemainingTime = (
   };
 };
 
-
-export const calculatePendingTimeRemaining =  (createdAt:string):number=>{
-  const now = new Date()
-  const difference = differenceInSeconds(now,new Date(createdAt))
-  if(difference<=0){
-    return 0
+export const calculatePendingTimeRemaining = (createdAt: string): number => {
+  const now = new Date();
+  const difference = differenceInSeconds(now, new Date(createdAt));
+  if (difference <= 0) {
+    return 0;
   }
-  return difference
-}
+  return difference;
+};

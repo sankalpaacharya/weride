@@ -3,7 +3,6 @@ import { updateSession } from "@/utils/supabase/middleware";
 import { createClient } from "./utils/supabase/server";
 import { getUserStatus } from "./lib/supabase/queries";
 
-
 const publicRoutes = [
   "/",
   "/login",

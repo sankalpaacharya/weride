@@ -36,7 +36,9 @@ export default function RentalModal({ children, formData }: RentalModal) {
   };
 
   const submitForm = async (data: TcheckOutSchema | {}) => {
+    console.log(data);
     const result = checkOutSchema.safeParse(data);
+    console.log(result);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
@@ -50,6 +52,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
     if (response.success) {
       toast.success(response.success);
       setIsLoading(false);
+      window.location.href = "/ride";
       return;
     }
   };
