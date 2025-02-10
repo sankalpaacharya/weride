@@ -30,17 +30,17 @@ import {
 } from "@/components/ui/table";
 import { Timer, Search } from "lucide-react";
 
+type Order = {
+  id: string;
+  bike_id: { name: string };
+  renter_id: { name: string };
+  status: string;
+  initial_meter_reading: string;
+  finalReading: string;
+  requestTime: string;
+};
 type Props = {
-  orders: {
-    id: string;
-    vehicle: string;
-    customer: string;
-    status: string;
-    initialReading: string;
-    finalReading: string;
-    requestTime: string;
-    timeLeft: string;
-  }[];
+  orders: Order[];
 };
 
 export default function OrdersTable({ orders }: Props) {
@@ -57,7 +57,7 @@ export default function OrdersTable({ orders }: Props) {
     }
   };
 
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -105,22 +105,24 @@ export default function OrdersTable({ orders }: Props) {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {orders.map((order: any) => (
+                      {orders.map((order: Order) => (
                         <TableRow key={order.id}>
                           <TableCell>
-                            <div className="font-medium">{order.id}</div>
+                            <div className="font-medium">
+                              {order.id.split("-")[0]}
+                            </div>
                             <div className="text-sm text-gray-500 md:hidden">
-                              {order.vehicle}
+                              {order.bike_id.name}
                             </div>
                             <div className="text-sm text-gray-500 sm:hidden">
-                              {order.customer}
+                              {order.renter_id.name}
                             </div>
                           </TableCell>
                           <TableCell className="hidden md:table-cell">
-                            {order.vehicle}
+                            {order.bike_id.name}
                           </TableCell>
                           <TableCell className="hidden sm:table-cell">
-                            {order.customer}
+                            {order.renter_id.name}
                           </TableCell>
                           <TableCell>
                             <Badge
@@ -132,7 +134,7 @@ export default function OrdersTable({ orders }: Props) {
                           <TableCell className="hidden lg:table-cell">
                             <div className="flex items-center gap-2 text-gray-600">
                               <Timer className="h-4 w-4" />
-                              {order.timeLeft}
+                              20
                             </div>
                           </TableCell>
                           <TableCell>
@@ -149,7 +151,7 @@ export default function OrdersTable({ orders }: Props) {
                               <DialogContent className="sm:max-w-[425px]">
                                 <DialogHeader>
                                   <DialogTitle>
-                                    Manage Order {order.id}
+                                    Manage Order {order.id.split("-")[0]}
                                   </DialogTitle>
                                 </DialogHeader>
                                 <div className="space-y-4 py-4">
@@ -162,13 +164,13 @@ export default function OrdersTable({ orders }: Props) {
                                         <SelectValue />
                                       </SelectTrigger>
                                       <SelectContent>
-                                        <SelectItem value="active">
+                                        <SelectItem value="Active">
                                           Active
                                         </SelectItem>
-                                        <SelectItem value="pending">
+                                        <SelectItem value="Pending">
                                           Pending
                                         </SelectItem>
-                                        <SelectItem value="canceled">
+                                        <SelectItem value="Canceled">
                                           Canceled
                                         </SelectItem>
                                       </SelectContent>
@@ -181,7 +183,7 @@ export default function OrdersTable({ orders }: Props) {
                                     <Input
                                       type="number"
                                       placeholder="Enter initial reading"
-                                      defaultValue={order.initialReading}
+                                      defaultValue={order.initial_meter_reading}
                                     />
                                   </div>
                                   <div className="space-y-2">

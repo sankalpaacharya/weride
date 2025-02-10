@@ -143,5 +143,3 @@ async function fetchOwnerInfo(
 
   return data;
 }
-
-

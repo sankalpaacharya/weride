@@ -1,28 +1,20 @@
+import { getAuthUserId, getOrdersByStatus } from "@/lib/supabase/queries";
 import OrdersTable from "./components/orders-table";
+import { redirect } from "next/navigation";
 
-const orders = [
-  {
-    id: "ORD001",
-    vehicle: "Bullet Raja",
-    customer: "John Doe",
-    status: "active",
-    initialReading: "12450",
-    finalReading: "",
-    requestTime: "2024-02-09T10:00:00",
-    timeLeft: "25:30",
-  },
-  {
-    id: "ORD002",
-    vehicle: "Activa 6G",
-    customer: "Jane Smith",
-    status: "pending",
-    initialReading: "",
-    finalReading: "",
-    requestTime: "2024-02-09T09:45:00",
-    timeLeft: "15:20",
-  },
-];
+// make a object case convertor
+export default async function AdminDashboard() {
+  const allowedUsers = [
+    "78eb5773-61b3-43ef-a2fc-c68518f8eaf1",
+    "fa9224ee-c17b-4be7-aab6-bc73515b1212",
+  ];
 
-export default function AdminDashboard() {
-  return <OrdersTable orders={orders} />;
+  const id = await getAuthUserId();
+  if (!allowedUsers.includes(id)) {
+    return redirect("/");
+  }
+
+  const allOrders = await getOrdersByStatus(["Active", "Pending", "Canceled"]);
+
+  return <OrdersTable orders={allOrders} />;
 }
