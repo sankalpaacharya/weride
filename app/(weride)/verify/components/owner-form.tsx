@@ -28,9 +28,11 @@ import {
 } from "@/lib/schemas/ownerIdentitySchema";
 import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
 import toast from "react-hot-toast";
+import { LoaderCircle } from "lucide-react";
 
 export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -41,6 +43,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
   });
 
   const submitForm = async (data: TownerIdentitySchema) => {
+    setIsLoading(true);
     if (
       fuelType == "petrol" ||
       fuelType == "cycle" ||
@@ -69,10 +72,12 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     const response = await ownerIdentityAction(ownerFormData);
     if (response.error) {
       toast.error(response.error);
+      setIsLoading(false);
       return;
     }
     if (response.success) {
       toast.success(response.success);
+      setIsLoading(false);
       return;
     }
   };
@@ -340,8 +345,12 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Button
                 disabled={isSubmitting || isPending}
                 type="submit"
-                className="w-full bg-main hover:bg-mainhover"
+                className="w-full flex gap-2 bg-main hover:bg-mainhover"
               >
+                {isLoading ? (
+                  <LoaderCircle className="animate-spin" size={15} />
+                ) : null}
+
                 {isPending ? "Waiting for Verification" : "Verify"}
               </Button>
             </div>
