@@ -63,7 +63,7 @@ export async function rentCheckoutAction(
       bike_id: data.bikeId,
       location: data.location,
       rent_hour: data.hour,
-      pickup_location:data.pickUpLocation
+      pickup_location:data.pickUpLocation,
     };
 
     // Insert order
@@ -84,9 +84,10 @@ export async function rentCheckoutAction(
       ownerInfo.name,
       rentUser.name,
       data.hour,
-      data.location,
+      data.pickUpLocation,
       rentUser.phone,
       vehicleInfo.name,
+      data.location
     );
 
     // Send Discord message
