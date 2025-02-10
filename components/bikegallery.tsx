@@ -24,9 +24,9 @@ export default function BikeGallery({ bikeId }: { bikeId: string }) {
     "https://cxlnoycrdkdkdezryaph.supabase.co/storage/v1/object/public/Vehicle/" +
     bikeId;
   const images = [
-    baseUrl + "_front.jpeg",
-    baseUrl + "_side.jpeg",
-    baseUrl + "_back.jpeg",
+    baseUrl + "_front.png",
+    baseUrl + "_side.png",
+    baseUrl + "_back.png",
   ];
 
   const handleThumbnailClick = (index: number) => {

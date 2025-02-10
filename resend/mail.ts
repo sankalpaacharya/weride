@@ -10,33 +10,58 @@ export const sendMail = async (
   location: string,
   phone: string,
   bikeName: string,
+  destination: string
 ) => {
   const { data, error } = await resend.emails.send({
     from: "Weride <team@weride.live>",
     to: [ownerEmail],
-    subject: "Request a Book",
-    html: `<div style="background: linear-gradient(to right, #1f2937, #374151); padding: 40px; color: #f3f4f6; min-height: 100vh; font-family: Arial, sans-serif;">
-  <h1 style="margin-bottom: 48px; text-align: center; font-size: 32px; font-weight: bold;">Rental Request</h1>
-  <div style="border-radius: 16px; background: rgba(167, 139, 250, 0.2); padding: 24px; font-family: monospace;">
-    <p style="padding-left: 28px; margin-top: 28px; text-align: left;">Hi <span style="font-weight: 800;">${ownerName},</span></p>
-    
-    <p style="padding-left: 28px; margin-top: 28px; text-align: left;">
-      <span style="font-weight: 800;">${renterName}</span> has requested to rent your vehicle 
-      <strong>${bikeName}</strong> for <strong>${hours}</strong> hours.
-    </p>
-    
-    <p style="padding-left: 28px; margin-top: 28px; text-align: left;">📍 Pickup Location: <strong>${location}</strong></p>
-    <p style="padding-left: 28px; margin-top: 8px; text-align: left;">📞 Renter’s Contact: <strong>${phone}</strong></p>
-    
-    <p style="padding-left: 28px; margin-top: 20px; text-align: left;">⏳ Please respond to this request within <strong>20 mins.</strong></p>
-    
-    <p style="padding-left: 28px; margin-top: 20px; text-align: left; color: #9ca3af; font-weight: 800;">Cheers,</p>
-    <p style="padding-left: 28px; text-align: left; margin-bottom: 28px; color: #9ca3af; font-weight: 800;">Team Weride !!</p>
+    subject: `🚀 New Rental Request for ${bikeName}!`,
+    html: `
+  <div style="background: #f4f4f4; padding: 20px; font-family: Arial, sans-serif; color: #333; box-sizing: border-box;">
+    <div style="max-width: 600px; width: 100%; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 24px; box-sizing: border-box;">
+      
+      <h2 style="text-align: center; color: #6A0DAD; margin-bottom: 16px;">🚲 Rental Request</h2>
+      
+      <p style="font-size: 16px; color: #444; line-height: 1.6;">
+        Hi <strong>${ownerName}</strong>,
+      </p>
+      
+      <p style="font-size: 16px; color: #444; line-height: 1.6;">
+        <strong>${renterName}</strong> wants to rent your <strong style="color: #6A0DAD;">${bikeName}</strong> for 
+        <strong style="color: #6A0DAD;">${hours} hours</strong>.
+      </p>
+  
+      <div style="background: #f9f9f9; padding: 16px; border-radius: 8px; margin: 16px 0; box-sizing: border-box;">
+        <p style="margin: 0; font-size: 15px;"><strong>📍 Pickup:</strong> ${location}</p>
+        <p style="margin: 8px 0 0 0; font-size: 15px;"><strong>📌 Destination:</strong> ${destination}</p>
+        <p style="margin: 8px 0 0 0; font-size: 15px;"><strong>📞 Contact:</strong> ${phone}</p>
+      </div>
+  
+      <p style="font-size: 16px; color: #D9534F; font-weight: bold; margin-top: 20px;">
+        ⏳ Please respond within <strong>20 minutes</strong>.
+      </p>
+  
+      <!-- Button Container with improved mobile styling -->
+      <div style="text-align: center; margin-top: 25px;">
+        <a href="#"
+           style="background: #6A0DAD; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; font-weight: bold; width: 150px; margin: 5px;">
+           ✅ Approve
+        </a>
+        <a href="#"
+           style="background: #D9534F; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; width: 150px; margin: 5px; font-weight: bold;">
+           ❌ Decline
+        </a>
+      </div>
+  
+      <p style="text-align: center; color: #888; font-size: 14px; margin-top: 30px;">
+        🚀 Happy Riding,<br><strong>Team Weride</strong>
+      </p>
+    </div>
   </div>
-</div>`,
+  `,
   });
   if (error) {
-    console.error("Email Sending Failed: ");
+    console.error("Email Sending Failed:", error);
     return { error };
   }
   return { success: "Email sent successfully", data };
