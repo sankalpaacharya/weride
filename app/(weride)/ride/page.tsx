@@ -36,7 +36,7 @@ const Page = async () => {
   const timeLeft = calculateRemainingTime(
     activeRideData.accepted_at,
     activeRideData.rent_hour,
-    activeRideData.status
+    activeRideData.status,
   );
 
   return (
@@ -56,7 +56,7 @@ const Page = async () => {
           ) : (
             <PendingLoading
               timeRemaining={calculatePendingTimeRemaining(
-                activeRideData.created_at
+                activeRideData.created_at,
               )}
             />
           )}
