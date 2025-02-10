@@ -210,3 +210,23 @@ export async function updateRideStatus(rideId: string, status: string) {
 }
 
 export async function updateProfile() {}
+
+
+export async function updateOrder({status,initialMeterReading,finalMeterReading}:any){
+  const supabase = await createClient()
+  const updateData = {
+    status,
+    initial_meter_reading:initialMeterReading,
+    final_meter_reading:finalMeterReading
+  }
+  const {error} = await supabase.from("order").update(updateData)
+  if (error) throw error 
+}
+
+
+export async function getOrdersByStatus(status:string[]){
+  const supabase = await createClient() 
+  const {data,error} = await supabase.from("order").select("*").in("status",status)
+  if(error) throw error
+  return data
+}

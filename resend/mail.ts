@@ -10,7 +10,7 @@ export const sendMail = async (
   location: string,
   phone: string,
   bikeName: string,
-  destination: string
+  destination: string,
 ) => {
   const { data, error } = await resend.emails.send({
     from: "Weride <team@weride.live>",
