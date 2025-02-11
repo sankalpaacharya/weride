@@ -212,17 +212,21 @@ export async function updateRideStatus(rideId: string, status: string) {
 export async function updateProfile() {}
 
 export async function updateOrder({
+  id,
   status,
-  initialMeterReading,
-  finalMeterReading,
+  initial_meter_reading,
+  final_meter_reading,
 }: any) {
   const supabase = await createClient();
-  const updateData = {
+  const updateData:any = {
     status,
-    initial_meter_reading: initialMeterReading,
-    final_meter_reading: finalMeterReading,
+    initial_meter_reading,
+    final_meter_reading,
   };
-  const { error } = await supabase.from("order").update(updateData);
+  if (status==="Active"){
+    updateData["accepted_at"] = new Date()
+  }
+  const { error } = await supabase.from("order").update(updateData).eq("id",id);
   if (error) throw error;
 }
 

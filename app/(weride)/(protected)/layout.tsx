@@ -12,7 +12,7 @@ export default async function Layout({
     error: _,
   } = await supabase.auth.getUser();
   if (user) {
-    const { data: rideData, error } = await supabase
+    const { data: rideData } = await supabase
       .from("order")
       .select("*")
       .eq("renter_id", user?.id)

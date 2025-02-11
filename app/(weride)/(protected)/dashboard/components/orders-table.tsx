@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { updateOrderAction } from "../actions/updateOrder";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
@@ -10,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,6 +31,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Timer, Search } from "lucide-react";
+import toast from "react-hot-toast";
 
 type Order = {
   id: string;
@@ -39,25 +42,63 @@ type Order = {
   finalReading: string;
   requestTime: string;
 };
+
 type Props = {
   orders: Order[];
 };
 
+const STATUS_OPTIONS = [
+  { value: "Active", label: "Active" },
+  { value: "Pending", label: "Pending" },
+  { value: "Canceled", label: "Canceled" },
+] as const;
+
+const STATUS_STYLES = {
+  Active: "bg-green-100 text-green-800 hover:bg-green-100",
+  Pending: "bg-yellow-100 text-yellow-800 hover:bg-yellow-100",
+  Canceled: "bg-red-100 text-red-800 hover:bg-red-100",
+  default: "bg-gray-100 text-gray-800 hover:bg-gray-100",
+} as const;
+
 export default function OrdersTable({ orders }: Props) {
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const getStatusBadgeVariant = (status: string) => {
-    switch (status) {
-      case "active":
-        return "bg-green-100 text-green-800 hover:bg-green-100";
-      case "pending":
-        return "bg-yellow-100 text-yellow-800 hover:bg-yellow-100";
-      case "canceled":
-        return "bg-red-100 text-red-800 hover:bg-red-100";
-      default:
-        return "bg-gray-100 text-gray-800 hover:bg-gray-100";
+    return (
+      STATUS_STYLES[status as keyof typeof STATUS_STYLES] ||
+      STATUS_STYLES.default
+    );
+  };
+
+  const handleOrderUpdate = (field: string, value: string) => {
+    setSelectedOrder((prev) => (prev ? { ...prev, [field]: value } : null));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!selectedOrder) return;
+
+    try {
+      console.log(selectedOrder);
+      const response = await updateOrderAction(selectedOrder);
+      if (!response.error) {
+        toast.success("Order updated successfully");
+      } else {
+        toast.error("Failed to update order");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An unexpected error occurred");
     }
   };
 
-  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const filteredOrders = orders.filter(
+    (order) =>
+      order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.bike_id.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      order.renter_id.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -67,12 +108,16 @@ export default function OrdersTable({ orders }: Props) {
             Orders Dashboard
           </h1>
           <div className="relative w-64">
-            <Input placeholder="Search orders..." className="pl-8" />
+            <Input
+              placeholder="Search orders..."
+              className="pl-8"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
           </div>
         </div>
 
-        {/* Orders Table */}
         <Card>
           <CardHeader>
             <CardTitle>Orders Management</CardTitle>
@@ -80,10 +125,11 @@ export default function OrdersTable({ orders }: Props) {
           <CardContent>
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
-                <TabsTrigger value="pending">Pending</TabsTrigger>
-                <TabsTrigger value="canceled">Canceled</TabsTrigger>
+                {["all", ...STATUS_OPTIONS.map((s) => s.value)].map((tab) => (
+                  <TabsTrigger key={tab} value={tab}>
+                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  </TabsTrigger>
+                ))}
               </TabsList>
               <TabsContent value="all" className="mt-4">
                 <div className="rounded-md border">
@@ -105,7 +151,7 @@ export default function OrdersTable({ orders }: Props) {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {orders.map((order: Order) => (
+                      {filteredOrders.map((order) => (
                         <TableRow key={order.id}>
                           <TableCell>
                             <div className="font-medium">
@@ -154,52 +200,78 @@ export default function OrdersTable({ orders }: Props) {
                                     Manage Order {order.id.split("-")[0]}
                                   </DialogTitle>
                                 </DialogHeader>
-                                <div className="space-y-4 py-4">
-                                  <div className="space-y-2">
-                                    <label className="text-sm font-medium">
-                                      Status
-                                    </label>
-                                    <Select defaultValue={order.status}>
-                                      <SelectTrigger>
-                                        <SelectValue />
-                                      </SelectTrigger>
-                                      <SelectContent>
-                                        <SelectItem value="Active">
-                                          Active
-                                        </SelectItem>
-                                        <SelectItem value="Pending">
-                                          Pending
-                                        </SelectItem>
-                                        <SelectItem value="Canceled">
-                                          Canceled
-                                        </SelectItem>
-                                      </SelectContent>
-                                    </Select>
+
+                                <form onSubmit={handleSubmit}>
+                                  <div className="space-y-4 py-4">
+                                    <div className="space-y-2">
+                                      <label className="text-sm font-medium">
+                                        Status
+                                      </label>
+                                      <Select
+                                        defaultValue={order.status}
+                                        onValueChange={(value) =>
+                                          handleOrderUpdate("status", value)
+                                        }
+                                      >
+                                        <SelectTrigger>
+                                          <SelectValue placeholder="Select Status" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          {STATUS_OPTIONS.map((status) => (
+                                            <SelectItem
+                                              key={status.value}
+                                              value={status.value}
+                                            >
+                                              {status.label}
+                                            </SelectItem>
+                                          ))}
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
+                                    <div className="space-y-2">
+                                      <label className="text-sm font-medium">
+                                        Initial Meter Reading
+                                      </label>
+                                      <Input
+                                        type="number"
+                                        placeholder="Enter initial reading"
+                                        defaultValue={
+                                          order.initial_meter_reading
+                                        }
+                                        onChange={(e) =>
+                                          handleOrderUpdate(
+                                            "initial_meter_reading",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div className="space-y-2">
+                                      <label className="text-sm font-medium">
+                                        Final Meter Reading
+                                      </label>
+                                      <Input
+                                        type="number"
+                                        placeholder="Enter final reading"
+                                        defaultValue={order.finalReading}
+                                        onChange={(e) =>
+                                          handleOrderUpdate(
+                                            "final_meter_reading",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </div>
                                   </div>
-                                  <div className="space-y-2">
-                                    <label className="text-sm font-medium">
-                                      Initial Meter Reading
-                                    </label>
-                                    <Input
-                                      type="number"
-                                      placeholder="Enter initial reading"
-                                      defaultValue={order.initial_meter_reading}
-                                    />
-                                  </div>
-                                  <div className="space-y-2">
-                                    <label className="text-sm font-medium">
-                                      Final Meter Reading
-                                    </label>
-                                    <Input
-                                      type="number"
-                                      placeholder="Enter final reading"
-                                      defaultValue={order.finalReading}
-                                    />
-                                  </div>
-                                </div>
-                                <DialogFooter>
-                                  <Button type="submit">Save changes</Button>
-                                </DialogFooter>
+
+                                  <DialogFooter>
+                                    <DialogClose asChild>
+                                      <Button type="submit">
+                                        Save changes
+                                      </Button>
+                                    </DialogClose>
+                                  </DialogFooter>
+                                </form>
                               </DialogContent>
                             </Dialog>
                           </TableCell>
