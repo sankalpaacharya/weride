@@ -54,7 +54,7 @@ export default function RentalCard({
           <Image
             className="rounded-t-lg object-cover brightness-50 absolute inset-0"
             alt={bikeDetails.name}
-            src={`/images/${imageName}`}
+            src={`https://cxlnoycrdkdkdezryaph.supabase.co/storage/v1/object/public/Vehicle/${bikeDetails.id}_side.png`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
