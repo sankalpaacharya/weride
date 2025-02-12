@@ -211,13 +211,11 @@ export async function updateRideStatus(rideId: string, status: string) {
 
 export async function updateProfile() {}
 
-
-
 export async function getOrdersByStatus(status: string[]) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("order")
-    .select("*,renter_id(name),bike_id(name)")
+    .select("*,renter_id(name),bike_id(name)").order('created_at', { ascending: false })
     .in("status", status);
   if (error) throw error;
   return data;

@@ -1,15 +1,17 @@
 import { getAuthUserId, getOrdersByStatus } from "@/lib/supabase/queries";
-import OrdersTable from "./components/orders-table";
+import OrdersTable from "@/app/features/dashboard/components/orders-table";
 import { redirect } from "next/navigation";
+import { getAuthUserEmail } from "@/app/features/dashboard/db/orders";
 
 // make a object case convertor
 export default async function AdminDashboard() {
   const allowedUsers = [
-    "78eb5773-61b3-43ef-a2fc-c68518f8eaf1",
-    "fa9224ee-c17b-4be7-aab6-bc73515b1212",
+    "sankalp.ace22@sot.pdpu.ac.in",
+    "vinit.tce22@sot.pdpu.ac.in",
+    "nishit.bce22@sot.pdpu.ac.in",
   ];
 
-  const id = await getAuthUserId();
+  const id = await getAuthUserEmail();
   if (!allowedUsers.includes(id)) {
     return redirect("/");
   }

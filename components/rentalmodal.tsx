@@ -140,7 +140,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
                     or evidence of reckless driving may result in immediate
                     termination of the rental agreement, forfeiture of any
                     deposits, and a permanent ban from our platform.{" "}
-                    <Link className="underline" href="/">
+                    <Link className="underline" href="/tos">
                       (read more)
                     </Link>
                   </div>
