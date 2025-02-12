@@ -22,7 +22,6 @@ export async function updateOrder({
   if (error) throw error;
 }
 
-
 export async function getAuthUserEmail(): Promise<string> {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
