@@ -1,18 +1,18 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Timer } from "lucide-react";
-import { CalendarCheck } from "lucide-react";
+import { Timer, CalendarCheck } from "lucide-react";
+
 type Props = {};
 
 const UnavailableTime = {
-  Monday: [{ start: "10:30", end: "11:00" }],
-  Tueday: [{ start: "10:30", end: "11:00" }],
-  Wednesday: [{ start: "10:30", end: "11:00" }],
-  Thursday: [{ start: "10:30", end: "11:00" }],
-  Friday: [{ start: "10:30", end: "11:00" }],
-  Saturday: [{ start: "10:30", end: "11:00" }],
-  Sunday: [{ start: "10:30", end: "11:00" }],
+  Monday: [],
+  Tueday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: [],
+  Saturday: [],
+  Sunday: [],
 };
 
 type Day = keyof typeof UnavailableTime;
@@ -27,27 +27,31 @@ export default function UnavailableTimeSlot({}: Props) {
             <span>Unavailable time slot</span>
           </p>
         </CardTitle>
-        <CardContent className="space-y-3">
-          {Object.keys(UnavailableTime).map((day) => {
-            const timeSlots = UnavailableTime[day as Day];
-            return (
-              <div key={day} className="space-y-1">
-                <p className="font-semibold flex space-x-1 items-center">
-                  <CalendarCheck size={15} />
-                  <span>{day}</span>
-                </p>
-                <div className="space-y-1">
-                  {timeSlots.map((slot, index) => (
-                    <Button variant={"outline"} key={index}>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {Object.keys(UnavailableTime).map((day) => {
+          const timeSlots = UnavailableTime[day as Day];
+          return (
+            <div key={day} className="space-y-1">
+              <p className="font-semibold flex space-x-1 items-center">
+                <CalendarCheck size={15} />
+                <span>{day}</span>
+              </p>
+              <div className="space-y-1">
+                {timeSlots.length > 0 ? (
+                  timeSlots.map((slot: any, index) => (
+                    <Button variant="outline" key={index}>
                       {slot.start} - {slot.end}
                     </Button>
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  <span className="text-gray-500">No slot</span>
+                )}
               </div>
-            );
-          })}
-        </CardContent>
-      </CardHeader>
+            </div>
+          );
+        })}
+      </CardContent>
     </Card>
   );
 }
