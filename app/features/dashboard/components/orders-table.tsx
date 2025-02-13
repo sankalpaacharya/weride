@@ -39,7 +39,7 @@ type Order = {
   renter_id: { name: string };
   status: string;
   initial_meter_reading: string;
-  finalReading: string;
+  final_meter_reading: string;
   requestTime: string;
 };
 
@@ -97,7 +97,7 @@ export default function OrdersTable({ orders }: Props) {
     (order) =>
       order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.bike_id.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.renter_id.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      order.renter_id.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -241,7 +241,7 @@ export default function OrdersTable({ orders }: Props) {
                                         onChange={(e) =>
                                           handleOrderUpdate(
                                             "initial_meter_reading",
-                                            e.target.value,
+                                            e.target.value
                                           )
                                         }
                                       />
@@ -253,17 +253,16 @@ export default function OrdersTable({ orders }: Props) {
                                       <Input
                                         type="number"
                                         placeholder="Enter final reading"
-                                        defaultValue={order.finalReading}
+                                        defaultValue={order.final_meter_reading}
                                         onChange={(e) =>
                                           handleOrderUpdate(
                                             "final_meter_reading",
-                                            e.target.value,
+                                            e.target.value
                                           )
                                         }
                                       />
                                     </div>
                                   </div>
-
                                   <DialogFooter>
                                     <DialogClose asChild>
                                       <Button type="submit">
