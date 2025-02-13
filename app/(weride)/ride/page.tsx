@@ -12,12 +12,15 @@ import RideTimer from "@/components/ridetimer";
 import Image from "next/image";
 import QrCode from "@/public/images/QRimage.jpeg";
 import { getActiveRide, updateRideStatus } from "@/lib/supabase/queries";
-import { calculateRemainingTime } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import { updateVehicleStatus } from "@/lib/supabase/queries";
 import PendingLoading from "@/components/pendingloading";
-import { calculatePendingTimeRemaining } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import CancelRideButton from "./components/cancel-ride-button";
+import {
+  calculatePendingTimeRemaining,
+  calculateRemainingTime,
+} from "@/lib/utils";
 
 const Page = async () => {
   const activeRideData = await getActiveRide();
@@ -29,14 +32,14 @@ const Page = async () => {
     "use server";
     if (activeRideData.status !== "Active") {
       await updateRideStatus(activeRideData.id, "Canceled");
-      await updateVehicleStatus(activeRideData.bike_id, "Available");
+      await updateVehicleStatus(activeRideData.bike_id.id, "Available");
       return redirect("/");
     }
   }
   const timeLeft = calculateRemainingTime(
     activeRideData.accepted_at,
     activeRideData.rent_hour,
-    activeRideData.status,
+    activeRideData.status
   );
 
   return (
@@ -56,7 +59,7 @@ const Page = async () => {
           ) : (
             <PendingLoading
               timeRemaining={calculatePendingTimeRemaining(
-                activeRideData.created_at,
+                activeRideData.created_at
               )}
             />
           )}
@@ -227,15 +230,9 @@ const Page = async () => {
                 action={cancelRide}
                 className={`flex-1 h-15 bg-purple-900 cursor-pointer transition-all hover:bg-purple-800 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "active" ? "opacity-70" : null}`}
               >
-                <button
-                  type="submit"
-                  disabled={activeRideData.status === "Active"}
-                  className="flex items-center gap-2"
-                >
-                  <X size={20} />
-                  {/* {cancelLoading ? <X size={20} /> : <LoaderCircle />} */}
-                  End Ride
-                </button>
+                <CancelRideButton
+                  isActive={activeRideData.status === "Active"}
+                />
               </form>
               <Button
                 className="flex-1 h-15 border-2  py-4 border-primary"

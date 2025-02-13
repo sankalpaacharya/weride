@@ -193,7 +193,7 @@ export async function getActiveRide() {
   const { data: userData } = await supabase.auth.getUser();
   const { data, error } = await supabase
     .from("order")
-    .select("*, owner_id(email,phone,name,id)")
+    .select("*, owner_id(email,phone,name,id), bike_id(id,name)")
     .eq("renter_id", userData.user?.id)
     .in("status", ["Active", "Pending"])
     .order("created_at", { ascending: false });

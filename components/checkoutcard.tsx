@@ -113,7 +113,7 @@ export default function CheckoutCard({
             <Input
               type="text"
               className="h-12"
-              placeholder="Enter your pickup location"
+              placeholder="Enter your destination location"
               {...register("location")}
             />
             {errors.location && (

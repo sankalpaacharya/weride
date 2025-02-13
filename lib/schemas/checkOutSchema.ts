@@ -5,7 +5,7 @@ export const checkOutSchema = z.object({
   location: z
     .string()
     .trim()
-    .min(10, "minimum length should be of 10 characters")
+    .min(5, "minimum length should be of 5 characters")
     .max(100, "location can't be more than 100 characters"),
   pickUpLocation: z
     .enum(["Boys UG Gate", "Cafeteria Gate", "High Rise Gate"])
