@@ -41,6 +41,7 @@ export async function renterFormAction(data: any) {
         uploadImage(authData.user.id, formData.collegeIDPhoto, "CollegeID"),
         uploadImage(authData.user.id, formData.hostelIDPhoto, "HostelID"),
         uploadImage(authData.user.id, formData.profilePhoto, "Profile"),
+        uploadImage(authData.user.id,formData.drivingLicencePhoto,"DrivingLicence")
       ];
 
       const uploadResults = await Promise.all(uploadPromises);
