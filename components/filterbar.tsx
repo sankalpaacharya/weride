@@ -38,7 +38,7 @@ export default async function SearchHero() {
               />
             </div>
           ) : (
-            <div className="flex justify-center gap-4 mb-4 flex-col md:flex-row items-center">
+            <div className="flex justify-center gap-4 mb-4  items-center">
               <Link href={"/login"}>
                 <button className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg shadow-lg transition">
                   <Bike /> Login
