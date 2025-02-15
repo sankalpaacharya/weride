@@ -1,6 +1,7 @@
 import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
 import { getVehicles } from "@/lib/supabase/queries";
+import { Bike, ListCheck } from "lucide-react";
 
 type Vehicle = {
   id: string;
@@ -51,10 +52,10 @@ export default async function Home() {
           </p>
           <div className="flex justify-center gap-4 mb-4 flex-col md:flex-row items-center">
             <button className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg shadow-lg transition">
-              <i className="lucide lucide-bike"></i> Rent a Bike
+              <ListCheck /> Rent a Bike
             </button>
             <button className="flex items-center gap-2 bg-white hover:bg-gray-200 text-orange-500 font-medium py-2 px-6 rounded-lg shadow-lg border-2 border-orange-500 transition">
-              <i className="lucide lucide-dollar-sign"></i> List Your Bike
+              <Bike /> List Your Bike
             </button>
           </div>
           <p className="text-sm text-gray-300">
