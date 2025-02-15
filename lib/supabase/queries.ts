@@ -209,7 +209,6 @@ export async function updateRideStatus(rideId: string, status: string) {
   await supabase.from("order").update({ status }).eq("id", rideId);
 }
 
-
 export async function getOrdersByStatus(status: string[]) {
   const supabase = await createClient();
   const { data, error } = await supabase
