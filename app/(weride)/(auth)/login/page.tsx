@@ -112,8 +112,11 @@ export default function LoginComponent() {
                 </Button>
                 <p className="text-center text-sm text-gray-600">
                   Don't have an account?{" "}
-                  <Link className="text-primary hover:underline" href="/signup">
-                    Sign up
+                  <Link
+                    className="text-primary hover:underline"
+                    href="/register"
+                  >
+                    Register
                   </Link>
                 </p>
               </div>

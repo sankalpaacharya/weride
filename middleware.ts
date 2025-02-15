@@ -6,7 +6,7 @@ import { getUserStatus } from "./lib/supabase/queries";
 const publicRoutes = [
   "/",
   "/login",
-  "/signup",
+  "/register",
   "/forgot-password",
   "/faq",
   "/tos",

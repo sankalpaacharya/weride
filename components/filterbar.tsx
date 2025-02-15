@@ -44,9 +44,9 @@ export default async function SearchHero() {
                   <Bike /> Login
                 </button>
               </Link>
-              <Link href={"signup"}>
+              <Link href={"/register"}>
                 <button className="flex items-center gap-2 bg-white hover:bg-gray-200 text-orange-500 font-medium py-3 px-6 rounded-lg shadow-lg border-2 border-orange-500 transition">
-                  <CircleUser /> Signup
+                  <CircleUser /> Register
                 </button>
               </Link>
             </div>

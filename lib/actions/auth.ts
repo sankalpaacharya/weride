@@ -1,5 +1,5 @@
 "use server";
-import { TsignInSchema, signInSchema } from "@/lib/schemas/signInSchema";
+import { TsignInSchema, signInSchema } from "@/lib/schemas/registerSchema";
 import { TloginSchema, loginInSchema } from "@/lib/schemas/logInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
