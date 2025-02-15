@@ -1,7 +1,7 @@
 import { getAuthUserId, getOrdersByStatus } from "@/lib/supabase/queries";
-import OrdersTable from "@/app/features/dashboard/components/orders-table";
+import OrdersTable from "@/features/dashboard/components/orders-table";
 import { redirect } from "next/navigation";
-import { getAuthUserEmail } from "@/app/features/dashboard/db/orders";
+import { getAuthUserEmail } from "@/features/dashboard/db/orders";
 
 // make a object case convertor
 export default async function AdminDashboard() {

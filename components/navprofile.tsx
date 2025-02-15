@@ -16,7 +16,6 @@ import { MdLogout, MdOnlinePrediction } from "react-icons/md";
 import { ChevronRight } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
-import { FaHandshake } from "react-icons/fa6";
 export default function NavProfile() {
   const logOutUser = async () => {
     const supabase = await createClient();
@@ -55,7 +54,7 @@ export default function NavProfile() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="border-0">
           <AvatarImage src="https://github.com/randompost12.png" />
           <AvatarFallback>WR</AvatarFallback>
         </Avatar>

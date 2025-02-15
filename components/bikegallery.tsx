@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 export default function BikeGallery({ bikeId }: { bikeId: string }) {
   const [activeImage, setActiveImage] = useState(0);
@@ -40,7 +41,7 @@ export default function BikeGallery({ bikeId }: { bikeId: string }) {
           <CarouselContent>
             {images.map((src, index) => (
               <CarouselItem key={index}>
-                <img
+                <Image
                   src={src}
                   alt={`Bike image ${index + 1}`}
                   className="w-full h-auto aspect-video rounded-xl object-fill"
