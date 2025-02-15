@@ -40,12 +40,12 @@ export default async function SearchHero() {
           ) : (
             <div className="flex justify-center gap-4 mb-4  items-center">
               <Link href={"/login"}>
-                <button className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg shadow-lg transition">
+                <button className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg shadow-lg transition">
                   <Bike /> Login
                 </button>
               </Link>
               <Link href={"signup"}>
-                <button className="flex items-center gap-2 bg-white hover:bg-gray-200 text-orange-500 font-medium py-2 px-6 rounded-lg shadow-lg border-2 border-orange-500 transition">
+                <button className="flex items-center gap-2 bg-white hover:bg-gray-200 text-orange-500 font-medium py-3 px-6 rounded-lg shadow-lg border-2 border-orange-500 transition">
                   <CircleUser /> Signup
                 </button>
               </Link>
