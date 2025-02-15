@@ -14,7 +14,7 @@ export const sendMail = async (
 ) => {
   const { data, error } = await resend.emails.send({
     from: "Weride <team@weride.live>",
-    to: [ownerEmail],
+    to: ["sankalp.ace22@sot.pdpu.ac.in","vinit.tce22@sot.pdpu.ac.in","nishit.bce22@sot.pdpu.ac.in"],
     subject: `🚀 New Rental Request for ${bikeName}!`,
     html: `
   <div style="background: #f4f4f4; padding: 20px; font-family: Arial, sans-serif; color: #333; box-sizing: border-box;">

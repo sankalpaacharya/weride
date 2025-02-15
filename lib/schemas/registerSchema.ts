@@ -3,7 +3,8 @@ import { z } from "zod";
 export const signInSchema = z
   .object({
     name: z
-      .string().trim()
+      .string()
+      .trim()
       .min(4, "Name must be at least 4 characters")
       .max(100, "Name can't be more than 100 characters"),
     email: z

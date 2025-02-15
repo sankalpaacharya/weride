@@ -9,7 +9,7 @@ const CancelRideButton = ({ isActive }: { isActive: boolean }) => {
     <button
       type="submit"
       disabled={isActive || pending}
-      className="flex items-center gap-2 w-full justify-center"
+      className={`flex items-center gap-2 w-full justify-center`}
     >
       {pending ? (
         <Loader size={20} className="animate-spin" />

@@ -188,7 +188,10 @@ export default function ProfileForm({ userData }: Props) {
                     href={`https://weride-discord-backend-production.up.railway.app/auth/discord?userId=${userData.id}`}
                     target="_blank"
                   >
-                    <Button className="bg-blue-600 flex gap-1.5 hover:bg-blue-500">
+                    <Button
+                      type="button"
+                      className="bg-blue-600 flex gap-1.5 hover:bg-blue-500"
+                    >
                       <FaDiscord size={20} />
                       Connect to Discord
                     </Button>

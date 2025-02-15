@@ -22,6 +22,15 @@ import {
   calculateRemainingTime,
 } from "@/lib/utils";
 
+const calculateMeterReadingPrice = (initial: string, final: string): number => {
+  const initialReading = parseInt(initial);
+  const finalReading = parseInt(final);
+  if (initialReading > 0 && finalReading > 0) {
+    return Math.floor((finalReading - initialReading) * 2.7);
+  }
+  return 0;
+};
+
 const Page = async () => {
   const activeRideData = await getActiveRide();
   if (!activeRideData) {
@@ -39,7 +48,7 @@ const Page = async () => {
   const timeLeft = calculateRemainingTime(
     activeRideData.accepted_at,
     activeRideData.rent_hour,
-    activeRideData.status,
+    activeRideData.status
   );
 
   return (
@@ -59,7 +68,7 @@ const Page = async () => {
           ) : (
             <PendingLoading
               timeRemaining={calculatePendingTimeRemaining(
-                activeRideData.created_at,
+                activeRideData.created_at
               )}
             />
           )}
@@ -76,15 +85,16 @@ const Page = async () => {
                 <div className="space-y-2">
                   <div className="text-sm text-gray-500">Initial Reading</div>
                   <div className="text-2xl font-bold text-purple-900">
-                    {activeRideData.initial_meter_reading}{" "}
-                    {activeRideData.initial_meter_reading === "TBD" ? "" : "km"}
+                    {activeRideData.initial_meter_reading === "0"
+                      ? "TBD"
+                      : `${activeRideData.initial_meter_reading} km`}
                   </div>
                   <div className="text-xs text-gray-400">Verified by Owner</div>
                 </div>
                 <div className="space-y-2">
                   <div className="text-sm text-gray-500">Rate</div>
                   <div className="text-2xl font-bold text-purple-900">
-                    ₹40/hr
+                    ₹{activeRideData.bike_id.price}/hr
                   </div>
                   <div className="text-xs text-gray-400">
                     Final reading at return
@@ -93,8 +103,9 @@ const Page = async () => {
                 <div className="space-y-2">
                   <div className="text-sm text-gray-500">Final Reading</div>
                   <div className="text-2xl font-bold text-purple-900">
-                    {activeRideData.final_meter_reading}{" "}
-                    {activeRideData.final_meter_reading === "TBD" ? "" : "km"}
+                    {activeRideData.final_meter_reading === "0"
+                      ? "TBD"
+                      : `${activeRideData.final_meter_reading} km`}
                   </div>
                   <div className="text-xs text-gray-400">Verified by Owner</div>
                 </div>
@@ -207,7 +218,12 @@ const Page = async () => {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-purple-900">
-                    ₹{activeRideData.rent_hour * 40}
+                    ₹
+                    {activeRideData.rent_hour * activeRideData.bike_id.price +
+                      calculateMeterReadingPrice(
+                        activeRideData.initial_meter_reading,
+                        activeRideData.final_meter_reading
+                      )}
                   </div>
                   <div className="text-gray-600">
                     Scan to pay after ride completion
@@ -228,7 +244,7 @@ const Page = async () => {
             <div className="flex gap-4 sticky bottom-6">
               <form
                 action={cancelRide}
-                className={`flex-1 h-15 bg-purple-900 cursor-pointer transition-all hover:bg-purple-800 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "active" ? "opacity-70" : null}`}
+                className={`flex-1 h-15 bg-purple-900 cursor-pointer transition-all hover:bg-purple-800 text-white py-4 rounded-lg flex items-center justify-center gap-2 font-medium ${activeRideData.status === "Active" ? "opacity-70 cursor-default" : null}`}
               >
                 <CancelRideButton
                   isActive={activeRideData.status === "Active"}
