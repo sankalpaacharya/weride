@@ -26,7 +26,7 @@ const calculateMeterReadingPrice = (initial: string, final: string): number => {
   const initialReading = parseInt(initial);
   const finalReading = parseInt(final);
   if (initialReading > 0 && finalReading > 0) {
-    return Math.floor((finalReading - initialReading) * 2.7);
+    return Math.floor((finalReading - initialReading) * 2.8);
   }
   return 0;
 };

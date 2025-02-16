@@ -52,7 +52,7 @@ export default function RentalCard({
       <Card className="h-full">
         <div className="relative w-full pt-[66.67%]">
           <Image
-            className="rounded-t-lg object-cover brightness-50 absolute inset-0"
+            className="rounded-t-lg object-cover brightness-[70%] absolute inset-0"
             alt={bikeDetails.name}
             src={`https://cxlnoycrdkdkdezryaph.supabase.co/storage/v1/object/public/Vehicle/${bikeDetails.id}_side.png`}
             fill

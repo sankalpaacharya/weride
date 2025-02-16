@@ -57,27 +57,39 @@ type NotificationTextProps = {
   renterName: string;
   location: string;
   hours: number;
+  ownerName: string;
+  pickUpLocation: string;
+  renterPhone: number;
+  vehicleName: string;
 };
 
 export const discordOwnerRentRequest = ({
   renterName,
   location,
   hours,
+  ownerName,
+  pickUpLocation,
+  renterPhone,
+  vehicleName,
 }: NotificationTextProps) => {
   return `
- \`\`\` 
-  New Rental Request!
+    > 🚲 **New Rental Request!**
+    > Hi  **${ownerName},**
+    
+    > **👤 Renter:** ${renterName}  
+    > **🏍 Vehicle:** ${vehicleName}  
+    > **⏳ Duration:** ${hours} hour(s)  
 
-${renterName} has requested to rent your vehicle
+    > 📍 **Pickup Location:** ${pickUpLocation}  
+    > 📌 **Destination:** ${location}  
+    > 📞 **Contact:** ${renterPhone}  
 
-📍 Pickup Location: ${location}
-⏰ Duration: ${hours} hour(s)
+    > ⏳ **Please respond within 20 minutes.** The request will expire after this time.  
+    > ✅ **Approve** | ❌ **Decline**  
 
-Please review and respond to this rental request within 30 minutes. The request will expire after this time.
-
-Thank you for using our service!
- \`\`\` 
-`;
+    🚀 *Happy Riding,*  
+    **Team WeRide**
+  `;
 };
 
 export const calculateRemainingTime = (
