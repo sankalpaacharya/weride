@@ -18,6 +18,7 @@ import {
 } from "@/lib/schemas/renterIdentitySchema";
 import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 import toast from "react-hot-toast";
+import { Loader2 } from "lucide-react";
 
 export default function RenterForm({
   isPending: formState = false,
@@ -56,7 +57,6 @@ export default function RenterForm({
       const response = await renterFormAction(formData);
 
       if (response.error) {
-        console.error(response.error);
         toast.error(response.error);
         return;
       }
@@ -211,9 +211,13 @@ export default function RenterForm({
             </div>
             <div className="flex flex-col gap-3">
               <Button
+                disabled={isSubmitting}
                 type="submit"
                 className="w-full bg-main hover:bg-mainhover"
               >
+                {isSubmitting ? (
+                  <Loader2 className="animate-spin mr-2" />
+                ) : null}
                 {isPending ? "Waiting for verification" : "Verify"}
               </Button>
             </div>

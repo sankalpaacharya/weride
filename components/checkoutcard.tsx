@@ -153,8 +153,8 @@ export default function CheckoutCard({
               <span className="font-medium">₹{totalPrice}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span>Insurance & Protection</span>
-              <span className="font-medium text-green-600">Included</span>
+              <span>Helment</span>
+              <span className="font-medium text-purple-900">ask owner</span>
             </div>
             <div className="flex justify-between text-sm">
               <span>Service fee</span>

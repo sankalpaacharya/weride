@@ -8,7 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getVehicleData } from "@/lib/supabase/queries";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { MessageSquareText } from "lucide-react";
 import { redirect } from "next/navigation";
 import UnavailableTimeSlot from "@/components/timeslot";
 
@@ -142,7 +143,15 @@ async function BikePage({ params }: PageProps) {
           />
           <OwnerInfo name={vehicleDetails.owner_name} />
         </div>
-        <Card></Card>
+        <Card className="md:w-3/5">
+          <CardHeader className="flex">
+            <p className="flex gap-2 items-center">
+              <MessageSquareText size={15} />
+              <span>Message From Owner</span>
+            </p>
+          </CardHeader>
+          <CardContent>{vehicleDetails.message}</CardContent>
+        </Card>
 
         <UnavailableTimeSlot></UnavailableTimeSlot>
 

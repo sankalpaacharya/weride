@@ -1,5 +1,5 @@
 "use client";
-import { X, Loader } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 
 const CancelRideButton = ({ isActive }: { isActive: boolean }) => {
@@ -12,7 +12,7 @@ const CancelRideButton = ({ isActive }: { isActive: boolean }) => {
       className={`flex items-center gap-2 w-full justify-center`}
     >
       {pending ? (
-        <Loader size={20} className="animate-spin" />
+        <Loader2 size={20} className="animate-spin" />
       ) : (
         <X size={20} />
       )}

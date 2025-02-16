@@ -10,6 +10,7 @@ type Vehicle = {
   fuel_type: string;
   message: string;
   owner_name: string;
+  owner_message:string;
   price: number;
   availability: string;
 };
@@ -136,13 +137,13 @@ export async function uploadImage(
       });
 
     if (error !== null) {
-      return { error: error.message };
+      return {name:bucketName,error: error.message };
     }
     return { success: "Upload successful" };
   } catch (error) {
     console.log("im inside catch block");
 
-    return { error: error };
+    return {name:bucketName, error: error };
   }
 }
 
