@@ -29,16 +29,16 @@ export default function NavProfile() {
       icon: FaRegUser,
       href: "/settings/profile",
     },
-    {
-      name: "Vehicle",
-      icon: RiBikeFill,
-      href: "/vechile",
-    },
-    {
-      name: "History",
-      icon: FaHistory,
-      href: "/rental/requests",
-    },
+    // {
+    //   name: "Vehicle",
+    //   icon: RiBikeFill,
+    //   href: "/vechile",
+    // },
+    // {
+    //   name: "History",
+    //   icon: FaHistory,
+    //   href: "/rental/requests",
+    // },
     // {
     //   name: "Request",
     //   icon: FaHandshake,
