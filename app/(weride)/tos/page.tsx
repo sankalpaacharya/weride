@@ -68,43 +68,63 @@ export default function TermsOfService() {
           <strong>Late Fee Policy</strong>
         </blockquote>
         <p className="mb-4">
-  <strong>Late Returns:</strong><br />
-  If a vehicle is not returned by the agreed-upon time, a late fee will be charged.  
-  A grace period of <strong>15 minutes</strong> is provided before any late fees apply.
-</p>
+          <strong>Late Returns:</strong>
+          <br />
+          If a vehicle is not returned by the agreed-upon time, a late fee will
+          be charged. A grace period of <strong>15 minutes</strong> is provided
+          before any late fees apply.
+        </p>
 
-<ul className="list-disc ml-6 mb-4">
-  <li><strong>1st hour late:</strong> 1.25 × hourly rental fee</li>
-  <li><strong>2nd hour late:</strong> 1.5 × hourly rental fee</li>
-  <li><strong>3rd hour late:</strong> 1.75 × hourly rental fee</li>
-  <li><strong>4th hour & beyond (up to 6 hours):</strong> 2 × hourly rental fee per hour</li>
-  <li><strong>More than 6 hours late:</strong> A flat fine (₹X) set by the owner applies</li>
-</ul>
+        <ul className="list-disc ml-6 mb-4">
+          <li>
+            <strong>1st hour late:</strong> 1.25 × hourly rental fee
+          </li>
+          <li>
+            <strong>2nd hour late:</strong> 1.5 × hourly rental fee
+          </li>
+          <li>
+            <strong>3rd hour late:</strong> 1.75 × hourly rental fee
+          </li>
+          <li>
+            <strong>4th hour & beyond (up to 6 hours):</strong> 2 × hourly
+            rental fee per hour
+          </li>
+          <li>
+            <strong>More than 6 hours late:</strong> A flat fine (₹X) set by the
+            owner applies
+          </li>
+        </ul>
 
-<p className="mb-4">
-  <strong>Example:</strong><br />
-  Suppose you rented a vehicle for two hours at Rs. 50 per hour and returned it after five hours (3 hours late).  
-  The total extra cost (other than the base rental fees) would be:
-</p>
+        <p className="mb-4">
+          <strong>Example:</strong>
+          <br />
+          Suppose you rented a vehicle for two hours at Rs. 50 per hour and
+          returned it after five hours (3 hours late). The total extra cost
+          (other than the base rental fees) would be:
+        </p>
 
-<p className="mb-4">
-  <strong>
-    (1.25 × 50) [for 1st hr] + (1.5 × 50) [for 2nd hr] + (1.75 × 50) [for 3rd hr]  
-    <br />
-    = 62.5 + 75 + 87.5 = Rs. 225 (Late Fees)
-  </strong>  
-</p>
+        <p className="mb-4">
+          <strong>
+            (1.25 × 50) [for 1st hr] + (1.5 × 50) [for 2nd hr] + (1.75 × 50)
+            [for 3rd hr]
+            <br />= 62.5 + 75 + 87.5 = Rs. 225 (Late Fees)
+          </strong>
+        </p>
 
-<p className="mb-4">
-  <strong>Additional Charges: </strong>  
-  Distance-based charges for the extra 3 hours will also apply as per the rental agreement.  
-  The final amount due will be calculated as:   
-  <strong> Base Rental Fee + Late Fees + Distance-Based Charges.</strong>
-</p>
+        <p className="mb-4">
+          <strong>Additional Charges: </strong>
+          Distance-based charges for the extra 3 hours will also apply as per
+          the rental agreement. The final amount due will be calculated as:
+          <strong>
+            {" "}
+            Base Rental Fee + Late Fees + Distance-Based Charges.
+          </strong>
+        </p>
 
-<p className="mb-4">
-  If the vehicle is returned more than 6 hours late, a flat fine set by the owner (₹X) will be applied in addition to all other charges.  
-</p>
+        <p className="mb-4">
+          If the vehicle is returned more than 6 hours late, a flat fine set by
+          the owner (₹X) will be applied in addition to all other charges.
+        </p>
       </section>
 
       <section className="text-gray-700 mb-8">

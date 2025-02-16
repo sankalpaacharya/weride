@@ -5,7 +5,7 @@ import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
-import { Loader } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -58,7 +58,7 @@ function SubmitButton({ pending }: { pending: boolean }) {
       className="bg-purple-600 hover:bg-purple-700 flex items-center gap-2"
       disabled={pending}
     >
-      {pending && <Loader size={15} className="animate-spin" />}
+      {pending && <Loader2 size={15} className="animate-spin" />}
       Save Changes
     </Button>
   );

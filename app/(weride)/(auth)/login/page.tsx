@@ -1,5 +1,5 @@
 "use client";
-import { Loader } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import {
   Card,
   CardHeader,
@@ -106,7 +106,7 @@ export default function LoginComponent() {
                   className="w-full flex gap-2"
                 >
                   {isSubmitting ? (
-                    <Loader size={16} className="animate-spin" />
+                    <Loader2 size={16} className="animate-spin" />
                   ) : null}
                   Login
                 </Button>

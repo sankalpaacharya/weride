@@ -28,7 +28,7 @@ import {
 } from "@/lib/schemas/ownerIdentitySchema";
 import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
 import toast from "react-hot-toast";
-import { LoaderCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
@@ -348,7 +348,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                 className="w-full flex gap-2 bg-main hover:bg-mainhover"
               >
                 {isLoading ? (
-                  <LoaderCircle className="animate-spin" size={15} />
+                  <Loader2 className="animate-spin" size={15} />
                 ) : null}
 
                 {isPending ? "Waiting for Verification" : "Verify"}
