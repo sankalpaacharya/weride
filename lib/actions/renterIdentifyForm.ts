@@ -8,7 +8,7 @@ export async function renterFormAction(data: any) {
   try {
     const supabase = await createClient();
     const { data: authData, error: authError } = await supabase.auth.getUser();
-    
+
     if (authError) {
       return { error: "User is not logged in" };
     }
@@ -20,7 +20,7 @@ export async function renterFormAction(data: any) {
 
     const formData = Object.fromEntries(data);
     const result = renterIdentitySchema.safeParse(formData);
-    
+
     if (!result.success) {
       return { error: result.error.issues[0].message };
     }
@@ -37,9 +37,9 @@ export async function renterFormAction(data: any) {
         const result = await uploadImage(
           authData.user.id,
           upload.file,
-          upload.type
+          upload.type,
         );
-        
+
         if (result.error) {
           return { error: `Failed to upload ${upload.type}: ${result.error}` };
         }
