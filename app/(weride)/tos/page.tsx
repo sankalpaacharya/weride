@@ -11,7 +11,7 @@ export default function TermsOfService() {
         <p className="text-lg font-semibold mb-4 text-center">
           <strong>
             These terms govern your use of the vehicle rental service provided
-            by ‘WeRide’.
+            by ‘Weride’.
           </strong>
         </p>
         <p className="mb-4">
@@ -50,14 +50,16 @@ export default function TermsOfService() {
         </p>
         <p className="mb-4">
           <strong> Rental Fees:</strong> You agree to pay the hourly rental fee
-          as set by the vehicle owner. The rental fee must be paid in full
-          before the rental period begins.
+          as set by the vehicle owner. The rental fee must be paid in full after
+          the rental period ends.
         </p>
         <p className="mb-4">
-          <strong> Petrol Refill Requirement:</strong> Riders must refill the
-          vehicle to the petrol level specified by the owner (pre-decided)
-          before returning the vehicle. Failure to do so will result in
-          additional charges.
+          <strong> Petrol Refill Requirement:</strong> The renter is responsible
+          for refueling the vehicle as needed during the rental period. If fuel
+          is refilled, the amount paid by the renter at the fuel station will be
+          deducted from the total rental amount (hourly + distance-based
+          charges). However, the renter must provide proof of the fuel refill (a
+          picture of the fuel meter or a bill receipt).
         </p>
       </section>
 
@@ -65,34 +67,44 @@ export default function TermsOfService() {
         <blockquote>
           <strong>Late Fee Policy</strong>
         </blockquote>
-        <p className="mb-4 ">
-          <strong>Late Returns:</strong>
-          <br></br>
-          If a vehicle is not returned by the agreed-upon time, a late fee will
-          be charged.<br></br>
-          For the first late hour, <br></br>
-          <strong>Late Fee = (2 * Rental Fee). </strong>
-          <br></br>
-          For each subsequent hour n, the late fee can be calculated as:
-          <br></br>
-          <strong>
-            Late Fee (for hour n) = Previous Late Fee + 0.5 * Previous Late Fee.
-          </strong>
-        </p>
-        <p className="mb-4 ">
-          For example, if you rented a vehicle for two hours for rental fees of
-          Rs.100 and returned it after five hours, the total extra cost (other
-          than the rental fees) would be:<br></br>
-          <strong>
-            {" "}
-            (2 * 100)[for 1st hr] + ((200 * 0.5) + 200) [for 2nd hr] + ((300 *
-            0.5) + 300) [for 3rd hr] <br></br>= 200 + 300 + 450 = Rs. 950
-          </strong>
-        </p>
         <p className="mb-4">
-          <strong>Grace Period:</strong> A 10-12 minute grace period may be
-          provided before late fees are applied.
-        </p>
+  <strong>Late Returns:</strong><br />
+  If a vehicle is not returned by the agreed-upon time, a late fee will be charged.  
+  A grace period of <strong>15 minutes</strong> is provided before any late fees apply.
+</p>
+
+<ul className="list-disc ml-6 mb-4">
+  <li><strong>1st hour late:</strong> 1.25 × hourly rental fee</li>
+  <li><strong>2nd hour late:</strong> 1.5 × hourly rental fee</li>
+  <li><strong>3rd hour late:</strong> 1.75 × hourly rental fee</li>
+  <li><strong>4th hour & beyond (up to 6 hours):</strong> 2 × hourly rental fee per hour</li>
+  <li><strong>More than 6 hours late:</strong> A flat fine (₹X) set by the owner applies</li>
+</ul>
+
+<p className="mb-4">
+  <strong>Example:</strong><br />
+  Suppose you rented a vehicle for two hours at Rs. 50 per hour and returned it after five hours (3 hours late).  
+  The total extra cost (other than the base rental fees) would be:
+</p>
+
+<p className="mb-4">
+  <strong>
+    (1.25 × 50) [for 1st hr] + (1.5 × 50) [for 2nd hr] + (1.75 × 50) [for 3rd hr]  
+    <br />
+    = 62.5 + 75 + 87.5 = Rs. 225 (Late Fees)
+  </strong>  
+</p>
+
+<p className="mb-4">
+  <strong>Additional Charges: </strong>  
+  Distance-based charges for the extra 3 hours will also apply as per the rental agreement.  
+  The final amount due will be calculated as:   
+  <strong> Base Rental Fee + Late Fees + Distance-Based Charges.</strong>
+</p>
+
+<p className="mb-4">
+  If the vehicle is returned more than 6 hours late, a flat fine set by the owner (₹X) will be applied in addition to all other charges.  
+</p>
       </section>
 
       <section className="text-gray-700 mb-8">
@@ -143,7 +155,7 @@ export default function TermsOfService() {
           </li>
         </ul>
         <blockquote>
-          <strong>Consequences:</strong> While WeRide does not have direct
+          <strong>Consequences:</strong> While Weride does not have direct
           control over the actions of users, any reports or evidence of reckless
           driving may result in immediate termination of the rental agreement,
           forfeiture of any deposits, and a permanent ban from our platform.
