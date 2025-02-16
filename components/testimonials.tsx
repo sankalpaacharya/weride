@@ -43,7 +43,7 @@ export default function Testimonials({}: Props) {
         {testimonials.map((item, index) => (
           <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
             <Card>
-              <CardContent className="h-[15rem] space-y-5 flex flex-col justify-center p-10">
+              <CardContent className="min:h-[15rem] h-fit space-y-5 flex flex-col justify-center p-10">
                 <p>{item.content}</p>
                 <div className="flex items-center space-x-2">
                   <img
