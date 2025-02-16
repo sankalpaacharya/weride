@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { getVehicleData } from "@/lib/supabase/queries";
+import { Card } from "@/components/ui/card";
 import { redirect } from "next/navigation";
 import UnavailableTimeSlot from "@/components/timeslot";
 
@@ -141,6 +142,7 @@ async function BikePage({ params }: PageProps) {
           />
           <OwnerInfo name={vehicleDetails.owner_name} />
         </div>
+        <Card></Card>
 
         <UnavailableTimeSlot></UnavailableTimeSlot>
 
