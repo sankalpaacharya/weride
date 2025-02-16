@@ -2,6 +2,7 @@ import RentalCard from "@/components/bikecard";
 import FilterBar from "@/components/filterbar";
 import { getVehicles } from "@/lib/supabase/queries";
 import { Bike, ListCheck } from "lucide-react";
+import Testimonials from "@/components/testimonials";
 
 type Vehicle = {
   id: string;
@@ -39,6 +40,12 @@ export default async function Home() {
             ))}
           </div>
         </div>
+      </div>
+      <div className="container mt-20 space-y-5">
+        <h2 className="text-xl font-semibold text-gray-800">
+          What People Have to Say About Us
+        </h2>
+        <Testimonials />
       </div>
 
       <div className="bg-primary mt-20 text-white py-10">
