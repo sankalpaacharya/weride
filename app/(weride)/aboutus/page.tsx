@@ -8,7 +8,7 @@ export default function about() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           <strong>
-            Hey there!, fellow travelers of PDEU! WeRide is here to rescue you
+            Hey there!, fellow travelers of PDEU! Weride is here to rescue you
             from the tragic fate of empty pockets and long walks under the
             blazing sun. Need a ride? Rent one. Got a ride? Rent it out and make
             some cash. Simple, isn’t it? 🫱🏼‍🫲🏻
@@ -17,7 +17,7 @@ export default function about() {
           <br></br>
           <strong>
             Gone are the days of begging friends for lifts or wrestling with
-            overpriced rentals. At WeRide, we believe in fair pricing, zero
+            overpriced rentals. At Weride, we believe in fair pricing, zero
             nonsense, and maximum convenience. Think of it as Tinder for
             vehicles—but instead of matching with heartbreak, you match with a
             sweet ride! 😊
@@ -54,7 +54,7 @@ export default function about() {
       <section className="text-gray-700 mb-8">
         <p className="text-lg font-semibold mb-4">
           So whether you need a ride to grab chai, impress a date, or escape an
-          assignment deadline—WeRide together! 🔥
+          assignment deadline—Weride together! 🔥
           <br></br>
           <br></br>
           Hop in, put on your helmet (safety first!), and embark on the journey

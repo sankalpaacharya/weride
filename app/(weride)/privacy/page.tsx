@@ -99,7 +99,7 @@ export default function PrivacyPolicy() {
         <p className="mb-4">
           <strong> Disputes Between Users:</strong> In case of a dispute between
           a rider and a owner, both parties agree to attempt to resolve the
-          issue amicably. If a resolution cannot be reached, WeRide may assist
+          issue amicably. If a resolution cannot be reached, Weride may assist
           in mediating the dispute, but we are not responsible for the final
           outcome.
         </p>
@@ -114,7 +114,7 @@ export default function PrivacyPolicy() {
         </p>
         <p className="mb-4">
           <strong> Reporting Violations:</strong> Users are encouraged to report
-          any violations of these terms to WeRide at{" "}
+          any violations of these terms to Weride at{" "}
           <a
             href="mailto:sankalpaacharya01@gmail.com."
             className="text-blue-600 hover:underline"
