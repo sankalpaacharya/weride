@@ -15,24 +15,23 @@ type Props = {};
 
 const testimonials = [
   {
-    content: `⭐️ Excellent Service!
-    Renting a two-wheeler from Weride was smooth and hassle-free! 🚀The bike was in great condition, the pickup was easy, and the pricing was fair. Highly recommend for a seamless rental experience! 💫✨`,
-
+    content: `Excellent Service!
+Renting a bike from WeRide was super easy! The bike was in great shape, pickup was fast, and the price was fair. No surprises. I’d totally use them again!`,
     name: "Chirag Doshi",
     profile: chirag,
     role: "Vehicle Renter",
   },
   {
-    content: `🚀 Great Platform for Owners!
-    Listing my vehicle on WeRide was effortless, and the rental process is well-managed. 🔥 The platform ensures quick bookings, reliable renters, and timely payments. A hassle-free way to earn from my vehicle! 💰✅`,
+    content: `Great Platform for Owners!
+   At first I hesitated but eventually listed my vehicle. Seems like a good way to earn some cash. Would definitely recommend it.`,
 
     name: "Jay Padalia",
     profile: jay,
     role: "Vehicle Owner",
   },
   {
-    content: `🌟 Fantastic Experience!
-      Weride made renting a two-wheeler super easy and convenient! 🛵The process was quick, the bike was well-maintained, and the pricing was great. Smooth ride from start to finish —highly recommended! 🔥💯`,
+    content: `Great Service!
+    Had a great experience renting a bike from WeRide. Everything was super quick and simple, and the bike was just as described. The price was decent too. Definitely coming back!`,
 
     name: "Dhariya Soni",
     profile: dhariya,
