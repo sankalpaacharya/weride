@@ -23,7 +23,7 @@ const testimonials = [
     role: "Vehicle Renter",
   },
   {
-    content:`🚀 Great Platform for Owners!
+    content: `🚀 Great Platform for Owners!
     Listing my vehicle on WeRide was effortless, and the rental process is well-managed. 🔥 The platform ensures quick bookings, reliable renters, and timely payments. A hassle-free way to earn from my vehicle! 💰✅`,
 
     name: "Jay Padalia",
@@ -31,8 +31,7 @@ const testimonials = [
     role: "Vehicle Owner",
   },
   {
-    content:
-      `🌟 Fantastic Experience!
+    content: `🌟 Fantastic Experience!
       Weride made renting a two-wheeler super easy and convenient! 🛵The process was quick, the bike was well-maintained, and the pricing was great. Smooth ride from start to finish —highly recommended! 🔥💯`,
 
     name: "Dhariya Soni",
@@ -47,7 +46,7 @@ export default function Testimonials({}: Props) {
         {testimonials.map((item, index) => (
           <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
             <Card>
-              <CardContent className="min:h-[15rem] h-fit space-y-5 flex flex-col justify-center p-10">
+              <CardContent className="min-h-[18rem] h-fit space-y-5 flex flex-col justify-center p-10">
                 <p>
                   {item.content.split("\n").map((line, index) => (
                     <React.Fragment key={index}>

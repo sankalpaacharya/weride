@@ -9,10 +9,10 @@ export async function signupAction(data: TsignInSchema) {
   if (!result.success) {
     return { error: result.error.issues[0].message };
   }
-  
+
   const supabase = await createClient();
   const { confirmPassword, password, ...formData } = data;
-  
+
   // Check if user already exists
   const { data: existingUser } = await supabase
     .from("users")
@@ -48,9 +48,10 @@ export async function signupAction(data: TsignInSchema) {
     return { error: "Oops, an error occurred!" };
   }
 
-  return { 
-    success: "Verification email sent! Please check your inbox to verify your account.",
-    email: data.email 
+  return {
+    success:
+      "Verification email sent! Please check your inbox to verify your account.",
+    email: data.email,
   };
 }
 
@@ -72,7 +73,7 @@ export async function loginAction(data: TloginSchema) {
   if (error?.message?.includes("Email not confirmed")) {
     // Resend verification email
     const { error: resendError } = await supabase.auth.resend({
-      type: 'signup',
+      type: "signup",
       email: data.email,
       options: {
         emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
@@ -83,9 +84,10 @@ export async function loginAction(data: TloginSchema) {
       return { error: "Failed to resend verification email" };
     }
 
-    return { 
-      error: "Please verify your email first. We've sent a new verification email.",
-      email: data.email
+    return {
+      error:
+        "Please verify your email first. We've sent a new verification email.",
+      email: data.email,
     };
   }
 
@@ -103,9 +105,9 @@ export async function loginAction(data: TloginSchema) {
 
 export async function resendVerificationEmail(email: string) {
   const supabase = await createClient();
-  
+
   const { error } = await supabase.auth.resend({
-    type: 'signup',
+    type: "signup",
     email: email,
     options: {
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
