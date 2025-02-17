@@ -100,10 +100,10 @@ export async function rentCheckoutAction(
         renterName: rentUser.name,
         location: data.location,
         hours: data.hour,
-        ownerName : ownerInfo.name,
+        ownerName: ownerInfo.name,
         pickUpLocation: data.pickUpLocation,
-        renterPhone : rentUser.phone,
-        vehicleName : vehicleInfo.name,
+        renterPhone: rentUser.phone,
+        vehicleName: vehicleInfo.name,
       }),
     );
 

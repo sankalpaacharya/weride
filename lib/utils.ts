@@ -73,22 +73,24 @@ export const discordOwnerRentRequest = ({
   vehicleName,
 }: NotificationTextProps) => {
   return `
-    > 🚲 **New Rental Request!**
-    > Hi  **${ownerName},**
+   \`\`\` 
+     🚲 **New Rental Request!**
+     Hi  **${ownerName},**
     
-    > **👤 Renter:** ${renterName}  
-    > **🏍 Vehicle:** ${vehicleName}  
-    > **⏳ Duration:** ${hours} hour(s)  
+    **👤 Renter:** ${renterName}  
+     **🏍 Vehicle:** ${vehicleName}  
+     **⏳ Duration:** ${hours} hour(s)  
 
-    > 📍 **Pickup Location:** ${pickUpLocation}  
-    > 📌 **Destination:** ${location}  
-    > 📞 **Contact:** ${renterPhone}  
+     📍 **Pickup Location:** ${pickUpLocation}  
+     📌 **Destination:** ${location}  
+     📞 **Contact:** ${renterPhone}  
 
-    > ⏳ **Please respond within 20 minutes.** The request will expire after this time.  
-    > ✅ **Approve** | ❌ **Decline**  
+     ⏳ **Please respond within 20 minutes.** The request will expire after this time.  
+     ✅ **Approve** | ❌ **Decline**  
 
     🚀 *Happy Riding,*  
     **Team WeRide**
+   \`\`\` 
   `;
 };
 
