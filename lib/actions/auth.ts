@@ -85,7 +85,7 @@ export async function loginAction(data: TloginSchema) {
     }
 
     return {
-      needsVerification:"verify account",
+      needsVerification: "verify account",
       error:
         "Please verify your email first. We've sent a new verification email.",
       email: data.email,

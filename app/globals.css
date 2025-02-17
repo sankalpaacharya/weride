@@ -10,7 +10,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 266, 69%, 31%;
+    --primary: 266 69% 31%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -57,10 +57,18 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-.content {
-  display: none;
+.tabs {
+  display: flex;
+  flex-direction: column;
 }
 
 .tabs-content {
@@ -82,23 +90,7 @@ input[type="radio"] {
 #tab3:checked ~ .tab-content #content3 {
   transform: translateX(0);
   opacity: 1;
-}
-#tab1:checked ~ .tab-content #content1 {
   left: 0;
-}
-#tab2:checked ~ .tab-content #content2 {
-  left: 0;
-}
-#tab3:checked ~ .tab-content #content3 {
-  left: 0;
-}
-.tabs {
-  display: flex;
-  flex-direction: column;
-}
-
-.tab-content {
-  position: relative;
 }
 
 .tab {
@@ -107,14 +99,6 @@ input[type="radio"] {
 
 .tab.active {
   display: block;
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
 
 blockquote {
@@ -136,8 +120,6 @@ blockquote {
 }
 
 .red-shadow {
-  -webkit-box-shadow: 2px -3px 27px -7px rgba(230, 32, 42, 1);
-  -moz-box-shadow: 2px -3px 27px -7px rgba(230, 32, 42, 1);
   box-shadow: 2px -3px 27px -7px rgba(230, 32, 42, 1);
 }
 
