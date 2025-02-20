@@ -37,7 +37,7 @@ export async function rentCheckoutAction(
 
     // Check vehicle availability
     const vehicleStatus = await getVehicleStatus(data.bikeId);
-    if (["Pending","Booked","Unavailable"].includes(vehicleStatus)) {
+    if (["Pending", "Booked", "Unavailable"].includes(vehicleStatus)) {
       return { error: "Sorry! We can't book this vehicle" };
     }
 

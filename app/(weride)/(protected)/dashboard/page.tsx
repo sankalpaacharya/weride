@@ -16,7 +16,12 @@ export default async function AdminDashboard() {
     return redirect("/");
   }
 
-  const allOrders = await getOrdersByStatus(["Active", "Pending", "Canceled"]);
+  const allOrders = await getOrdersByStatus([
+    "Active",
+    "Pending",
+    "Canceled",
+    "Completed",
+  ]);
 
   return <OrdersTable orders={allOrders} />;
 }

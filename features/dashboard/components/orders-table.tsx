@@ -97,7 +97,7 @@ export default function OrdersTable({ orders }: Props) {
     (order) =>
       order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.bike_id.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      order.renter_id.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      order.renter_id.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -241,7 +241,7 @@ export default function OrdersTable({ orders }: Props) {
                                         onChange={(e) =>
                                           handleOrderUpdate(
                                             "initial_meter_reading",
-                                            e.target.value,
+                                            e.target.value
                                           )
                                         }
                                       />
@@ -257,7 +257,7 @@ export default function OrdersTable({ orders }: Props) {
                                         onChange={(e) =>
                                           handleOrderUpdate(
                                             "final_meter_reading",
-                                            e.target.value,
+                                            e.target.value
                                           )
                                         }
                                       />
