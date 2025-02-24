@@ -41,6 +41,21 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <div className="bg-primary mt-20 text-gray-200 py-10">
+        <div className="container flex justify-center">
+          <div className="flex flex-col space-y-2 items-center justify-center ">
+            <div className="p-4 bg-white rounded-full">
+              <Bike className="text-primary" size={50} />
+            </div>
+            <div>
+              <p className="text-3xl font-bold">10+</p>
+              <span className="text-sm">Rides</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container mt-20 space-y-5">
         <h2 className="text-xl font-semibold text-gray-800">
           What People Have to Say About Us
