@@ -9,7 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function sendDiscordMessage(userId: string, message: string) {
-  if (userId !== "") {
     const response = await fetch(DISCORD_URL + "/notify/discord", {
       method: "POST",
       body: JSON.stringify({
@@ -20,7 +19,6 @@ export async function sendDiscordMessage(userId: string, message: string) {
         "Content-Type": "application/json",
       },
     });
-  }
 }
 
 export function getFormatedDate() {
