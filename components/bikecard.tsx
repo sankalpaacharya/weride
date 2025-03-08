@@ -98,7 +98,7 @@ export default function RentalCard({
               </div>
               <div className="flex items-center gap-2 text-gray-700">
                 <FaGasPump className="text-primary text-lg" />
-                <span className="text-sm">60kmpl</span>
+                <span className="text-sm">40kmpl</span>
               </div>
             </div>
             <div className="space-y-2">

@@ -39,33 +39,84 @@ export default function TermsOfService() {
 
       <section className="text-gray-700 mb-8">
         <blockquote>
-          <strong>Vehicle Rental Agreement</strong>
+          <strong>1. Platform’s Role & Responsibilities</strong>
         </blockquote>
-
-        <p className="mb-4">
-          <strong> Rental Duration:</strong> You as a rider agree to rent the
-          vehicle for the duration agreed upon with the vehicle owner. Any
-          extension of time will result in late fees charge levied on the rider
-          (read late fees policy).
-        </p>
-        <p className="mb-4">
-          <strong> Rental Fees:</strong> You agree to pay the hourly rental fee
-          as set by the vehicle owner. The rental fee must be paid in full after
-          the rental period ends.
-        </p>
-        <p className="mb-4">
-          <strong> Petrol Refill Requirement:</strong> The renter is responsible
-          for refueling the vehicle as needed during the rental period. If fuel
-          is refilled, the amount paid by the renter at the fuel station will be
-          deducted from the total rental amount (hourly + distance-based
-          charges). However, the renter must provide proof of the fuel refill (a
-          picture of the fuel meter or a bill receipt).
-        </p>
+        <ul className="list-disc pl-6 mb-4">
+          <li>
+            WeRide is <strong>only an intermediary</strong> connecting vehicle
+            owners with renters. We do not own, operate, or manage any vehicles.
+          </li>
+          <li>
+            Vehicle availability is <strong>not guaranteed</strong>. Owners have
+            the discretion to accept or reject rental requests.
+          </li>
+          <li>
+            WeRide <strong>assumes no responsibility</strong> for the mechanical
+            condition, safety, or reliability of any vehicle listed on the
+            platform.
+          </li>
+        </ul>
       </section>
 
       <section className="text-gray-700 mb-8">
         <blockquote>
-          <strong>Late Fee Policy</strong>
+          <strong>2. Vehicle Rental Agreement</strong>
+        </blockquote>
+        <ul className="list-disc pl-6 mb-4">
+          <li>
+            <strong>Rental Duration:</strong> Riders agree to rent the vehicle
+            for the duration agreed upon with the owner. Extensions may incur
+            late fees as per our Late Fees Policy.
+          </li>
+          <li>
+            <strong>Rental Fees:</strong> Riders must pay the rental fee as set
+            by the vehicle owner. The full amount is due at the end of the
+            rental period.
+          </li>
+          <li>
+            <strong>Petrol Refill Requirement:</strong> Riders are responsible
+            for refueling as needed. Refill costs (backed by proof such as a
+            receipt or fuel meter photo) will be deducted from the total rental
+            cost.
+          </li>
+          <li>
+            <strong>Damage Responsibility:</strong> Riders bear full
+            responsibility for any damages incurred during the rental period.
+          </li>
+          <li>
+            If a vehicle is damaged, the rider{" "}
+            <strong>must compensate the owner</strong> for repairs or
+            replacement.
+          </li>
+          <li>
+            WeRide <strong>will not mediate disputes</strong> related to vehicle
+            damages between owners and riders.
+          </li>
+        </ul>
+      </section>
+
+      <section className="text-gray-700 mb-8">
+        <blockquote>
+          <strong>3. Commitment to Users</strong>
+        </blockquote>
+        <ul className="list-disc pl-6 mb-4">
+          <li>
+            <strong>For Owners:</strong> WeRide strives to{" "}
+            <strong>maximize rental assignments</strong> for available vehicles
+            but does not guarantee a steady flow of bookings.
+          </li>
+          <li>
+            <strong>For Riders:</strong> If the requested vehicle is
+            unavailable, <strong>WeRide may suggest an alternative</strong>.
+            However, final approval remains with both the rider and the new
+            owner.
+          </li>
+        </ul>
+      </section>
+
+      <section className="text-gray-700 mb-8">
+        <blockquote>
+          <strong>4. Late Fee Policy</strong>
         </blockquote>
         <p className="mb-4">
           <strong>Late Returns:</strong>
@@ -129,7 +180,7 @@ export default function TermsOfService() {
 
       <section className="text-gray-700 mb-8">
         <blockquote>
-          <strong>Vehicle Condition</strong>
+          <strong>5. Vehicle Condition</strong>
         </blockquote>
         <p className="mb-4">
           <strong> Inspection:</strong> Both the Rider and the Owner must
@@ -151,7 +202,7 @@ export default function TermsOfService() {
 
       <section className="text-gray-700 mb-8">
         <blockquote>
-          <strong>Reckless Driving Policy</strong>
+          <strong>6. Reckless Driving Policy</strong>
         </blockquote>
         <p className="mb-4">
           Reckless driving is strictly prohibited while using any vehicle rented
