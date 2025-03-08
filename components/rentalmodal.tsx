@@ -85,25 +85,26 @@ export default function RentalModal({ children, formData }: RentalModal) {
                   <div>
                     <span className="font-bold">3.1. Rental Duration:</span> You
                     as a rider agree to rent the vehicle for the duration agreed
-                    upon with the vehicle owner. Any extension of time will
-                    result in late fees charge levied on the rider{" "}
-                    <Link className="underline" href="/">
+                    upon with the vehicle owner. Any extension of time may incur
+                    late fees as per our Late Fee Policy{" "}
+                    <Link className="underline" href="/tos">
                       (read late fees policy)
                     </Link>
                   </div>
                   <div>
                     <span className="font-bold">3.2. Rental Fees:</span> You
                     agree to pay the hourly rental fee as set by the vehicle
-                    owner. The rental fee must be paid in full before the rental
-                    period begins.
+                    owner. The full amount is due at the end of the rental
+                    period.
                   </div>
                   <div>
                     <span className="font-bold">
                       3.3. Petrol Refill Requirement:
                     </span>{" "}
-                    Riders must refill the vehicle to the petrol level specified
-                    by the owner (pre-decided) before returning the vehicle.
-                    Failure to do so will result in additional charges.
+                    Riders are responsible for refueling as needed during the
+                    rental period. Refill costs, supported by proof (e.g., a
+                    receipt or fuel meter photo), will be deducted from the
+                    total rental cost.
                   </div>
                 </div>
                 <div className="space-y-2 mt-5">
@@ -112,14 +113,14 @@ export default function RentalModal({ children, formData }: RentalModal) {
                   </span>
                   <div>
                     <span className="font-bold">5.1. Inspection:</span> Both the
-                    Rider and the Owner must inspect the vehicle before the
+                    rider and the owner must inspect the vehicle before the
                     rental period begins, noting any pre-existing damage.
                   </div>
                   <div>
                     <span className="font-bold">5.2. Damage or Loss:</span>{" "}
-                    Riders are responsible for any damage or loss that occurs
-                    during the rental period. In case of any damage, the rider
-                    agrees to compensate the vehicle owner for the cost of
+                    Riders bear full responsibility for any damage or loss
+                    incurred during the rental period. In the event of damage,
+                    you must compensate the vehicle owner for the cost of
                     repairs or replacement.
                   </div>
                   <div>
@@ -135,11 +136,12 @@ export default function RentalModal({ children, formData }: RentalModal) {
                   </span>
                   <div>
                     Reckless driving is strictly prohibited while using any
-                    vehicle rented through our platform. While weride does not
-                    have direct control over the actions of users, any reports
-                    or evidence of reckless driving may result in immediate
-                    termination of the rental agreement, forfeiture of any
-                    deposits, and a permanent ban from our platform.{" "}
+                    vehicle rented through our platform. This includes, but is
+                    not limited to, excessive speeding, aggressive maneuvers,
+                    driving under the influence, or any dangerous driving
+                    behavior. Reports or evidence of reckless driving may result
+                    in immediate termination of the rental agreement, forfeiture
+                    of any deposits, and a permanent ban from our platform.{" "}
                     <Link className="underline" href="/tos">
                       (read more)
                     </Link>
@@ -155,8 +157,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
                   />
                   <label
                     htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                     I have read all the terms and conditions and I accept it.
                   </label>
                 </div>
@@ -167,8 +168,7 @@ export default function RentalModal({ children, formData }: RentalModal) {
             <Button
               type="button"
               disabled={!isTosAccepted}
-              onClick={handleNextClick}
-            >
+              onClick={handleNextClick}>
               Next
             </Button>
           </div>

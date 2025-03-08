@@ -45,15 +45,17 @@ export const sendMail = async (
         ⏳ Please respond within <strong>20 minutes</strong>.
       </p>
   
-      <!-- Button Container with improved mobile styling -->
       <div style="text-align: center; margin-top: 25px;">
+        <p style="font-size: 14px; color: #555; margin-bottom: 15px;">
+          By clicking "Approve", you formally acknowledge and accept Weride's Terms of Service.
+        </p>
         <a href="#"
-           style="background: #6A0DAD; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; font-weight: bold; width: 150px; margin: 5px;">
-           ✅ Approve
+          style="background: #6A0DAD; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; font-weight: bold; width: 150px; margin: 5px;">
+          ✅ Approve
         </a>
         <a href="#"
-           style="background: #D9534F; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; width: 150px; margin: 5px; font-weight: bold;">
-           ❌ Decline
+          style="background: #D9534F; color: #fff; padding: 12px 24px; text-decoration: none; font-size: 16px; border-radius: 6px; display: inline-block; width: 150px; margin: 5px; font-weight: bold;">
+          ❌ Decline
         </a>
       </div>
   
