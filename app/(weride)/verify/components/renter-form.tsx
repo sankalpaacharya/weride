@@ -20,6 +20,7 @@ import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 
+// remove hostel id and other fields
 export default function RenterForm({
   isPending: formState = false,
 }: {
