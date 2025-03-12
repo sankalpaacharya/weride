@@ -43,8 +43,8 @@ export const ownerIdentitySchema = z.object({
   rollno: z.string({ required_error: "Rollno is required" }),
   vehicleDescription: z
     .string({ required_error: "Message is required" })
-    .max(500, "description can't be more than 5000 characters")
-    .min(100, "description for the vehicle should be atleast 100 characters"),
+    .max(500, "description can't be more than 500 characters")
+    .min(70, "description for the vehicle should be atleast 70 characters"),
   vehicleName: z
     .string({ required_error: "Message is required" })
     .max(20, "name can't be more than 20 characters")

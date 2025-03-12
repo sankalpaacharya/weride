@@ -131,7 +131,9 @@ export async function uploadImage(
     const supabase = await createClient();
     const { error } = await supabase.storage
       .from(bucketName)
-      .upload(`${userID}.png`, file, {
+      .upload(`${userID}.webp
+        
+        `, file, {
         cacheControl: "3600",
         upsert: true,
       });
