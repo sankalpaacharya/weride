@@ -29,6 +29,7 @@ import {
 import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import { image_compress_webp } from "../utils/imageProcessor";
 
 export default function OwnerForm({ isPending }: { isPending: boolean }) {
   const [fuelType, setFuelType] = useState("petrol");
@@ -53,14 +54,14 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
       data.fuelType = fuelType;
     }
     const ownerFormData = new FormData();
-    ownerFormData.append("collegeIDPhoto", data.collegeIDPhoto[0]);
-    ownerFormData.append("hostelIDPhoto", data.hostelIDPhoto[0]);
-    ownerFormData.append("QRPhoto", data.QRPhoto[0]);
-    ownerFormData.append("profilePhoto", data.profilePhoto[0]);
-    ownerFormData.append("vehiclePhotoFront", data.vehiclePhotoFront[0]);
-    ownerFormData.append("vehiclePhotoBack", data.vehiclePhotoBack[0]);
-    ownerFormData.append("vehiclePhotoSide", data.vehiclePhotoSide[0]);
-    ownerFormData.append("drivingLiscencePhoto", data.drivingLiscencePhoto[0]);
+    ownerFormData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
+    ownerFormData.append("hostelIDPhoto", await image_compress_webp(data.hostelIDPhoto[0]) as Blob);
+    ownerFormData.append("QRPhoto", await image_compress_webp(data.QRPhoto[0]) as Blob);
+    ownerFormData.append("profilePhoto", await image_compress_webp(data.profilePhoto[0]) as Blob);
+    ownerFormData.append("vehiclePhotoFront", await image_compress_webp(data.vehiclePhotoFront[0]) as Blob);
+    ownerFormData.append("vehiclePhotoBack", await image_compress_webp(data.vehiclePhotoBack[0]) as Blob);
+    ownerFormData.append("vehiclePhotoSide", await image_compress_webp(data.vehiclePhotoSide[0]) as Blob);
+    ownerFormData.append("drivingLiscencePhoto", await image_compress_webp(data.drivingLiscencePhoto[0]) as Blob);
     ownerFormData.append("hostelBlock", data.hostelBlock);
     ownerFormData.append("hostelRoom", data.hostelRoom);
     ownerFormData.append("vehicleName", data.vehicleName);
@@ -325,8 +326,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Select
                 disabled={isPending}
                 defaultValue="petrol"
-                onValueChange={(value) => setFuelType(value)}
-              >
+                onValueChange={(value) => setFuelType(value)}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select your role" />
                 </SelectTrigger>
@@ -345,8 +345,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Button
                 disabled={isSubmitting || isPending}
                 type="submit"
-                className="w-full flex gap-2 bg-main hover:bg-mainhover"
-              >
+                className="w-full flex gap-2 bg-main hover:bg-mainhover">
                 {isLoading ? (
                   <Loader2 className="animate-spin" size={15} />
                 ) : null}

@@ -19,6 +19,7 @@ import {
 import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
+import {image_compress_webp} from "../utils/imageProcessor"
 
 // remove hostel id and other fields
 export default function RenterForm({
@@ -39,16 +40,16 @@ export default function RenterForm({
       const formData = new FormData();
 
       if (data.collegeIDPhoto?.[0]) {
-        formData.append("collegeIDPhoto", data.collegeIDPhoto[0]);
+        formData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
       }
       if (data.hostelIDPhoto?.[0]) {
-        formData.append("hostelIDPhoto", data.hostelIDPhoto[0]);
+        formData.append("hostelIDPhoto",  await image_compress_webp(data.hostelIDPhoto[0]) as Blob);
       }
       if (data.drivingLicencePhoto?.[0]) {
-        formData.append("drivingLicencePhoto", data.drivingLicencePhoto[0]);
+        formData.append("drivingLicencePhoto",  await image_compress_webp(data.drivingLicencePhoto[0]) as Blob);
       }
       if (data.profilePhoto?.[0]) {
-        formData.append("profilePhoto", data.profilePhoto[0]);
+        formData.append("profilePhoto",  await image_compress_webp(data.profilePhoto[0]) as Blob);
       }
 
       formData.append("hostelBlock", data.hostelBlock);
