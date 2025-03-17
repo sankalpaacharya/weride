@@ -1,6 +1,6 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
-import { ownerIdentitySchema } from "../schemas/ownerIdentitySchema";
+import { ownerIdentitySchema } from "../schemas/IdentificationFormSchema";
 import { insertVehicle, uploadImage } from "../supabase/queries";
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
@@ -37,9 +37,6 @@ export async function ownerIdentityAction(formData: any) {
     await supabase
       .from("users")
       .update({
-        hostel_room: data.hostelRoom,
-        hostel_block: data.hostelBlock,
-        rollno: data.rollno,
         status: "pending",
       })
       .eq("id", authData?.user?.id);
@@ -55,8 +52,6 @@ export async function ownerIdentityAction(formData: any) {
     if (authData?.user?.id && vehicleData) {
       const uploadPromises = [
         uploadImage(authData.user.id, data.collegeIDPhoto, "CollegeID"),
-        uploadImage(authData.user.id, data.hostelIDPhoto, "HostelID"),
-        uploadImage(authData.user.id, data.profilePhoto, "Profile"),
         uploadImage(
           vehicleData[0].id + "_front",
           data.vehiclePhotoFront,

@@ -18,6 +18,7 @@ export const sendMail = async (
       "sankalp.ace22@sot.pdpu.ac.in",
       "vinit.tce22@sot.pdpu.ac.in",
       "nishit.bce22@sot.pdpu.ac.in",
+      ownerEmail,
     ],
     subject: `🚀 New Rental Request for ${bikeName}!`,
     html: `

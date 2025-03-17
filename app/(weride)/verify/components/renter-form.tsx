@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   renterIdentitySchema,
   TrenterIdentitySchema,
-} from "@/lib/schemas/renterIdentitySchema";
+} from "@/lib/schemas/IdentificationFormSchema";
 import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
@@ -42,20 +42,9 @@ export default function RenterForm({
       if (data.collegeIDPhoto?.[0]) {
         formData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
       }
-      if (data.hostelIDPhoto?.[0]) {
-        formData.append("hostelIDPhoto",  await image_compress_webp(data.hostelIDPhoto[0]) as Blob);
-      }
       if (data.drivingLicencePhoto?.[0]) {
         formData.append("drivingLicencePhoto",  await image_compress_webp(data.drivingLicencePhoto[0]) as Blob);
       }
-      if (data.profilePhoto?.[0]) {
-        formData.append("profilePhoto",  await image_compress_webp(data.profilePhoto[0]) as Blob);
-      }
-
-      formData.append("hostelBlock", data.hostelBlock);
-      formData.append("hostelRoom", data.hostelRoom);
-      formData.append("rollno", data.rollno);
-
       const response = await renterFormAction(formData);
 
       if (response.error) {
@@ -93,15 +82,13 @@ export default function RenterForm({
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="collegeIDPhoto">
-                College ID Card Photo (Both Side){" "}
-                <span className="text-xs mx-1 text-red-500">200KB</span>
+                College ID Card Photo (Front){" "}
               </Label>
               <Input
                 disabled={isPending}
                 {...register("collegeIDPhoto")}
                 id="collegeIDPhoto"
                 type="file"
-                placeholder="319"
                 accept="image/*"
               />
               {errors.collegeIDPhoto && (
@@ -111,103 +98,19 @@ export default function RenterForm({
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="hostelIDPhoto">
-                Hostel ID Card Photo (Both Side)
-                <span className="text-xs mx-1 text-red-500">200KB</span>
-              </Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelIDPhoto")}
-                id="hostelIDPhoto"
-                type="file"
-                placeholder="319"
-                accept="image/*"
-              />
-              {errors.hostelIDPhoto && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelIDPhoto.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
               <Label htmlFor="drivingLicencePhoto">
-                Driving Licence Photo (Both Side)
-                <span className="text-xs mx-1 text-red-500">200KB</span>
+                Driving Licence Photo (Front)
               </Label>
               <Input
                 disabled={isPending}
                 {...register("drivingLicencePhoto")}
                 id="drivingLicencePhoto"
                 type="file"
-                placeholder="319"
                 accept="image/*"
               />
               {errors.drivingLicencePhoto && (
                 <p className="text-red-500 text-sm">
                   {`${errors.drivingLicencePhoto.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Profile Photo</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
-              <Input
-                disabled={isPending}
-                {...register("profilePhoto")}
-                id="profilePhoto"
-                type="file"
-                placeholder="319"
-                accept="image/*"
-              />
-              {errors.profilePhoto && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.profilePhoto.message}`}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="hostelBlock">Hostel Block</Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelBlock")}
-                id="hostelBlock"
-                type="text"
-                placeholder="A1"
-              />
-              {errors.hostelBlock && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelBlock.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="hostelRoom">Room no</Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelRoom")}
-                id="hostelRoom"
-                type="text"
-                placeholder="319"
-              />
-              {errors.hostelRoom && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelRoom.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rollno">Roll no</Label>
-              <Input
-                disabled={isPending}
-                {...register("rollno")}
-                id="rollno"
-                type="text"
-                placeholder="22BCP890"
-              />
-              {errors.rollno && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.rollno?.message}`}
                 </p>
               )}
             </div>
