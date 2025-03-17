@@ -49,7 +49,7 @@ export default async function Home() {
               <Bike className="text-primary" size={50} />
             </div>
             <div>
-              <p className="text-3xl font-bold">10+</p>
+              <p className="text-3xl font-bold">25+</p>
               <span className="text-sm">Rides</span>
             </div>
           </div>

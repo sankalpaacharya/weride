@@ -25,7 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ownerIdentitySchema,
   TownerIdentitySchema,
-} from "@/lib/schemas/ownerIdentitySchema";
+} from "@/lib/schemas/IdentificationFormSchema";
 import { ownerIdentityAction } from "@/lib/actions/ownerIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
@@ -55,19 +55,13 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
     }
     const ownerFormData = new FormData();
     ownerFormData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
-    ownerFormData.append("hostelIDPhoto", await image_compress_webp(data.hostelIDPhoto[0]) as Blob);
     ownerFormData.append("QRPhoto", await image_compress_webp(data.QRPhoto[0]) as Blob);
-    ownerFormData.append("profilePhoto", await image_compress_webp(data.profilePhoto[0]) as Blob);
     ownerFormData.append("vehiclePhotoFront", await image_compress_webp(data.vehiclePhotoFront[0]) as Blob);
     ownerFormData.append("vehiclePhotoBack", await image_compress_webp(data.vehiclePhotoBack[0]) as Blob);
     ownerFormData.append("vehiclePhotoSide", await image_compress_webp(data.vehiclePhotoSide[0]) as Blob);
-    ownerFormData.append("drivingLiscencePhoto", await image_compress_webp(data.drivingLiscencePhoto[0]) as Blob);
-    ownerFormData.append("hostelBlock", data.hostelBlock);
-    ownerFormData.append("hostelRoom", data.hostelRoom);
     ownerFormData.append("vehicleName", data.vehicleName);
     ownerFormData.append("messageToRenter", data.messageToRenter);
     ownerFormData.append("collegeID", data.messageToRenter);
-    ownerFormData.append("rollno", data.rollno);
     ownerFormData.append("fuelType", fuelType);
     ownerFormData.append("vehicleDescription", data.vehicleDescription);
     const response = await ownerIdentityAction(ownerFormData);
@@ -103,7 +97,6 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             <div className="space-y-2">
               <Label htmlFor="collegeIDPhoto">
                 College ID Card Photo (Front)
-                <span className="text-xs mx-1 text-red-500">200KB</span>
               </Label>
               <Input
                 disabled={isPending}
@@ -119,42 +112,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="hostelIDPhoto">
-                Hostel ID Card Photo (Front)
-                <span className="text-xs mx-1 text-red-500">200KB</span>
-              </Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelIDPhoto")}
-                id="hostelIDPhoto"
-                type="file"
-                placeholder="319"
-              />
-              {errors.hostelIDPhoto && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelIDPhoto.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="profilePhoto">Profile Photo</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
-              <Input
-                disabled={isPending}
-                {...register("profilePhoto")}
-                id="password"
-                type="file"
-                placeholder="319"
-              />
-              {errors.profilePhoto && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.profilePhoto.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
               <Label htmlFor="vehiclePhoto">Vehicle Photo- Front View</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("vehiclePhotoFront")}
@@ -170,7 +128,6 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="vehiclePhoto">Vehicle Photo- Side View</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("vehiclePhotoSide")}
@@ -186,7 +143,6 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="vehiclePhoto">Vehicle Photo- Back View</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("vehiclePhotoBack")}
@@ -203,13 +159,11 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
 
             <div className="space-y-2">
               <Label htmlFor="QRPhoto">QR Photo for payment</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
               <Input
                 disabled={isPending}
                 {...register("QRPhoto")}
                 id="QRPhoto"
                 type="file"
-                placeholder="319"
               />
               {errors.QRPhoto && (
                 <p className="text-red-500 text-sm">
@@ -217,69 +171,6 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                 </p>
               )}
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="Driving Liscence">Driving Liscence</Label>
-              <span className="text-xs mx-1 text-red-500">200KB</span>
-              <Input
-                disabled={isPending}
-                {...register("drivingLiscencePhoto")}
-                id="drivingLiscence"
-                type="file"
-                placeholder="319"
-              />
-              {errors.drivingLiscencePhoto && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.drivingLiscencePhoto.message}`}
-                </p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="hostelBlock">Hostel Block</Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelBlock")}
-                id="email"
-                type="text"
-                placeholder="A1"
-              />
-              {errors.hostelBlock && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelBlock.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="hostelRoom">Room no</Label>
-              <Input
-                disabled={isPending}
-                {...register("hostelRoom")}
-                id="password"
-                type="text"
-                placeholder="319"
-              />
-              {errors.hostelRoom && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelRoom.message}`}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="hostelRoom">Roll no</Label>
-              <Input
-                disabled={isPending}
-                {...register("rollno")}
-                id="password"
-                type="text"
-                placeholder="22BCP700"
-              />
-              {errors.hostelRoom && (
-                <p className="text-red-500 text-sm">
-                  {`${errors.hostelRoom.message}`}
-                </p>
-              )}
-            </div>
-
             <div className="space-y-2">
               <Label htmlFor="vehicleName">Vehicle Name</Label>
               <Input
@@ -299,7 +190,7 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
                 <Textarea
                   disabled={isPending}
                   {...register("vehicleDescription")}
-                  placeholder="write the vehicle description, min 100 characters"
+                  placeholder="write the vehicle description, min 50 characters"
                 />
                 {errors.vehicleDescription && (
                   <p className="text-red-500 text-sm">

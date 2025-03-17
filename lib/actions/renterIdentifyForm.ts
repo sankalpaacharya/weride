@@ -1,6 +1,6 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
-import { renterIdentitySchema } from "../schemas/renterIdentitySchema";
+import { renterIdentitySchema } from "../schemas/IdentificationFormSchema";
 import { uploadImage } from "../supabase/queries";
 import { getUserById } from "../supabase/queries";
 
@@ -28,8 +28,6 @@ export async function renterFormAction(data: any) {
     if (authData?.user?.id) {
       const uploads = [
         { file: formData.collegeIDPhoto, type: "CollegeID" },
-        { file: formData.hostelIDPhoto, type: "HostelID" },
-        { file: formData.profilePhoto, type: "Profile" },
         { file: formData.drivingLicencePhoto, type: "DrivingLicence" },
       ];
 
@@ -49,9 +47,6 @@ export async function renterFormAction(data: any) {
     await supabase
       .from("users")
       .update({
-        hostel_room: formData.hostelRoom,
-        hostel_block: formData.hostelBlock,
-        rollno: formData.rollno,
         status: "pending",
       })
       .eq("id", authData?.user?.id);

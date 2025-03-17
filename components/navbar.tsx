@@ -32,13 +32,13 @@ export default function Header() {
               prefetch={false}
               key={link.label}
               className="hover:bg-[#ffffff22] px-2 py-1 text-center rounded-lg transition-all"
-              href={link.href}
+              href={link.href} target="_blank" rel="noopener noreferrer"
             >
               {link.label}
             </Link>
           ))}
         </nav>
-        <button onClick={toggleMenu} className="md:hidden">
+        <button onClick={toggleMenu} className="md:hidden" title="Toggle Menu">
           <IoMdMenu size={30} />
         </button>
       </div>
