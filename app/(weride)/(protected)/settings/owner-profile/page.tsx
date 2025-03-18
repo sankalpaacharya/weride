@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Card,
@@ -17,8 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Shield, Star, Calendar as CalendarIcon } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Calendar as CalendarIcon, Bike } from "lucide-react";
 
 const OwnerProfileSettings = () => {
   return (
@@ -29,7 +30,7 @@ const OwnerProfileSettings = () => {
           <CardHeader>
             <div className="flex justify-between items-start">
               <div>
-                <CardTitle className="text-2xl">Profile Settings</CardTitle>
+                <CardTitle className="text-2xl">Vehicle Settings</CardTitle>
                 <CardDescription>
                   Manage how you appear to potential renters
                 </CardDescription>
@@ -42,42 +43,31 @@ const OwnerProfileSettings = () => {
         </Card>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Privacy Settings */}
+          {/* Vehicle Information */}
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Shield className="h-5 w-5" />
-                Privacy Settings
+                <Bike className="h-5 w-5" />
+                Vehicle Information
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>Display Name</Label>
-                <Select defaultValue="hostel">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select display name type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="hostel">Use Hostel ID (H125)</SelectItem>
-                    <SelectItem value="real">Use Real Name</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label>Vehicle Title</Label>
+                <Input placeholder="Enter vehicle title" />
               </div>
 
               <div className="space-y-2">
-                <Label>Custom Display Name</Label>
-                <Input placeholder="Enter custom name" />
+                <Label>Vehicle Description</Label>
+                <Textarea
+                  placeholder="Describe your vehicle"
+                  className="h-32"
+                />
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <Label>Show Response Rate</Label>
-                  <Switch defaultChecked />
-                </div>
-                <div className="flex items-center justify-between">
-                  <Label>Show Total Rentals</Label>
-                  <Switch defaultChecked />
-                </div>
+              <div className="space-y-2">
+                <Label>Message to Renter</Label>
+                <Textarea placeholder="Message to renter" className="h-24" />
               </div>
             </CardContent>
           </Card>
@@ -99,8 +89,9 @@ const OwnerProfileSettings = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="available">Available</SelectItem>
-                    <SelectItem value="away">Away</SelectItem>
-                    <SelectItem value="busy">Busy</SelectItem>
+                    <SelectItem value="away">Booked</SelectItem>
+                    <SelectItem value="busy">Unavailable</SelectItem>
+                    <SelectItem value="busy">Maintaince</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -143,55 +134,6 @@ const OwnerProfileSettings = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Preview Section */}
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle className="text-lg">Profile Preview</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="border rounded-lg p-4">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <span className="text-purple-600 font-medium">H125</span>
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-medium">Owner H125</h4>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <Badge
-                          variant="secondary"
-                          className="bg-green-100 text-green-700"
-                        >
-                          Verified
-                        </Badge>
-                        <span className="text-sm text-gray-500">
-                          Response within 10 mins
-                        </span>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                        <span className="font-medium">4.8</span>
-                      </div>
-                      <span className="text-sm text-gray-500">12 rentals</span>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <Badge
-                      variant="secondary"
-                      className="bg-green-100 text-green-700"
-                    >
-                      Available Today
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

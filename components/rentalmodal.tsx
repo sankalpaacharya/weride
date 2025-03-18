@@ -157,7 +157,8 @@ export default function RentalModal({ children, formData }: RentalModal) {
                   />
                   <label
                     htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
                     I have read all the terms and conditions and I accept it.
                   </label>
                 </div>
@@ -168,7 +169,8 @@ export default function RentalModal({ children, formData }: RentalModal) {
             <Button
               type="button"
               disabled={!isTosAccepted}
-              onClick={handleNextClick}>
+              onClick={handleNextClick}
+            >
               Next
             </Button>
           </div>

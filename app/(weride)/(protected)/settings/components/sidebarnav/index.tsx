@@ -13,6 +13,7 @@ interface SidebarNav {
 
 export default function SidebarNav({ items }: SidebarNav) {
   const pathname = usePathname();
+
   return (
     <div>
       <nav className="flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1">

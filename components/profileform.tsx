@@ -38,16 +38,16 @@ type FormValues = z.infer<typeof formSchema>;
 
 type Props = {
   userData: {
-    id: string;
-    name: string;
-    created_at: string;
-    phone: string;
-    email: string;
-    role: string;
-    status: string;
-    hostel_block: string;
-    hostel_room: string;
-    rollno: string;
+    id: string | null;
+    name: string | null;
+    created_at: string | null;
+    phone: string | null;
+    email: string | null;
+    role: string | null;
+    status: string | null;
+    hostel_block: string | null;
+    hostel_room: string | null;
+    rollno: string | null;
   };
 };
 
@@ -69,11 +69,11 @@ export default function ProfileForm({ userData }: Props) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      id: userData.id,
-      name: userData.name,
-      email: userData.email,
-      hostelBlock: userData.hostel_block,
-      hostelRoom: userData.hostel_room,
+      id: userData.id || "",
+      name: userData.name || "",
+      email: userData.email || "",
+      hostelBlock: userData.hostel_block || "",
+      hostelRoom: userData.hostel_room || "",
     },
   });
 
