@@ -34,11 +34,11 @@ export default function NavProfile() {
     //   icon: RiBikeFill,
     //   href: "/vechile",
     // },
-    // {
-    //   name: "History",
-    //   icon: FaHistory,
-    //   href: "/rental/requests",
-    // },
+    {
+      name: "Past Rides",
+      icon: FaHistory,
+      href: "/rental/requests",
+    },
     // {
     //   name: "Request",
     //   icon: FaHandshake,
