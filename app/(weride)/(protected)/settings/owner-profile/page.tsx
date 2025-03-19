@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -16,124 +16,254 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Calendar as CalendarIcon, Bike } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  Bike,
+  Calendar,
+  Clock,
+  Trash2,
+  Plus,
+  Divide,
+} from "lucide-react";
+
+type TimeSlot = {
+  start: string;
+  end: string;
+};
+
+type Slots = {
+  monday: TimeSlot[];
+  tuesday: TimeSlot[];
+  wednesday: TimeSlot[];
+  thursday: TimeSlot[];
+  friday: TimeSlot[];
+  saturday: TimeSlot[];
+  sunday: TimeSlot[];
+};
+
+type days = keyof Slots;
+
+const Header = () => (
+  <Card className="mb-6">
+    <CardHeader>
+      <div className="flex justify-between items-start">
+        <div>
+          <CardTitle className="text-2xl">Vehicle Settings</CardTitle>
+          <CardDescription>
+            Manage how you appear to potential renters
+          </CardDescription>
+        </div>
+        <Button className="bg-purple-600 hover:bg-purple-700">
+          Save Changes
+        </Button>
+      </div>
+    </CardHeader>
+  </Card>
+);
+
+const AvailabilitySettings = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <CalendarIcon className="h-5 w-5" /> Availability Settings
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <div className="space-y-2">
+        <Label>Default Status</Label>
+        <Select defaultValue="Available">
+          <SelectTrigger>
+            <SelectValue placeholder="Select status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Available">Available</SelectItem>
+            <SelectItem value="Booked">Booked</SelectItem>
+            <SelectItem value="Unavailable">Unavailable</SelectItem>
+            <SelectItem value="Maintaince">Maintaince</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <Label>Set Unavailable Times</Label>
+          <p className="text-gray-500 text-xs">
+            Set specific times when your vehicle is not available for rental.
+            You can add multiple time slots of any duration.
+          </p>
+        </div>
+        <UnavailableTimeSettings />
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const VehicleInformation = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-lg flex items-center gap-2">
+        <Bike className="h-5 w-5" /> Vehicle Information
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <div className="space-y-2">
+        <Label>Vehicle Title</Label>
+        <Input placeholder="Enter vehicle title" />
+      </div>
+
+      <div className="space-y-2">
+        <Label>Vehicle Description</Label>
+        <Textarea placeholder="Describe your vehicle" className="h-32" />
+      </div>
+
+      <div className="space-y-2">
+        <Label>Message to Renter</Label>
+        <Textarea placeholder="Message to renter" className="h-24" />
+      </div>
+    </CardContent>
+  </Card>
+);
+
+const UnavailableTimeSettings = () => {
+  const timeSlots: Slots = {
+    monday: [{ start: "10:00:00", end: "13:00:00" }],
+    tuesday: [],
+    wednesday: [],
+    thursday: [],
+    friday: [],
+    saturday: [],
+    sunday: [],
+  };
+  const [selectedDay, setSelectedDay] = useState<days>("monday");
+  const [slots, setSlots] = useState<Slots>(timeSlots);
+
+  useEffect(() => {
+    console.log(slots);
+  }, [slots]);
+
+  const updateTimeSlot = (
+    day: days,
+    index: number,
+    field: "start" | "end",
+    value: string
+  ) => {
+    setSlots((prev) => {
+      const updatedSlots = { ...prev };
+      updatedSlots[day] = [...prev[day]];
+      updatedSlots[day][index] = {
+        ...updatedSlots[day][index],
+        [field]: value,
+      };
+      return updatedSlots;
+    });
+  };
+
+  return (
+    <div className="mt-10 ">
+      {/* day */}
+      <div className="space-y-2 pb-3 border-b">
+        <div className="flex items-center justify-between">
+          <p className="inline-flex items-center">
+            <Calendar className="h-4 w-4 mr-2" />
+            <Select
+              defaultValue="monday"
+              onValueChange={(value: days) => setSelectedDay(value)}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a day " />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.keys(slots).map((day) => (
+                  <SelectItem key={day} value={day.toLowerCase()}>
+                    {day.charAt(0).toUpperCase() + day.slice(1)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </p>
+          <Button
+            variant={"outline"}
+            onClick={() =>
+              setSlots((prev: Slots) => {
+                return {
+                  ...prev,
+                  [selectedDay]: [
+                    ...prev[selectedDay],
+                    { start: "10:00:00", end: "12:00:00" },
+                  ],
+                };
+              })
+            }
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Time Slot
+          </Button>
+        </div>
+        {/*  time slot */}
+        {slots[selectedDay].map((slot, index) => (
+          <div
+            key={`${selectedDay}-${index}`}
+            className="p-2 bg-gray-50 flex items-center"
+          >
+            <Clock className="h-4 w-4 mr-4" />
+            <div className="flex items-center space-x-2 w-full">
+              <Input
+                onChange={(e) =>
+                  updateTimeSlot(selectedDay, index, "start", e.target.value)
+                }
+                value={slot.start}
+                type="time"
+              />
+              <span className="text-gray-600">to</span>
+              <Input
+                type="time"
+                value={slot.end}
+                onChange={(e) =>
+                  updateTimeSlot(selectedDay, index, "end", e.target.value)
+                }
+              />
+            </div>
+            <span
+              onClick={() => {
+                setSlots((prev) => {
+                  const updatedDay = prev[selectedDay].filter(
+                    (_, i) => i !== index
+                  );
+                  return {
+                    ...prev,
+                    [selectedDay]: updatedDay,
+                  };
+                });
+              }}
+              className="p-3 hover:bg-gray-200 transition-all cursor-pointer rounded-lg flex justify-center ml-4"
+            >
+              <Trash2 className="h-4 w-4" />
+            </span>
+          </div>
+        ))}
+        {slots[selectedDay].length == 0 ? (
+          <div className="p-12 rounded-lg border shadow-sm flex justify-center items-center">
+            No unavailable time slots have been set
+          </div>
+        ) : null}
+
+        {/* time slot end's here */}
+      </div>
+
+      {/* day ends here */}
+    </div>
+  );
+};
 
 const OwnerProfileSettings = () => {
   return (
-    <div className="">
-      <div className="">
-        {/* Header */}
-        <Card className="mb-6">
-          <CardHeader>
-            <div className="flex justify-between items-start">
-              <div>
-                <CardTitle className="text-2xl">Vehicle Settings</CardTitle>
-                <CardDescription>
-                  Manage how you appear to potential renters
-                </CardDescription>
-              </div>
-              <Button className="bg-purple-600 hover:bg-purple-700">
-                Save Changes
-              </Button>
-            </div>
-          </CardHeader>
-        </Card>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Vehicle Information */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Bike className="h-5 w-5" />
-                Vehicle Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label>Vehicle Title</Label>
-                <Input placeholder="Enter vehicle title" />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Vehicle Description</Label>
-                <Textarea
-                  placeholder="Describe your vehicle"
-                  className="h-32"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label>Message to Renter</Label>
-                <Textarea placeholder="Message to renter" className="h-24" />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Availability Settings */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <CalendarIcon className="h-5 w-5" />
-                Availability Settings
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label>Default Status</Label>
-                <Select defaultValue="available">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="available">Available</SelectItem>
-                    <SelectItem value="away">Booked</SelectItem>
-                    <SelectItem value="busy">Unavailable</SelectItem>
-                    <SelectItem value="busy">Maintaince</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Regularly Available Times</Label>
-                <div className="flex gap-2">
-                  <Select defaultValue="monday">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Day" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="monday">Monday</SelectItem>
-                      {/* Add other days */}
-                    </SelectContent>
-                  </Select>
-                  <Select defaultValue="9am">
-                    <SelectTrigger>
-                      <SelectValue placeholder="Start" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="9am">9:00 AM</SelectItem>
-                      {/* Add other times */}
-                    </SelectContent>
-                  </Select>
-                  <Select defaultValue="5pm">
-                    <SelectTrigger>
-                      <SelectValue placeholder="End" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="5pm">5:00 PM</SelectItem>
-                      {/* Add other times */}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button variant="ghost" className="text-purple-600 p-0 h-auto">
-                  + Add Time Slot
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+    <div>
+      <Header />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <AvailabilitySettings />
+        <VehicleInformation />
       </div>
     </div>
   );
