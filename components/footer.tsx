@@ -15,12 +15,11 @@ export default function footer({}: Props) {
             href="https://discord.gg/bEMrcuW3W3"
             target="_blank"
             rel="noopener noreferrer"
-            title="Join our Discord">
+            title="Join our Discord"
+          >
             <FaDiscord size={25} />
           </a>
-          <a
-            href="mailto:team@weride.live"
-            title="Mail us your Query">
+          <a href="mailto:team@weride.live" title="Mail us your Query">
             <MdEmail size={25} />
           </a>
         </div>

@@ -37,7 +37,7 @@ export default function NavProfile() {
     {
       name: "Past Rides",
       icon: FaHistory,
-      href: "/rental/requests",
+      href: "/renter/rides",
     },
     // {
     //   name: "Request",

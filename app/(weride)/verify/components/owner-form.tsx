@@ -54,11 +54,26 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
       data.fuelType = fuelType;
     }
     const ownerFormData = new FormData();
-    ownerFormData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
-    ownerFormData.append("QRPhoto", await image_compress_webp(data.QRPhoto[0]) as Blob);
-    ownerFormData.append("vehiclePhotoFront", await image_compress_webp(data.vehiclePhotoFront[0]) as Blob);
-    ownerFormData.append("vehiclePhotoBack", await image_compress_webp(data.vehiclePhotoBack[0]) as Blob);
-    ownerFormData.append("vehiclePhotoSide", await image_compress_webp(data.vehiclePhotoSide[0]) as Blob);
+    ownerFormData.append(
+      "collegeIDPhoto",
+      (await image_compress_webp(data.collegeIDPhoto[0])) as Blob,
+    );
+    ownerFormData.append(
+      "QRPhoto",
+      (await image_compress_webp(data.QRPhoto[0])) as Blob,
+    );
+    ownerFormData.append(
+      "vehiclePhotoFront",
+      (await image_compress_webp(data.vehiclePhotoFront[0])) as Blob,
+    );
+    ownerFormData.append(
+      "vehiclePhotoBack",
+      (await image_compress_webp(data.vehiclePhotoBack[0])) as Blob,
+    );
+    ownerFormData.append(
+      "vehiclePhotoSide",
+      (await image_compress_webp(data.vehiclePhotoSide[0])) as Blob,
+    );
     ownerFormData.append("vehicleName", data.vehicleName);
     ownerFormData.append("messageToRenter", data.messageToRenter);
     ownerFormData.append("collegeID", data.messageToRenter);
@@ -217,7 +232,8 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Select
                 disabled={isPending}
                 defaultValue="petrol"
-                onValueChange={(value) => setFuelType(value)}>
+                onValueChange={(value) => setFuelType(value)}
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select your role" />
                 </SelectTrigger>
@@ -236,7 +252,8 @@ export default function OwnerForm({ isPending }: { isPending: boolean }) {
               <Button
                 disabled={isSubmitting || isPending}
                 type="submit"
-                className="w-full flex gap-2 bg-main hover:bg-mainhover">
+                className="w-full flex gap-2 bg-main hover:bg-mainhover"
+              >
                 {isLoading ? (
                   <Loader2 className="animate-spin" size={15} />
                 ) : null}

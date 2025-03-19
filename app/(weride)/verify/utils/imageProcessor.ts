@@ -1,4 +1,4 @@
-import imageCompression from "browser-image-compression"
+import imageCompression from "browser-image-compression";
 
 export async function image_compress_webp(file: File) {
   if (file) {
@@ -58,13 +58,17 @@ async function convertToWebP(file: File) {
         canvas.toBlob(
           (blob) => {
             if (blob) {
-              resolve(new File([blob], `${file.name.split(".")[0]}.webp`, { type: "image/webp" }));
+              resolve(
+                new File([blob], `${file.name.split(".")[0]}.webp`, {
+                  type: "image/webp",
+                }),
+              );
             } else {
               reject("Conversion to WebP failed");
             }
           },
           "image/webp",
-          0.9
+          0.9,
         );
       };
     };
