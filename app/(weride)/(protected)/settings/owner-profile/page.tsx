@@ -25,7 +25,6 @@ import {
   Clock,
   Trash2,
   Plus,
-  Divide,
 } from "lucide-react";
 
 type TimeSlot = {

@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FaRegUser } from "react-icons/fa";
-import { RiBikeFill } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
 import { MdLogout, MdOnlinePrediction } from "react-icons/md";
 import { ChevronRight } from "lucide-react";

@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ChevronRight,
   MapPin,
@@ -23,7 +21,7 @@ type RideProps = {
   price?: string;
 };
 
-export default function RideDetailCard({
+export default function Page({
   rideNumber = "0057",
   date = "March 14, 2025",
   time = "2:30 PM",
@@ -99,7 +97,7 @@ export default function RideDetailCard({
 
         {/* Price and action buttons */}
         <div className="flex justify-between items-center">
-          <div className="text-teal-500 font-bold text-2xl">{price}</div>
+          <div className="text-primary font-bold text-2xl">{price}</div>
           <div className="flex space-x-3">
             <button className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-md font-medium flex items-center transition-colors">
               <Phone className="w-4 h-4 mr-2" />
