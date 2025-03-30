@@ -75,6 +75,12 @@ Had a great experience renting a bike from WeRide. Everything was super quick an
     profile: anonymous,
     role: "Vehicle Renter",
   },
+  {
+    content: `I had booked a scooter from WeRide and it was a very nice experience. The process was very simple and easy. Will definitely book again.`,
+    name: "Heet Dobariya",
+    profile: anonymous,
+    role: "Vehicle Renter",
+  },
 ];
 
 export default function Testimonials({}: Props) {
