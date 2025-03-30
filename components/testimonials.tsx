@@ -63,6 +63,18 @@ Had a great experience renting a bike from WeRide. Everything was super quick an
     profile: anonymous,
     role: "Vehicle Renter",
   },
+  {
+    content: `I had a great experience using the WeRide platform to drive the Activa 3G. One of the best parts was its instant availability, which added to the overall convenience. Highly recommended!`,
+    name: "Maitri Patel",
+    profile: anonymous,
+    role: "Vehicle Renter",
+  },
+  {
+    content: `Excellent service and quality. Genuinely recommended to all college students. Thank you`,
+    name: "Prayash Mishra",
+    profile: anonymous,
+    role: "Vehicle Renter",
+  },
 ];
 
 export default function Testimonials({}: Props) {
