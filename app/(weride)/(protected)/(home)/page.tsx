@@ -45,11 +45,11 @@ export default async function Home() {
       <div className="bg-primary mt-20 text-gray-200 py-10">
         <div className="container flex justify-center">
           <div className="flex flex-col space-y-2 items-center justify-center ">
-            <div className="p-4 bg-white rounded-full">
+            <div className="p-4 bg-white rounded-full flex items-center justify-center">
               <Bike className="text-primary" size={50} />
             </div>
-            <div>
-              <p className="text-3xl font-bold">25+</p>
+            <div className="text-center">
+              <p className="text-3xl font-bold">30+</p>
               <span className="text-sm">Rides</span>
             </div>
           </div>
