@@ -224,3 +224,14 @@ export async function getOrdersByStatus(status: string[]) {
   if (error) throw error;
   return data;
 }
+
+export async function getOrderByOwnerId(ownerId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("order")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .eq("owner_id", ownerId);
+  if (error) throw error;
+  return data;
+}
