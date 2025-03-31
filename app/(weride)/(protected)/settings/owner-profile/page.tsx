@@ -19,6 +19,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  Form,
+  FormControl,
+  FormField,
+  useFormField,
+  FormItem,
+} from "@/components/ui/form";
+import {
   Calendar as CalendarIcon,
   Bike,
   Calendar,
@@ -26,6 +33,7 @@ import {
   Trash2,
   Plus,
 } from "lucide-react";
+import { useForm, UseFormReturn, FieldValues } from "react-hook-form";
 
 type TimeSlot = {
   start: string;
@@ -44,7 +52,7 @@ type Slots = {
 
 type days = keyof Slots;
 
-const Header = () => (
+const Header = ({ isSubmitting }: { isSubmitting: boolean }) => (
   <Card className="mb-6">
     <CardHeader>
       <div className="flex justify-between items-start">
@@ -54,7 +62,11 @@ const Header = () => (
             Manage how you appear to potential renters
           </CardDescription>
         </div>
-        <Button className="bg-purple-600 hover:bg-purple-700">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-purple-600 hover:bg-purple-700"
+        >
           Save Changes
         </Button>
       </div>
@@ -62,7 +74,11 @@ const Header = () => (
   </Card>
 );
 
-const AvailabilitySettings = () => (
+const AvailabilitySettings = ({
+  form,
+}: {
+  form: UseFormReturn<FieldValues, any, undefined>;
+}) => (
   <Card>
     <CardHeader>
       <CardTitle className="text-lg flex items-center gap-2">
@@ -72,17 +88,24 @@ const AvailabilitySettings = () => (
     <CardContent className="space-y-4">
       <div className="space-y-2">
         <Label>Default Status</Label>
-        <Select defaultValue="Available">
-          <SelectTrigger>
-            <SelectValue placeholder="Select status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Available">Available</SelectItem>
-            <SelectItem value="Booked">Booked</SelectItem>
-            <SelectItem value="Unavailable">Unavailable</SelectItem>
-            <SelectItem value="Maintaince">Maintaince</SelectItem>
-          </SelectContent>
-        </Select>
+        <FormField
+          name="availability"
+          render={({ field }) => (
+            <FormItem>
+              <Select onValueChange={field.onChange} defaultValue="Available">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Available">Available</SelectItem>
+                  <SelectItem value="Booked">Booked</SelectItem>
+                  <SelectItem value="Unavailable">Unavailable</SelectItem>
+                  <SelectItem value="Maintaince">Maintaince</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormItem>
+          )}
+        />
       </div>
 
       <div className="space-y-4">
@@ -99,7 +122,11 @@ const AvailabilitySettings = () => (
   </Card>
 );
 
-const VehicleInformation = () => (
+const VehicleInformation = ({
+  form,
+}: {
+  form: UseFormReturn<FieldValues, any, undefined>;
+}) => (
   <Card>
     <CardHeader>
       <CardTitle className="text-lg flex items-center gap-2">
@@ -109,17 +136,53 @@ const VehicleInformation = () => (
     <CardContent className="space-y-4">
       <div className="space-y-2">
         <Label>Vehicle Title</Label>
-        <Input placeholder="Enter vehicle title" />
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input {...field} placeholder="Enter vehicle title" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
       </div>
 
       <div className="space-y-2">
         <Label>Vehicle Description</Label>
-        <Textarea placeholder="Describe your vehicle" className="h-32" />
+        <FormField
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  placeholder="Describe your vehicle"
+                  className="h-32"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
       </div>
 
       <div className="space-y-2">
         <Label>Message to Renter</Label>
-        <Textarea placeholder="Message to renter" className="h-24" />
+        <FormField
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  placeholder="Message to renter"
+                  className="h-24"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
       </div>
     </CardContent>
   </Card>
@@ -166,21 +229,26 @@ const UnavailableTimeSettings = () => {
         <div className="flex items-center justify-between">
           <p className="inline-flex items-center">
             <Calendar className="h-4 w-4 mr-2" />
-            <Select
-              defaultValue="monday"
-              onValueChange={(value: days) => setSelectedDay(value)}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a day " />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.keys(slots).map((day) => (
-                  <SelectItem key={day} value={day.toLowerCase()}>
-                    {day.charAt(0).toUpperCase() + day.slice(1)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <FormField
+              name="day"
+              render={({ field }) => (
+                <Select
+                  defaultValue="monday"
+                  onValueChange={(value: days) => setSelectedDay(value)}
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a day " />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.keys(slots).map((day) => (
+                      <SelectItem key={day} value={day.toLowerCase()}>
+                        {day.charAt(0).toUpperCase() + day.slice(1)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </p>
           <Button
             variant={"outline"}
@@ -257,14 +325,23 @@ const UnavailableTimeSettings = () => {
 };
 
 const OwnerProfileSettings = () => {
+  const form = useForm();
+  const formSubmit = (formValue: any) => {
+    console.log(formValue);
+  };
+
   return (
-    <div>
-      <Header />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <AvailabilitySettings />
-        <VehicleInformation />
-      </div>
-    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(formSubmit)}>
+        <div>
+          <Header isSubmitting={form.formState.isSubmitting} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <AvailabilitySettings form={form} />
+            <VehicleInformation form={form} />
+          </div>
+        </div>
+      </form>
+    </Form>
   );
 };
 
