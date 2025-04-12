@@ -50,17 +50,17 @@ export async function ownerIdentityAction(formData: any) {
         uploadImage(
           vehicleData[0].id + "_front",
           data.vehiclePhotoFront,
-          "Vehicle"
+          "Vehicle",
         ),
         uploadImage(
           vehicleData[0].id + "_side",
           data.vehiclePhotoSide,
-          "Vehicle"
+          "Vehicle",
         ),
         uploadImage(
           vehicleData[0].id + "_back",
           data.vehiclePhotoBack,
-          "Vehicle"
+          "Vehicle",
         ),
         uploadImage(vehicleData[0].id, data.QRPhoto, "QRCode"),
       ];

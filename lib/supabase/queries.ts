@@ -129,14 +129,16 @@ export async function uploadImage(
 ) {
   try {
     const supabase = await createClient();
-    const { error } = await supabase.storage
-      .from(bucketName)
-      .upload(`${userID}.webp
+    const { error } = await supabase.storage.from(bucketName).upload(
+      `${userID}.webp
         
-        `, file, {
+        `,
+      file,
+      {
         cacheControl: "3600",
         upsert: true,
-      });
+      },
+    );
 
     if (error !== null) {
       return { name: bucketName, error: error.message };

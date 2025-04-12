@@ -212,7 +212,7 @@ const OTPVerificationForm = ({
 
       if (error) throw error;
       toast.success("Email verified successfully!");
-      window.location.href = "/";
+      window.location.href = "/verify";
     } catch (error) {
       toast.error("Invalid code. Please try again.");
       setOTPValue("");

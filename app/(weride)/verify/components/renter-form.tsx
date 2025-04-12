@@ -19,7 +19,7 @@ import {
 import { renterFormAction } from "@/lib/actions/renterIdentifyForm";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
-import {image_compress_webp} from "../utils/imageProcessor"
+import { image_compress_webp } from "../utils/imageProcessor";
 
 // remove hostel id and other fields
 export default function RenterForm({
@@ -40,10 +40,16 @@ export default function RenterForm({
       const formData = new FormData();
 
       if (data.collegeIDPhoto?.[0]) {
-        formData.append("collegeIDPhoto", await image_compress_webp(data.collegeIDPhoto[0]) as Blob);
+        formData.append(
+          "collegeIDPhoto",
+          (await image_compress_webp(data.collegeIDPhoto[0])) as Blob,
+        );
       }
       if (data.drivingLicencePhoto?.[0]) {
-        formData.append("drivingLicencePhoto",  await image_compress_webp(data.drivingLicencePhoto[0]) as Blob);
+        formData.append(
+          "drivingLicencePhoto",
+          (await image_compress_webp(data.drivingLicencePhoto[0])) as Blob,
+        );
       }
       const response = await renterFormAction(formData);
 

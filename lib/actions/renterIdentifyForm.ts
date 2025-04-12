@@ -36,7 +36,7 @@ export async function renterFormAction(data: any) {
         const result = await uploadImage(
           authData.user.id,
           upload.file,
-          upload.type
+          upload.type,
         );
 
         if (result.error) {

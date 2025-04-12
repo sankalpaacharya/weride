@@ -1,15 +1,13 @@
 import React from "react";
-import { Card, CardContent } from "./ui/card"; 
+import { Card, CardContent } from "./ui/card";
 import chirag from "@/public/images/testimonials/Chirag.jpg";
 import jay from "@/public/images/testimonials/Jay.jpg";
 import dhariya from "@/public/images/testimonials/Dhariya.jpg";
-import anonymous from "@/public/images/testimonials/anonymous.webp"
-import yash from "@/public/images/testimonials/Yash.webp"
-import shafin from "@/public/images/testimonials/Shafin.webp"
-import pratyay from "@/public/images/testimonials/Pratyay.webp"
+import anonymous from "@/public/images/testimonials/anonymous.webp";
+import yash from "@/public/images/testimonials/Yash.webp";
+import shafin from "@/public/images/testimonials/Shafin.webp";
+import pratyay from "@/public/images/testimonials/Pratyay.webp";
 import { FaStar } from "react-icons/fa";
-
-
 
 type Props = {};
 
@@ -98,10 +96,18 @@ export default function Testimonials({}: Props) {
                     className="h-12 w-12 rounded-full object-cover border border-white/30"
                   />
                   <div>
-                    <h3 className="font-semibold text-black">{item.name}  </h3>
-                    <span className="text-xs  text-gray-700/80">{item.role}</span>
-                    <span className="text-base flex flex-row text-yellow-400"> <FaStar/><FaStar/><FaStar/><FaStar/><FaStar/>  </span>
-
+                    <h3 className="font-semibold text-black">{item.name} </h3>
+                    <span className="text-xs  text-gray-700/80">
+                      {item.role}
+                    </span>
+                    <span className="text-base flex flex-row text-yellow-400">
+                      {" "}
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />{" "}
+                    </span>
                   </div>
                 </div>
               </CardContent>
