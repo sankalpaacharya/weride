@@ -52,7 +52,7 @@ export async function renterFormAction(data: any) {
           status: "pending",
         })
         .eq("id", authData?.user?.id),
-      notifyNewRegister(userData[0].name),
+      notifyNewRegister(userData.name),
     ]);
 
     return { success: "Your information has been added!" };
