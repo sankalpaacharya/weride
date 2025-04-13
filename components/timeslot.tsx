@@ -6,7 +6,7 @@ import { Timer, CalendarCheck } from "lucide-react";
 type Props = {};
 
 const UnavailableTime = {
-  Monday: [],
+  Monday: [{ start: "10AM", end: "3PM" }],
   Tueday: [],
   Wednesday: [],
   Thursday: [],

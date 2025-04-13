@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FaRegUser } from "react-icons/fa";
-import { RiBikeFill } from "react-icons/ri";
 import { FaHistory } from "react-icons/fa";
 import { MdLogout, MdOnlinePrediction } from "react-icons/md";
 import { ChevronRight } from "lucide-react";
@@ -34,11 +33,11 @@ export default function NavProfile() {
     //   icon: RiBikeFill,
     //   href: "/vechile",
     // },
-    // {
-    //   name: "History",
-    //   icon: FaHistory,
-    //   href: "/rental/requests",
-    // },
+    {
+      name: "Past Rides",
+      icon: FaHistory,
+      href: "/renter/rides",
+    },
     // {
     //   name: "Request",
     //   icon: FaHandshake,
