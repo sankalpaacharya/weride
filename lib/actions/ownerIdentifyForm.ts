@@ -2,6 +2,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { ownerIdentitySchema } from "../schemas/IdentificationFormSchema";
 import { insertVehicle, uploadImage } from "../supabase/queries";
+import { notifyNewRegister } from "@/resend/notifyNewRegister";
 // make use of facade design pattern
 //  for different db query, make a file which has a function for getting user updating upserting etc
 // make a available status  column in vehicle field, check bikecard component
@@ -34,12 +35,6 @@ export async function ownerIdentityAction(formData: any) {
     if (!result.success) {
       return { error: result.error.issues[0].message };
     }
-    await supabase
-      .from("users")
-      .update({
-        status: "pending",
-      })
-      .eq("id", authData?.user?.id);
 
     const vehicleData = await insertVehicle({
       name: data.vehicleName,
@@ -76,6 +71,16 @@ export async function ownerIdentityAction(formData: any) {
       if (uploadErrors.length > 0) {
         return { error: uploadErrors.map((err) => err.error).join(", ") };
       }
+
+      await Promise.all([
+        supabase
+          .from("users")
+          .update({
+            status: "pending",
+          })
+          .eq("id", authData?.user?.id),
+        notifyNewRegister(userData[0].name),
+      ]);
     }
     return {
       success: "Your data has been submitted please wait for the verification",

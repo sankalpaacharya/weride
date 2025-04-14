@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { renterIdentitySchema } from "../schemas/IdentificationFormSchema";
 import { uploadImage } from "../supabase/queries";
 import { getUserById } from "../supabase/queries";
+import { notifyNewRegister } from "@/resend/notifyNewRegister";
 
 export async function renterFormAction(data: any) {
   try {
@@ -44,12 +45,15 @@ export async function renterFormAction(data: any) {
       }
     }
 
-    await supabase
-      .from("users")
-      .update({
-        status: "pending",
-      })
-      .eq("id", authData?.user?.id);
+    await Promise.all([
+      supabase
+        .from("users")
+        .update({
+          status: "pending",
+        })
+        .eq("id", authData?.user?.id),
+      notifyNewRegister(userData.name),
+    ]);
 
     return { success: "Your information has been added!" };
   } catch (error) {
