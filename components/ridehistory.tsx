@@ -41,35 +41,34 @@ const RideHistory: React.FC<RideProps> = ({
   vehicleData,
   title,
 }: RideProps) => {
-    const calculateFare = (ride: any) => {
-        if(ride.status!=="Completed"){
-            return {totalBill: 0.00,
-            convenienceFee: 0.00,
-            finalBill: 0.00
-            }}
-        const petrolFee = (ride.final_meter_reading - ride.initial_meter_reading) * 2.8;
-        const hourlyFee = ride.rent_hour * vehicleData.data.price;
-        const totalBill = petrolFee + hourlyFee + ride.late_fee;
-      
-        let convenienceFee = 0;
-        let convenienceFeeText = "No Convenience Fee";
-      
-        if (ride.key_exchange === "weride") {
-          convenienceFee = 0.25 * hourlyFee;
-          convenienceFeeText = `WeRide Convenience Fee (25%): ${convenienceFee.toFixed(2)}`;
-        } else if (ride.key_exchange === "owner") {
-          convenienceFee = 0.10 * hourlyFee;
-          convenienceFeeText = `Owner Convenience Fee (10%): ${convenienceFee.toFixed(2)}`;
-        }
-      
-        const finalBill = totalBill - convenienceFee;
-      
-        return {
-          totalBill: totalBill.toFixed(2),
-          convenienceFee: convenienceFeeText,
-          finalBill: finalBill.toFixed(2),
-        };
-      };
+  const calculateFare = (ride: any) => {
+    if (ride.status !== "Completed") {
+      return { totalBill: 0.0, convenienceFee: 0.0, finalBill: 0.0 };
+    }
+    const petrolFee =
+      (ride.final_meter_reading - ride.initial_meter_reading) * 2.8;
+    const hourlyFee = ride.rent_hour * vehicleData.data.price;
+    const totalBill = petrolFee + hourlyFee + ride.late_fee;
+
+    let convenienceFee = 0;
+    let convenienceFeeText = "No Convenience Fee";
+
+    if (ride.key_exchange === "weride") {
+      convenienceFee = 0.25 * hourlyFee;
+      convenienceFeeText = `WeRide Convenience Fee (25%): ${convenienceFee.toFixed(2)}`;
+    } else if (ride.key_exchange === "owner") {
+      convenienceFee = 0.1 * hourlyFee;
+      convenienceFeeText = `Owner Convenience Fee (10%): ${convenienceFee.toFixed(2)}`;
+    }
+
+    const finalBill = totalBill - convenienceFee;
+
+    return {
+      totalBill: totalBill.toFixed(2),
+      convenienceFee: convenienceFeeText,
+      finalBill: finalBill.toFixed(2),
+    };
+  };
 
   return (
     <div className="max-w-3xl mx-auto px-4 space-y-4 my-4">
@@ -148,19 +147,19 @@ const RideHistory: React.FC<RideProps> = ({
               </div>
             </div>
             <div className="flex justify-between items-center">
-            <div className="text-primary font-bold text-2xl">
-            <div className="text-primary font-bold text-2xl">
-  <div className="flex items-center">
-    <IndianRupee />
-    {calculateFare(ride).finalBill}
-  </div>
-  <div className="text-sm font-medium">
-    <p>Total Bill: {calculateFare(ride).totalBill}</p>
-    <p>{calculateFare(ride).convenienceFee}</p>
-    <p>Final Bill: {calculateFare(ride).finalBill}</p>
-  </div>
-</div>
-</div>
+              <div className="text-primary font-bold text-2xl">
+                <div className="text-primary font-bold text-2xl">
+                  <div className="flex items-center">
+                    <IndianRupee />
+                    {calculateFare(ride).finalBill}
+                  </div>
+                  <div className="text-sm font-medium">
+                    <p>Total Bill: {calculateFare(ride).totalBill}</p>
+                    <p>{calculateFare(ride).convenienceFee}</p>
+                    <p>Final Bill: {calculateFare(ride).finalBill}</p>
+                  </div>
+                </div>
+              </div>
               <div className="flex space-x-2">
                 <a
                   href={`tel:${ride.renter_id.phone}`}
