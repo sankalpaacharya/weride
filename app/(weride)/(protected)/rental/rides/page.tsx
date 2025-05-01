@@ -33,7 +33,7 @@ export interface RideType {
 
 export default async function Page() {
   const ownerData = await getOrderByOwnerId(
-    "87bf1fe2-06cb-4a50-927f-2ab9d5c16530",
+    "87bf1fe2-06cb-4a50-927f-2ab9d5c16530"
   );
   ownerData.forEach((ride) => {
     const rideDate = new Date(ride.created_at);

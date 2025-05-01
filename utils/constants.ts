@@ -1,2 +1,2 @@
 export const DISCORD_URL =
-  "https://weride-discord-backend-production.up.railway.app";
+  "https://sacred-choir-457209-n0.el.r.appspot.com";
