@@ -42,7 +42,7 @@ export default function RentalCard({
         return "bg-gray-100 text-gray-800";
     }
   };
-
+  // testing
   return (
     <Link
       href={`vehicle/${bikeDetails.id}`}
