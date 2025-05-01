@@ -209,7 +209,7 @@ const UnavailableTimeSettings = () => {
     day: days,
     index: number,
     field: "start" | "end",
-    value: string,
+    value: string
   ) => {
     setSlots((prev) => {
       const updatedSlots = { ...prev };
@@ -296,7 +296,7 @@ const UnavailableTimeSettings = () => {
               onClick={() => {
                 setSlots((prev) => {
                   const updatedDay = prev[selectedDay].filter(
-                    (_, i) => i !== index,
+                    (_, i) => i !== index
                   );
                   return {
                     ...prev,
