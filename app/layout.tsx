@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import MapImage from "@/public/images/map.png";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "weride.live",
     images: [
       {
-        url: "/map.png",
+        url: MapImage.src,
         width: 1200,
         height: 630,
         alt: "weride.live - share the wheels, share the fun",
