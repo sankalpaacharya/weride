@@ -10,6 +10,22 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "weride.live",
   description: "weride-share the wheels, share the fun",
+  openGraph: {
+    title: "weride.live",
+    description: "weride-share the wheels, share the fun",
+    url: "https://weride.live",
+    siteName: "weride.live",
+    images: [
+      {
+        url: "/map.png",
+        width: 1200,
+        height: 630,
+        alt: "weride.live - share the wheels, share the fun",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
