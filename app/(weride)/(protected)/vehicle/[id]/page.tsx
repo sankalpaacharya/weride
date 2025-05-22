@@ -1,17 +1,13 @@
 import React from "react";
-import BikeGallery from "@/components/bikegallery";
-import CheckoutCard from "@/components/checkoutcard";
 import { FaLocationDot, FaStar } from "react-icons/fa6";
 import { FaRegSmileBeam } from "react-icons/fa";
 import { PiMedalLight } from "react-icons/pi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { getVehicleData } from "@/lib/supabase/queries";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { MessageSquareText } from "lucide-react";
-import { redirect } from "next/navigation";
-import UnavailableTimeSlot from "@/components/timeslot";
+import { Suspense } from "react";
+import VechileDisplay from "@/features/vechiles/components/bikedisplay";
+import VechileSkeleton from "@/features/vechiles/components/VechileSkeleton";
 
 type PageProps = {
   params: Promise<{
@@ -118,43 +114,13 @@ const OwnerInfo: React.FC<OwnerProps> = ({ name }) => (
 
 async function BikePage({ params }: PageProps) {
   const { id: bikeId } = await params;
-  const vehicleResponse = await getVehicleData(bikeId);
-  if (vehicleResponse.error || !vehicleResponse.data) {
-    redirect("/");
-  }
-  const vehicleDetails = vehicleResponse.data;
 
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="container space-y-10">
-        <div className="flex flex-col lg:flex-row gap-10">
-          <BikeGallery bikeId={bikeId} />
-          <CheckoutCard
-            bikeId={bikeId}
-            ownerId={vehicleDetails.owner_id}
-            availability={vehicleDetails.availability}
-            price={vehicleDetails.price}
-          />
-        </div>
-        <div className="">
-          <BikeInfo
-            title={vehicleDetails.name}
-            description={vehicleDetails.description}
-          />
-          <OwnerInfo name={vehicleDetails.owner_name} />
-        </div>
-        <Card className="md:w-3/5">
-          <CardHeader className="flex">
-            <p className="flex gap-2 items-center">
-              <MessageSquareText size={15} />
-              <span>Message From Owner</span>
-            </p>
-          </CardHeader>
-          <CardContent>{vehicleDetails.message}</CardContent>
-        </Card>
-
-        <UnavailableTimeSlot></UnavailableTimeSlot>
-
+        <Suspense fallback={<VechileSkeleton />}>
+          <VechileDisplay bikeId={bikeId} />
+        </Suspense>
         <div className="md:mt-20 mt-20">
           <h2 className="text-2xl font-semibold">Full address of booking</h2>
           <p className="text-sm">Pdeu High Rise Hostel</p>

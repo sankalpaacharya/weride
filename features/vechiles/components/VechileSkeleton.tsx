@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const BikePageSkeleton = () => {
+const VechileSkeleton = () => {
   return (
     <div className="flex justify-center min-h-screen mt-5">
       <div className="container">
@@ -47,4 +47,4 @@ const BikePageSkeleton = () => {
   );
 };
 
-export default BikePageSkeleton;
+export default VechileSkeleton;
