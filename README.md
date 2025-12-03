@@ -10,3 +10,5 @@ WeRide lets college students share rides and wheels, making getting around campu
 - Run `pnpm dev`
 
 ### Made with ❤️
+
+made by student
